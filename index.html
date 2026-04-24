@@ -3,632 +3,225 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pierre-Olivier Lemoine — Projets IA × Communication</title>
+<title>Pierre-Olivier Lemoine — Projets IA × Communication · NorthIA</title>
 <meta name="description" content="3 projets IA appliqués à la communication : générateur de candidature, agent de veille emploi, newsletter automatisée. Par Pierre-Olivier Lemoine · NorthIA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #1a1d23;
-  --ink-soft: #3d4251;
-  --ink-muted: #8892a4;
-  --ink-faint: #c8cedb;
-  --paper: #fafbfc;
-  --paper-warm: #f4f2ee;
-  --paper-card: #ffffff;
-  --line: #e8eaef;
-  --accent: #5E95C8;
-  --accent-light: rgba(94,149,200,.12);
-  --accent-dark: #27618C;
-  --green: #1a9e6e;
-  --green-light: #e6f7f1;
-  --amber: #c47a14;
-  --amber-light: #fef3e2;
-  --violet: #6d3fd1;
-  --violet-light: #f0ecfd;
-  --font-body: 'DM Sans', system-ui, sans-serif;
-  --font-serif: 'Lora', Georgia, serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --radius: 8px;
-  --radius-lg: 12px;
-  --shadow: 0 1px 4px rgba(0,0,0,.06), 0 2px 12px rgba(0,0,0,.04);
-  --shadow-md: 0 4px 20px rgba(0,0,0,.08);
-  --shadow-lg: 0 8px 40px rgba(0,0,0,.12);
+  --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;--nia-pink-dark:#C179A0;--nia-black:#222222;
+  --ink:#1a1d23;--ink-soft:#3d4251;--ink-muted:#8892a4;--ink-faint:#c8cedb;
+  --paper:#fafbfc;--paper-warm:#f4f2ee;--paper-card:#fff;--line:#e8eaef;
+  --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --display:'Cinzel',Georgia,serif;--ui:'Orbitron',sans-serif;
+  --r:8px;--r-lg:12px;
+  --shadow:0 1px 4px rgba(0,0,0,.06),0 2px 12px rgba(0,0,0,.04);
+  --shadow-md:0 4px 20px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.12);
 }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+/* NAV */
+.northia-nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
+.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
+.northia-nav__logo{height:36px;width:auto;}
+.northia-nav__links{display:flex;align-items:center;gap:4px;}
+.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
+.northia-nav__link:hover{color:var(--nia-pink);background:rgba(255,255,255,.06);}
+.northia-nav__cta{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
+.northia-nav__cta:hover{background:var(--nia-pink);}
+/* HERO */
+.hero{background:var(--nia-black);color:#fff;padding:80px 24px 72px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% -10%,rgba(94,149,200,.4),transparent);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:60px;background:linear-gradient(to bottom,transparent,var(--paper));pointer-events:none;}
+.hero__tag{display:inline-block;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:24px;}
+.hero__title{font-family:var(--display);font-size:clamp(32px,6vw,52px);font-weight:700;line-height:1.1;margin-bottom:8px;letter-spacing:-.01em;}
+.hero__title em{font-style:italic;color:var(--nia-pink);}
+.hero__author{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:18px;font-family:var(--ui);font-size:11px;letter-spacing:.04em;}
+.hero__sub{font-size:16px;color:rgba(255,255,255,.55);max-width:520px;margin:0 auto 32px;line-height:1.65;}
+.hero__principle{display:inline-block;background:rgba(228,158,198,.12);border:1px solid rgba(228,158,198,.25);border-radius:8px;padding:12px 20px;margin-bottom:28px;font-size:13px;color:rgba(255,255,255,.7);max-width:520px;}
+.hero__principle strong{color:var(--nia-pink);}
+.hero__stats{display:flex;justify-content:center;gap:32px;margin-top:0;}
+.hero__stat{text-align:center;}
+.hero__stat-n{font-family:var(--ui);font-size:20px;font-weight:700;color:#fff;display:block;}
+.hero__stat-l{font-size:11px;color:rgba(255,255,255,.35);display:block;margin-top:2px;}
+/* WRAP */
+.wrap{max-width:740px;margin:0 auto;padding:0 24px;}
+.section{padding:52px 0 0;}
+.section:last-of-type{padding-bottom:72px;}
+.slabel{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
+.stitle{font-family:var(--display);font-size:26px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em;}
+.sintro{font-size:15px;color:var(--ink-soft);max-width:560px;margin-bottom:28px;line-height:1.65;}
+/* PROJECT CARDS */
+.projects{display:flex;flex-direction:column;gap:20px;}
+.pcard{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);transition:box-shadow .2s,border-color .2s,transform .2s;}
+.pcard:hover{box-shadow:var(--shadow-lg);border-color:var(--nia-blue);transform:translateY(-2px);}
+.pcard__top{display:flex;align-items:center;gap:16px;padding:20px 24px 16px;border-bottom:1px solid var(--line);}
+.pcard__num{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:500;flex-shrink:0;}
+.pn-b{background:rgba(94,149,200,.12);color:var(--nia-blue);}
+.pn-p{background:rgba(228,158,198,.12);color:var(--nia-pink);}
+.pcard__meta{flex:1;}
+.pcard__title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.pcard__sub{font-size:12px;color:var(--ink-muted);}
+.pbadge{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
+.pb-ok{background:rgba(26,158,110,.1);color:#1a9e6e;}
+.pcard__body{padding:18px 24px;}
+.pcard__desc{font-size:14px;color:var(--ink-soft);line-height:1.7;margin-bottom:14px;}
+.pcard__rule{background:var(--nia-black);border-left:3px solid var(--nia-pink);border-radius:0 6px 6px 0;padding:10px 14px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.65);line-height:1.6;}
+.pcard__rule strong{color:var(--nia-pink);}
+.pcard__results{list-style:none;display:flex;flex-direction:column;gap:4px;margin-bottom:14px;}
+.pcard__results li{font-size:13px;color:var(--ink-soft);padding-left:16px;position:relative;}
+.pcard__results li::before{content:'→';position:absolute;left:0;color:var(--nia-blue);font-size:11px;top:2px;}
+.pcard__stack{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px;}
+.schip{font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 7px;border-radius:4px;background:var(--paper-warm);color:var(--ink-soft);border:1px solid var(--line);}
+.pcard__links{display:flex;gap:8px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line);}
+.plink{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.05em;padding:8px 16px;border-radius:var(--r);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
+.pl-pri{background:var(--nia-blue);color:#fff;}
+.pl-pri:hover{background:var(--nia-blue-dark);}
+.pl-sec{background:var(--paper-warm);color:var(--ink-soft);border:1px solid var(--line);}
+.pl-sec:hover{background:var(--line);color:var(--ink);}
+/* ABOUT */
+.divider{width:100%;height:1px;background:var(--line);margin:48px 0 0;}
+.about-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;display:flex;gap:24px;align-items:flex-start;box-shadow:var(--shadow);}
+.about-avatar{width:52px;height:52px;border-radius:10px;background:var(--nia-black);border:2px solid var(--nia-blue);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-style:italic;font-size:20px;color:var(--nia-blue);flex-shrink:0;}
+.about-name{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.about-role{font-size:13px;color:var(--ink-muted);margin-bottom:12px;}
+.about-bio{font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:14px;}
+.about-links{display:flex;gap:12px;flex-wrap:wrap;}
+.about-link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--nia-blue);text-decoration:none;padding:6px 14px;border:1px solid rgba(94,149,200,.3);border-radius:4px;transition:all .15s;}
+.about-link:hover{background:var(--nia-blue);color:#fff;}
+/* FOOTER */
+.northia-footer{background:#222;border-top:2px solid var(--nia-blue);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.northia-footer__logo{height:28px;width:auto;}
+.northia-footer__name{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
+.northia-footer__sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
+.northia-footer__links{display:flex;gap:14px;}
+.northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
+.northia-footer__lnk:hover{color:var(--nia-pink);}
+@media(max-width:600px){
+  .hero{padding:56px 20px 52px;}.hero__stats{gap:20px;}
+  .pcard__top{flex-wrap:wrap;}.about-card{flex-direction:column;gap:16px;}
+  .northia-nav__links{display:none;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}
 }
-
-/* ── NAV ── */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(250,251,252,.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
-  padding: 0 24px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.nav__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-.nav__logo {
-  width: 28px; height: 28px;
-  background: var(--ink);
-  border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; color: #fff; font-weight: 700;
-  font-family: var(--font-serif);
-  font-style: italic;
-}
-.nav__name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
-}
-.nav__links {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.nav__link {
-  font-size: 13px;
-  color: var(--ink-muted);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color .15s;
-}
-.nav__link:hover { color: var(--ink); }
-.nav__cta {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  padding: 6px 14px;
-  border: 1px solid var(--accent-light);
-  border-radius: 20px;
-  background: var(--accent-light);
-  transition: all .15s;
-}
-.nav__cta:hover { background: var(--accent); color: #fff; }
-
-/* ── HERO ── */
-.hero {
-  background: var(--ink);
-  color: #fff;
-  padding: 80px 24px 72px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 70% at 50% -10%, rgba(36,96,232,.5), transparent);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background: linear-gradient(to bottom, transparent, var(--paper));
-  pointer-events: none;
-}
-.hero__tag {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.5);
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.12);
-  padding: 5px 14px;
-  border-radius: 20px;
-  margin-bottom: 24px;
-}
-.hero__title {
-  font-family: var(--font-serif);
-  font-size: clamp(34px, 6vw, 54px);
-  font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 6px;
-  letter-spacing: -.02em;
-}
-.hero__title em {
-  font-style: italic;
-  color: rgba(255,255,255,.55);
-}
-.hero__author {
-  font-size: 14px;
-  color: rgba(255,255,255,.45);
-  margin-bottom: 18px;
-  font-weight: 500;
-}
-.hero__sub {
-  font-size: 16px;
-  color: rgba(255,255,255,.6);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.65;
-}
-.hero__stats {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  margin-top: 36px;
-}
-.hero__stat {
-  text-align: center;
-}
-.hero__stat-n {
-  font-family: var(--font-mono);
-  font-size: 22px;
-  font-weight: 500;
-  color: #fff;
-  display: block;
-}
-.hero__stat-l {
-  font-size: 12px;
-  color: rgba(255,255,255,.4);
-  display: block;
-  margin-top: 2px;
-}
-
-/* ── WRAP ── */
-.wrap { max-width: 740px; margin: 0 auto; padding: 0 24px; }
-
-/* ── SECTION ── */
-.section { padding: 56px 0 0; }
-.section:last-of-type { padding-bottom: 72px; }
-.section-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  margin-bottom: 6px;
-}
-.section-title {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 6px;
-  letter-spacing: -.01em;
-}
-.section-intro {
-  font-size: 15px;
-  color: var(--ink-soft);
-  max-width: 560px;
-  margin-bottom: 32px;
-  line-height: 1.65;
-}
-
-/* ── PROJECT CARDS ── */
-.projects { display: flex; flex-direction: column; gap: 20px; }
-
-.proj-card {
-  background: var(--paper-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: box-shadow .2s, border-color .2s, transform .2s;
-}
-.proj-card:hover {
-  box-shadow: var(--shadow-lg);
-  border-color: var(--ink-faint);
-  transform: translateY(-2px);
-}
-
-.proj-card__top {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 22px 24px 18px;
-  border-bottom: 1px solid var(--line);
-}
-.proj-card__num {
-  width: 36px; height: 36px;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 500;
-  flex-shrink: 0;
-}
-.proj-card__num--blue { background: var(--accent-light); color: var(--accent); }
-.proj-card__num--green { background: var(--green-light); color: var(--green); }
-.proj-card__num--violet { background: var(--violet-light); color: var(--violet); }
-
-.proj-card__meta { flex: 1; }
-.proj-card__title {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 2px;
-}
-.proj-card__sub {
-  font-size: 12px;
-  color: var(--ink-muted);
-}
-.proj-badge {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 20px;
-  flex-shrink: 0;
-}
-.proj-badge--green { background: var(--green-light); color: var(--green); }
-
-.proj-card__body {
-  padding: 18px 24px;
-}
-.proj-card__desc {
-  font-size: 14px;
-  color: var(--ink-soft);
-  line-height: 1.7;
-  margin-bottom: 14px;
-}
-.proj-card__results {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: 16px;
-}
-.proj-card__results li {
-  font-size: 13px;
-  color: var(--ink-soft);
-  padding-left: 18px;
-  position: relative;
-}
-.proj-card__results li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--ink-muted);
-  font-size: 11px;
-  top: 1px;
-}
-
-.proj-card__stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 18px;
-}
-.stack-chip {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  padding: 3px 8px;
-  border-radius: 4px;
-  background: var(--paper-warm);
-  color: var(--ink-soft);
-  border: 1px solid var(--line);
-}
-
-.proj-card__links {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-}
-.proj-link {
-  font-size: 13px;
-  font-weight: 600;
-  padding: 7px 16px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  transition: all .15s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.proj-link--primary {
-  background: var(--accent);
-  color: #fff;
-}
-.proj-link--primary:hover { background: var(--accent-dark); }
-.proj-link--secondary {
-  background: var(--paper-warm);
-  color: var(--ink-soft);
-  border: 1px solid var(--line);
-}
-.proj-link--secondary:hover { background: var(--line); color: var(--ink); }
-
-/* ── ABOUT ── */
-.about-card {
-  background: var(--paper-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 28px 28px;
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  box-shadow: var(--shadow);
-}
-.about-avatar {
-  width: 52px; height: 52px;
-  border-radius: 10px;
-  background: var(--ink);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 20px;
-  color: #fff;
-  flex-shrink: 0;
-}
-.about-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 2px;
-}
-.about-role {
-  font-size: 13px;
-  color: var(--ink-muted);
-  margin-bottom: 12px;
-}
-.about-bio {
-  font-size: 13px;
-  color: var(--ink-soft);
-  line-height: 1.7;
-  margin-bottom: 14px;
-}
-.about-links {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.about-link {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-.about-link:hover { text-decoration: underline; }
-
-/* ── FOOTER ── */
-.footer {
-  background: var(--ink);
-  color: rgba(255,255,255,.35);
-  text-align: center;
-  padding: 28px 24px;
-  font-size: 12px;
-  line-height: 1.7;
-}
-.footer a { color: rgba(255,255,255,.5); text-decoration: none; }
-.footer a:hover { color: rgba(255,255,255,.8); }
-
-/* ── DIVIDER ── */
-.divider { width: 100%; height: 1px; background: var(--line); margin: 48px 0 0; }
-
-@media (max-width: 600px) {
-  .hero { padding: 56px 20px 52px; }
-  .hero__stats { gap: 20px; }
-  .proj-card__top { flex-wrap: wrap; }
-  .about-card { flex-direction: column; gap: 16px; }
-  .nav__links { display: none; }
-}
-
-/* ── NORTHIA BRAND ── */
-.northia-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: #222222;
-  border-bottom: 2px solid #5E95C8;
-  padding: 0 24px; height: 56px;
-  display: flex; align-items: center; justify-content: space-between;
-  box-shadow: 0 2px 16px rgba(0,0,0,.4);
-}
-.northia-nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.northia-nav__logo { height: 36px; width: auto; display: block; }
-.northia-nav__links { display: flex; align-items: center; gap: 6px; }
-.northia-nav__link {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 11px; font-weight: 700; letter-spacing: .06em;
-  color: rgba(255,255,255,.6); text-decoration: none;
-  padding: 6px 12px; border-radius: 4px; transition: all .15s;
-}
-.northia-nav__link:hover { color: #E49EC6; background: rgba(255,255,255,.07); }
-.northia-nav__link--active { color: #5E95C8; }
-.northia-nav__cta {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 11px; font-weight: 700; letter-spacing: .06em;
-  color: #222; background: #5E95C8;
-  text-decoration: none; padding: 7px 16px;
-  border-radius: 4px; transition: all .15s; white-space: nowrap;
-}
-.northia-nav__cta:hover { background: #E49EC6; }
-.northia-footer {
-  background: #222222;
-  border-top: 2px solid #5E95C8;
-  padding: 24px 28px;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 14px; margin-top: 0;
-}
-.northia-footer__logo { height: 28px; width: auto; }
-.northia-footer__info { text-align: center; }
-.northia-footer__name {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 10px; font-weight: 700; letter-spacing: .08em;
-  color: #5E95C8; text-transform: uppercase;
-}
-.northia-footer__sub { font-size: 11px; color: rgba(255,255,255,.3); margin-top: 3px; }
-.northia-footer__links { display: flex; gap: 14px; }
-.northia-footer__lnk { font-size: 12px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .15s; }
-.northia-footer__lnk:hover { color: #E49EC6; }
-@media(max-width:600px){.northia-nav__links{display:none;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
-
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="northia-nav">
   <a href="/portfolio/index.html" class="northia-nav__brand">
-    <img src="/portfolio/Logo_NorthIA_Pictogramme.png" alt="NorthIA" class="northia-nav__logo">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
   </a>
   <div class="northia-nav__links">
+    <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
     <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
     <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
-    <a href="/portfolio/guide-utilisation.html" class="northia-nav__link">Guide</a>
-    <a href="/portfolio/generateur.html" class="northia-nav__cta">Ouvrir le générateur →</a>
+    <a href="/portfolio/generateur.html" class="northia-nav__cta">Tester le générateur →</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero__tag">Portfolio — 3 projets IA × Communication</div>
   <h1 class="hero__title">L'IA au service<br><em>de la communication</em></h1>
   <p class="hero__author">Pierre-Olivier Lemoine · NorthIA · 2025–2026</p>
   <p class="hero__sub">Trois agents et pipelines construits de A à Z — pour automatiser, qualifier et produire là où les communicants perdent le plus de temps.</p>
+  <div class="hero__principle"><strong>L'IA est un facilitateur. L'humain reste le décideur.</strong><br>Chaque projet applique la règle 80/20 : l'IA prend en charge le volume, l'humain conserve le jugement et la validation.</div>
   <div class="hero__stats">
-    <div class="hero__stat">
-      <span class="hero__stat-n">3</span>
-      <span class="hero__stat-l">projets livrés</span>
-    </div>
-    <div class="hero__stat">
-      <span class="hero__stat-n">0</span>
-      <span class="hero__stat-l">intervention manuelle</span>
-    </div>
-    <div class="hero__stat">
-      <span class="hero__stat-n">Claude</span>
-      <span class="hero__stat-l">API Anthropic</span>
-    </div>
+    <div class="hero__stat"><span class="hero__stat-n">3</span><span class="hero__stat-l">projets en production</span></div>
+    <div class="hero__stat"><span class="hero__stat-n">0</span><span class="hero__stat-l">intervention pour le volume</span></div>
+    <div class="hero__stat"><span class="hero__stat-n">Claude</span><span class="hero__stat-l">API Anthropic</span></div>
   </div>
 </div>
 
 <div class="wrap">
 <div class="section">
-  <div class="section-label">Réalisations</div>
-  <h2 class="section-title">Trois projets, trois problèmes résolus</h2>
-  <p class="section-intro">Chaque outil répond à une perte de temps réelle dans la recherche d'emploi et la communication. Conçus et déployés en production, pas en démo.</p>
+  <div class="slabel">Réalisations</div>
+  <h2 class="stitle">Trois projets, trois problèmes résolus</h2>
+  <p class="sintro">Chaque outil répond à une perte de temps réelle. Conçus et déployés en production — pas en démo.</p>
 
   <div class="projects">
 
-    <!-- PROJET 1 : GÉNÉRATEUR -->
-    <div class="proj-card">
-      <div class="proj-card__top">
-        <div class="proj-card__num proj-card__num--blue">01</div>
-        <div class="proj-card__meta">
-          <div class="proj-card__title">Générateur de candidature IA</div>
-          <div class="proj-card__sub">Lettre · Mail d'accompagnement · Profil ATS</div>
+    <div class="pcard">
+      <div class="pcard__top">
+        <div class="pcard__num pn-b">01</div>
+        <div class="pcard__meta">
+          <div class="pcard__title">Générateur de candidature IA</div>
+          <div class="pcard__sub">Lettre · Mail d'accompagnement · Profil ATS</div>
         </div>
-        <span class="proj-badge proj-badge--green">✓ En ligne</span>
+        <span class="pbadge pb-ok">✓ En ligne</span>
       </div>
-      <div class="proj-card__body">
-        <p class="proj-card__desc">Un fichier HTML autonome qui génère en 20 secondes une lettre de motivation structurée, deux versions de mail et un profil CV optimisé ATS — à partir du profil candidat et du texte de l'annonce. Quatre passes API en série et en parallèle, audit qualité automatique côté client.</p>
-        <ul class="proj-card__results">
-          <li>Génération en 4 passes : rédaction → correction → mail → analyse ATS</li>
-          <li>Audit automatique : mots interdits, tirets longs, score qualité /10</li>
-          <li>Profil sauvegardé localement — zéro serveur, zéro installation</li>
-          <li>Export PDF intégré, dark mode, trois tons (associatif / privé / public)</li>
+      <div class="pcard__body">
+        <p class="pcard__desc">Un fichier HTML autonome qui génère en 20 secondes une lettre de motivation structurée, deux versions de mail et un profil CV optimisé ATS. Quatre passes API, audit qualité automatique, règles éditoriales intégrées.</p>
+        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> l'IA génère la structure, l'humain valide, ajuste et choisit ce qu'il envoie. Les chiffres ne viennent que de votre profil — l'IA ne peut pas inventer votre valeur.</div>
+        <ul class="pcard__results">
+          <li>2 à 3h de rédaction → 20 minutes de relecture et d'envoi</li>
+          <li>4 passes API : rédaction → correction → mail → analyse ATS</li>
+          <li>Audit automatique : mots interdits, tirets longs, score /10</li>
+          <li>Zéro serveur, zéro installation — fichier HTML autonome</li>
         </ul>
-        <div class="proj-card__stack">
-          <span class="stack-chip">HTML vanilla</span>
-          <span class="stack-chip">JavaScript</span>
-          <span class="stack-chip">Claude API</span>
-          <span class="stack-chip">localStorage</span>
-          <span class="stack-chip">Netlify</span>
+        <div class="pcard__stack">
+          <span class="schip">HTML vanilla</span><span class="schip">JavaScript</span><span class="schip">Claude API</span><span class="schip">localStorage</span>
         </div>
-        <div class="proj-card__links">
-          <a href="/portfolio/index.html" class="proj-link proj-link--primary">Ouvrir le générateur →</a>
-          <a href="/portfolio/guide-utilisation.html" class="proj-link proj-link--secondary">Guide d'utilisation</a>
+        <div class="pcard__links">
+          <a href="/portfolio/generateur-projet.html" class="plink pl-pri">Voir le projet →</a>
+          <a href="/portfolio/generateur.html" class="plink pl-sec">Tester l'outil ↗</a>
+          <a href="/portfolio/guide-utilisation.html" class="plink pl-sec">Guide d'utilisation</a>
         </div>
       </div>
     </div>
 
-    <!-- PROJET 2 : AGENT DE VEILLE -->
-    <div class="proj-card">
-      <div class="proj-card__top">
-        <div class="proj-card__num proj-card__num--green">02</div>
-        <div class="proj-card__meta">
-          <div class="proj-card__title">Agent de veille emploi automatisé</div>
-          <div class="proj-card__sub">Python · Windows Scheduler · Gmail OAuth</div>
+    <div class="pcard">
+      <div class="pcard__top">
+        <div class="pcard__num pn-b">02</div>
+        <div class="pcard__meta">
+          <div class="pcard__title">Agent de veille emploi automatisé</div>
+          <div class="pcard__sub">Python · Windows Scheduler · Gmail OAuth</div>
         </div>
-        <span class="proj-badge proj-badge--green">✓ En production</span>
+        <span class="pbadge pb-ok">✓ En production</span>
       </div>
-      <div class="proj-card__body">
-        <p class="proj-card__desc">Un agent Python qui tourne chaque matin à 7h00 sans intervention humaine : scraping multi-sources, scoring IA par profil, email digest HTML actionnable. 180 offres agrégées par jour, 2 livrées en boîte mail avec justification et actions en un clic.</p>
-        <ul class="proj-card__results">
+      <div class="pcard__body">
+        <p class="pcard__desc">Agent Python qui tourne chaque matin à 7h00 : scraping multi-sources, scoring Claude, email digest HTML actionnable. 180 offres agrégées, 2 à 5 livrées avec justification IA.</p>
+        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> le tri est automatisé, la décision de candidater reste humaine. L'agent ne postule pas — il sélectionne pour que vous puissiez choisir.</div>
+        <ul class="pcard__results">
+          <li>45 min de veille manuelle → 5 min de lecture du digest</li>
           <li>3 sources : France Travail API (8 dép. IDF), Adzuna, Cadremploi RSS</li>
-          <li>Scoring Claude Sonnet : score /10 + tag + justification par offre</li>
-          <li>Email digest HTML — archiver, sauvegarder, générer une candidature</li>
-          <li>Déduplication intelligente, relance automatique, alertes d'erreur</li>
+          <li>Score /10 + tag + justification Claude par offre</li>
+          <li>Actions en un clic depuis l'email — dont ouverture dans le générateur</li>
         </ul>
-        <div class="proj-card__stack">
-          <span class="stack-chip">Python 3.13</span>
-          <span class="stack-chip">Claude API</span>
-          <span class="stack-chip">Gmail OAuth 2.0</span>
-          <span class="stack-chip">Windows Scheduler</span>
-          <span class="stack-chip">BeautifulSoup</span>
-          <span class="stack-chip">feedparser</span>
+        <div class="pcard__stack">
+          <span class="schip">Python 3.13</span><span class="schip">Claude API</span><span class="schip">Gmail OAuth</span><span class="schip">Windows Scheduler</span>
         </div>
-        <div class="proj-card__links">
-          <a href="/portfolio/agent-veille.html" class="proj-link proj-link--primary">Voir le projet →</a>
+        <div class="pcard__links">
+          <a href="/portfolio/agent-veille.html" class="plink pl-pri">Voir le projet →</a>
+          <a href="/portfolio/mock-email-digest.html" target="_blank" class="plink pl-sec">📧 Voir l'email digest</a>
         </div>
       </div>
     </div>
 
-    <!-- PROJET 3 : NEWSLETTER -->
-    <div class="proj-card">
-      <div class="proj-card__top">
-        <div class="proj-card__num proj-card__num--violet">03</div>
-        <div class="proj-card__meta">
-          <div class="proj-card__title">Newsletter IA automatisée — NorthIA</div>
-          <div class="proj-card__sub">Make · Claude · DALL-E 3 · Brevo</div>
+    <div class="pcard">
+      <div class="pcard__top">
+        <div class="pcard__num pn-p">03</div>
+        <div class="pcard__meta">
+          <div class="pcard__title">Newsletter IA automatisée — NorthIA</div>
+          <div class="pcard__sub">Make · Claude · DALL-E 3 · Brevo</div>
         </div>
-        <span class="proj-badge proj-badge--green">✓ En production</span>
+        <span class="pbadge pb-ok">✓ En production</span>
       </div>
-      <div class="proj-card__body">
-        <p class="proj-card__desc">Pipeline complet d'automatisation éditoriale : de la capture d'article RSS à la newsletter en boîte mail, sans intervention humaine. Claude enrichit chaque article, génère l'édito et décrit l'image. DALL-E 3 produit un visuel lié au contenu. Brevo distribue.</p>
-        <ul class="proj-card__results">
-          <li>Collecte automatique via RSS + capture URL mobile (Tally)</li>
-          <li>Enrichissement Claude : résumé, mots-clés, angle éditorial, score de priorité</li>
-          <li>Images éditoriales générées par IA, liées au contenu de chaque article</li>
-          <li>8 catégories avec palette couleur dédiée, édito original à chaque édition</li>
+      <div class="pcard__body">
+        <p class="pcard__desc">Pipeline complet de production éditoriale : collecte RSS, enrichissement Claude, images DALL-E 3, mise en page, distribution Brevo. L'IA produit, l'humain sélectionne et valide.</p>
+        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> 3 points de contrôle intentionnels — sélection des articles, ajout de sources stratégiques, validation avant envoi. Un éditorial sans regard humain n'est pas un éditorial.</div>
+        <ul class="pcard__results">
+          <li>4 à 6h de production éditoriale → 30 minutes de décision humaine</li>
+          <li>Images 100% générées par IA, liées au contenu de chaque article</li>
+          <li>Édito original Claude à chaque édition, règles embarquées dans le prompt</li>
+          <li>8 catégories avec palette couleur dédiée pour la cohérence visuelle</li>
         </ul>
-        <div class="proj-card__stack">
-          <span class="stack-chip">Make</span>
-          <span class="stack-chip">Claude API</span>
-          <span class="stack-chip">DALL-E 3</span>
-          <span class="stack-chip">Airtable</span>
-          <span class="stack-chip">Brevo</span>
-          <span class="stack-chip">Jina.ai</span>
+        <div class="pcard__stack">
+          <span class="schip">Make</span><span class="schip">Claude API</span><span class="schip">DALL-E 3</span><span class="schip">Airtable</span><span class="schip">Brevo</span>
         </div>
-        <div class="proj-card__links">
-          <a href="/portfolio/newsletter.html" class="proj-link proj-link--primary">Voir le projet →</a>
-          <a href="https://northia.fr" target="_blank" class="proj-link proj-link--secondary">northia.fr ↗</a>
+        <div class="pcard__links">
+          <a href="/portfolio/newsletter.html" class="plink pl-pri">Voir le projet →</a>
+          <a href="/portfolio/mock-newsletter.html" target="_blank" class="plink pl-sec">🔄 Voir le pipeline</a>
+          <a href="https://northia.fr" target="_blank" class="plink pl-sec">northia.fr ↗</a>
         </div>
       </div>
     </div>
@@ -636,40 +229,33 @@ body {
   </div>
 </div>
 
-<!-- ABOUT -->
 <div class="divider"></div>
 <div class="section">
-  <div class="section-label">À propos</div>
-  <h2 class="section-title">Pierre-Olivier Lemoine</h2>
-  <p class="section-intro" style="margin-bottom: 20px;">Responsable Communication Stratégique & Transformation · +20 ans d'expérience · NorthIA</p>
+  <div class="slabel">À propos</div>
+  <h2 class="stitle">Pierre-Olivier Lemoine</h2>
   <div class="about-card">
     <div class="about-avatar">P</div>
     <div>
       <div class="about-name">Pierre-Olivier Lemoine</div>
-      <div class="about-role">Responsable Communication Stratégique & Transformation · Vincennes</div>
-      <p class="about-bio">20 ans d'expérience en communication et marketing BtoB dans l'énergie, la santé, l'automobile et le secteur associatif. Depuis 2025, je développe NorthIA, une activité de conseil en communication digitale et IA — dont ces trois projets sont des réalisations concrètes, pas des démos.</p>
+      <div class="about-role">Responsable Communication Stratégique & Transformation · Vincennes · NorthIA</div>
+      <p class="about-bio">20 ans d'expérience en communication et marketing BtoB dans l'énergie, la santé, l'automobile et le secteur associatif. Depuis 2025, je développe NorthIA, une activité de conseil en communication digitale et IA — dont ces trois projets sont des réalisations concrètes, déployées et documentées.</p>
       <div class="about-links">
-        <a href="https://linkedin.com/in/pierre-olivier-lemoine" target="_blank" class="about-link">LinkedIn ↗</a>
-        <a href="https://northia.fr" target="_blank" class="about-link">northia.fr ↗</a>
-        <a href="mailto:contact@northia.fr" class="about-link">Contact</a>
+        <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="about-link">LinkedIn</a>
+        <a href="https://northia.fr" target="_blank" class="about-link">northia.fr</a>
       </div>
     </div>
   </div>
 </div>
 
-</div><!-- /wrap -->
+</div>
 
 <footer class="northia-footer">
   <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
-  <div class="northia-footer__info">
-    <div class="northia-footer__name">Pierre-Olivier Lemoine · NorthIA · 2026</div>
-    <div class="northia-footer__sub">Propulsé par Claude (Anthropic) · Aucun tracking</div>
-  </div>
+  <div><div class="northia-footer__name">Pierre-Olivier Lemoine · NorthIA · 2026</div><div class="northia-footer__sub">Propulsé par Claude (Anthropic) · Aucun tracking · Données locales</div></div>
   <div class="northia-footer__links">
     <a href="https://northia.fr" target="_blank" class="northia-footer__lnk">northia.fr</a>
     <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
   </div>
 </footer>
-
 </body>
 </html>

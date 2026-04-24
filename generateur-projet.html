@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Générateur de candidature IA — NorthIA · Pierre-Olivier Lemoine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;--nia-pink-dark:#C179A0;--nia-black:#222222;
+  --ink:#1a1d23;--ink-soft:#3d4251;--ink-muted:#8892a4;
+  --paper:#fafbfc;--paper-warm:#f4f2ee;--paper-card:#fff;--line:#e8eaef;
+  --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --display:'Cinzel',Georgia,serif;--ui:'Orbitron',sans-serif;
+  --r:8px;--r-lg:12px;--shadow:0 1px 4px rgba(0,0,0,.06),0 2px 12px rgba(0,0,0,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.northia-nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
+.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
+.northia-nav__logo{height:36px;width:auto;}
+.northia-nav__links{display:flex;align-items:center;gap:4px;}
+.northia-nav__home{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.12);transition:all .15s;margin-right:6px;}
+.northia-nav__home:hover{color:#fff;border-color:rgba(255,255,255,.3);}
+.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
+.northia-nav__link:hover{color:var(--nia-pink);background:rgba(255,255,255,.06);}
+.northia-nav__link--active{color:var(--nia-blue);}
+.northia-nav__guide{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.4);text-decoration:none;padding:7px 14px;border-radius:4px;border:1px solid rgba(255,255,255,.12);transition:all .15s;margin-left:4px;}
+.northia-nav__guide:hover{color:#fff;border-color:rgba(255,255,255,.3);}
+.northia-nav__cta{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
+.northia-nav__cta:hover{background:var(--nia-pink);}
+.hero{background:var(--nia-black);color:#fff;padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(94,149,200,.3),transparent);pointer-events:none;}
+.hero__tag{display:inline-block;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:20px;}
+.hero__title{font-family:var(--display);font-size:clamp(26px,5vw,44px);font-weight:700;line-height:1.1;margin-bottom:14px;}
+.hero__title em{font-style:italic;color:var(--nia-blue);}
+.hero__sub{font-size:15px;color:rgba(255,255,255,.55);max-width:540px;margin:0 auto 24px;line-height:1.65;}
+.hero__metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.metric{text-align:center;padding:11px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);}
+.metric__n{font-family:var(--ui);font-size:18px;font-weight:700;color:#fff;display:block;}
+.metric__l{font-size:11px;color:rgba(255,255,255,.4);display:block;margin-top:2px;}
+.hero__time{font-size:12px;color:rgba(255,255,255,.35);}
+.hero__time strong{color:var(--nia-blue);}
+.hero__btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+.hero__btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.06em;padding:11px 22px;border-radius:6px;text-decoration:none;transition:all .15s;}
+.hero__btn--pri{background:var(--nia-blue);color:#fff;}
+.hero__btn--pri:hover{background:var(--nia-pink);}
+.hero__btn--sec{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15);}
+.hero__btn--sec:hover{background:rgba(255,255,255,.14);color:#fff;}
+.wrap{max-width:700px;margin:0 auto;padding:0 24px;}
+.section{padding:44px 0 0;}
+.section:last-of-type{padding-bottom:72px;}
+.slabel{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
+.stitle{font-family:var(--display);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:12px;}
+.prose{font-size:14px;color:var(--ink-soft);line-height:1.75;max-width:580px;}
+.prose+.prose{margin-top:10px;}
+.rule8020{background:var(--nia-black);border-left:4px solid var(--nia-blue);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.rule8020__title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:8px;}
+.rule8020__text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;}
+.rule8020__text strong{color:#fff;font-weight:700;}
+/* PASSES */
+.passes{display:flex;flex-direction:column;gap:3px;margin-top:20px;}
+.pass{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:flex-start;background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.pass:hover{border-color:var(--nia-blue);}
+.pass__n{width:48px;height:48px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--ui);font-weight:700;flex-shrink:0;}
+.pn-b{background:rgba(94,149,200,.12);border:1px solid rgba(94,149,200,.25);}
+.pn-p{background:rgba(228,158,198,.12);border:1px solid rgba(228,158,198,.25);}
+.pass__n-label{font-size:9px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;}
+.pass__n-num{font-size:18px;color:var(--nia-blue);}
+.pn-p .pass__n-num{color:var(--nia-pink);}
+.pn-p .pass__n-label{color:var(--nia-pink);}
+.pass__title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.pass__desc{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+.pass__tag{font-family:var(--ui);font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(94,149,200,.1);color:var(--nia-blue);margin-left:8px;}
+/* SAMPLE LETTER */
+.letter-sample{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:0;overflow:hidden;margin-top:20px;box-shadow:var(--shadow);}
+.letter-sample__header{background:var(--nia-black);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;}
+.letter-sample__title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.6);text-transform:uppercase;}
+.letter-sample__score{display:flex;align-items:center;gap:8px;}
+.score-n{font-family:var(--ui);font-size:16px;font-weight:700;color:var(--nia-blue);}
+.score-bar{width:80px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;overflow:hidden;}
+.score-fill{height:100%;background:var(--nia-blue);border-radius:2px;width:90%;}
+.letter-body{padding:20px 24px;font-family:Georgia,serif;font-size:13px;line-height:1.9;color:var(--ink-soft);}
+.letter-body p{margin-bottom:12px;}
+.letter-body .meta{font-size:12px;color:var(--ink-muted);margin-bottom:16px;}
+/* AUDIT */
+.audit-box{background:var(--paper-warm);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 18px;margin-top:16px;}
+.audit-title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;}
+.audit-items{display:flex;flex-direction:column;gap:5px;}
+.audit-item{display:flex;align-items:center;gap:8px;font-size:12px;}
+.ai-ok{color:#1a9e6e;font-size:14px;}
+.ai-warn{color:#c47a14;font-size:14px;}
+/* RULES */
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;}
+.rule-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;}
+.rc-label{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--nia-pink);margin-bottom:6px;}
+.rc-text{font-size:12px;color:var(--ink-soft);line-height:1.55;}
+.stack-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;background:var(--paper-card);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);}
+.stack-table th{background:var(--nia-black);color:rgba(255,255,255,.6);font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;text-align:left;}
+.stack-table td{padding:10px 16px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+.stack-table tr:last-child td{border-bottom:none;}
+.stack-table tr:nth-child(odd) td{background:var(--paper-warm);}
+.mono-td{font-family:var(--mono);font-size:12px;}
+.nav-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;}
+.nav-btn{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.05em;padding:10px 18px;border-radius:var(--r);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
+.nav-btn--out{border:1px solid var(--line);color:var(--ink-muted);background:var(--paper-card);}
+.nav-btn--out:hover{border-color:var(--nia-blue);color:var(--nia-blue);}
+.nav-btn--pri{background:var(--nia-blue);color:#fff;border:none;}
+.nav-btn--pri:hover{background:var(--nia-blue-dark);}
+.northia-footer{background:#222;border-top:2px solid var(--nia-blue);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.northia-footer__logo{height:28px;width:auto;}
+.northia-footer__name{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
+.northia-footer__sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
+.northia-footer__links{display:flex;gap:14px;}
+.northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
+.northia-footer__lnk:hover{color:var(--nia-pink);}
+@media(max-width:600px){.northia-nav__links{display:none;}.rules-grid{grid-template-columns:1fr;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
+</style>
+</head>
+<body>
+
+<nav class="northia-nav">
+  <a href="/portfolio/index.html" class="northia-nav__brand">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
+  </a>
+  <div class="northia-nav__links">
+    <a href="/portfolio/index.html" class="northia-nav__home">← Accueil</a>
+    <a href="/portfolio/generateur-projet.html" class="northia-nav__link northia-nav__link--active">Générateur</a>
+    <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
+    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
+    <a href="/portfolio/guide-utilisation.html" class="northia-nav__guide">Guide</a>
+    <a href="/portfolio/generateur.html" class="northia-nav__cta">Tester l'outil →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero__tag">Projet 01 / 03 · HTML · API Claude</div>
+  <h1 class="hero__title">Générateur de <em>candidature IA</em></h1>
+  <p class="hero__sub">Une lettre de motivation structurée, un mail d'accompagnement et un profil CV optimisé ATS — générés en 20 secondes à partir d'une annonce et d'un profil.</p>
+  <div class="hero__btns">
+    <a href="/portfolio/generateur.html" target="_blank" class="hero__btn hero__btn--pri">✦ Tester le générateur →</a>
+    <a href="/portfolio/guide-utilisation.html" class="hero__btn hero__btn--sec">📖 Guide d'utilisation</a>
+  </div>
+  <div class="hero__metrics">
+    <div class="metric"><span class="metric__n">4</span><span class="metric__l">passes API</span></div>
+    <div class="metric"><span class="metric__n">20 sec</span><span class="metric__l">génération complète</span></div>
+    <div class="metric"><span class="metric__n">0</span><span class="metric__l">serveur · installation</span></div>
+    <div class="metric"><span class="metric__n">ATS</span><span class="metric__l">optimisation intégrée</span></div>
+  </div>
+  <div class="hero__time">Lettre de motivation : <strong>2 à 3h manuelles → 20 minutes de relecture</strong> — dont 20 secondes de génération</div>
+</div>
+
+<div class="wrap">
+
+<div class="section">
+  <div class="slabel">Problème résolu</div>
+  <h2 class="stitle">2 à 3h pour une lettre que personne ne lit</h2>
+  <p class="prose">La plupart des candidats passent 2 à 3 heures sur une lettre qui finit par ressembler à toutes les autres — formules convenues, structure prévisible, ton générique. Le problème n'est pas le manque de talent : c'est le manque de méthode et de temps.</p>
+  <p class="prose">L'objectif n'est pas de remplacer le candidat. C'est de lui restituer ce temps et de lui permettre de concentrer son énergie là où elle a de la valeur : choisir les bonnes offres, préparer les entretiens, construire son réseau.</p>
+
+  <div class="rule8020">
+    <div class="rule8020__title">Règle 80/20 — <strong>L'humain reste le décideur</strong></div>
+    <div class="rule8020__text">L'IA génère la structure, les formulations et l'optimisation ATS. <strong>L'humain relit, ajuste le ton, choisit ce qu'il envoie.</strong> La lettre finale reflète votre parcours réel — les chiffres et les faits ne viennent que de votre profil. L'IA ne peut pas inventer votre valeur : elle la met en forme.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Architecture</div>
+  <h2 class="stitle">Génération en 4 passes API</h2>
+  <div class="passes">
+    <div class="pass"><div class="pass__n pn-b"><span class="pass__n-label">Passe</span><span class="pass__n-num">1</span></div><div><div class="pass__title">Rédaction <span class="pass__tag">Série</span></div><div class="pass__desc">Le prompt système transmet le profil complet, les règles d'écriture actives, le ton sélectionné (associatif / privé / public) et la structure attendue en 8 blocs. Claude rédige une première version.</div></div></div>
+    <div class="pass"><div class="pass__n pn-b"><span class="pass__n-label">Passe</span><span class="pass__n-num">2</span></div><div><div class="pass__title">Correction automatique <span class="pass__tag">Série</span></div><div class="pass__desc">Un second appel relit et corrige : tirets longs, mots interdits, chiffres absents du profil, phrases de synthèse creuses en fin de paragraphe. La lettre corrigée est la version affichée.</div></div></div>
+    <div class="pass"><div class="pass__n pn-p"><span class="pass__n-label">Passe</span><span class="pass__n-num">3</span></div><div><div class="pass__title">Mail d'accompagnement <span class="pass__tag" style="background:rgba(228,158,198,.1);color:var(--nia-pink)">Parallèle</span></div><div class="pass__desc">Pendant que la lettre s'affiche, Claude génère en arrière-plan deux versions de mail (sobre et personnalisée) avec objet, et retourne un JSON structuré.</div></div></div>
+    <div class="pass"><div class="pass__n pn-p"><span class="pass__n-label">Passe</span><span class="pass__n-num">4</span></div><div><div class="pass__title">Analyse ATS <span class="pass__tag" style="background:rgba(228,158,198,.1);color:var(--nia-pink)">Parallèle</span></div><div class="pass__desc">Extraction de 5 mots-clés de l'annonce, génération d'un profil CV court et long intégrant ces mots-clés, score d'adéquation profil/offre. Checklist de conformité affichée.</div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Exemple de sortie</div>
+  <h2 class="stitle">Ce que l'outil génère — lettre réelle</h2>
+  <div class="letter-sample">
+    <div class="letter-sample__header">
+      <span class="letter-sample__title">Lettre générée · Passe 2 corrigée · Ton Associatif</span>
+      <div class="letter-sample__score">
+        <span class="score-n">9.0/10</span>
+        <div class="score-bar"><div class="score-fill"></div></div>
+      </div>
+    </div>
+    <div class="letter-body">
+      <p class="meta">Vincennes, le 24 avril 2026<br>Objet : Directeur·rice Communication &amp; Affaires Publiques</p>
+      <p>Madame, Monsieur,</p>
+      <p>La Fédération Française des Énergies Renouvelables porte depuis plus de trente ans la voix d'un secteur en pleine transformation — un rôle de représentation qui exige autant de rigueur institutionnelle que de capacité à rendre lisible des enjeux techniques complexes pour des publics très divers.</p>
+      <p>Directeur Marketing &amp; Communication chez EVOLEN pendant un an, j'ai piloté la communication d'une fédération sectorielle dans l'énergie : refonte de la stratégie LinkedIn (+30% d'engagement), production de la revue de presse quotidienne pour 400 décideurs, coordination des prises de parole à destination des institutions. Ce poste m'a appris à tenir les deux exigences simultanément — la précision du fond et l'efficacité de la forme.</p>
+      <p>Mes vingt-deux ans à la FIEV, dont dix en tant que responsable communication, m'ont donné une maîtrise des environnements fédératifs que je ne trouverais pas ailleurs : gestion des adhérents, reporting au Directeur Général, transformation digitale d'une organisation de 500 000 € de budget. J'ai quitté la FIEV après avoir accompagné sa mutation numérique. Je cherche aujourd'hui à mettre cette expérience au service d'un secteur dont les combats m'importent.</p>
+      <p>Disponible immédiatement, je serais heureux d'échanger sur la façon dont mon parcours peut répondre à vos enjeux de communication et d'influence.</p>
+      <p>Cordialement,<br>Pierre-Olivier Lemoine</p>
+    </div>
+  </div>
+  <div class="audit-box">
+    <div class="audit-title">Audit qualité automatique — résultat côté client</div>
+    <div class="audit-items">
+      <div class="audit-item"><span class="ai-ok">✓</span>Aucun mot interdit détecté (notamment, ainsi, levier, synergie…)</div>
+      <div class="audit-item"><span class="ai-ok">✓</span>Aucun tiret long (— ou –)</div>
+      <div class="audit-item"><span class="ai-ok">✓</span>Chiffres tirés du profil uniquement (+30%, 400, 22 ans, 500 000 €)</div>
+      <div class="audit-item"><span class="ai-ok">✓</span>Aucune phrase de synthèse creuse en fin de paragraphe</div>
+      <div class="audit-item"><span class="ai-warn">⚠</span>2 paragraphes commençant par "Je" — avertissement non bloquant</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Règles éditoriales</div>
+  <h2 class="stitle">Ce qui guide l'IA à chaque génération</h2>
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rc-label">Mots interdits</div><div class="rc-text">notamment · ainsi · par ailleurs · levier · synergie · écosystème · constitue · représente · déployer · valoriser · permettre de · dynamique · motivé(e)</div></div>
+    <div class="rule-card"><div class="rc-label">Interdits structurels</div><div class="rc-text">Tirets longs (— ou –) · Phrases de synthèse creuses en fin de paragraphe · Bullets dans le corps de la lettre</div></div>
+    <div class="rule-card"><div class="rc-label">Règle chiffres</div><div class="rc-text">Seuls les chiffres présents dans le profil fourni sont autorisés. L'IA ne doit jamais inventer de résultats, volumes, taux ou effectifs.</div></div>
+    <div class="rule-card"><div class="rc-label">Structure</div><div class="rc-text">Ville + date · Objet · Formule · Accroche (pas de "Je") · Expérience + preuve · Compétence + preuve · Motivation · Conclusion + signature</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Choix techniques</div>
+  <h2 class="stitle">Pourquoi un fichier HTML autonome</h2>
+  <table class="stack-table">
+    <thead><tr><th>Décision</th><th>Raison</th></tr></thead>
+    <tbody>
+      <tr><td>Fichier HTML unique</td><td>Zéro déploiement, partageable par email ou lien direct</td></tr>
+      <tr><td class="mono-td">JavaScript vanilla</td><td>Aucune dépendance, pas de build, lisible et maintenable</td></tr>
+      <tr><td class="mono-td">localStorage</td><td>Profil 100% côté client — aucune donnée transmise à un serveur tiers</td></tr>
+      <tr><td>API Anthropic directe</td><td>Contrôle total du prompt, pas d'intermédiaire</td></tr>
+      <tr><td class="mono-td">claude-sonnet-4</td><td>Meilleur rapport qualité / coût pour ce type de génération</td></tr>
+      <tr><td>4 passes en série + parallèle</td><td>Correction automatique + mail + ATS sans attente supplémentaire</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="nav-bottom">
+  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
+  <a href="/portfolio/agent-veille.html" class="nav-btn nav-btn--pri">Projet suivant : Agent de veille →</a>
+</div>
+
+</div>
+
+<footer class="northia-footer">
+  <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
+  <div><div class="northia-footer__name">Pierre-Olivier Lemoine · NorthIA · 2026</div><div class="northia-footer__sub">Claude Sonnet (Anthropic) · HTML vanilla · Fichier autonome</div></div>
+  <div class="northia-footer__links">
+    <a href="https://northia.fr" target="_blank" class="northia-footer__lnk">northia.fr</a>
+    <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
+  </div>
+</footer>
+</body>
+</html>
