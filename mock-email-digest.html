@@ -361,8 +361,31 @@ body { background: #eef0f5; font-family: var(--font); font-size: 14px; color: va
   line-height: 1.6;
 }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+/* NorthIA Nav */
+.northia-nav{position:sticky;top:0;z-index:100;background:#222222;border-bottom:2px solid #5E95C8;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
+.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
+.northia-nav__logo{height:30px;width:auto;}
+.northia-nav__links{display:flex;align-items:center;gap:8px;}
+.northia-nav__link{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;padding:5px 10px;border-radius:4px;transition:all .15s;}
+.northia-nav__link:hover{color:#E49EC6;}
+.northia-nav__back{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.15);transition:all .15s;}
+.northia-nav__back:hover{color:#fff;border-color:rgba(255,255,255,.4);}
+.mock-badge{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;letter-spacing:.07em;padding:3px 10px;border-radius:20px;background:rgba(228,158,198,.15);color:#E49EC6;border:1px solid rgba(228,158,198,.25);}
+</style>
 </head>
 <body>
+<nav class="northia-nav">
+  <a href="/portfolio/index.html" class="northia-nav__brand">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
+  </a>
+  <div class="northia-nav__links">
+    <span class="mock-badge">Démonstration</span>
+    <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
+    <a href="/portfolio/index.html" class="northia-nav__back">← Portfolio</a>
+  </div>
+</nav>
 
 <!-- ANNOTATION -->
 <div class="annotation">
@@ -375,7 +398,7 @@ body { background: #eef0f5; font-family: var(--font); font-size: 14px; color: va
 
   <!-- EN-TÊTE CLIENT MAIL -->
   <div class="email-meta">
-    <div class="email-meta__subject">🎯 Veille emploi — 3 offres qualifiées — Vendredi 25 avril 2026</div>
+    <div class="email-meta__subject">🎯 Veille emploi — 3 offres qualifiées — Vendredi 24 avril 2026</div>
     <div class="email-meta__row">
       <span>De : <strong>Agent Veille NorthIA</strong></span>
       <span>À : pierre-olivier.lemoine@northia.fr</span>
@@ -393,7 +416,7 @@ body { background: #eef0f5; font-family: var(--font); font-size: 14px; color: va
           <div class="header-band__logo-dot"></div>
           Agent Veille · NorthIA
         </div>
-        <div class="header-band__sub">Vendredi 25 avril 2026 · Île-de-France</div>
+        <div class="header-band__sub">Vendredi 24 avril 2026 · Île-de-France</div>
       </div>
       <div class="header-band__stats">
         <div class="stat-pill">
@@ -472,7 +495,7 @@ body { background: #eef0f5; font-family: var(--font); font-size: 14px; color: va
       </div>
       <div class="offer-details">
         <span class="detail-chip">Cadremploi</span>
-        <span class="detail-chip">Publié 25/04</span>
+        <span class="detail-chip">Publié 24/04</span>
         <span class="detail-chip">Santé / Mutualiste</span>
         <span class="detail-chip">BtoB</span>
         <span class="detail-chip">Digital</span>
@@ -555,7 +578,7 @@ body { background: #eef0f5; font-family: var(--font); font-size: 14px; color: va
 
     <!-- FOOTER -->
     <div class="email-footer">
-      Agent Veille NorthIA · Généré le 25/04/2026 à 07:02<br>
+      Agent Veille NorthIA · Généré le 24/04/2026 à 07:02<br>
       Sources : France Travail (IDF) · Adzuna · Cadremploi · Seuil d'affichage ≥ 7/10<br>
       <span style="color:#c0d3cc">Propulsé par Claude Sonnet (Anthropic)</span>
     </div>

@@ -3,588 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pipeline Newsletter IA — NorthIA · Make · Airtable · Brevo</title>
+<title>Newsletter NorthIA — Revue de presse IA · Démonstration</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0f1117; --surface: #161b27; --card: #1c2333; --elevated: #222840;
-  --border: #2a3450; --border-light: #344060;
-  --text: #e8ecf4; --text-soft: #8896b0; --text-muted: #4a5578;
-  --accent: #4d90ff; --accent-soft: rgba(77,144,255,.12);
-  --green: #22d3a0; --green-soft: rgba(34,211,160,.1);
-  --amber: #f59e0b; --amber-soft: rgba(245,158,11,.1);
-  --violet: #a78bfa; --violet-soft: rgba(167,139,250,.12);
-  --red: #f87171;
-  --font: 'DM Sans', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', monospace;
-  --serif: 'DM Serif Display', Georgia, serif;
-  --r: 8px; --r-lg: 12px;
+/* ── NORTHIA NAV ── */
+.northia-nav{position:sticky;top:0;z-index:100;background:#222222;border-bottom:2px solid #5E95C8;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
+.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
+.northia-nav__logo{height:30px;width:auto;}
+.northia-nav__links{display:flex;align-items:center;gap:8px;}
+.northia-nav__link{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;padding:5px 10px;border-radius:4px;transition:all .15s;}
+.northia-nav__link:hover{color:#E49EC6;}
+.northia-nav__back{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.15);transition:all .15s;}
+.northia-nav__back:hover{color:#fff;border-color:rgba(255,255,255,.4);}
+.mock-badge{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;letter-spacing:.07em;padding:3px 10px;border-radius:20px;background:rgba(228,158,198,.15);color:#E49EC6;border:1px solid rgba(228,158,198,.25);}
+
+/* ── PAGE WRAPPER ── */
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}
+
+/* ── EMAIL SHELL ── */
+.email-wrap{max-width:640px;margin:0 auto;background:#0d1526;padding:0 0 32px;}
+
+/* ── HEADER ── */
+.email-header{
+  background:#0d1526;
+  padding:32px 40px 20px;
+  text-align:center;
+  border-bottom:1px solid rgba(94,149,200,.2);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 13px; -webkit-font-smoothing: antialiased; }
+.email-header__logo{height:80px;width:auto;margin-bottom:16px;}
+.email-header__divider{width:100%;height:1px;background:rgba(94,149,200,.25);margin:0 0 14px;}
+.email-header__date{
+  font-size:14px;font-weight:600;
+  color:#E49EC6;
+  letter-spacing:.02em;
+  margin-bottom:8px;
+}
+.email-header__divider2{width:100%;height:1px;background:rgba(94,149,200,.25);}
 
-.annotation { background: rgba(167,139,250,.1); border-bottom: 1px solid rgba(167,139,250,.2); padding: 10px 20px; display: flex; align-items: center; gap: 10px; font-size: 12px; color: rgba(167,139,250,.8); }
-.annotation strong { color: var(--violet); }
-.ann-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--violet); flex-shrink: 0; }
+/* ── EDITORIAL ── */
+.email-edito{padding:28px 40px 24px;border-bottom:1px solid rgba(255,255,255,.07);}
+.edito-greeting{font-size:15px;color:#fff;font-weight:400;margin-bottom:18px;}
+.edito-title{font-size:20px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:16px;}
+.edito-body{font-size:14px;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:16px;}
+.edito-sign{font-size:15px;font-weight:700;color:#fff;}
 
-.topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 20px; height: 48px; display: flex; align-items: center; justify-content: space-between; }
-.topbar__brand { display: flex; align-items: center; gap: 10px; }
-.topbar__logo { font-family: var(--serif); font-size: 16px; color: var(--text); }
-.topbar__logo em { font-style: italic; color: var(--violet); }
-.topbar__sub { font-size: 11px; color: var(--text-muted); }
-.tbadge { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 20px; background: var(--green-soft); color: var(--green); border: 1px solid rgba(34,211,160,.2); }
+/* ── ARTICLES ── */
+.articles{padding:0 40px;}
+.article{padding:24px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+.article:last-child{border-bottom:none;}
+.article-inner{display:flex;gap:20px;align-items:flex-start;margin-bottom:16px;}
+.article-img{
+  width:140px;height:140px;flex-shrink:0;
+  border-radius:8px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;position:relative;
+}
+/* Article images — CSS backgrounds matching DALL-E aesthetics */
+.ai-google{background:linear-gradient(135deg,#0a0f1a 0%,#0d1a30 50%,#102040 100%);}
+.ai-google::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 30% 40%,rgba(91,126,201,.5),transparent),radial-gradient(ellipse 40% 40% at 80% 70%,rgba(232,121,160,.3),transparent);}
+.ai-openai{background:linear-gradient(135deg,#080c14 0%,#0f1525 50%,#0a1020 100%);}
+.ai-openai::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 35% 45%,rgba(130,90,220,.4),transparent),radial-gradient(ellipse 40% 45% at 70% 30%,rgba(228,158,198,.3),transparent);}
+.ai-video{background:linear-gradient(135deg,#060810 0%,#0c1020 50%,#0a0c1a 100%);}
+.ai-video::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 40% 50%,rgba(40,160,200,.35),transparent),radial-gradient(ellipse 35% 40% at 75% 25%,rgba(180,80,200,.3),transparent);}
+.ai-spacex{background:linear-gradient(135deg,#050810 0%,#080d1a 50%,#06091a 100%);}
+.ai-spacex::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 30% 60%,rgba(60,80,160,.4),transparent),radial-gradient(ellipse 40% 40% at 70% 20%,rgba(100,180,240,.25),transparent);}
+.ai-wordpress{background:linear-gradient(135deg,#08050a 0%,#100810 50%,#0a0510 100%);}
+.ai-wordpress::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 55% at 25% 55%,rgba(200,40,40,.35),transparent),radial-gradient(ellipse 35% 40% at 72% 28%,rgba(91,126,201,.3),transparent);}
+.ai-ikea{background:linear-gradient(135deg,#060810 0%,#0a0c1a 50%,#0c0f20 100%);}
+.ai-ikea::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 35% 45%,rgba(32,200,232,.3),transparent),radial-gradient(ellipse 35% 45% at 72% 28%,rgba(232,121,160,.25),transparent);}
+.article-img .img-icon{position:relative;z-index:1;filter:drop-shadow(0 0 12px rgba(255,255,255,.2));}
+.article-content{}
+.article-title{font-size:16px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:10px;}
+.article-summary{font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;}
+.article-cta{margin-top:0;text-align:left;}
+.cta-btn{
+  display:inline-block;
+  background:#5E95C8;
+  color:#fff;
+  font-size:13px;font-weight:600;
+  padding:10px 28px;
+  border-radius:20px;
+  text-decoration:none;
+  transition:background .15s;
+}
+.cta-btn:hover{background:#27618C;}
 
-.tabs-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 20px; display: flex; gap: 2px; }
-.tab-btn { padding: 12px 18px; font-size: 12px; font-weight: 500; color: var(--text-muted); border: none; background: transparent; cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s; display: flex; align-items: center; gap: 7px; white-space: nowrap; }
-.tab-btn:hover { color: var(--text-soft); }
-.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
-.tab-step { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; background: var(--elevated); }
-.tab-btn.active .tab-step { background: var(--accent-soft); color: var(--accent); }
+/* ── FOOTER EMAIL ── */
+.email-footer{
+  padding:20px 40px;
+  text-align:center;
+  border-top:1px solid rgba(94,149,200,.2);
+  margin-top:8px;
+}
+.email-footer__text{font-size:11px;color:rgba(255,255,255,.25);line-height:1.7;}
+.email-footer__link{color:rgba(94,149,200,.6);text-decoration:none;}
 
-.panel { display: none; padding: 20px; }
-.panel.active { display: block; }
+/* ── OUTER WRAPPER ── */
+.page-outer{background:#1a2235;padding:24px 16px 48px;min-height:100vh;}
+.email-meta-bar{
+  max-width:640px;margin:0 auto 12px;
+  background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);
+  border-radius:8px;padding:10px 16px;
+  font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,.4);
+  display:flex;gap:16px;flex-wrap:wrap;
+}
+.email-meta-bar strong{color:rgba(255,255,255,.65);}
 
-/* ── MAKE ── */
-.make-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-.make-title { font-size: 14px; font-weight: 700; color: var(--text); }
-.make-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-.make-status { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--green); background: var(--green-soft); border: 1px solid rgba(34,211,160,.2); padding: 4px 12px; border-radius: 20px; }
-.make-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
-
-.scenario { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 18px; margin-bottom: 12px; }
-.scenario__label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.scenario__label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.lbl-tag { padding: 2px 8px; border-radius: 4px; font-size: 9px; font-weight: 700; }
-.lbl--auto { background: var(--accent-soft); color: var(--accent); }
-.lbl--manual { background: var(--violet-soft); color: var(--violet); }
-
-.flow-row { display: flex; align-items: center; overflow-x: auto; padding-bottom: 4px; }
-.flow-row::-webkit-scrollbar { height: 3px; }
-.flow-row::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-.fmod { flex-shrink: 0; width: 80px; text-align: center; }
-.fmod__icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 17px; position: relative; }
-.fi-trigger { background: rgba(77,144,255,.15); border: 1px solid rgba(77,144,255,.25); }
-.fi-fetch { background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.2); }
-.fi-claude { background: rgba(167,139,250,.12); border: 1px solid rgba(167,139,250,.2); }
-.fi-dalle { background: rgba(34,211,160,.1); border: 1px solid rgba(34,211,160,.2); }
-.fi-drive { background: rgba(77,144,255,.1); border: 1px solid rgba(77,144,255,.18); }
-.fi-wp { background: rgba(34,211,160,.1); border: 1px solid rgba(34,211,160,.2); }
-.fi-at { background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.18); }
-.fi-brevo { background: rgba(34,211,160,.12); border: 1px solid rgba(34,211,160,.22); }
-.fi-tally { background: rgba(167,139,250,.1); border: 1px solid rgba(167,139,250,.18); }
-.fi-filter { background: rgba(248,113,113,.1); border: 1px solid rgba(248,113,113,.2); }
-.fi-json { background: rgba(77,144,255,.1); border: 1px solid rgba(77,144,255,.18); }
-.nbadge { position: absolute; top: -4px; right: -4px; width: 16px; height: 16px; border-radius: 50%; background: var(--violet); color: #fff; font-size: 8px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid var(--card); }
-.fmod__name { font-size: 10px; font-weight: 600; color: var(--text-soft); line-height: 1.3; }
-.fmod__sub { font-size: 9px; color: var(--text-muted); margin-top: 2px; line-height: 1.3; }
-.farrow { flex-shrink: 0; width: 24px; text-align: center; color: var(--border-light); font-size: 13px; margin-bottom: 22px; }
-
-.claude-prompt { background: var(--elevated); border: 1px solid var(--border); border-left: 3px solid var(--violet); border-radius: var(--r); padding: 12px 14px; margin-top: 12px; }
-.cp-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); margin-bottom: 8px; }
-.cp-fields { display: flex; flex-wrap: wrap; gap: 5px; }
-.cp-field { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 4px; background: var(--card); border: 1px solid var(--border); color: var(--text-soft); font-family: var(--mono); }
-.cp-field--out { border-color: rgba(34,211,160,.3); color: var(--green); background: var(--green-soft); }
-.cp-field--rule { border-color: rgba(245,158,11,.3); color: var(--amber); background: var(--amber-soft); }
-
-.make-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-top: 14px; }
-.make-stat { background: var(--elevated); border: 1px solid var(--border); border-radius: var(--r); padding: 10px 12px; text-align: center; }
-.make-stat__n { font-family: var(--mono); font-size: 16px; font-weight: 500; color: var(--green); display: block; }
-.make-stat__l { font-size: 10px; color: var(--text-muted); display: block; margin-top: 2px; }
-
-/* ── AIRTABLE ── */
-.at-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
-.at-base-name { font-size: 14px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
-.at-base-icon { width: 28px; height: 28px; border-radius: 6px; background: linear-gradient(135deg,#f59e0b,#f97316); display: flex; align-items: center; justify-content: center; font-size: 13px; }
-.at-actions { display: flex; gap: 6px; }
-.at-btn { font-size: 11px; font-weight: 500; padding: 5px 10px; border-radius: 6px; background: var(--elevated); color: var(--text-soft); border: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; gap: 5px; }
-.at-views { display: flex; gap: 2px; margin-bottom: 14px; border-bottom: 1px solid var(--border); }
-.at-view { font-size: 11px; font-weight: 500; padding: 7px 14px; color: var(--text-muted); border-bottom: 2px solid transparent; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-.at-view.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-.at-wrap { overflow-x: auto; border-radius: var(--r-lg); border: 1px solid var(--border); }
-.at-table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 960px; }
-.at-table th { background: var(--card); color: var(--text-muted); font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 8px 12px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); text-align: left; white-space: nowrap; }
-.at-table th:last-child { border-right: none; }
-.at-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); vertical-align: top; color: var(--text-soft); line-height: 1.5; }
-.at-table td:last-child { border-right: none; }
-.at-table tr:last-child td { border-bottom: none; }
-.at-table tr:hover td { background: var(--elevated); }
-.ft { font-size: 9px; color: var(--text-muted); font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: 3px; }
-.c-title { font-weight: 600; color: var(--text); max-width: 175px; }
-.c-mono { font-family: var(--mono); font-size: 10px; }
-.c-score { font-family: var(--mono); font-weight: 700; font-size: 13px; }
-.c-score--hi { color: var(--green); } .c-score--mid { color: var(--amber); }
-.cat-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
-.cat-inno { background: rgba(91,126,201,.15); color: #9ab3e8; }
-.cat-eco { background: rgba(232,160,32,.15); color: #f0c060; }
-.cat-cyber { background: rgba(232,64,64,.15); color: #f09090; }
-.cat-emp { background: rgba(32,200,232,.15); color: #70d8f0; }
-.cat-env { background: rgba(32,232,160,.15); color: #70f0b8; }
-.sent-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; }
-.sent-pos { background: var(--green-soft); color: var(--green); }
-.sent-neu { background: var(--elevated); color: var(--text-muted); }
-.sent-neg { background: rgba(248,113,113,.1); color: var(--red); }
-.c-url { font-family: var(--mono); font-size: 10px; color: var(--accent); max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.c-img { font-family: var(--mono); font-size: 9px; color: var(--text-muted); max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.kws { display: flex; flex-wrap: wrap; gap: 3px; max-width: 130px; }
-.kw { font-size: 9px; padding: 1px 5px; border-radius: 3px; background: var(--elevated); color: var(--text-muted); border: 1px solid var(--border); white-space: nowrap; }
-.at-stats { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.at-stat { background: var(--elevated); border: 1px solid var(--border); border-radius: var(--r); padding: 8px 14px; font-size: 11px; color: var(--text-soft); display: flex; align-items: center; gap: 6px; }
-.at-stat strong { color: var(--text); font-weight: 700; }
-
-/* ── BREVO ── */
-.brevo-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-.brevo-title { font-size: 14px; font-weight: 700; color: var(--text); }
-.brevo-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-.brevo-mode { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 20px; background: var(--amber-soft); border: 1px solid rgba(245,158,11,.25); color: var(--amber); }
-
-.params-map { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px 16px; margin-bottom: 14px; }
-.pm-title { font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-.pm-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.pm-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
-.pm-row { background: var(--elevated); border: 1px solid var(--border); border-radius: var(--r); padding: 8px 10px; }
-.pm-key { font-family: var(--mono); font-size: 10px; color: var(--amber); }
-.pm-arrow { font-size: 9px; color: var(--text-muted); margin: 2px 0; }
-.pm-val { font-size: 10px; color: var(--text-soft); line-height: 1.4; }
-
-.email-frame { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border); }
-.eclient-bar { background: var(--card); border-bottom: 1px solid var(--border); padding: 10px 16px; }
-.eclient-subject { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.eclient-meta { font-size: 11px; color: var(--text-muted); display: flex; gap: 14px; flex-wrap: wrap; }
-
-/* Newsletter dark mode */
-.nl { background: #141720; }
-.nl-top { padding: 22px 28px; border-bottom: 1px solid rgba(255,255,255,.07); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-.nl-logo { font-family: var(--serif); font-size: 20px; color: #fff; }
-.nl-logo em { font-style: italic; color: #a78bfa; }
-.nl-tagline { font-size: 10px; color: rgba(255,255,255,.3); text-transform: uppercase; letter-spacing: .08em; margin-top: 3px; }
-.nl-ed-info { font-size: 11px; color: rgba(255,255,255,.3); text-align: right; line-height: 1.7; }
-.nl-ed-info strong { color: rgba(255,255,255,.6); }
-
-.nl-edito { padding: 20px 28px; border-bottom: 1px solid rgba(255,255,255,.07); }
-.nl-edito-lbl { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #a78bfa; margin-bottom: 10px; }
-.nl-edito-txt { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.8; font-style: italic; }
-.nl-edito-sign { font-size: 11px; color: rgba(255,255,255,.3); margin-top: 10px; font-style: normal; }
-
-.nl-sect { padding: 12px 28px 6px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.2); display: flex; align-items: center; gap: 10px; }
-.nl-sect::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,.07); }
-
-.nla { margin: 0 16px 10px; border: 1px solid rgba(255,255,255,.07); border-radius: 10px; overflow: hidden; display: grid; grid-template-columns: 100px 1fr; }
-.nla-img { width: 100px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; position: relative; min-height: 90px; }
-.nla-img .gen-lbl { position: absolute; bottom: 4px; left: 0; right: 0; font-size: 8px; color: rgba(255,255,255,.2); text-align: center; font-family: var(--mono); }
-.nla-body { padding: 11px 13px; }
-.nla-cat { font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 5px; }
-.nla-title { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.8); margin-bottom: 5px; line-height: 1.4; }
-.nla-sum { font-size: 11px; color: rgba(255,255,255,.45); line-height: 1.65; margin-bottom: 8px; }
-.nla-foot { display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: rgba(255,255,255,.3); }
-.nla-read { color: #a78bfa; font-weight: 600; }
-
-.nl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0 8px; margin-bottom: 8px; }
-.nl-grid .nla { margin: 4px 8px; grid-template-columns: 1fr; }
-.nl-grid .nla-img { width: 100%; height: 80px; }
-
-.nl-foot { padding: 16px 28px; border-top: 1px solid rgba(255,255,255,.07); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.nl-foot-logo { font-family: var(--serif); font-size: 13px; color: rgba(255,255,255,.3); }
-.nl-foot-logo em { font-style: italic; color: rgba(167,139,250,.5); }
-.nl-foot-meta { font-size: 10px; color: rgba(255,255,255,.2); line-height: 1.6; text-align: right; }
-
-.img-inno { background: linear-gradient(135deg,#0d1020,#1a1f3a); }
-.img-inno::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 35% 40%,rgba(91,126,201,.4),transparent); }
-.img-eco { background: linear-gradient(135deg,#0d1010,#1a180a); }
-.img-eco::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 55% at 40% 50%,rgba(232,160,32,.35),transparent); }
-.img-cyber { background: linear-gradient(135deg,#0a0a0d,#0f0f1a); }
-.img-cyber::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 55% at 30% 50%,rgba(232,64,64,.3),transparent); }
-.img-emp { background: linear-gradient(135deg,#080d14,#091520); }
-.img-emp::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 55% at 35% 45%,rgba(32,200,232,.3),transparent); }
-.img-env { background: linear-gradient(135deg,#080f0d,#091a12); }
-.img-env::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 55% at 40% 45%,rgba(32,232,160,.3),transparent); }
-.nla-img { position: relative; }
-.icon-z { position: relative; z-index: 1; }
-
-@media (max-width: 600px) {
-  .pm-grid { grid-template-columns: 1fr 1fr; }
-  .make-stats { grid-template-columns: 1fr 1fr; }
-  .nl-grid { grid-template-columns: 1fr; }
-  .nla { grid-template-columns: 80px 1fr; }
-  .nla-img { width: 80px; }
+@media(max-width:600px){
+  .northia-nav__links .northia-nav__link{display:none;}
+  .email-header{padding:24px 20px 16px;}
+  .email-edito{padding:20px 20px 18px;}
+  .articles{padding:0 20px;}
+  .article-inner{flex-direction:column;}
+  .article-img{width:100%;height:180px;}
 }
 </style>
 </head>
 <body>
 
-<div class="annotation">
-  <div class="ann-dot"></div>
-  <div><strong>Pipeline démonstration</strong> — Représentation fidèle du process Make · Airtable · Brevo en production. Articles fictifs, architecture et données conformes au système réel.</div>
-</div>
-
-<div class="topbar">
-  <div class="topbar__brand">
-    <div class="topbar__logo">North<em>IA</em></div>
-    <div class="topbar__sub">Newsletter IA automatisée · Pipeline complet</div>
+<!-- NAV -->
+<nav class="northia-nav">
+  <a href="/portfolio/index.html" class="northia-nav__brand">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
+  </a>
+  <div class="northia-nav__links">
+    <span class="mock-badge">Démonstration · Rendu réel</span>
+    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
+    <a href="/portfolio/index.html" class="northia-nav__back">← Portfolio</a>
   </div>
-  <span class="tbadge">✓ En production</span>
-</div>
+</nav>
 
-<div class="tabs-bar">
-  <button class="tab-btn active" onclick="showTab('make',this)">
-    <span class="tab-step">01</span> ⚙️ Scénarios Make
-  </button>
-  <button class="tab-btn" onclick="showTab('airtable',this)">
-    <span class="tab-step">02</span> 🗃 Base Airtable
-  </button>
-  <button class="tab-btn" onclick="showTab('brevo',this)">
-    <span class="tab-step">03</span> 📨 Rendu Brevo
-  </button>
-</div>
+<!-- OUTER -->
+<div class="page-outer">
 
-<!-- ═══ PANEL MAKE ═══ -->
-<div id="panel-make" class="panel active">
-  <div class="make-header">
-    <div>
-      <div class="make-title">Scénarios Make (Integromat)</div>
-      <div class="make-sub">2 scénarios de collecte · 1 scénario de génération + distribution</div>
+  <!-- EMAIL META BAR (simule le client mail) -->
+  <div class="email-meta-bar">
+    <span><strong>De :</strong> NorthIA &lt;newsletter@northia.fr&gt;</span>
+    <span><strong>À :</strong> Bonjour Pierre-Olivier,</span>
+    <span><strong>Objet :</strong> Revue de presse IA — 24 avril 2026</span>
+    <span>Vendredi 24 avril 2026 · 08:04</span>
+  </div>
+
+  <!-- EMAIL BODY -->
+  <div class="email-wrap">
+
+    <!-- HEADER -->
+    <div class="email-header">
+      <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="email-header__logo">
+      <div class="email-header__divider"></div>
+      <div class="email-header__date">Revue de presse — 24 avril 2026</div>
+      <div class="email-header__divider2"></div>
     </div>
-    <div class="make-status"><div class="make-dot"></div>Actif · Planifié</div>
-  </div>
 
-  <div class="scenario">
-    <div class="scenario__label">Scénario A — Revue de presse automatique <span class="lbl-tag lbl--auto">RSS · Auto</span></div>
-    <div class="flow-row">
-      <div class="fmod"><div class="fmod__icon fi-trigger">⏰</div><div class="fmod__name">Scheduler</div><div class="fmod__sub">Toutes les 6h</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-fetch">📡</div><div class="fmod__name">RSS Feed</div><div class="fmod__sub">BriefIA · Usine Dig. · The Conv. · Novethic…</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-filter">🔎</div><div class="fmod__name">Router</div><div class="fmod__sub">Filtre doublons (seen_ids)</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-fetch">🌐</div><div class="fmod__name">Jina.ai</div><div class="fmod__sub">Extraction contenu (anti-paywall)</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-claude"><span class="nbadge">T1–5</span>🧠</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Enrichissement 8 champs</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-claude"><span class="nbadge">T6</span>🎨</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Description visuelle métaphorique</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-dalle">🖼</div><div class="fmod__name">DALL-E 3</div><div class="fmod__sub">Génération image éditoriale</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-drive">☁️</div><div class="fmod__name">Google Drive</div><div class="fmod__sub">Upload permanent</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-wp">🌐</div><div class="fmod__name">WordPress</div><div class="fmod__sub">northia.fr URL publique</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-at">📊</div><div class="fmod__name">Airtable</div><div class="fmod__sub">Écriture enregistrement complet</div></div>
+    <!-- ÉDITO -->
+    <div class="email-edito">
+      <p class="edito-greeting">Bonjour Pierre-Olivier,</p>
+      <h2 class="edito-title">L'IA s'accélère. Vos organisations suivent&nbsp;?</h2>
+      <p class="edito-body">Google rebaptise ses plateformes. OpenAI relance la génération d'images. SpaceX s'allie à un éditeur de code pour 60 milliards. En une semaine, les grandes manœuvres se multiplient. Pendant ce temps, les organisations cherchent encore leur gouvernance IA, leurs cas d'usage, leur sponsor interne. L'écart entre la vitesse des éditeurs et la lenteur des directions n'est pas un problème technique. C'est un problème de décision. La vraie question n'est pas de savoir si vous utilisez l'IA. C'est de savoir qui dans votre entreprise a le droit de dire non.</p>
+      <p class="edito-sign">NorthIA</p>
     </div>
-    <div class="claude-prompt">
-      <div class="cp-label">🧠 Claude T1–T5 — Champs enrichis retournés en JSON</div>
-      <div class="cp-fields">
-        <span class="cp-field">titre_article</span><span class="cp-field">contenu_brut</span><span style="font-size:11px;color:var(--text-muted);align-self:center">→</span>
-        <span class="cp-field cp-field--out">titre_propre</span><span class="cp-field cp-field--out">résumé_court</span><span class="cp-field cp-field--out">résumé_long</span><span class="cp-field cp-field--out">mots_clés[ ]</span><span class="cp-field cp-field--out">angle_éditorial</span><span class="cp-field cp-field--out">score_priorité</span><span class="cp-field cp-field--out">sentiment</span><span class="cp-field cp-field--out">périmètre_géo</span><span class="cp-field cp-field--out">catégorie</span>
-      </div>
-    </div>
-  </div>
 
-  <div class="scenario">
-    <div class="scenario__label">Scénario B — Capture URL manuelle <span class="lbl-tag lbl--manual">Tally · Mobile</span></div>
-    <div class="flow-row">
-      <div class="fmod"><div class="fmod__icon fi-tally">📱</div><div class="fmod__name">Tally Form</div><div class="fmod__sub">Formulaire mobile (webhook)</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-filter">🔄</div><div class="fmod__name">Anti-doublon</div><div class="fmod__sub">Vérif. URL existante</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-fetch">🌐</div><div class="fmod__name">Jina.ai</div><div class="fmod__sub">Extraction contenu</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-claude">🧠</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Même pipeline T1–T6</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-dalle">🖼</div><div class="fmod__name">DALL-E 3</div><div class="fmod__sub">Image éditoriale</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-at">📊</div><div class="fmod__name">Airtable</div><div class="fmod__sub">Écriture enregistrement</div></div>
-    </div>
-  </div>
+    <!-- ARTICLES -->
+    <div class="articles">
 
-  <div class="scenario">
-    <div class="scenario__label">Scénario C — Génération newsletter et distribution <span class="lbl-tag lbl--auto">Hebdo · Vendredi</span></div>
-    <div class="flow-row">
-      <div class="fmod"><div class="fmod__icon fi-trigger">📅</div><div class="fmod__name">Scheduler</div><div class="fmod__sub">Vendredi 8h00</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-at">📊</div><div class="fmod__name">Airtable</div><div class="fmod__sub">Filtre "newsletter = ✓" → 6 articles</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-claude">🧠</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Génération édito + 6 blocs JSON</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-json">📦</div><div class="fmod__name">JSON Parser</div><div class="fmod__sub">Extraction édito + blocs</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-brevo">📨</div><div class="fmod__name">Brevo</div><div class="fmod__sub">Envoi template dynamique (brouillon)</div></div>
-    </div>
-    <div class="claude-prompt">
-      <div class="cp-label">🧠 Claude · Scénario C — Règles éditoriales embarquées dans le prompt</div>
-      <div class="cp-fields">
-        <span class="cp-field cp-field--rule">Pas de tiret long</span><span class="cp-field cp-field--rule">Pas de "NorthIA" dans le corps</span><span class="cp-field cp-field--rule">Ton affûté, jamais condescendant</span><span class="cp-field cp-field--rule">Dernière phrase provocatrice</span><span class="cp-field cp-field--rule">Réponse JSON strict · édito + 6 blocs</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="make-stats">
-    <div class="make-stat"><span class="make-stat__n">3</span><span class="make-stat__l">scénarios Make</span></div>
-    <div class="make-stat"><span class="make-stat__n">9</span><span class="make-stat__l">outils connectés</span></div>
-    <div class="make-stat"><span class="make-stat__n">6+</span><span class="make-stat__l">appels Claude / édition</span></div>
-    <div class="make-stat"><span class="make-stat__n">0</span><span class="make-stat__l">intervention manuelle</span></div>
-  </div>
-</div>
-
-<!-- ═══ PANEL AIRTABLE ═══ -->
-<div id="panel-airtable" class="panel">
-  <div class="at-toolbar">
-    <div class="at-base-name"><div class="at-base-icon">📊</div>NorthIA · Revue de presse</div>
-    <div class="at-actions"><div class="at-btn">🔍 Filtrer</div><div class="at-btn">⊞ Grouper</div><div class="at-btn">+ Champ</div></div>
-  </div>
-  <div class="at-views">
-    <div class="at-view active">📋 Tous les articles</div>
-    <div class="at-view">✅ Sélectionnés newsletter</div>
-    <div class="at-view">🗓 Cette semaine</div>
-  </div>
-  <div class="at-wrap">
-    <table class="at-table">
-      <thead>
-        <tr>
-          <th>Titre <span class="ft">texte long</span></th>
-          <th>Catégorie <span class="ft">sélection</span></th>
-          <th>Score <span class="ft">nombre</span></th>
-          <th>Sentiment <span class="ft">sélection</span></th>
-          <th>Mots-clés <span class="ft">tags</span></th>
-          <th>Source <span class="ft">URL</span></th>
-          <th>Image URL <span class="ft">URL</span></th>
-          <th>Newsletter <span class="ft">case</span></th>
-          <th>Géo <span class="ft">texte</span></th>
-          <th>Ajouté le <span class="ft">date</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="c-title">Les agents IA autonomes entrent en production chez les grands comptes européens</td>
-          <td><span class="cat-tag cat-inno">Innovation</span></td>
-          <td><span class="c-score c-score--hi">9</span></td>
-          <td><span class="sent-tag sent-pos">● Positif</span></td>
-          <td><div class="kws"><span class="kw">agents IA</span><span class="kw">CAC 40</span><span class="kw">DSI</span></div></td>
-          <td class="c-url">usine-digitale.fr</td>
-          <td class="c-img">northia.fr/…/ia-agents.jpg</td>
-          <td style="font-size:14px;text-align:center">✅</td>
-          <td>Europe</td>
-          <td class="c-mono">22/04/2026</td>
-        </tr>
-        <tr>
-          <td class="c-title">ROI de l'IA générative : 68% des directions peinent à mesurer l'impact</td>
-          <td><span class="cat-tag cat-eco">Économie</span></td>
-          <td><span class="c-score c-score--hi">8</span></td>
-          <td><span class="sent-tag sent-neu">● Neutre</span></td>
-          <td><div class="kws"><span class="kw">ROI</span><span class="kw">DG</span><span class="kw">pilotage</span></div></td>
-          <td class="c-url">lesechos.fr</td>
-          <td class="c-img">northia.fr/…/roi-gen.jpg</td>
-          <td style="font-size:14px;text-align:center">✅</td>
-          <td>France</td>
-          <td class="c-mono">22/04/2026</td>
-        </tr>
-        <tr>
-          <td class="c-title">Plugins WordPress infectés après changement de propriétaire : 40 000 sites exposés</td>
-          <td><span class="cat-tag cat-cyber">Cyber</span></td>
-          <td><span class="c-score c-score--hi">8</span></td>
-          <td><span class="sent-tag sent-neg">● Négatif</span></td>
-          <td><div class="kws"><span class="kw">WordPress</span><span class="kw">supply chain</span><span class="kw">malware</span></div></td>
-          <td class="c-url">briefia.com</td>
-          <td class="c-img">northia.fr/…/wp-plugins.jpg</td>
-          <td style="font-size:14px;text-align:center">✅</td>
-          <td>Monde</td>
-          <td class="c-mono">21/04/2026</td>
-        </tr>
-        <tr>
-          <td class="c-title">Les communicants face à l'IA : délégation ou réappropriation des compétences ?</td>
-          <td><span class="cat-tag cat-emp">Emploi</span></td>
-          <td><span class="c-score c-score--hi">9</span></td>
-          <td><span class="sent-tag sent-neu">● Neutre</span></td>
-          <td><div class="kws"><span class="kw">communicants</span><span class="kw">métier</span><span class="kw">IA</span></div></td>
-          <td class="c-url">theconversation.com</td>
-          <td class="c-img">northia.fr/…/comm-ia.jpg</td>
-          <td style="font-size:14px;text-align:center">✅</td>
-          <td>France</td>
-          <td class="c-mono">23/04/2026</td>
-        </tr>
-        <tr>
-          <td class="c-title">Claude 4 : ce que change la mémoire longue pour les cas d'usage enterprise</td>
-          <td><span class="cat-tag cat-inno">Innovation</span></td>
-          <td><span class="c-score c-score--hi">8</span></td>
-          <td><span class="sent-tag sent-pos">● Positif</span></td>
-          <td><div class="kws"><span class="kw">Claude 4</span><span class="kw">Anthropic</span><span class="kw">agents</span></div></td>
-          <td class="c-url">journaldugeek.com</td>
-          <td class="c-img">northia.fr/…/claude4.jpg</td>
-          <td style="font-size:14px;text-align:center">✅</td>
-          <td>Monde</td>
-          <td class="c-mono">24/04/2026</td>
-        </tr>
-        <tr>
-          <td class="c-title">Empreinte carbone des LLM : les premières obligations de reporting arrivent en Europe</td>
-          <td><span class="cat-tag cat-env">Enviro</span></td>
-          <td><span class="c-score c-score--mid">7</span></td>
-          <td><span class="sent-tag sent-neu">● Neutre</span></td>
-          <td><div class="kws"><span class="kw">RSE</span><span class="kw">AI Act</span><span class="kw">reporting</span></div></td>
-          <td class="c-url">novethic.fr</td>
-          <td class="c-img">northia.fr/…/llm-carbone.jpg</td>
-          <td style="font-size:14px;text-align:center">✅</td>
-          <td>Europe</td>
-          <td class="c-mono">23/04/2026</td>
-        </tr>
-        <tr>
-          <td class="c-title" style="opacity:.5">OpenAI annonce GPT-5 Turbo pour le marché enterprise</td>
-          <td><span class="cat-tag cat-inno">Innovation</span></td>
-          <td><span class="c-score c-score--mid">6</span></td>
-          <td><span class="sent-tag sent-pos">● Positif</span></td>
-          <td><div class="kws"><span class="kw">OpenAI</span><span class="kw">GPT-5</span></div></td>
-          <td class="c-url">briefia.com</td>
-          <td class="c-img">northia.fr/…/gpt5.jpg</td>
-          <td style="font-size:14px;text-align:center;opacity:.3">⬜</td>
-          <td>Monde</td>
-          <td class="c-mono">20/04/2026</td>
-        </tr>
-        <tr>
-          <td class="c-title" style="opacity:.5">Rapport McKinsey : 25% des emplois administratifs automatisés d'ici 2030</td>
-          <td><span class="cat-tag cat-emp">Emploi</span></td>
-          <td><span class="c-score c-score--mid">5</span></td>
-          <td><span class="sent-tag sent-neg">● Négatif</span></td>
-          <td><div class="kws"><span class="kw">emploi</span><span class="kw">McKinsey</span></div></td>
-          <td class="c-url">usine-digitale.fr</td>
-          <td class="c-img">northia.fr/…/mckinsey.jpg</td>
-          <td style="font-size:14px;text-align:center;opacity:.3">⬜</td>
-          <td>Monde</td>
-          <td class="c-mono">21/04/2026</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="at-stats">
-    <div class="at-stat">Total : <strong>47 articles</strong> cette semaine</div>
-    <div class="at-stat">Newsletter sélectionnés : <strong>6 ✅</strong></div>
-    <div class="at-stat">Images DALL-E générées : <strong>47 / 47</strong></div>
-    <div class="at-stat">Hébergées WordPress : <strong>47 / 47</strong></div>
-    <div class="at-stat">Score moyen : <strong>7.2 / 10</strong></div>
-  </div>
-</div>
-
-<!-- ═══ PANEL BREVO ═══ -->
-<div id="panel-brevo" class="panel">
-  <div class="brevo-header">
-    <div>
-      <div class="brevo-title">Distribution Brevo — Template dynamique dark mode NorthIA</div>
-      <div class="brevo-sub">Paramètres injectés par Make · Personnalisation FIRSTNAME · 6 articles dynamiques</div>
-    </div>
-    <div class="brevo-mode">⏳ Mode brouillon · Validation avant envoi</div>
-  </div>
-
-  <div class="params-map">
-    <div class="pm-title">Paramètres dynamiques Make → Brevo</div>
-    <div class="pm-grid">
-      <div class="pm-row"><div class="pm-key">{{ params.edito }}</div><div class="pm-arrow">↓</div><div class="pm-val">Texte édito Claude (100 mots)</div></div>
-      <div class="pm-row"><div class="pm-key">{{ params.article_1_titre }}</div><div class="pm-arrow">↓</div><div class="pm-val">Titre enrichi · Airtable</div></div>
-      <div class="pm-row"><div class="pm-key">{{ params.article_1_img }}</div><div class="pm-arrow">↓</div><div class="pm-val">URL image DALL-E · northia.fr/wp/</div></div>
-      <div class="pm-row"><div class="pm-key">{{ params.article_1_resume }}</div><div class="pm-arrow">↓</div><div class="pm-val">Résumé 60 mots · Claude</div></div>
-      <div class="pm-row"><div class="pm-key">{{ params.article_1_lien }}</div><div class="pm-arrow">↓</div><div class="pm-val">URL source · Airtable</div></div>
-      <div class="pm-row"><div class="pm-key">× 6 articles</div><div class="pm-arrow">↓</div><div class="pm-val">Même structure articles 2 à 6</div></div>
-    </div>
-  </div>
-
-  <div class="email-frame">
-    <div class="eclient-bar">
-      <div class="eclient-subject">🤖 NorthIA — L'IA & la transformation digitale · Semaine 17</div>
-      <div class="eclient-meta">
-        <span>De : NorthIA &lt;newsletter@northia.fr&gt;</span>
-        <span>À : Bonjour Pierre,</span>
-        <span>Vendredi 25 avril 2026 · 08:04</span>
-        <span style="color:var(--amber)">⏳ Brouillon</span>
-      </div>
-    </div>
-    <div class="nl">
-      <div class="nl-top">
-        <div><div class="nl-logo">North<em>IA</em></div><div class="nl-tagline">IA & Transformation Digitale</div></div>
-        <div class="nl-ed-info"><strong>Semaine 17 · 2026</strong><br>6 articles · Édition #28</div>
-      </div>
-      <div class="nl-edito">
-        <div class="nl-edito-lbl">Édito · Généré par Claude · Règles éditoriales embarquées</div>
-        <div class="nl-edito-txt">Les modèles de langage viennent de franchir un seuil discret mais décisif : ils ne se contentent plus de répondre, ils anticipent. Trois acteurs majeurs ont annoncé cette semaine des agents capables d'agir de façon autonome sur des systèmes tiers. Pour les communicants, la question n'est plus de savoir si l'IA va transformer leur métier. Elle est de décider à quelle vitesse ils veulent être dans la salle quand les règles s'écrivent.</div>
-        <div class="nl-edito-sign">— NorthIA · Pipeline Make automatisé · Claude (Anthropic)</div>
-      </div>
-      <div class="nl-sect">6 articles de la semaine</div>
-
-      <div class="nla" style="margin:0 16px 10px">
-        <div class="nla-img img-inno"><div class="icon-z">🧠</div><div class="gen-lbl">DALL-E 3 · Innovation</div></div>
-        <div class="nla-body">
-          <div class="nla-cat" style="color:#9ab3e8">● Innovation</div>
-          <div class="nla-title">Les agents IA autonomes entrent en production chez les grands comptes européens</div>
-          <div class="nla-sum">Après deux ans de pilotes, les DSI de plusieurs groupes du CAC 40 déploient des agents capables d'agir sur leurs SI sans validation humaine. Un tournant enterprise.</div>
-          <div class="nla-foot"><span>Usine Digitale · 22 avr.</span><a href="#" class="nla-read">Lire →</a></div>
-        </div>
-      </div>
-
-      <div class="nl-grid">
-        <div class="nla">
-          <div class="nla-img img-eco"><div class="icon-z">📊</div><div class="gen-lbl">DALL-E 3 · Économie</div></div>
-          <div class="nla-body">
-            <div class="nla-cat" style="color:#f0c060">● Économie</div>
-            <div class="nla-title">ROI de l'IA : 68% des directions peinent à mesurer l'impact</div>
-            <div class="nla-sum">La majorité des DG avouent avoir investi sans critères préétablis. Un déficit de pilotage qui fragilise les projets.</div>
-            <div class="nla-foot"><span>Les Échos</span><a href="#" class="nla-read">Lire →</a></div>
+      <div class="article">
+        <div class="article-inner">
+          <div class="article-img ai-google"><span class="img-icon">🤖</span></div>
+          <div class="article-content">
+            <h3 class="article-title">Google Cloud mise tout sur les agents autonomes</h3>
+            <p class="article-summary">Lors de Google Cloud Next 26 à Las Vegas, Google a recentré toute sa stratégie autour des agents IA autonomes. Vertex AI devient Gemini Enterprise Agent Platform. Deux nouveaux TPU de 8e génération sont dévoilés. Des clients comme Tata Steel, Macy's ou la NASA pour Artemis II illustrent une adoption déjà industrielle. En France, Valeo figure parmi les références annoncées.</p>
           </div>
         </div>
-        <div class="nla">
-          <div class="nla-img img-cyber"><div class="icon-z">🐺</div><div class="gen-lbl">DALL-E 3 · Cyber</div></div>
-          <div class="nla-body">
-            <div class="nla-cat" style="color:#f09090">● Cybersécurité</div>
-            <div class="nla-title">Plugins WordPress infectés après changement de propriétaire</div>
-            <div class="nla-sum">40 000 sites exposés. La chaîne d'approvisionnement logicielle reste le maillon faible pour les PME.</div>
-            <div class="nla-foot"><span>BriefIA</span><a href="#" class="nla-read">Lire →</a></div>
-          </div>
-        </div>
+        <div class="article-cta"><a href="#" class="cta-btn">Lire l'article</a></div>
       </div>
 
-      <div class="nla" style="margin:0 16px 10px">
-        <div class="nla-img img-emp"><div class="icon-z">🤝</div><div class="gen-lbl">DALL-E 3 · Emploi</div></div>
-        <div class="nla-body">
-          <div class="nla-cat" style="color:#70d8f0">● Emploi</div>
-          <div class="nla-title">Les communicants face à l'IA : délégation ou réappropriation des compétences ?</div>
-          <div class="nla-sum">200 responsables interrogés révèlent une bifurcation nette entre ceux qui intègrent l'IA et ceux qui la subissent. La posture managériale de la direction est déterminante.</div>
-          <div class="nla-foot"><span>The Conversation · 23 avr.</span><a href="#" class="nla-read">Lire →</a></div>
-        </div>
-      </div>
-
-      <div class="nl-grid" style="margin-bottom:14px">
-        <div class="nla">
-          <div class="nla-img img-inno"><div class="icon-z">🔮</div><div class="gen-lbl">DALL-E 3 · Innovation</div></div>
-          <div class="nla-body">
-            <div class="nla-cat" style="color:#9ab3e8">● Innovation</div>
-            <div class="nla-title">Claude 4 : la mémoire longue change les architectures d'agents</div>
-            <div class="nla-sum">Moins de RAG, plus de contexte direct. Implications concrètes pour les intégrateurs enterprise.</div>
-            <div class="nla-foot"><span>Journal du Geek</span><a href="#" class="nla-read">Lire →</a></div>
+      <div class="article">
+        <div class="article-inner">
+          <div class="article-img ai-openai"><span class="img-icon">🎨</span></div>
+          <div class="article-content">
+            <h3 class="article-title">OpenAI relance la génération d'images et cible le marketing</h3>
+            <p class="article-summary">OpenAI déploie ChatGPT Images 2.0, version améliorée de son outil de génération visuelle. La cible est explicite : les professionnels du marketing et de la communication. Une offensive stratégique dans un marché très concurrentiel, alors que Midjourney, Adobe Firefly et les acteurs chinois renforcent leurs positions.</p>
           </div>
         </div>
-        <div class="nla">
-          <div class="nla-img img-env"><div class="icon-z">🌿</div><div class="gen-lbl">DALL-E 3 · Enviro</div></div>
-          <div class="nla-body">
-            <div class="nla-cat" style="color:#70f0b8">● Environnement</div>
-            <div class="nla-title">Empreinte carbone des LLM : les premières obligations de reporting arrivent</div>
-            <div class="nla-sum">L'AI Act intègre des déclarations environnementales pour les grands modèles. Nouvelle contrainte pour les RSE.</div>
-            <div class="nla-foot"><span>Novethic</span><a href="#" class="nla-read">Lire →</a></div>
-          </div>
-        </div>
+        <div class="article-cta"><a href="#" class="cta-btn">Lire l'article</a></div>
       </div>
 
-      <div class="nl-foot">
-        <div class="nl-foot-logo">North<em>IA</em></div>
-        <div class="nl-foot-meta">Make · Claude (Anthropic) · DALL-E 3 · Brevo<br>northia.fr · Se désabonner</div>
+      <div class="article">
+        <div class="article-inner">
+          <div class="article-img ai-video"><span class="img-icon">🎬</span></div>
+          <div class="article-content">
+            <h3 class="article-title">Vidéo IA : Synthesia, Runway et Veo tiennent la route</h3>
+            <p class="article-summary">Malgré l'arrêt de Sora jugé trop coûteux, le marché de la vidéo générée par IA progresse. Synthesia est valorisée 4 milliards après une levée de 200 millions, Runway lève 315 millions pour 5,3 milliards de valorisation. Google, Meta et les acteurs chinois accélèrent aussi. Les défis restent réels : énergie, droits d'auteur, deepfakes.</p>
+          </div>
+        </div>
+        <div class="article-cta"><a href="#" class="cta-btn">Lire l'article</a></div>
       </div>
+
+      <div class="article">
+        <div class="article-inner">
+          <div class="article-img ai-spacex"><span class="img-icon">🚀</span></div>
+          <div class="article-content">
+            <h3 class="article-title">SpaceX s'allie à Cursor pour 60 milliards de dollars</h3>
+            <p class="article-summary">SpaceX noue un partenariat stratégique avec Cursor, éditeur de code assisté par IA, incluant une option de rachat à 60 milliards de dollars. L'opération confirme l'intensification de la bataille pour capter les développeurs professionnels. SpaceX signale ainsi une ambition claire de diversification au-delà de l'aérospatial.</p>
+          </div>
+        </div>
+        <div class="article-cta"><a href="#" class="cta-btn">Lire l'article</a></div>
+      </div>
+
+      <div class="article">
+        <div class="article-inner">
+          <div class="article-img ai-wordpress"><span class="img-icon">🐺</span></div>
+          <div class="article-content">
+            <h3 class="article-title">Plugins WordPress infectés après un changement de propriétaire</h3>
+            <p class="article-summary">Après le rachat de plus de 30 plugins WordPress sur Flippa, un acheteur y a introduit des portes dérobées dormantes pendant 8 mois. Activées le 5 avril 2026, elles ont transformé des sites en relais de spam SEO. L'infrastructure utilisait la blockchain Ethereum. WordPress.org a bloqué les plugins, mais la gestion des transferts de propriété reste un angle mort structurel.</p>
+          </div>
+        </div>
+        <div class="article-cta"><a href="#" class="cta-btn">Lire l'article</a></div>
+      </div>
+
+      <div class="article">
+        <div class="article-inner">
+          <div class="article-img ai-ikea"><span class="img-icon">💡</span></div>
+          <div class="article-content">
+            <h3 class="article-title">IKEA et Samsung : la domotique Matter franchit un cap</h3>
+            <p class="article-summary">Samsung intègre nativement les appareils Matter d'IKEA dans SmartThings. Ampoules, capteurs et télécommandes de la gamme IKEA, lancée en novembre 2025, fonctionnent désormais sans hub dédié. Ils rejoignent un écosystème incluant Hue, Eve, Ring et Nuki, ainsi que les électroménagers Samsung. Plusieurs cycles de validation ont été nécessaires pour stabiliser l'expérience utilisateur.</p>
+          </div>
+        </div>
+        <div class="article-cta"><a href="#" class="cta-btn">Lire l'article</a></div>
+      </div>
+
+    </div><!-- /articles -->
+
+    <!-- FOOTER -->
+    <div class="email-footer">
+      <p class="email-footer__text">
+        NorthIA · <a href="https://northia.fr" class="email-footer__link">northia.fr</a><br>
+        Pipeline automatisé : Make · Claude (Anthropic) · DALL-E 3 · Brevo<br>
+        <a href="#" class="email-footer__link">Se désabonner</a>
+      </p>
     </div>
-  </div>
-</div>
 
-<script>
-function showTab(name, btn) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('active');
-  btn.classList.add('active');
-}
-</script>
+  </div><!-- /email-wrap -->
+</div><!-- /page-outer -->
+
 </body>
 </html>
