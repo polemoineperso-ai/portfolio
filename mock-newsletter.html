@@ -5,559 +5,516 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pipeline Newsletter IA — NorthIA · Make · Airtable · Brevo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
+:root{
   --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;
-  --nia-black:#222222;
-  --bg:#0f1117;--surface:#161b27;--card:#1c2333;--elevated:#222840;
-  --border:#2a3450;--border-light:#344060;
+  --nia-black:#222;--bg:#0f1117;--surface:#161b27;--card:#1c2333;
+  --elevated:#222840;--border:#2a3450;
   --text:#e8ecf4;--text-soft:#8896b0;--text-muted:#4a5578;
   --font:'DM Sans',system-ui,sans-serif;
-  --mono:'JetBrains Mono',monospace;
-  --ui:'Orbitron',sans-serif;
+  --mono:'JetBrains Mono',monospace;--ui:'Orbitron',sans-serif;
   --r:8px;--r-lg:12px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:13px;-webkit-font-smoothing:antialiased;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;-webkit-font-smoothing:antialiased;}
 
-/* ── NAV NORTHIA ── */
-.northia-nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
-.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
-.northia-nav__logo{height:30px;width:auto;}
-.northia-nav__links{display:flex;align-items:center;gap:8px;}
-.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;padding:5px 10px;border-radius:4px;transition:all .15s;}
-.northia-nav__link:hover{color:var(--nia-pink);}
-.northia-nav__back{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.15);transition:all .15s;}
-.northia-nav__back:hover{color:#fff;border-color:rgba(255,255,255,.4);}
-.mock-badge{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.07em;padding:3px 10px;border-radius:20px;background:rgba(228,158,198,.15);color:var(--nia-pink);border:1px solid rgba(228,158,198,.25);}
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.5);}
+.nav__brand{display:flex;align-items:center;text-decoration:none;}
+.nav__logo{height:28px;width:auto;}
+.nav__links{display:flex;align-items:center;gap:8px;}
+.nav__pill{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.07em;padding:3px 10px;border-radius:20px;background:rgba(228,158,198,.15);color:var(--nia-pink);border:1px solid rgba(228,158,198,.25);}
+.nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.45);text-decoration:none;padding:6px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.12);transition:all .15s;}
+.nav__link:hover{color:#fff;border-color:rgba(255,255,255,.35);}
 
-/* ── TOPBAR ── */
-.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;height:48px;display:flex;align-items:center;justify-content:space-between;}
-.topbar__logo{font-family:'DM Serif Display',var(--ui),serif;font-size:16px;color:var(--text);}
-.topbar__logo em{font-style:italic;color:var(--nia-pink);}
-.topbar__sub{font-size:11px;color:var(--text-muted);}
-.tbadge{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;background:rgba(34,211,160,.1);color:#22d3a0;border:1px solid rgba(34,211,160,.2);}
+/* ── HERO ── */
+.hero{background:linear-gradient(160deg,#0d1320 0%,#111827 60%,#0d1526 100%);padding:48px 24px 40px;text-align:center;border-bottom:1px solid var(--border);}
+.hero__tag{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nia-pink);margin-bottom:14px;display:block;}
+.hero__title{font-size:clamp(22px,4vw,34px);font-weight:700;color:#fff;margin-bottom:10px;line-height:1.2;}
+.hero__title span{color:var(--nia-blue);}
+.hero__sub{font-size:14px;color:var(--text-soft);max-width:560px;margin:0 auto 24px;line-height:1.65;}
+.hero__flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;}
+.hf-step{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:8px 14px;font-size:12px;font-weight:600;color:var(--text-soft);}
+.hf-step span{font-size:16px;}
+.hf-arrow{color:var(--text-muted);font-size:16px;}
 
-/* ── TABS ── */
-.tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;gap:2px;}
-.tab-btn{padding:12px 18px;font-size:12px;font-weight:500;color:var(--text-muted);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;display:flex;align-items:center;gap:7px;white-space:nowrap;font-family:var(--font);}
-.tab-btn:hover{color:var(--text-soft);}
-.tab-btn.active{color:var(--nia-blue);border-bottom-color:var(--nia-blue);font-weight:600;}
-.tab-step{font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;background:var(--elevated);}
-.tab-btn.active .tab-step{background:rgba(94,149,200,.15);color:var(--nia-blue);}
+/* ── SECTION HEADERS ── */
+.section{max-width:900px;margin:0 auto;padding:40px 24px 0;}
+.section:last-of-type{padding-bottom:60px;}
+.section-head{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.section-num{font-family:var(--ui);font-size:11px;font-weight:700;padding:6px 14px;border-radius:4px;white-space:nowrap;}
+.sn-b{background:rgba(94,149,200,.15);color:var(--nia-blue);border:1px solid rgba(94,149,200,.2);}
+.sn-p{background:rgba(228,158,198,.12);color:var(--nia-pink);border:1px solid rgba(228,158,198,.2);}
+.sn-g{background:rgba(34,211,160,.1);color:#22d3a0;border:1px solid rgba(34,211,160,.2);}
+.section-title{font-size:18px;font-weight:700;color:#fff;}
+.section-sub{font-size:12px;color:var(--text-muted);margin-top:2px;}
+.divider{width:100%;max-width:900px;margin:40px auto 0;height:1px;background:var(--border);}
 
-/* ── PANELS ── */
-.panel{display:none;padding:20px;}
-.panel.active{display:block;}
+/* ── MAKE FLOW ── */
+.make-scenarios{display:flex;flex-direction:column;gap:12px;}
+.scenario{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 20px;}
+.scenario-label{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.scenario-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.stag{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:700;}
+.stag-b{background:rgba(94,149,200,.15);color:var(--nia-blue);}
+.stag-p{background:rgba(228,158,198,.15);color:var(--nia-pink);}
 
-/* ════ PANEL 1 — MAKE ════ */
-.make-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
-.make-title{font-size:14px;font-weight:700;color:var(--text);}
-.make-sub{font-size:12px;color:var(--text-muted);margin-top:2px;}
-.make-status{display:flex;align-items:center;gap:6px;font-size:11px;color:#22d3a0;background:rgba(34,211,160,.1);border:1px solid rgba(34,211,160,.2);padding:4px 12px;border-radius:20px;}
-.make-dot{width:6px;height:6px;border-radius:50%;background:#22d3a0;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.scenario{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;margin-bottom:12px;}
-.scenario__label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.scenario__label::after{content:'';flex:1;height:1px;background:var(--border);}
-.lbl-tag{padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;}
-.lbl--auto{background:rgba(94,149,200,.15);color:var(--nia-blue);}
-.lbl--manual{background:rgba(228,158,198,.15);color:var(--nia-pink);}
-.flow-row{display:flex;align-items:center;overflow-x:auto;padding-bottom:4px;}
-.flow-row::-webkit-scrollbar{height:3px;}
-.flow-row::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.fmod{flex-shrink:0;width:80px;text-align:center;}
-.fmod__icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:17px;position:relative;}
-.fi-b{background:rgba(94,149,200,.15);border:1px solid rgba(94,149,200,.25);}
-.fi-p{background:rgba(228,158,198,.12);border:1px solid rgba(228,158,198,.2);}
-.fi-a{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.2);}
-.fi-g{background:rgba(34,211,160,.1);border:1px solid rgba(34,211,160,.2);}
-.nbadge{position:absolute;top:-4px;right:-4px;width:16px;height:16px;border-radius:50%;background:var(--nia-pink);color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--card);}
-.fmod__name{font-size:10px;font-weight:600;color:var(--text-soft);line-height:1.3;}
-.fmod__sub{font-size:9px;color:var(--text-muted);margin-top:2px;line-height:1.3;}
-.farrow{flex-shrink:0;width:22px;text-align:center;color:var(--border-light);font-size:13px;margin-bottom:22px;}
-.claude-prompt{background:var(--elevated);border:1px solid var(--border);border-left:3px solid var(--nia-pink);border-radius:var(--r);padding:12px 14px;margin-top:12px;}
-.cp-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-pink);margin-bottom:8px;}
-.cp-fields{display:flex;flex-wrap:wrap;gap:5px;}
-.cp-field{font-size:10px;font-weight:500;padding:3px 8px;border-radius:4px;background:var(--card);border:1px solid var(--border);color:var(--text-soft);font-family:var(--mono);}
-.cp-field--out{border-color:rgba(34,211,160,.3);color:#22d3a0;background:rgba(34,211,160,.08);}
-.cp-field--rule{border-color:rgba(245,158,11,.3);color:#f59e0b;background:rgba(245,158,11,.08);}
-.make-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;}
-.make-stat{background:var(--elevated);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;text-align:center;}
-.make-stat__n{font-family:var(--mono);font-size:16px;font-weight:500;color:#22d3a0;display:block;}
-.make-stat__l{font-size:10px;color:var(--text-muted);display:block;margin-top:2px;}
+.flow{display:flex;align-items:center;gap:4px;overflow-x:auto;padding-bottom:4px;}
+.flow::-webkit-scrollbar{height:3px;}
+.flow::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.fmod{flex-shrink:0;text-align:center;width:72px;}
+.fmod__icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto 5px;font-size:15px;position:relative;}
+.fi-b{background:rgba(94,149,200,.12);border:1px solid rgba(94,149,200,.2);}
+.fi-p{background:rgba(228,158,198,.1);border:1px solid rgba(228,158,198,.18);}
+.fi-a{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.18);}
+.fi-g{background:rgba(34,211,160,.08);border:1px solid rgba(34,211,160,.18);}
+.nbadge{position:absolute;top:-4px;right:-4px;width:15px;height:15px;border-radius:50%;background:var(--nia-pink);color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--card);}
+.fmod__name{font-size:9px;font-weight:600;color:var(--text-soft);line-height:1.3;}
+.fmod__sub{font-size:8px;color:var(--text-muted);margin-top:1px;line-height:1.3;}
+.farr{color:var(--border);font-size:12px;flex-shrink:0;margin-bottom:22px;}
 
-/* ════ PANEL 2 — AIRTABLE ════ */
-.at-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;}
-.at-base-name{font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;}
-.at-base-icon{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:13px;}
-.at-actions{display:flex;gap:6px;}
-.at-btn{font-size:11px;font-weight:500;padding:5px 10px;border-radius:6px;background:var(--elevated);color:var(--text-soft);border:1px solid var(--border);cursor:pointer;}
-.at-views{display:flex;gap:2px;margin-bottom:14px;border-bottom:1px solid var(--border);}
-.at-view{font-size:11px;font-weight:500;padding:7px 14px;color:var(--text-muted);border-bottom:2px solid transparent;cursor:pointer;}
-.at-view.active{color:var(--nia-blue);border-bottom-color:var(--nia-blue);}
+.prompt-box{background:var(--elevated);border:1px solid var(--border);border-left:3px solid var(--nia-pink);border-radius:var(--r);padding:10px 14px;margin-top:10px;}
+.prompt-label{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-pink);margin-bottom:7px;}
+.chips{display:flex;flex-wrap:wrap;gap:4px;}
+.chip{font-size:10px;padding:2px 7px;border-radius:4px;font-family:var(--mono);}
+.chip-in{background:var(--card);border:1px solid var(--border);color:var(--text-muted);}
+.chip-out{background:rgba(34,211,160,.08);border:1px solid rgba(34,211,160,.25);color:#22d3a0;}
+.chip-rule{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);color:#f59e0b;}
+.chip-sep{color:var(--text-muted);font-size:12px;align-self:center;margin:0 2px;}
+
+.make-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;}
+.mstat{background:var(--elevated);border:1px solid var(--border);border-radius:var(--r);padding:10px;text-align:center;}
+.mstat__n{font-family:var(--mono);font-size:16px;font-weight:500;color:#22d3a0;display:block;}
+.mstat__l{font-size:10px;color:var(--text-muted);margin-top:2px;display:block;}
+
+/* ── AIRTABLE ── */
+.at-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;}
+.at-base{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--text);}
+.at-icon{width:26px;height:26px;border-radius:5px;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:12px;}
+.at-views{display:flex;gap:2px;margin-bottom:12px;border-bottom:1px solid var(--border);}
+.atv{font-size:11px;font-weight:500;padding:6px 14px;color:var(--text-muted);border-bottom:2px solid transparent;cursor:pointer;}
+.atv.active{color:var(--nia-blue);border-bottom-color:var(--nia-blue);}
 .at-wrap{overflow-x:auto;border-radius:var(--r-lg);border:1px solid var(--border);}
-.at-table{width:100%;border-collapse:collapse;font-size:11px;min-width:960px;}
-.at-table th{background:var(--card);color:var(--text-muted);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-align:left;white-space:nowrap;}
+.at-table{width:100%;border-collapse:collapse;font-size:11px;min-width:800px;}
+.at-table th{background:var(--card);color:var(--text-muted);font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:8px 12px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-align:left;white-space:nowrap;}
 .at-table th:last-child{border-right:none;}
-.at-table td{padding:9px 12px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);vertical-align:top;color:var(--text-soft);line-height:1.5;}
+.at-table td{padding:8px 12px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);color:var(--text-soft);vertical-align:middle;}
 .at-table td:last-child{border-right:none;}
 .at-table tr:last-child td{border-bottom:none;}
 .at-table tr:hover td{background:var(--elevated);}
-.ft{font-size:9px;color:var(--text-muted);font-weight:400;text-transform:none;letter-spacing:0;margin-left:3px;}
-.c-title{font-weight:600;color:var(--text);max-width:170px;}
-.c-mono{font-family:var(--mono);font-size:10px;}
-.c-score{font-family:var(--mono);font-weight:700;font-size:13px;}
+.at-img{width:40px;height:40px;border-radius:5px;object-fit:cover;border:1px solid var(--border);display:block;}
+.c-title{font-weight:600;color:var(--text);max-width:200px;}
+.c-score{font-family:var(--mono);font-weight:700;font-size:14px;}
 .c-hi{color:#22d3a0;}.c-mid{color:#f59e0b;}
-.cat-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;white-space:nowrap;}
-.cat-inno{background:rgba(91,126,201,.15);color:#9ab3e8;}
-.cat-eco{background:rgba(232,160,32,.15);color:#f0c060;}
-.cat-cyber{background:rgba(232,64,64,.15);color:#f09090;}
-.cat-video{background:rgba(167,139,250,.15);color:#c4b5fd;}
-.cat-space{background:rgba(32,200,232,.15);color:#70d8f0;}
-.sent-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;}
-.sent-pos{background:rgba(34,211,160,.1);color:#22d3a0;}
-.sent-neu{background:var(--elevated);color:var(--text-muted);}
-.sent-neg{background:rgba(248,113,113,.1);color:#f87171;}
-.c-url{font-family:var(--mono);font-size:10px;color:var(--nia-blue);max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.kws{display:flex;flex-wrap:wrap;gap:3px;max-width:130px;}
+.ctag{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;}
+.ct-inno{background:rgba(91,126,201,.15);color:#9ab3e8;}
+.ct-cyber{background:rgba(232,64,64,.15);color:#f09090;}
+.ct-video{background:rgba(167,139,250,.15);color:#c4b5fd;}
+.ct-space{background:rgba(32,200,232,.15);color:#70d8f0;}
+.ct-eco{background:rgba(232,160,32,.15);color:#f0c060;}
+.stag2{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;}
+.sp{background:rgba(34,211,160,.1);color:#22d3a0;}
+.sn{background:var(--elevated);color:var(--text-muted);}
+.sng{background:rgba(248,113,113,.1);color:#f87171;}
+.kws{display:flex;flex-wrap:wrap;gap:3px;}
 .kw{font-size:9px;padding:1px 5px;border-radius:3px;background:var(--elevated);color:var(--text-muted);border:1px solid var(--border);white-space:nowrap;}
-/* Miniature image dans Airtable */
-.at-img{width:36px;height:36px;border-radius:4px;object-fit:cover;border:1px solid var(--border);}
-.at-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
-.at-stat{background:var(--elevated);border:1px solid var(--border);border-radius:var(--r);padding:8px 14px;font-size:11px;color:var(--text-soft);display:flex;align-items:center;gap:6px;}
-.at-stat strong{color:var(--text);font-weight:700;}
+.at-foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.at-stat{background:var(--elevated);border:1px solid var(--border);border-radius:var(--r);padding:7px 12px;font-size:11px;color:var(--text-soft);}
+.at-stat strong{color:var(--text);}
 
-/* ════ PANEL 3 — RENDU BREVO / GMAIL ════ */
-.brevo-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
-.brevo-title{font-size:14px;font-weight:700;color:var(--text);}
-.brevo-sub{font-size:12px;color:var(--text-muted);margin-top:2px;}
-.brevo-mode{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b;}
+/* ── EMAIL RENDERING ── */
+.email-context{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 18px;margin-bottom:16px;}
+.ec-label{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+.ec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.ec-item{background:var(--elevated);border:1px solid var(--border);border-radius:var(--r);padding:8px 10px;}
+.ec-key{font-family:var(--mono);font-size:10px;color:#f59e0b;}
+.ec-val{font-size:10px;color:var(--text-muted);margin-top:3px;}
 
-.params-map{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px;margin-bottom:16px;}
-.pm-title{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-.pm-title::after{content:'';flex:1;height:1px;background:var(--border);}
-.pm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;}
-.pm-row{background:var(--elevated);border:1px solid var(--border);border-radius:var(--r);padding:8px 10px;}
-.pm-key{font-family:var(--mono);font-size:10px;color:#f59e0b;}
-.pm-arrow{font-size:9px;color:var(--text-muted);margin:2px 0;}
-.pm-val{font-size:10px;color:var(--text-soft);line-height:1.4;}
+.email-shell{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);}
+.email-topbar{background:var(--card);border-bottom:1px solid var(--border);padding:10px 16px;}
+.email-subject{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.email-meta{font-size:11px;color:var(--text-muted);display:flex;gap:14px;flex-wrap:wrap;}
+.draft-badge{color:#f59e0b;font-weight:600;}
 
-/* EMAIL SHELL — reproduction fidèle Gmail */
-.email-frame{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);}
-.eclient-bar{background:var(--card);border-bottom:1px solid var(--border);padding:10px 16px;}
-.eclient-subject{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.eclient-meta{font-size:11px;color:var(--text-muted);display:flex;gap:14px;flex-wrap:wrap;}
+/* NEWSLETTER BODY - reproduction fidèle Gmail */
+.nl{background:#0d1526;}
+.nl-top{background:#000;padding:24px 32px 18px;text-align:center;border-bottom:1px solid rgba(94,149,200,.2);}
+.nl-logo-img{height:65px;width:auto;}
+.nl-sep{width:80%;height:1px;background:rgba(228,158,198,.4);margin:14px auto 12px;}
+.nl-date-txt{font-size:14px;font-weight:600;color:var(--nia-pink);letter-spacing:.02em;}
+.nl-sep2{width:80%;height:1px;background:rgba(228,158,198,.4);margin:12px auto 0;}
 
-/* Newsletter dark — rendu réel */
-.nl{background:#0d1526;font-family:'DM Sans',-apple-system,sans-serif;}
-.nl-header{background:#0d1526;padding:28px 32px 18px;text-align:center;border-bottom:1px solid rgba(94,149,200,.2);}
-.nl-logo{height:70px;width:auto;margin-bottom:14px;}
-.nl-divider{width:100%;height:1px;background:rgba(94,149,200,.25);margin:0 0 12px;}
-.nl-date{font-size:14px;font-weight:600;color:#E49EC6;letter-spacing:.02em;margin-bottom:8px;}
-.nl-divider2{width:100%;height:1px;background:rgba(94,149,200,.25);}
-
-.nl-edito{padding:22px 32px 20px;border-bottom:1px solid rgba(255,255,255,.06);}
+.nl-edito{padding:22px 32px 18px;border-bottom:1px solid rgba(255,255,255,.06);}
 .nl-greeting{font-size:14px;color:#fff;margin-bottom:14px;}
-.nl-etitle{font-size:18px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:12px;}
-.nl-ebody{font-size:13px;color:rgba(255,255,255,.72);line-height:1.8;margin-bottom:12px;}
+.nl-etitle{font-size:17px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px;}
+.nl-ebody{font-size:13px;color:rgba(255,255,255,.7);line-height:1.85;margin-bottom:10px;}
 .nl-esign{font-size:14px;font-weight:700;color:#fff;}
 
-.nl-articles{padding:0 28px;}
-.nl-article{padding:20px 0;border-bottom:1px solid rgba(255,255,255,.07);}
-.nl-article:last-child{border-bottom:none;}
-.nl-article-inner{display:flex;gap:18px;align-items:flex-start;margin-bottom:14px;}
-.nl-article-img{width:140px;height:140px;flex-shrink:0;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
-.nl-article-img img{width:100%;height:100%;object-fit:cover;display:block;}
-.nl-article-title{font-size:15px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:8px;}
-.nl-article-summary{font-size:12px;color:rgba(255,255,255,.62);line-height:1.75;}
-.nl-cta{text-align:left;}
-.nl-btn{display:inline-block;background:#5E95C8;color:#fff;font-size:13px;font-weight:600;padding:9px 26px;border-radius:20px;text-decoration:none;}
+.nl-arts{padding:0 28px;}
+.nl-art{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.nl-art:last-child{border-bottom:none;}
+.nl-art-row{display:flex;gap:16px;align-items:flex-start;margin-bottom:12px;}
+.nl-art-img{width:135px;height:135px;flex-shrink:0;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
+.nl-art-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.nl-art-title{font-size:14px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:8px;}
+.nl-art-sum{font-size:12px;color:rgba(255,255,255,.6);line-height:1.75;}
+.nl-btn{display:inline-block;background:var(--nia-blue);color:#fff;font-size:12px;font-weight:600;padding:8px 22px;border-radius:18px;text-decoration:none;}
+.nl-btn:hover{background:var(--nia-blue-dark);}
 
-.nl-footer{padding:18px 32px;text-align:center;border-top:1px solid rgba(94,149,200,.2);}
-.nl-footer-text{font-size:11px;color:rgba(255,255,255,.22);line-height:1.7;}
-.nl-footer-link{color:rgba(94,149,200,.55);text-decoration:none;}
+.nl-foot{padding:16px 28px;text-align:center;border-top:1px solid rgba(94,149,200,.15);}
+.nl-foot p{font-size:11px;color:rgba(255,255,255,.2);line-height:1.7;}
+.nl-foot a{color:rgba(94,149,200,.5);text-decoration:none;}
 
-@media(max-width:600px){
-  .northia-nav__link{display:none;}
-  .pm-grid{grid-template-columns:1fr 1fr;}
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .nav__link{display:none;}
+  .hero__flow{gap:4px;}
+  .hf-step{font-size:11px;padding:6px 10px;}
   .make-stats{grid-template-columns:1fr 1fr;}
-  .nl-article-inner{flex-direction:column;}
-  .nl-article-img{width:100%;height:160px;}
-  .nl-header,.nl-edito,.nl-articles,.nl-footer{padding-left:16px;padding-right:16px;}
+  .ec-grid{grid-template-columns:1fr 1fr;}
+  .nl-art-row{flex-direction:column;}
+  .nl-art-img{width:100%;height:160px;}
+  .nl-top,.nl-edito,.nl-arts,.nl-foot{padding-left:16px;padding-right:16px;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV NORTHIA -->
-<nav class="northia-nav">
-  <a href="/portfolio/index.html" class="northia-nav__brand">
-    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
+<!-- NAV -->
+<nav class="nav">
+  <a href="/portfolio/index.html" class="nav__brand">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="nav__logo">
   </a>
-  <div class="northia-nav__links">
-    <span class="mock-badge">Démonstration pipeline</span>
-    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
-    <a href="/portfolio/index.html" class="northia-nav__back">← Portfolio</a>
+  <div class="nav__links">
+    <span class="nav__pill">Pipeline · Démonstration</span>
+    <a href="/portfolio/newsletter.html" class="nav__link">← Newsletter IA</a>
+    <a href="/portfolio/index.html" class="nav__link">← Portfolio</a>
   </div>
 </nav>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div style="display:flex;align-items:center;gap:10px;">
-    <div style="font-size:14px;font-weight:700;color:var(--text);">NorthIA · Newsletter IA</div>
-    <div style="font-size:11px;color:var(--text-muted);">Pipeline complet Make · Airtable · Brevo</div>
+<!-- HERO -->
+<div class="hero">
+  <span class="hero__tag">Projet 03 / 03 · Make · Claude · DALL-E 3 · Brevo</span>
+  <h1 class="hero__title">Pipeline newsletter IA <span>de A à Z</span></h1>
+  <p class="hero__sub">De la capture d'article RSS à l'email en boîte mail — sans intervention humaine sur la production. L'humain sélectionne et valide.</p>
+  <div class="hero__flow">
+    <div class="hf-step"><span>📡</span> Collecte RSS</div>
+    <div class="hf-arrow">→</div>
+    <div class="hf-step"><span>🧠</span> Enrichissement Claude</div>
+    <div class="hf-arrow">→</div>
+    <div class="hf-step"><span>🎨</span> Image DALL-E 3</div>
+    <div class="hf-arrow">→</div>
+    <div class="hf-step"><span>📊</span> Sélection Airtable</div>
+    <div class="hf-arrow">→</div>
+    <div class="hf-step"><span>📨</span> Distribution Brevo</div>
   </div>
-  <span class="tbadge">✓ En production</span>
 </div>
 
-<!-- TABS -->
-<div class="tabs-bar">
-  <button class="tab-btn active" onclick="showTab('make',this)">
-    <span class="tab-step">01</span> ⚙️ Scénarios Make
-  </button>
-  <button class="tab-btn" onclick="showTab('airtable',this)">
-    <span class="tab-step">02</span> 🗃 Base Airtable
-  </button>
-  <button class="tab-btn" onclick="showTab('brevo',this)">
-    <span class="tab-step">03</span> 📨 Rendu Gmail réel
-  </button>
-</div>
-
-<!-- ═══ PANEL MAKE ═══ -->
-<div id="panel-make" class="panel active">
-  <div class="make-header">
+<!-- ═══ SECTION 1 — MAKE ═══ -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-num sn-b">01 · SCÉNARIOS MAKE</span>
     <div>
-      <div class="make-title">Scénarios Make (Integromat)</div>
-      <div class="make-sub">2 scénarios de collecte · 1 scénario génération + distribution</div>
+      <div class="section-title">Automatisation de la collecte et de la distribution</div>
+      <div class="section-sub">3 scénarios · 9 outils connectés · 0 intervention manuelle sur le volume</div>
     </div>
-    <div class="make-status"><div class="make-dot"></div>Actif · Planifié</div>
   </div>
 
-  <div class="scenario">
-    <div class="scenario__label">Scénario A — Revue de presse automatique <span class="lbl-tag lbl--auto">RSS · Auto</span></div>
-    <div class="flow-row">
-      <div class="fmod"><div class="fmod__icon fi-b">⏰</div><div class="fmod__name">Scheduler</div><div class="fmod__sub">Toutes les 6h</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-a">📡</div><div class="fmod__name">RSS Feed</div><div class="fmod__sub">BriefIA · Usine Dig. · The Conv. · Novethic…</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-b">🔎</div><div class="fmod__name">Router</div><div class="fmod__sub">Filtre doublons</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-a">🌐</div><div class="fmod__name">Jina.ai</div><div class="fmod__sub">Extraction contenu (anti-paywall)</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-p"><span class="nbadge">T1–5</span>🧠</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Enrichissement 8 champs</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-p"><span class="nbadge">T6</span>🎨</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Description visuelle métaphorique</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-g">🖼</div><div class="fmod__name">DALL-E 3</div><div class="fmod__sub">Image éditoriale unique</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-b">☁️</div><div class="fmod__name">Google Drive</div><div class="fmod__sub">Upload permanent</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-g">🌐</div><div class="fmod__name">WordPress</div><div class="fmod__sub">northia.fr URL publique</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-a">📊</div><div class="fmod__name">Airtable</div><div class="fmod__sub">Écriture enregistrement</div></div>
-    </div>
-    <div class="claude-prompt">
-      <div class="cp-label">🧠 Claude T1–T5 — Enrichissement JSON par article</div>
-      <div class="cp-fields">
-        <span class="cp-field">titre_article</span><span class="cp-field">contenu_brut</span>
-        <span style="color:var(--text-muted);font-size:11px;align-self:center">→</span>
-        <span class="cp-field cp-field--out">titre_propre</span>
-        <span class="cp-field cp-field--out">résumé_court</span>
-        <span class="cp-field cp-field--out">résumé_long</span>
-        <span class="cp-field cp-field--out">mots_clés[ ]</span>
-        <span class="cp-field cp-field--out">angle_éditorial</span>
-        <span class="cp-field cp-field--out">score_priorité</span>
-        <span class="cp-field cp-field--out">sentiment</span>
-        <span class="cp-field cp-field--out">catégorie</span>
+  <div class="make-scenarios">
+
+    <div class="scenario">
+      <div class="scenario-label">Scénario A — Collecte automatique RSS <span class="stag stag-b">Toutes les 6h</span></div>
+      <div class="flow">
+        <div class="fmod"><div class="fmod__icon fi-b">⏰</div><div class="fmod__name">Scheduler</div><div class="fmod__sub">Toutes les 6h</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-a">📡</div><div class="fmod__name">RSS Feeds</div><div class="fmod__sub">BriefIA · Usine Dig. Novethic…</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-b">🔎</div><div class="fmod__name">Filtre doublons</div><div class="fmod__sub">seen_ids</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-a">🌐</div><div class="fmod__name">Jina.ai</div><div class="fmod__sub">Extraction anti-paywall</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-p"><span class="nbadge">T1–5</span>🧠</div><div class="fmod__name">Claude API</div><div class="fmod__sub">8 champs enrichis</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-p"><span class="nbadge">T6</span>🎨</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Description visuelle</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-g">🖼</div><div class="fmod__name">DALL-E 3</div><div class="fmod__sub">Image unique par article</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-b">☁️</div><div class="fmod__name">Drive → WP</div><div class="fmod__sub">URL publique</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-a">📊</div><div class="fmod__name">Airtable</div><div class="fmod__sub">Écriture enregistrement</div></div>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">🧠 Claude T1–T5 — Enrichissement retourné en JSON</div>
+        <div class="chips">
+          <span class="chip chip-in">titre_article</span><span class="chip chip-in">contenu_brut</span>
+          <span class="chip-sep">→</span>
+          <span class="chip chip-out">titre_propre</span><span class="chip chip-out">résumé_court</span>
+          <span class="chip chip-out">résumé_long</span><span class="chip chip-out">mots_clés[]</span>
+          <span class="chip chip-out">score_priorité</span><span class="chip chip-out">sentiment</span>
+          <span class="chip chip-out">catégorie</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="scenario">
-    <div class="scenario__label">Scénario B — Capture URL manuelle <span class="lbl-tag lbl--manual">Tally · Mobile</span></div>
-    <div class="flow-row">
-      <div class="fmod"><div class="fmod__icon fi-p">📱</div><div class="fmod__name">Tally Form</div><div class="fmod__sub">Formulaire mobile (webhook)</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-b">🔄</div><div class="fmod__name">Anti-doublon</div><div class="fmod__sub">Vérif. URL existante</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-a">🌐</div><div class="fmod__name">Jina.ai</div><div class="fmod__sub">Extraction contenu</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-p">🧠</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Même pipeline T1–T6</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-g">🖼</div><div class="fmod__name">DALL-E 3</div><div class="fmod__sub">Image éditoriale</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-a">📊</div><div class="fmod__name">Airtable</div><div class="fmod__sub">Écriture enregistrement</div></div>
+    <div class="scenario">
+      <div class="scenario-label">Scénario B — Capture URL manuelle <span class="stag stag-p">👤 Tally Mobile</span></div>
+      <div class="flow">
+        <div class="fmod"><div class="fmod__icon fi-p">📱</div><div class="fmod__name">Tally Form</div><div class="fmod__sub">Mobile · webhook</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-b">🔄</div><div class="fmod__name">Anti-doublon</div><div class="fmod__sub">Vérif. URL existante</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-a">🌐</div><div class="fmod__name">Jina.ai</div><div class="fmod__sub">Extraction</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-p">🧠</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Même pipeline T1–T6</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-g">🖼</div><div class="fmod__name">DALL-E 3</div><div class="fmod__sub">Image éditoriale</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-a">📊</div><div class="fmod__name">Airtable</div><div class="fmod__sub">Écriture</div></div>
+      </div>
     </div>
-  </div>
 
-  <div class="scenario">
-    <div class="scenario__label">Scénario C — Génération newsletter + distribution <span class="lbl-tag lbl--auto">Hebdo · Mercredi</span></div>
-    <div class="flow-row">
-      <div class="fmod"><div class="fmod__icon fi-b">📅</div><div class="fmod__name">Scheduler</div><div class="fmod__sub">Mercredi 8h00</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-a">📊</div><div class="fmod__name">Airtable</div><div class="fmod__sub">Filtre "newsletter = ✓" → 6 articles</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-p">🧠</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Génération édito + 6 blocs JSON</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-b">📦</div><div class="fmod__name">JSON Parser</div><div class="fmod__sub">Extraction édito + blocs</div></div>
-      <div class="farrow">→</div>
-      <div class="fmod"><div class="fmod__icon fi-g">📨</div><div class="fmod__name">Brevo</div><div class="fmod__sub">Brouillon → validation → envoi</div></div>
-    </div>
-    <div class="claude-prompt">
-      <div class="cp-label">🧠 Claude · Scénario C — Règles éditoriales embarquées dans le prompt</div>
-      <div class="cp-fields">
-        <span class="cp-field cp-field--rule">Pas de tiret long</span>
-        <span class="cp-field cp-field--rule">Pas de "NorthIA" dans le corps</span>
-        <span class="cp-field cp-field--rule">Ton affûté, jamais condescendant</span>
-        <span class="cp-field cp-field--rule">Dernière phrase provocatrice</span>
-        <span class="cp-field cp-field--rule">Réponse JSON strict</span>
+    <div class="scenario">
+      <div class="scenario-label">Scénario C — Génération newsletter + envoi <span class="stag stag-b">Hebdo · Mercredi 8h</span></div>
+      <div class="flow">
+        <div class="fmod"><div class="fmod__icon fi-b">📅</div><div class="fmod__name">Scheduler</div><div class="fmod__sub">Mercredi 8h00</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-a">📊</div><div class="fmod__name">Airtable</div><div class="fmod__sub">Filtre "✓ newsletter" 6 articles</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-p">🧠</div><div class="fmod__name">Claude API</div><div class="fmod__sub">Édito + 6 blocs JSON</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-b">📦</div><div class="fmod__name">JSON Parser</div><div class="fmod__sub">Extraction blocs</div></div>
+        <div class="farr">→</div>
+        <div class="fmod"><div class="fmod__icon fi-g">📨</div><div class="fmod__name">Brevo</div><div class="fmod__sub">Brouillon → validation</div></div>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">🧠 Claude Scénario C — Règles éditoriales embarquées</div>
+        <div class="chips">
+          <span class="chip chip-rule">Pas de tiret long</span>
+          <span class="chip chip-rule">Pas de "NorthIA" dans le corps</span>
+          <span class="chip chip-rule">Ton affûté, jamais condescendant</span>
+          <span class="chip chip-rule">Dernière phrase provocatrice</span>
+          <span class="chip chip-rule">JSON strict : édito + 6 blocs</span>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="make-stats">
-    <div class="make-stat"><span class="make-stat__n">3</span><span class="make-stat__l">scénarios Make</span></div>
-    <div class="make-stat"><span class="make-stat__n">9</span><span class="make-stat__l">outils connectés</span></div>
-    <div class="make-stat"><span class="make-stat__n">6+</span><span class="make-stat__l">appels Claude / édition</span></div>
-    <div class="make-stat"><span class="make-stat__n">0</span><span class="make-stat__l">intervention sur le volume</span></div>
+    <div class="mstat"><span class="mstat__n">3</span><span class="mstat__l">scénarios</span></div>
+    <div class="mstat"><span class="mstat__n">9</span><span class="mstat__l">outils connectés</span></div>
+    <div class="mstat"><span class="mstat__n">6+</span><span class="mstat__l">appels Claude / édition</span></div>
+    <div class="mstat"><span class="mstat__n">0</span><span class="mstat__l">action sur le volume</span></div>
   </div>
 </div>
 
-<!-- ═══ PANEL AIRTABLE ═══ -->
-<div id="panel-airtable" class="panel">
-  <div class="at-toolbar">
-    <div class="at-base-name"><div class="at-base-icon">📊</div>NorthIA · Revue de presse</div>
-    <div class="at-actions"><div class="at-btn">🔍 Filtrer</div><div class="at-btn">⊞ Grouper</div></div>
+<div class="divider"></div>
+
+<!-- ═══ SECTION 2 — AIRTABLE ═══ -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-num sn-p">02 · BASE AIRTABLE</span>
+    <div>
+      <div class="section-title">Articles enrichis par Claude · Sélection éditoriale humaine</div>
+      <div class="section-sub">Images DALL-E stockées · Scores de priorité · Cases newsletter cochées manuellement</div>
+    </div>
+  </div>
+
+  <div class="at-header">
+    <div class="at-base"><div class="at-icon">📊</div>NorthIA · Revue de presse</div>
   </div>
   <div class="at-views">
-    <div class="at-view active">📋 Tous les articles</div>
-    <div class="at-view">✅ Sélectionnés newsletter</div>
-    <div class="at-view">🗓 Cette semaine</div>
+    <div class="atv active">📋 Tous les articles</div>
+    <div class="atv">✅ Sélectionnés newsletter</div>
+    <div class="atv">🗓 Cette semaine</div>
   </div>
   <div class="at-wrap">
     <table class="at-table">
       <thead>
         <tr>
-          <th>Image <span class="ft">URL</span></th>
-          <th>Titre <span class="ft">texte long</span></th>
-          <th>Catégorie <span class="ft">sélection</span></th>
-          <th>Score <span class="ft">nombre</span></th>
-          <th>Sentiment <span class="ft">sélection</span></th>
-          <th>Mots-clés <span class="ft">tags</span></th>
-          <th>Source <span class="ft">URL</span></th>
-          <th>Newsletter <span class="ft">case</span></th>
+          <th>Image DALL-E</th>
+          <th>Titre enrichi par Claude</th>
+          <th>Catégorie</th>
+          <th>Score</th>
+          <th>Sentiment</th>
+          <th>Mots-clés</th>
+          <th>Source</th>
+          <th>Newsletter ✓</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><img src="/portfolio/img-google-cloud.png" alt="" class="at-img"></td>
+          <td><img src="/portfolio/img-google-cloud.png" class="at-img" alt=""></td>
           <td class="c-title">Google Cloud mise tout sur les agents autonomes</td>
-          <td><span class="cat-tag cat-inno">Innovation</span></td>
+          <td><span class="ctag ct-inno">Innovation</span></td>
           <td><span class="c-score c-hi">9</span></td>
-          <td><span class="sent-tag sent-pos">● Positif</span></td>
-          <td><div class="kws"><span class="kw">agents IA</span><span class="kw">CAC 40</span><span class="kw">TPU</span></div></td>
-          <td class="c-url">usine-digitale.fr</td>
-          <td style="font-size:14px;text-align:center">✅</td>
+          <td><span class="stag2 sp">● Positif</span></td>
+          <td><div class="kws"><span class="kw">agents IA</span><span class="kw">Google</span><span class="kw">TPU</span></div></td>
+          <td style="font-size:10px;color:var(--nia-blue)">usine-digitale.fr</td>
+          <td style="text-align:center;font-size:15px">✅</td>
         </tr>
         <tr>
-          <td><img src="/portfolio/img-openai-images.png" alt="" class="at-img"></td>
+          <td><img src="/portfolio/img-openai-images.png" class="at-img" alt=""></td>
           <td class="c-title">OpenAI relance la génération d'images et cible le marketing</td>
-          <td><span class="cat-tag cat-inno">Innovation</span></td>
+          <td><span class="ctag ct-inno">Innovation</span></td>
           <td><span class="c-score c-hi">8</span></td>
-          <td><span class="sent-tag sent-neu">● Neutre</span></td>
+          <td><span class="stag2 sn">● Neutre</span></td>
           <td><div class="kws"><span class="kw">OpenAI</span><span class="kw">DALL-E</span><span class="kw">marketing</span></div></td>
-          <td class="c-url">briefia.com</td>
-          <td style="font-size:14px;text-align:center">✅</td>
+          <td style="font-size:10px;color:var(--nia-blue)">briefia.com</td>
+          <td style="text-align:center;font-size:15px">✅</td>
         </tr>
         <tr>
-          <td><img src="/portfolio/img-video-ia.png" alt="" class="at-img"></td>
+          <td><img src="/portfolio/img-video-ia.png" class="at-img" alt=""></td>
           <td class="c-title">Vidéo IA : Synthesia, Runway et Veo tiennent la route</td>
-          <td><span class="cat-tag cat-video">Vidéo</span></td>
+          <td><span class="ctag ct-video">Vidéo</span></td>
           <td><span class="c-score c-hi">8</span></td>
-          <td><span class="sent-tag sent-pos">● Positif</span></td>
+          <td><span class="stag2 sp">● Positif</span></td>
           <td><div class="kws"><span class="kw">Synthesia</span><span class="kw">Runway</span><span class="kw">Veo</span></div></td>
-          <td class="c-url">theconversation.com</td>
-          <td style="font-size:14px;text-align:center">✅</td>
+          <td style="font-size:10px;color:var(--nia-blue)">theconversation.com</td>
+          <td style="text-align:center;font-size:15px">✅</td>
         </tr>
         <tr>
-          <td><img src="/portfolio/img-spacex-cursor.png" alt="" class="at-img"></td>
+          <td><img src="/portfolio/img-spacex-cursor.png" class="at-img" alt=""></td>
           <td class="c-title">SpaceX s'allie à Cursor pour 60 milliards de dollars</td>
-          <td><span class="cat-tag cat-space">Tech</span></td>
+          <td><span class="ctag ct-space">Tech</span></td>
           <td><span class="c-score c-hi">9</span></td>
-          <td><span class="sent-tag sent-pos">● Positif</span></td>
+          <td><span class="stag2 sp">● Positif</span></td>
           <td><div class="kws"><span class="kw">SpaceX</span><span class="kw">Cursor</span><span class="kw">code IA</span></div></td>
-          <td class="c-url">journaldugeek.com</td>
-          <td style="font-size:14px;text-align:center">✅</td>
+          <td style="font-size:10px;color:var(--nia-blue)">journaldugeek.com</td>
+          <td style="text-align:center;font-size:15px">✅</td>
         </tr>
         <tr>
-          <td><img src="/portfolio/img-wordpress.png" alt="" class="at-img"></td>
+          <td><img src="/portfolio/img-wordpress.png" class="at-img" alt=""></td>
           <td class="c-title">Plugins WordPress infectés après changement de propriétaire</td>
-          <td><span class="cat-tag cat-cyber">Cyber</span></td>
+          <td><span class="ctag ct-cyber">Cyber</span></td>
           <td><span class="c-score c-hi">8</span></td>
-          <td><span class="sent-tag sent-neg">● Négatif</span></td>
-          <td><div class="kws"><span class="kw">WordPress</span><span class="kw">supply chain</span><span class="kw">malware</span></div></td>
-          <td class="c-url">briefia.com</td>
-          <td style="font-size:14px;text-align:center">✅</td>
+          <td><span class="stag2 sng">● Négatif</span></td>
+          <td><div class="kws"><span class="kw">WordPress</span><span class="kw">supply chain</span></div></td>
+          <td style="font-size:10px;color:var(--nia-blue)">briefia.com</td>
+          <td style="text-align:center;font-size:15px">✅</td>
         </tr>
         <tr>
-          <td><img src="/portfolio/img-ikea-samsung.png" alt="" class="at-img"></td>
+          <td><img src="/portfolio/img-ikea-samsung.png" class="at-img" alt=""></td>
           <td class="c-title">IKEA et Samsung : la domotique Matter franchit un cap</td>
-          <td><span class="cat-tag cat-eco">Tech</span></td>
+          <td><span class="ctag ct-eco">Tech</span></td>
           <td><span class="c-score c-mid">7</span></td>
-          <td><span class="sent-tag sent-pos">● Positif</span></td>
-          <td><div class="kws"><span class="kw">Matter</span><span class="kw">domotique</span><span class="kw">IKEA</span></div></td>
-          <td class="c-url">novethic.fr</td>
-          <td style="font-size:14px;text-align:center">✅</td>
+          <td><span class="stag2 sp">● Positif</span></td>
+          <td><div class="kws"><span class="kw">Matter</span><span class="kw">domotique</span></div></td>
+          <td style="font-size:10px;color:var(--nia-blue)">novethic.fr</td>
+          <td style="text-align:center;font-size:15px">✅</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="at-stats">
+  <div class="at-foot">
     <div class="at-stat">Total : <strong>47 articles</strong> cette semaine</div>
-    <div class="at-stat">Sélectionnés : <strong>6 ✅</strong></div>
-    <div class="at-stat">Images DALL-E : <strong>47 / 47</strong></div>
+    <div class="at-stat">Sélectionnés newsletter : <strong>6 ✅ — choix humain</strong></div>
+    <div class="at-stat">Images DALL-E générées : <strong>47 / 47</strong></div>
     <div class="at-stat">Score moyen : <strong>7.8 / 10</strong></div>
   </div>
 </div>
 
-<!-- ═══ PANEL BREVO / RENDU RÉEL ═══ -->
-<div id="panel-brevo" class="panel">
-  <div class="brevo-header">
+<div class="divider"></div>
+
+<!-- ═══ SECTION 3 — RENDU GMAIL ═══ -->
+<div class="section">
+  <div class="section-head">
+    <span class="section-num sn-g">03 · RENDU GMAIL RÉEL</span>
     <div>
-      <div class="brevo-title">Rendu réel — Email reçu dans Gmail</div>
-      <div class="brevo-sub">Template dark mode NorthIA · Paramètres dynamiques Make → Brevo · Images DALL-E réelles</div>
-    </div>
-    <div class="brevo-mode">⏳ Brouillon validé · Envoi manuel</div>
-  </div>
-
-  <div class="params-map">
-    <div class="pm-title">Paramètres dynamiques Make → Brevo</div>
-    <div class="pm-grid">
-      <div class="pm-row"><div class="pm-key">{{ params.edito }}</div><div class="pm-arrow">↓</div><div class="pm-val">Texte édito Claude (règles embarquées)</div></div>
-      <div class="pm-row"><div class="pm-key">{{ params.article_1_titre }}</div><div class="pm-arrow">↓</div><div class="pm-val">Titre enrichi · Airtable</div></div>
-      <div class="pm-row"><div class="pm-key">{{ params.article_1_img }}</div><div class="pm-arrow">↓</div><div class="pm-val">URL image DALL-E · northia.fr/wp/</div></div>
-      <div class="pm-row"><div class="pm-key">{{ params.article_1_resume }}</div><div class="pm-arrow">↓</div><div class="pm-val">Résumé 60 mots · Claude</div></div>
-      <div class="pm-row"><div class="pm-key">{{ params.article_1_lien }}</div><div class="pm-arrow">↓</div><div class="pm-val">URL source · Airtable</div></div>
-      <div class="pm-row"><div class="pm-key">× 6 articles</div><div class="pm-arrow">↓</div><div class="pm-val">Même structure pour articles 2 à 6</div></div>
+      <div class="section-title">Email reçu en boîte mail · Édition du 22 avril 2026</div>
+      <div class="section-sub">Template dark mode Brevo · Paramètres dynamiques Make · Images DALL-E réelles</div>
     </div>
   </div>
 
-  <div class="email-frame">
-    <div class="eclient-bar">
-      <div class="eclient-subject">NorthIA — Revue de presse IA · 22 avril 2026</div>
-      <div class="eclient-meta">
+  <div class="email-context">
+    <div class="ec-label">Paramètres Make → Brevo (injection dynamique)</div>
+    <div class="ec-grid">
+      <div class="ec-item"><div class="ec-key">{{ params.edito }}</div><div class="ec-val">Édito Claude · règles embarquées</div></div>
+      <div class="ec-item"><div class="ec-key">{{ params.article_N_titre }}</div><div class="ec-val">Titre enrichi Claude · Airtable</div></div>
+      <div class="ec-item"><div class="ec-key">{{ params.article_N_img }}</div><div class="ec-val">URL image DALL-E · northia.fr/wp/</div></div>
+      <div class="ec-item"><div class="ec-key">{{ params.article_N_resume }}</div><div class="ec-val">Résumé 60 mots · Claude</div></div>
+      <div class="ec-item"><div class="ec-key">{{ params.article_N_lien }}</div><div class="ec-val">URL source · Airtable</div></div>
+      <div class="ec-item"><div class="ec-key">× 6 articles</div><div class="ec-val">Même structure · articles 1 à 6</div></div>
+    </div>
+  </div>
+
+  <div class="email-shell">
+    <div class="email-topbar">
+      <div class="email-subject">NorthIA — Revue de presse IA · 22 avril 2026</div>
+      <div class="email-meta">
         <span>De : NorthIA &lt;newsletter@northia.fr&gt;</span>
         <span>À : Bonjour Pierre-Olivier,</span>
         <span>Mercredi 22 avril 2026 · 08:04</span>
-        <span style="color:#f59e0b">⏳ Brouillon validé</span>
+        <span class="draft-badge">⏳ Brouillon validé manuellement</span>
       </div>
     </div>
 
     <div class="nl">
-      <div class="nl-header">
-        <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="nl-logo">
-        <div class="nl-divider"></div>
-        <div class="nl-date">Revue de presse — 22 avril 2026</div>
-        <div class="nl-divider2"></div>
+      <div class="nl-top">
+        <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="nl-logo-img">
+        <div class="nl-sep"></div>
+        <div class="nl-date-txt">Revue de presse — 22 avril 2026</div>
+        <div class="nl-sep2"></div>
       </div>
 
       <div class="nl-edito">
         <p class="nl-greeting">Bonjour Pierre-Olivier,</p>
-        <h2 class="nl-etitle">L'IA s'accélère. Vos organisations suivent&nbsp;?</h2>
+        <p class="nl-etitle">L'IA s'accélère. Vos organisations suivent&nbsp;?</p>
         <p class="nl-ebody">Google rebaptise ses plateformes. OpenAI relance la génération d'images. SpaceX rachète un éditeur de code pour 60 milliards. En une semaine, les grandes manœuvres se multiplient. Pendant ce temps, les organisations cherchent encore leur gouvernance IA, leurs cas d'usage, leur sponsor interne. L'écart entre la vitesse des éditeurs et la lenteur des directions n'est pas un problème technique. C'est un problème de décision. La vraie question n'est pas de savoir si vous utilisez l'IA. C'est de savoir qui dans votre entreprise a le droit de dire non.</p>
         <p class="nl-esign">NorthIA</p>
       </div>
 
-      <div class="nl-articles">
-
-        <div class="nl-article">
-          <div class="nl-article-inner">
-            <div class="nl-article-img"><img src="/portfolio/img-google-cloud.png" alt="Google Cloud agents autonomes"></div>
-            <div>
-              <h3 class="nl-article-title">Google Cloud mise tout sur les agents autonomes</h3>
-              <p class="nl-article-summary">Lors de Google Cloud Next 26 à Las Vegas, Google a recentré toute sa stratégie autour des agents IA autonomes. Vertex AI devient Gemini Enterprise Agent Platform. Deux nouveaux TPU de 8e génération sont dévoilés. Des clients comme Tata Steel, Macy's ou la NASA pour Artemis II illustrent une adoption déjà industrielle.</p>
-            </div>
+      <div class="nl-arts">
+        <div class="nl-art">
+          <div class="nl-art-row">
+            <div class="nl-art-img"><img src="/portfolio/img-google-cloud.png" alt="Google Cloud"></div>
+            <div><p class="nl-art-title">Google Cloud mise tout sur les agents autonomes</p><p class="nl-art-sum">Lors de Google Cloud Next 26 à Las Vegas, Google a recentré toute sa stratégie autour des agents IA autonomes. Vertex AI devient Gemini Enterprise Agent Platform. Deux nouveaux TPU de 8e génération sont dévoilés. Des clients comme Tata Steel, Macy's ou la NASA pour Artemis II illustrent une adoption déjà industrielle.</p></div>
           </div>
-          <div class="nl-cta"><a href="#" class="nl-btn">Lire l'article</a></div>
+          <a href="#" class="nl-btn">Lire l'article</a>
         </div>
-
-        <div class="nl-article">
-          <div class="nl-article-inner">
-            <div class="nl-article-img"><img src="/portfolio/img-openai-images.png" alt="OpenAI génération images"></div>
-            <div>
-              <h3 class="nl-article-title">OpenAI relance la génération d'images et cible le marketing</h3>
-              <p class="nl-article-summary">OpenAI déploie ChatGPT Images 2.0, version améliorée de son outil de génération visuelle. La cible est explicite : les professionnels du marketing et de la communication. Une offensive stratégique dans un marché très concurrentiel, alors que Midjourney, Adobe Firefly et les acteurs chinois renforcent leurs positions.</p>
-            </div>
+        <div class="nl-art">
+          <div class="nl-art-row">
+            <div class="nl-art-img"><img src="/portfolio/img-openai-images.png" alt="OpenAI"></div>
+            <div><p class="nl-art-title">OpenAI relance la génération d'images et cible le marketing</p><p class="nl-art-sum">OpenAI déploie ChatGPT Images 2.0. La cible est explicite : les professionnels du marketing et de la communication. Une offensive stratégique dans un marché très concurrentiel, alors que Midjourney, Adobe Firefly et les acteurs chinois renforcent leurs positions.</p></div>
           </div>
-          <div class="nl-cta"><a href="#" class="nl-btn">Lire l'article</a></div>
+          <a href="#" class="nl-btn">Lire l'article</a>
         </div>
-
-        <div class="nl-article">
-          <div class="nl-article-inner">
-            <div class="nl-article-img"><img src="/portfolio/img-video-ia.png" alt="Vidéo IA"></div>
-            <div>
-              <h3 class="nl-article-title">Vidéo IA : Synthesia, Runway et Veo tiennent la route</h3>
-              <p class="nl-article-summary">Malgré l'arrêt de Sora jugé trop coûteux, le marché de la vidéo générée par IA progresse. Synthesia est valorisée 4 milliards après une levée de 200 millions, Runway lève 315 millions pour 5,3 milliards de valorisation. Les défis restent réels : énergie, droits d'auteur, deepfakes.</p>
-            </div>
+        <div class="nl-art">
+          <div class="nl-art-row">
+            <div class="nl-art-img"><img src="/portfolio/img-video-ia.png" alt="Vidéo IA"></div>
+            <div><p class="nl-art-title">Vidéo IA : Synthesia, Runway et Veo tiennent la route</p><p class="nl-art-sum">Synthesia est valorisée 4 milliards après une levée de 200 millions, Runway lève 315 millions. Les défis restent réels : énergie, droits d'auteur, deepfakes.</p></div>
           </div>
-          <div class="nl-cta"><a href="#" class="nl-btn">Lire l'article</a></div>
+          <a href="#" class="nl-btn">Lire l'article</a>
         </div>
-
-        <div class="nl-article">
-          <div class="nl-article-inner">
-            <div class="nl-article-img"><img src="/portfolio/img-spacex-cursor.png" alt="SpaceX Cursor"></div>
-            <div>
-              <h3 class="nl-article-title">SpaceX s'allie à Cursor pour 60 milliards de dollars</h3>
-              <p class="nl-article-summary">SpaceX noue un partenariat stratégique avec Cursor, éditeur de code assisté par IA, incluant une option de rachat à 60 milliards. L'opération confirme l'intensification de la bataille pour capter les développeurs professionnels. SpaceX signale une ambition de diversification au-delà de l'aérospatial.</p>
-            </div>
+        <div class="nl-art">
+          <div class="nl-art-row">
+            <div class="nl-art-img"><img src="/portfolio/img-spacex-cursor.png" alt="SpaceX Cursor"></div>
+            <div><p class="nl-art-title">SpaceX s'allie à Cursor pour 60 milliards de dollars</p><p class="nl-art-sum">SpaceX noue un partenariat avec Cursor, éditeur de code assisté par IA, incluant une option de rachat à 60 milliards. L'opération confirme la bataille pour capter les développeurs professionnels.</p></div>
           </div>
-          <div class="nl-cta"><a href="#" class="nl-btn">Lire l'article</a></div>
+          <a href="#" class="nl-btn">Lire l'article</a>
         </div>
-
-        <div class="nl-article">
-          <div class="nl-article-inner">
-            <div class="nl-article-img"><img src="/portfolio/img-wordpress.png" alt="WordPress plugins infectés"></div>
-            <div>
-              <h3 class="nl-article-title">Plugins WordPress infectés après un changement de propriétaire</h3>
-              <p class="nl-article-summary">Après le rachat de plus de 30 plugins WordPress sur Flippa, un acheteur y a introduit des portes dérobées dormantes pendant 8 mois. Activées le 5 avril 2026, elles ont transformé des sites en relais de spam SEO. WordPress.org a bloqué les plugins, mais la gestion des transferts reste un angle mort.</p>
-            </div>
+        <div class="nl-art">
+          <div class="nl-art-row">
+            <div class="nl-art-img"><img src="/portfolio/img-wordpress.png" alt="WordPress"></div>
+            <div><p class="nl-art-title">Plugins WordPress infectés après un changement de propriétaire</p><p class="nl-art-sum">30 plugins rachetés sur Flippa, portes dérobées dormantes pendant 8 mois, activées en avril 2026. Des milliers de sites transformés en relais de spam SEO.</p></div>
           </div>
-          <div class="nl-cta"><a href="#" class="nl-btn">Lire l'article</a></div>
+          <a href="#" class="nl-btn">Lire l'article</a>
         </div>
-
-        <div class="nl-article">
-          <div class="nl-article-inner">
-            <div class="nl-article-img"><img src="/portfolio/img-ikea-samsung.png" alt="IKEA Samsung Matter"></div>
-            <div>
-              <h3 class="nl-article-title">IKEA et Samsung : la domotique Matter franchit un cap</h3>
-              <p class="nl-article-summary">Samsung intègre nativement les appareils Matter d'IKEA dans SmartThings. Ampoules, capteurs et télécommandes fonctionnent désormais sans hub dédié. Ils rejoignent un écosystème incluant Hue, Eve, Ring et Nuki, ainsi que les électroménagers Samsung.</p>
-            </div>
+        <div class="nl-art">
+          <div class="nl-art-row">
+            <div class="nl-art-img"><img src="/portfolio/img-ikea-samsung.png" alt="IKEA Samsung"></div>
+            <div><p class="nl-art-title">IKEA et Samsung : la domotique Matter franchit un cap</p><p class="nl-art-sum">Samsung intègre nativement les appareils Matter d'IKEA dans SmartThings. Ampoules, capteurs et télécommandes fonctionnent désormais sans hub dédié.</p></div>
           </div>
-          <div class="nl-cta"><a href="#" class="nl-btn">Lire l'article</a></div>
+          <a href="#" class="nl-btn">Lire l'article</a>
         </div>
-
       </div>
 
-      <div class="nl-footer">
-        <p class="nl-footer-text">
-          NorthIA · <a href="https://northia.fr" class="nl-footer-link">northia.fr</a><br>
-          Make · Claude (Anthropic) · DALL-E 3 · Brevo<br>
-          <a href="#" class="nl-footer-link">Se désabonner</a>
-        </p>
+      <div class="nl-foot">
+        <p>NorthIA · <a href="https://northia.fr">northia.fr</a> · Make · Claude (Anthropic) · DALL-E 3 · Brevo<br><a href="#">Se désabonner</a></p>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-function showTab(name, btn) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('active');
-  btn.classList.add('active');
-}
-</script>
 </body>
 </html>
