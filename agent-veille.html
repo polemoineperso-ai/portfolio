@@ -6,6 +6,7 @@
 <title>Agent de veille emploi — Pierre-Olivier Lemoine · NorthIA</title>
 <meta name="description" content="Agent autonome de veille et de qualification d'offres d'emploi, conçu en Python. 180 offres agrégées chaque matin, 2 qualifiées livrées en boîte mail. Par Pierre-Olivier Lemoine · NorthIA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -17,9 +18,9 @@
   --paper-warm: #f4f2ee;
   --paper-card: #ffffff;
   --line: #e8eaef;
-  --accent: #2460e8;
-  --accent-light: #e8f0fe;
-  --accent-dark: #1a48c4;
+  --accent: #5E95C8;
+  --accent-light: rgba(94,149,200,.12);
+  --accent-dark: #27618C;
   --green: #1a9e6e;
   --green-light: #e6f7f1;
   --amber: #c47a14;
@@ -166,16 +167,69 @@ body {
   .metric { padding: 10px 14px; }
   .results-grid { grid-template-columns: 1fr; }
 }
+
+/* ── NORTHIA BRAND ── */
+.northia-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #222222;
+  border-bottom: 2px solid #5E95C8;
+  padding: 0 24px; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 16px rgba(0,0,0,.4);
+}
+.northia-nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.northia-nav__logo { height: 36px; width: auto; display: block; }
+.northia-nav__links { display: flex; align-items: center; gap: 6px; }
+.northia-nav__link {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  color: rgba(255,255,255,.6); text-decoration: none;
+  padding: 6px 12px; border-radius: 4px; transition: all .15s;
+}
+.northia-nav__link:hover { color: #E49EC6; background: rgba(255,255,255,.07); }
+.northia-nav__link--active { color: #5E95C8; }
+.northia-nav__cta {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  color: #222; background: #5E95C8;
+  text-decoration: none; padding: 7px 16px;
+  border-radius: 4px; transition: all .15s; white-space: nowrap;
+}
+.northia-nav__cta:hover { background: #E49EC6; }
+.northia-footer {
+  background: #222222;
+  border-top: 2px solid #5E95C8;
+  padding: 24px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 14px; margin-top: 0;
+}
+.northia-footer__logo { height: 28px; width: auto; }
+.northia-footer__info { text-align: center; }
+.northia-footer__name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  color: #5E95C8; text-transform: uppercase;
+}
+.northia-footer__sub { font-size: 11px; color: rgba(255,255,255,.3); margin-top: 3px; }
+.northia-footer__links { display: flex; gap: 14px; }
+.northia-footer__lnk { font-size: 12px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .15s; }
+.northia-footer__lnk:hover { color: #E49EC6; }
+@media(max-width:600px){.northia-nav__links{display:none;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
+
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <a href="/portfolio/index.html" class="nav__brand">
-    <div class="nav__logo">N</div>
-    <span class="nav__name">NorthIA</span>
+<nav class="northia-nav">
+  <a href="/portfolio/index.html" class="northia-nav__brand">
+    <img src="/portfolio/Logo_NorthIA_Pictogramme.png" alt="NorthIA" class="northia-nav__logo">
   </a>
-  <a href="/portfolio/index.html" class="nav__back">← Tous les projets</a>
+  <div class="northia-nav__links">
+    <a href="/portfolio/agent-veille.html" class="northia-nav__link northia-nav__link--active">Agent de veille</a>
+    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
+    <a href="/portfolio/guide-utilisation.html" class="northia-nav__link">Guide</a>
+    <a href="/portfolio/generateur.html" class="northia-nav__cta">Ouvrir le générateur →</a>
+  </div>
 </nav>
 
 <div class="hero">
@@ -352,10 +406,17 @@ body {
 
 </div><!-- /wrap -->
 
-<div class="footer">
-  <p>Pierre-Olivier Lemoine · <a href="https://northia.fr" target="_blank">NorthIA</a> · Projet 02/03 · 2026</p>
-  <p style="margin-top:4px">Propulsé par Claude Sonnet (Anthropic) · Python 3.13 · Windows 11</p>
-</div>
+<footer class="northia-footer">
+  <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
+  <div class="northia-footer__info">
+    <div class="northia-footer__name">Pierre-Olivier Lemoine · NorthIA · 2026</div>
+    <div class="northia-footer__sub">Propulsé par Claude (Anthropic) · Aucun tracking</div>
+  </div>
+  <div class="northia-footer__links">
+    <a href="https://northia.fr" target="_blank" class="northia-footer__lnk">northia.fr</a>
+    <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
+  </div>
+</footer>
 
 </body>
 </html>
