@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent de veille emploi — Pierre-Olivier Lemoine · NorthIA</title>
+<meta name="description" content="Agent autonome de veille et de qualification d'offres d'emploi, conçu en Python. 180 offres agrégées chaque matin, 2 qualifiées livrées en boîte mail. Par Pierre-Olivier Lemoine · NorthIA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1d23;
+  --ink-soft: #3d4251;
+  --ink-muted: #8892a4;
+  --ink-faint: #c8cedb;
+  --paper: #fafbfc;
+  --paper-warm: #f4f2ee;
+  --paper-card: #ffffff;
+  --line: #e8eaef;
+  --accent: #2460e8;
+  --accent-light: #e8f0fe;
+  --accent-dark: #1a48c4;
+  --green: #1a9e6e;
+  --green-light: #e6f7f1;
+  --amber: #c47a14;
+  --amber-light: #fef3e2;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow: 0 1px 4px rgba(0,0,0,.06), 0 2px 12px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 20px rgba(0,0,0,.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,251,252,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 24px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav__logo { width: 28px; height: 28px; background: var(--ink); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-style: italic; font-size: 13px; color: #fff; font-weight: 700; }
+.nav__name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.nav__back { font-size: 13px; color: var(--ink-muted); text-decoration: none; font-weight: 500; transition: color .15s; display: flex; align-items: center; gap: 6px; }
+.nav__back:hover { color: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  color: #fff;
+  padding: 64px 24px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(26,158,110,.35), transparent);
+  pointer-events: none;
+}
+.hero__tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
+.hero__num { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,.3); margin-bottom: 8px; }
+.hero__title { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 46px); font-weight: 700; line-height: 1.1; margin-bottom: 16px; letter-spacing: -.02em; }
+.hero__title em { font-style: italic; color: rgba(255,255,255,.55); }
+.hero__sub { font-size: 16px; color: rgba(255,255,255,.55); max-width: 520px; margin: 0 auto 32px; line-height: 1.65; }
+.hero__metrics { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.metric { text-align: center; padding: 12px 20px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-lg); }
+.metric__n { font-family: var(--font-mono); font-size: 22px; font-weight: 500; color: #fff; display: block; }
+.metric__l { font-size: 11px; color: rgba(255,255,255,.4); display: block; margin-top: 3px; }
+
+/* ── WRAP ── */
+.wrap { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 48px 0 0; }
+.section:last-of-type { padding-bottom: 72px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; }
+.section-title { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 12px; letter-spacing: -.01em; }
+.prose { font-size: 14px; color: var(--ink-soft); line-height: 1.75; max-width: 580px; }
+.prose + .prose { margin-top: 12px; }
+
+/* ── FLOW ── */
+.flow { display: flex; flex-direction: column; gap: 3px; margin-top: 20px; }
+.flow-step {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+  transition: border-color .18s;
+}
+.flow-step:hover { border-color: var(--ink-faint); }
+.flow-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.flow-icon--green { background: var(--green-light); }
+.flow-icon--blue { background: var(--accent-light); }
+.flow-icon--amber { background: var(--amber-light); }
+.flow-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.flow-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+.flow-sub { font-size: 12px; color: var(--ink-muted); margin-top: 5px; font-family: var(--font-mono); }
+
+/* ── CHALLENGES ── */
+.challenges { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.challenge {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.challenge__title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.challenge__body { font-size: 13px; color: var(--ink-soft); line-height: 1.65; }
+.challenge__code { font-family: var(--font-mono); font-size: 11px; background: var(--paper-warm); padding: 2px 6px; border-radius: 3px; color: var(--ink-soft); }
+
+/* ── STACK TABLE ── */
+.stack-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; background: var(--paper-card); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+.stack-table th { background: var(--ink); color: rgba(255,255,255,.65); font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 10px 16px; text-align: left; }
+.stack-table td { padding: 10px 16px; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
+.stack-table tr:last-child td { border-bottom: none; }
+.stack-table tr:nth-child(odd) td { background: var(--paper-warm); }
+.stack-table .mono { font-family: var(--font-mono); font-size: 12px; }
+
+/* ── RESULTS ── */
+.results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+.result-card { background: var(--paper-card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 18px; box-shadow: var(--shadow); }
+.result-card__n { font-family: var(--font-mono); font-size: 26px; font-weight: 500; color: var(--green); display: block; margin-bottom: 4px; }
+.result-card__l { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+/* ── FOOTER ── */
+.footer { background: var(--ink); color: rgba(255,255,255,.35); text-align: center; padding: 28px 24px; font-size: 12px; line-height: 1.7; }
+.footer a { color: rgba(255,255,255,.5); text-decoration: none; }
+.footer a:hover { color: rgba(255,255,255,.8); }
+
+/* ── DIVIDER ── */
+.divider { width: 100%; height: 1px; background: var(--line); margin: 44px 0 0; }
+
+/* ── NAV BOTTOM ── */
+.nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); flex-wrap: wrap; gap: 12px; }
+.nav-btn { font-size: 13px; font-weight: 600; padding: 9px 18px; border-radius: var(--radius); text-decoration: none; transition: all .15s; display: inline-flex; align-items: center; gap: 6px; }
+.nav-btn--outline { border: 1px solid var(--line); color: var(--ink-soft); background: var(--paper-card); }
+.nav-btn--outline:hover { border-color: var(--ink-faint); color: var(--ink); }
+.nav-btn--primary { background: var(--accent); color: #fff; }
+.nav-btn--primary:hover { background: var(--accent-dark); }
+
+@media (max-width: 600px) {
+  .hero { padding: 48px 20px 40px; }
+  .hero__metrics { gap: 10px; }
+  .metric { padding: 10px 14px; }
+  .results-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/portfolio" class="nav__brand">
+    <div class="nav__logo">N</div>
+    <span class="nav__name">NorthIA</span>
+  </a>
+  <a href="/portfolio" class="nav__back">← Tous les projets</a>
+</nav>
+
+<div class="hero">
+  <div class="hero__tag">Projet 02 / 03 · Python · IA</div>
+  <div class="hero__num">Agent autonome</div>
+  <h1 class="hero__title">Agent de veille <em>emploi</em></h1>
+  <p class="hero__sub">180 offres agrégées chaque matin depuis 3 sources. 2 qualifiées par l'IA livrées en boîte mail. Zéro intervention humaine.</p>
+  <div class="hero__metrics">
+    <div class="metric">
+      <span class="metric__n">~180</span>
+      <span class="metric__l">offres / jour</span>
+    </div>
+    <div class="metric">
+      <span class="metric__n">2</span>
+      <span class="metric__l">livrées en boîte mail</span>
+    </div>
+    <div class="metric">
+      <span class="metric__n">7h00</span>
+      <span class="metric__l">chaque matin</span>
+    </div>
+    <div class="metric">
+      <span class="metric__n">7j/7</span>
+      <span class="metric__l">autonome</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="section">
+  <div class="section-label">Problème résolu</div>
+  <h2 class="section-title">Le bruit avant le signal</h2>
+  <p class="prose">La recherche d'emploi senior en communication génère chaque jour des dizaines d'offres sur des plateformes disparates. Les trier manuellement est chronophage et peu fiable : même avec des filtres, 90% des offres ne correspondent pas réellement au profil recherché.</p>
+  <p class="prose">L'objectif était d'automatiser intégralement cette veille pour ne recevoir chaque matin que les 2 ou 3 offres vraiment pertinentes, avec une justification IA et des actions en un clic directement depuis l'email.</p>
+</div>
+
+<div class="section">
+  <div class="section-label">Architecture</div>
+  <h2 class="section-title">Comment ça fonctionne</h2>
+  <div class="flow">
+
+    <div class="flow-step">
+      <div class="flow-icon flow-icon--blue">⏰</div>
+      <div>
+        <div class="flow-name">Déclenchement automatique — 7h00</div>
+        <div class="flow-desc">Le planificateur Windows (compte SYSTEM) lance <span style="font-family:var(--font-mono);font-size:12px">run.bat</span> chaque matin. Même si le PC était en veille, la tâche s'exécute au réveil. Fonctionne sans session utilisateur active.</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-icon flow-icon--blue">🔍</div>
+      <div>
+        <div class="flow-name">Scraping multi-sources en parallèle</div>
+        <div class="flow-desc">Trois connecteurs tournent simultanément : France Travail API sur 8 départements Île-de-France, Adzuna API avec pagination, Cadremploi via flux RSS avec filtrage par mots-clés côté client.</div>
+        <div class="flow-sub">~130 offres France Travail · Adzuna · Cadremploi RSS</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-icon flow-icon--amber">🔁</div>
+      <div>
+        <div class="flow-name">Déduplication intelligente</div>
+        <div class="flow-desc">Trois fichiers JSON gèrent l'état : <span style="font-family:var(--font-mono);font-size:12px">seen.json</span> (déjà traitées), <span style="font-family:var(--font-mono);font-size:12px">applied.json</span> (archivées), <span style="font-family:var(--font-mono);font-size:12px">saved.json</span> (à relire). Une offre sauvegardée revient chaque jour jusqu'à action de l'utilisateur.</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-icon flow-icon--green">🤖</div>
+      <div>
+        <div class="flow-name">Scoring IA — Claude Sonnet</div>
+        <div class="flow-desc">Chaque offre est soumise à Claude avec un profil détaillé : titre ciblé, zone géographique, compétences clés, secteurs exclus, contrats acceptés. Le modèle retourne un score /10, un tag et une justification en une phrase.</div>
+        <div class="flow-sub">Score · Tag prioritaire / à regarder / ignorer · Justification</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-icon flow-icon--green">📧</div>
+      <div>
+        <div class="flow-name">Email digest HTML — actions en un clic</div>
+        <div class="flow-desc">Envoi via Gmail API (OAuth 2.0). Chaque carte d'offre contient le score, la justification IA, et trois boutons : archiver, sauvegarder, ouvrir dans le générateur de candidature avec le texte pré-rempli.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Défis techniques</div>
+  <h2 class="section-title">Les vrais problèmes à résoudre</h2>
+  <div class="challenges">
+
+    <div class="challenge">
+      <div class="challenge__title">Exécution sous compte SYSTEM Windows</div>
+      <div class="challenge__body">La tâche planifiée tourne sans session utilisateur. Contraintes : pas d'accès à <span class="challenge__code">C:\Users\</span> pour les packages pip (environnement virtuel dans <span class="challenge__code">C:\ProgramData\</span>), tokens OAuth stockés séparément, redémarrage propre du serveur local géré dans le batch.</div>
+    </div>
+
+    <div class="challenge">
+      <div class="challenge__title">Bug WMIC / encodage UTF-16LE</div>
+      <div class="challenge__body"><span class="challenge__code">wmic os get localdatetime</span> sort en UTF-16LE avec espaces dans un contexte SYSTEM, générant des noms de fichiers de log invalides et des échecs silencieux. Solution : date via PowerShell <span class="challenge__code">Get-Date -Format yyyyMMdd</span>.</div>
+    </div>
+
+    <div class="challenge">
+      <div class="challenge__title">Injection HTML sécurisée dans le générateur</div>
+      <div class="challenge__body">Le générateur de candidature contient <span class="challenge__code">&lt;/body&gt;</span> dans des chaînes JavaScript. Utilisation de <span class="challenge__code">rfind()</span> plutôt que <span class="challenge__code">replace()</span> pour cibler uniquement la vraie balise de fermeture.</div>
+    </div>
+
+    <div class="challenge">
+      <div class="challenge__title">Fiabilité sur laptop en veille</div>
+      <div class="challenge__body">Deux paramètres critiques : <span class="challenge__code">DisallowStartIfOnBatteries=false</span> et <span class="challenge__code">StartWhenAvailable=true</span>. La tâche se déclenche sur batterie et se lance dès le réveil si le PC était en veille à 7h00.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Stack technique</div>
+  <h2 class="section-title">Technologies utilisées</h2>
+  <table class="stack-table">
+    <thead>
+      <tr>
+        <th>Catégorie</th>
+        <th>Outil</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Langage</td><td class="mono">Python 3.13</td></tr>
+      <tr><td>IA / Scoring</td><td class="mono">Claude Sonnet · API Anthropic</td></tr>
+      <tr><td>Email</td><td class="mono">Gmail API · OAuth 2.0 · google-api-python-client</td></tr>
+      <tr><td>HTTP / Serveur local</td><td class="mono">urllib · http.server (stdlib)</td></tr>
+      <tr><td>RSS / Scraping</td><td class="mono">feedparser · BeautifulSoup4</td></tr>
+      <tr><td>Planification</td><td class="mono">Windows Task Scheduler · SYSTEM</td></tr>
+      <tr><td>OS</td><td class="mono">Windows 11</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-label">Résultats</div>
+  <h2 class="section-title">Ce que ça produit</h2>
+  <div class="results-grid">
+    <div class="result-card">
+      <span class="result-card__n">~180</span>
+      <span class="result-card__l">offres agrégées chaque matin depuis 3 sources</span>
+    </div>
+    <div class="result-card">
+      <span class="result-card__n">~2</span>
+      <span class="result-card__l">offres qualifiées livrées en boîte mail (seuil ≥ 8/10)</span>
+    </div>
+    <div class="result-card">
+      <span class="result-card__n">0</span>
+      <span class="result-card__l">intervention manuelle — système autonome 7j/7</span>
+    </div>
+    <div class="result-card">
+      <span class="result-card__n">1 clic</span>
+      <span class="result-card__l">pour archiver, sauvegarder ou générer une candidature depuis l'email</span>
+    </div>
+  </div>
+</div>
+
+<!-- DÉMO -->
+<div class="section" style="padding-top:36px">
+  <div class="section-label">Démonstration</div>
+  <h2 class="section-title">Voir le résultat</h2>
+  <p class="prose" style="margin-bottom:16px">Représentation fidèle de l'email reçu chaque matin à 7h00 — format, scoring IA, justifications et boutons d'action conformes au système en production.</p>
+  <a href="/mock-email-digest" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;font-size:14px;font-weight:600;padding:12px 22px;border-radius:var(--radius);text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+    📧 Voir l'email digest en production →
+  </a>
+</div>
+
+<div class="nav-bottom">
+  <a href="/portfolio" class="nav-btn nav-btn--outline">← Tous les projets</a>
+  <a href="/newsletter" class="nav-btn nav-btn--outline">Projet suivant : Newsletter IA →</a>
+</div>
+
+</div><!-- /wrap -->
+
+<div class="footer">
+  <p>Pierre-Olivier Lemoine · <a href="https://northia.fr" target="_blank">NorthIA</a> · Projet 02/03 · 2026</p>
+  <p style="margin-top:4px">Propulsé par Claude Sonnet (Anthropic) · Python 3.13 · Windows 11</p>
+</div>
+
+</body>
+</html>

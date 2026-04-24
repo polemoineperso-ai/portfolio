@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Newsletter IA automatisée — NorthIA · Pierre-Olivier Lemoine</title>
+<meta name="description" content="Pipeline complet d'automatisation éditoriale : de la capture d'article RSS à la newsletter en boîte mail. Make · Claude · DALL-E 3 · Brevo. Par Pierre-Olivier Lemoine · NorthIA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1d23;
+  --ink-soft: #3d4251;
+  --ink-muted: #8892a4;
+  --ink-faint: #c8cedb;
+  --paper: #fafbfc;
+  --paper-warm: #f4f2ee;
+  --paper-card: #ffffff;
+  --line: #e8eaef;
+  --accent: #2460e8;
+  --accent-light: #e8f0fe;
+  --accent-dark: #1a48c4;
+  --green: #1a9e6e;
+  --green-light: #e6f7f1;
+  --violet: #6d3fd1;
+  --violet-light: #f0ecfd;
+  --amber: #c47a14;
+  --amber-light: #fef3e2;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow: 0 1px 4px rgba(0,0,0,.06), 0 2px 12px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 20px rgba(0,0,0,.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+.nav { position: sticky; top: 0; z-index: 100; background: rgba(250,251,252,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+.nav__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav__logo { width: 28px; height: 28px; background: var(--ink); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-style: italic; font-size: 13px; color: #fff; font-weight: 700; }
+.nav__name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.nav__back { font-size: 13px; color: var(--ink-muted); text-decoration: none; font-weight: 500; transition: color .15s; }
+.nav__back:hover { color: var(--ink); }
+
+/* ── HERO ── */
+.hero { background: var(--ink); color: #fff; padding: 64px 24px 56px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(109,63,209,.4), transparent); pointer-events: none; }
+.hero__tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); padding: 5px 14px; border-radius: 20px; margin-bottom: 20px; }
+.hero__title { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 46px); font-weight: 700; line-height: 1.1; margin-bottom: 16px; letter-spacing: -.02em; }
+.hero__title em { font-style: italic; color: rgba(255,255,255,.55); }
+.hero__sub { font-size: 16px; color: rgba(255,255,255,.55); max-width: 520px; margin: 0 auto 32px; line-height: 1.65; }
+.hero__metrics { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.metric { text-align: center; padding: 12px 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-lg); }
+.metric__n { font-family: var(--font-mono); font-size: 18px; font-weight: 500; color: #fff; display: block; }
+.metric__l { font-size: 11px; color: rgba(255,255,255,.4); display: block; margin-top: 3px; }
+
+/* ── WRAP / SECTION ── */
+.wrap { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 48px 0 0; }
+.section:last-of-type { padding-bottom: 72px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; }
+.section-title { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 12px; letter-spacing: -.01em; }
+.prose { font-size: 14px; color: var(--ink-soft); line-height: 1.75; max-width: 580px; }
+.prose + .prose { margin-top: 12px; }
+
+/* ── PIPELINE STEPS ── */
+.pipeline { display: flex; flex-direction: column; gap: 3px; margin-top: 20px; }
+.pipe-step { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: flex-start; background: var(--paper-card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 16px 18px; box-shadow: var(--shadow); transition: border-color .18s; }
+.pipe-step:hover { border-color: var(--ink-faint); }
+.pipe-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.pipe-icon--violet { background: var(--violet-light); }
+.pipe-icon--blue { background: var(--accent-light); }
+.pipe-icon--amber { background: var(--amber-light); }
+.pipe-icon--green { background: var(--green-light); }
+.pipe-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.pipe-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+.pipe-sub { font-size: 12px; color: var(--ink-muted); margin-top: 5px; font-family: var(--font-mono); }
+
+/* ── CATEGORIES TABLE ── */
+.cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+.cat-item { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--paper-card); border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; }
+.cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.cat-name { font-weight: 600; color: var(--ink); }
+.cat-palette { font-size: 11px; color: var(--ink-muted); font-family: var(--font-mono); }
+
+/* ── EXAMPLE BOX ── */
+.example-box { background: var(--paper-warm); border: 1px solid var(--line); border-left: 3px solid var(--violet); border-radius: var(--radius); padding: 14px 16px; margin-top: 14px; }
+.example-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); margin-bottom: 6px; }
+.example-title { font-size: 13px; font-style: italic; color: var(--ink-soft); margin-bottom: 6px; }
+.example-result { font-size: 13px; color: var(--ink); font-weight: 600; }
+
+/* ── STACK TABLE ── */
+.stack-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; background: var(--paper-card); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+.stack-table th { background: var(--ink); color: rgba(255,255,255,.65); font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 10px 16px; text-align: left; }
+.stack-table td { padding: 10px 16px; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
+.stack-table tr:last-child td { border-bottom: none; }
+.stack-table tr:nth-child(odd) td { background: var(--paper-warm); }
+.stack-table .mono { font-family: var(--font-mono); font-size: 12px; }
+
+/* ── RESULTS ── */
+.results-list { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+.result-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; background: var(--paper-card); border: 1px solid var(--line); border-radius: var(--radius); }
+.result-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.result-text { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+.result-text strong { color: var(--ink); font-weight: 600; }
+
+/* ── NAV BOTTOM ── */
+.nav-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); flex-wrap: wrap; gap: 12px; }
+.nav-btn { font-size: 13px; font-weight: 600; padding: 9px 18px; border-radius: var(--radius); text-decoration: none; transition: all .15s; display: inline-flex; align-items: center; gap: 6px; }
+.nav-btn--outline { border: 1px solid var(--line); color: var(--ink-soft); background: var(--paper-card); }
+.nav-btn--outline:hover { border-color: var(--ink-faint); color: var(--ink); }
+.nav-btn--primary { background: var(--accent); color: #fff; }
+.nav-btn--primary:hover { background: var(--accent-dark); }
+
+/* ── FOOTER ── */
+.footer { background: var(--ink); color: rgba(255,255,255,.35); text-align: center; padding: 28px 24px; font-size: 12px; line-height: 1.7; }
+.footer a { color: rgba(255,255,255,.5); text-decoration: none; }
+.footer a:hover { color: rgba(255,255,255,.8); }
+.divider { width: 100%; height: 1px; background: var(--line); margin: 44px 0 0; }
+
+@media (max-width: 600px) {
+  .hero { padding: 48px 20px 40px; }
+  .cat-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/portfolio" class="nav__brand">
+    <div class="nav__logo">N</div>
+    <span class="nav__name">NorthIA</span>
+  </a>
+  <a href="/portfolio" class="nav__back">← Tous les projets</a>
+</nav>
+
+<div class="hero">
+  <div class="hero__tag">Projet 03 / 03 · Make · Claude · DALL-E 3</div>
+  <h1 class="hero__title">Newsletter IA <em>automatisée</em></h1>
+  <p class="hero__sub">De la capture d'article RSS à la newsletter en boîte mail — sans intervention humaine. Pipeline complet d'automatisation éditoriale.</p>
+  <div class="hero__metrics">
+    <div class="metric">
+      <span class="metric__n">0</span>
+      <span class="metric__l">intervention manuelle</span>
+    </div>
+    <div class="metric">
+      <span class="metric__n">8</span>
+      <span class="metric__l">catégories éditoriales</span>
+    </div>
+    <div class="metric">
+      <span class="metric__n">100%</span>
+      <span class="metric__l">images générées IA</span>
+    </div>
+    <div class="metric">
+      <span class="metric__n">Make</span>
+      <span class="metric__l">orchestration</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="section">
+  <div class="section-label">Contexte</div>
+  <h2 class="section-title">Revue de presse hebdomadaire, zéro rédaction</h2>
+  <p class="prose">Dans le cadre de NorthIA, j'ai conçu et déployé un pipeline complet pour produire et distribuer une revue de presse hebdomadaire sur l'IA et la transformation digitale, adressée à des dirigeants et responsables communication.</p>
+  <p class="prose">L'objectif était simple à formuler, complexe à tenir : zéro intervention manuelle entre la capture d'article et l'envoi en boîte mail. De l'URL à la newsletter en quelques minutes.</p>
+</div>
+
+<div class="section">
+  <div class="section-label">Pipeline</div>
+  <h2 class="section-title">Les 5 modules du pipeline</h2>
+  <div class="pipeline">
+
+    <div class="pipe-step">
+      <div class="pipe-icon pipe-icon--blue">📡</div>
+      <div>
+        <div class="pipe-name">Collecte automatique — deux scénarios Make</div>
+        <div class="pipe-desc"><strong>Revue de presse</strong> : collecte via flux RSS (BriefIA, Usine Digitale, The Conversation, Novethic…), extraction du contenu via Jina.ai pour contourner les protections Cloudflare.<br><strong>Capture URL</strong> : formulaire Tally mobile, même pipeline d'enrichissement, filtre anti-doublon automatique.</div>
+      </div>
+    </div>
+
+    <div class="pipe-step">
+      <div class="pipe-icon pipe-icon--violet">🧠</div>
+      <div>
+        <div class="pipe-name">Enrichissement Claude — 7 attributs par article</div>
+        <div class="pipe-desc">Pour chaque article, Claude génère : titre propre, résumé court et long, mots-clés, angle éditorial, score de priorité, sentiment, périmètre géographique, catégorie. Tout est écrit dans Airtable pour le tri et la sélection.</div>
+        <div class="pipe-sub">Titre · Résumé · Mots-clés · Angle · Score · Sentiment · Catégorie</div>
+      </div>
+    </div>
+
+    <div class="pipe-step">
+      <div class="pipe-icon pipe-icon--violet">🎨</div>
+      <div>
+        <div class="pipe-name">Images éditoriales — DALL-E 3</div>
+        <div class="pipe-desc">Claude génère d'abord une description visuelle métaphorique à partir du titre, de l'angle et des mots-clés. Cette description est injectée dans le prompt DALL-E 3 — chaque image est liée au contenu, pas à un concept générique. 8 palettes couleur selon la catégorie.</div>
+        <div class="pipe-sub">Description visuelle Claude → prompt DALL-E 3 → upload Drive → WordPress → URL Airtable</div>
+      </div>
+    </div>
+
+    <div class="pipe-step">
+      <div class="pipe-icon pipe-icon--amber">✍️</div>
+      <div>
+        <div class="pipe-name">Génération de la newsletter — Claude</div>
+        <div class="pipe-desc">À partir des 6 articles sélectionnés dans Airtable, Claude génère en JSON un édito original (100 mots, ton direct, provocation finale, signé NorthIA) et 6 blocs article. Règles embarquées : pas de tiret long, dernière phrase provocatrice, ton jamais condescendant.</div>
+      </div>
+    </div>
+
+    <div class="pipe-step">
+      <div class="pipe-icon pipe-icon--green">📨</div>
+      <div>
+        <div class="pipe-name">Distribution via Brevo</div>
+        <div class="pipe-desc">Template HTML dark mode personnalisé. Paramètres dynamiques mappés depuis Make (édito, 6 articles, images, liens). Envoi en mode brouillon pour validation avant distribution. Personnalisation FIRSTNAME par contact.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Images éditoriales</div>
+  <h2 class="section-title">8 catégories, 8 palettes</h2>
+  <p class="prose">Chaque catégorie dispose d'une palette couleur fixe qui garantit la cohérence visuelle d'une édition à l'autre, tout en différenciant les articles au premier regard.</p>
+
+  <div class="cat-grid">
+    <div class="cat-item">
+      <div class="cat-dot" style="background:#5B7EC9"></div>
+      <div>
+        <div class="cat-name">Innovation</div>
+        <div class="cat-palette">Navy · #5B7EC9 · #E879A0</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot" style="background:#E8A020"></div>
+      <div>
+        <div class="cat-name">Économie</div>
+        <div class="cat-palette">Navy · #E8A020 · #5B7EC9</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot" style="background:#20E8A0"></div>
+      <div>
+        <div class="cat-name">Environnement</div>
+        <div class="cat-palette">Navy · #20E8A0 · #5B7EC9</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot" style="background:#E84040"></div>
+      <div>
+        <div class="cat-name">Juridique</div>
+        <div class="cat-palette">Navy · #E8A020 · #E84040</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot" style="background:#20C8E8"></div>
+      <div>
+        <div class="cat-name">Emploi</div>
+        <div class="cat-palette">Navy · #20C8E8 · #E879A0</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot" style="background:#E8A020"></div>
+      <div>
+        <div class="cat-name">Société</div>
+        <div class="cat-palette">Gris chaud · #E8A020</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot" style="background:#E84040"></div>
+      <div>
+        <div class="cat-name">Cybersécurité</div>
+        <div class="cat-palette">Noir · #E84040 · #5B7EC9</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot" style="background:#8892a4"></div>
+      <div>
+        <div class="cat-name">Autre</div>
+        <div class="cat-palette">Navy · #5B7EC9 · #E879A0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <div class="example-label">Exemple — Module T6</div>
+    <div class="example-title">"Plugins WordPress infectés après un changement de propriétaire"</div>
+    <div class="example-result">→ Image générée : un loup en costume tenant une clé devant un cadenas WordPress, entouré de moutons endormis aux contours néon.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Stack technique</div>
+  <h2 class="section-title">Technologies utilisées</h2>
+  <table class="stack-table">
+    <thead>
+      <tr><th>Outil</th><th>Usage</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="mono">Make (Integromat)</td><td>Orchestration de tous les scénarios</td></tr>
+      <tr><td class="mono">Claude API (Anthropic)</td><td>Enrichissement articles · édito · description visuelle</td></tr>
+      <tr><td class="mono">DALL-E 3 (OpenAI)</td><td>Génération images éditoriales</td></tr>
+      <tr><td class="mono">Airtable</td><td>Base de données articles + CRM contacts</td></tr>
+      <tr><td class="mono">Brevo</td><td>Template newsletter + distribution</td></tr>
+      <tr><td class="mono">WordPress (northia.fr)</td><td>Hébergement images publiques</td></tr>
+      <tr><td class="mono">Jina.ai</td><td>Extraction contenu sites protégés</td></tr>
+      <tr><td class="mono">Tally</td><td>Formulaire capture URL mobile</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="section-label">Résultats</div>
+  <h2 class="section-title">Ce que ça produit</h2>
+  <div class="results-list">
+    <div class="result-row">
+      <span class="result-icon">⚡</span>
+      <span class="result-text"><strong>Pipeline entièrement automatisé</strong> : de l'URL à la newsletter en quelques minutes, sans toucher à quoi que ce soit.</span>
+    </div>
+    <div class="result-row">
+      <span class="result-icon">🖼</span>
+      <span class="result-text"><strong>Images 100% générées par IA</strong>, liées au contenu spécifique de chaque article — pas à une banque d'images ou un template.</span>
+    </div>
+    <div class="result-row">
+      <span class="result-icon">✍️</span>
+      <span class="result-text"><strong>Édito original généré par Claude</strong> à chaque édition, signé NorthIA, avec règles éditoriales embarquées dans le prompt.</span>
+    </div>
+    <div class="result-row">
+      <span class="result-icon">🎨</span>
+      <span class="result-text"><strong>Cohérence visuelle garantie</strong> par les 8 palettes couleur par catégorie, sans intervention humaine sur le design.</span>
+    </div>
+    <div class="result-row">
+      <span class="result-icon">📐</span>
+      <span class="result-text"><strong>Architecture documentée</strong> dans Notion : Prompts library complète et Make Runbook pour la maintenance et l'évolution.</span>
+    </div>
+  </div>
+</div>
+
+<!-- DÉMO -->
+<div class="section" style="padding-top:36px">
+  <div class="section-label">Démonstration</div>
+  <h2 class="section-title">Voir le pipeline en action</h2>
+  <p class="prose" style="margin-bottom:16px">Représentation fidèle des 3 étapes du pipeline : scénarios Make, base Airtable avec les articles enrichis par Claude, rendu final Brevo — conforme au système en production.</p>
+  <a href="/mock-newsletter" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;font-size:14px;font-weight:600;padding:12px 22px;border-radius:var(--radius);text-decoration:none;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+    🔄 Voir le pipeline Make · Airtable · Brevo →
+  </a>
+</div>
+
+<div class="nav-bottom">
+  <a href="/agent-veille" class="nav-btn nav-btn--outline">← Projet précédent : Agent de veille</a>
+  <a href="/generateur" class="nav-btn nav-btn--primary">Essayer le générateur →</a>
+</div>
+
+</div><!-- /wrap -->
+
+<div class="footer">
+  <p>Pierre-Olivier Lemoine · <a href="https://northia.fr" target="_blank">NorthIA</a> · Projet 03/03 · 2026</p>
+  <p style="margin-top:4px">Propulsé par Claude (Anthropic) · Make · DALL-E 3 · Brevo</p>
+</div>
+
+</body>
+</html>

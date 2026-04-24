@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guide d'utilisation — Générateur de candidature IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1d23;
+  --ink-soft: #3d4251;
+  --ink-muted: #8892a4;
+  --ink-faint: #c8cedb;
+  --paper: #fafbfc;
+  --paper-warm: #f4f2ee;
+  --paper-card: #ffffff;
+  --line: #e8eaef;
+  --accent: #2460e8;
+  --accent-light: #e8f0fe;
+  --accent-dark: #1a48c4;
+  --green: #1a9e6e;
+  --green-light: #e6f7f1;
+  --amber: #c47a14;
+  --amber-light: #fef3e2;
+  --red: #c0392b;
+  --red-light: #fdf0ee;
+  --step-1: #e8f0fe;
+  --step-2: #f0fdf7;
+  --step-3: #fef9e8;
+  --step-4: #f3f0fe;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow: 0 1px 4px rgba(0,0,0,.06), 0 2px 12px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 20px rgba(0,0,0,.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  color: #fff;
+  padding: 64px 24px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(36,96,232,.4), transparent);
+  pointer-events: none;
+}
+.hero__tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.hero__title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  letter-spacing: -.02em;
+}
+.hero__title em {
+  font-style: italic;
+  color: rgba(255,255,255,.6);
+}
+.hero__sub {
+  font-size: 16px;
+  color: rgba(255,255,255,.55);
+  max-width: 500px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(36,96,232,.5);
+  transition: all .18s ease;
+}
+.hero__cta:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(36,96,232,.55); }
+.hero__cta-note { font-size: 12px; color: rgba(255,255,255,.35); margin-top: 10px; }
+
+/* ── LAYOUT ── */
+.wrap { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+
+/* ── PREREQ ── */
+.prereq {
+  background: var(--amber-light);
+  border-top: 3px solid var(--amber);
+  padding: 20px 24px;
+}
+.prereq__inner { max-width: 700px; margin: 0 auto; display: flex; gap: 12px; align-items: flex-start; }
+.prereq__icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.prereq__title { font-weight: 700; font-size: 13px; color: var(--amber); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.prereq p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+.prereq a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.prereq a:hover { text-decoration: underline; }
+
+/* ── SECTION ── */
+.section { padding: 52px 0 0; }
+.section:last-child { padding-bottom: 64px; }
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -.01em;
+}
+.section-intro { font-size: 15px; color: var(--ink-soft); max-width: 560px; margin-bottom: 28px; line-height: 1.65; }
+
+/* ── STEPS ── */
+.steps { display: flex; flex-direction: column; gap: 14px; }
+
+.step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+  transition: border-color .18s, box-shadow .18s;
+}
+.step:hover { border-color: var(--ink-faint); box-shadow: var(--shadow-md); }
+
+.step__num {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step--1 .step__num { background: var(--step-1); color: var(--accent); }
+.step--2 .step__num { background: var(--step-2); color: var(--green); }
+.step--3 .step__num { background: var(--step-3); color: var(--amber); }
+.step--4 .step__num { background: var(--step-4); color: #7c3aed; }
+
+.step__title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.step__body { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+.step__body strong { color: var(--ink); font-weight: 600; }
+.step__body a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.step__body a:hover { text-decoration: underline; }
+
+.step__tip {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--paper-warm);
+  border-radius: var(--radius);
+  font-size: 12px;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--ink-faint);
+}
+.step__tip strong { color: var(--ink); }
+
+.step__code {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--ink);
+  color: #a8d8a8;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  display: inline-block;
+}
+
+/* ── OUTPUTS ── */
+.outputs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+.output-card {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: transform .18s, box-shadow .18s;
+}
+.output-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.output-card__icon { font-size: 24px; margin-bottom: 8px; }
+.output-card__title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.output-card__body { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+
+/* ── FAQ ── */
+.faq { display: flex; flex-direction: column; gap: 2px; }
+
+.faq-item {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  gap: 12px;
+  transition: background .15s;
+}
+.faq-q:hover { background: var(--paper-warm); }
+.faq-q .chevron { font-size: 12px; color: var(--ink-muted); transition: transform .2s; flex-shrink: 0; }
+.faq-item.open .faq-q .chevron { transform: rotate(180deg); }
+.faq-a {
+  display: none;
+  padding: 0 18px 14px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  border-top: 1px solid var(--line);
+}
+.faq-a a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.faq-a a:hover { text-decoration: underline; }
+.faq-item.open .faq-a { display: block; padding-top: 12px; }
+
+/* ── COST TABLE ── */
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--paper-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.cost-table th {
+  background: var(--ink);
+  color: rgba(255,255,255,.7);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  text-align: left;
+}
+.cost-table td { padding: 11px 16px; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
+.cost-table tr:last-child td { border-bottom: none; }
+.cost-table tr:nth-child(odd) td { background: var(--paper-warm); }
+.cost-table .highlight { color: var(--green); font-weight: 700; }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.4);
+  text-align: center;
+  padding: 28px 24px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ── UTILS ── */
+.divider { width: 100%; height: 1px; background: var(--line); margin: 48px 0 0; }
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.badge--green { background: var(--green-light); color: var(--green); }
+.badge--blue { background: var(--accent-light); color: var(--accent); }
+.badge--amber { background: var(--amber-light); color: var(--amber); }
+
+@media (max-width: 600px) {
+  .step { grid-template-columns: 36px 1fr; gap: 12px; padding: 14px 16px; }
+  .outputs { grid-template-columns: 1fr; }
+  .hero { padding: 48px 20px 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero__tag">Guide d'utilisation</div>
+  <h1 class="hero__title">Générateur de candidature <em>IA</em></h1>
+  <p class="hero__sub">Produisez une lettre de motivation, un mail d'accompagnement et un profil CV optimisé en moins de 2 minutes.</p>
+  <a href="#step1" class="hero__cta">Commencer →</a>
+  <p class="hero__cta-note">Propulsé par Claude · Anthropic</p>
+</div>
+
+<!-- PRÉREQUIS -->
+<div class="prereq">
+  <div class="prereq__inner">
+    <span class="prereq__icon">⚠️</span>
+    <div>
+      <div class="prereq__title">Avant de commencer</div>
+      <p>Vous aurez besoin d'une <strong>clé API Anthropic</strong> pour utiliser cet outil. Elle est gratuite à créer et vous offre <strong>~5 $ de crédits</strong> pour démarrer (environ 50 à 80 générations). Créez votre compte sur <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> → "Get API Keys" → "Create Key".</p>
+    </div>
+  </div>
+</div>
+
+<!-- ÉTAPES -->
+<div class="wrap">
+<div class="section" id="step1">
+  <div class="section-label">Mode d'emploi</div>
+  <h2 class="section-title">4 étapes pour votre première candidature</h2>
+  <p class="section-intro">L'outil fonctionne entièrement dans votre navigateur. Aucune donnée n'est stockée en ligne — tout reste sur votre ordinateur.</p>
+
+  <div class="steps">
+
+    <div class="step step--1">
+      <div class="step__num">01</div>
+      <div>
+        <div class="step__title">Entrez votre clé API</div>
+        <div class="step__body">
+          Au premier lancement, un encadré orange vous demande votre clé API.<br>
+          Copiez-collez votre clé (<strong>commence par sk-ant-...</strong>) puis cliquez <strong>Enregistrer</strong>.<br>
+          Elle est mémorisée dans votre navigateur — vous n'aurez plus à la saisir.
+          <div class="step__tip"><strong>Astuce :</strong> sur <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>, cliquez "API Keys" dans le menu gauche → "Create Key". Donnez-lui un nom clair (ex: "Candidature IA").</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step step--2">
+      <div class="step__num">02</div>
+      <div>
+        <div class="step__title">Renseignez votre profil <span class="badge badge--blue">Une seule fois</span></div>
+        <div class="step__body">
+          Remplissez vos informations personnelles, puis collez le texte de votre CV et de votre profil LinkedIn.<br><br>
+          <strong>Pour votre CV PDF :</strong> ouvrez-le, faites <kbd>Ctrl+A</kbd> puis <kbd>Ctrl+C</kbd>, et collez dans le champ.<br>
+          <strong>Pour LinkedIn :</strong> allez sur votre profil → "Plus" → "Enregistrer en PDF", puis copiez le texte.<br><br>
+          Ajoutez optionnellement un <strong>contexte de recherche</strong> (secteurs visés, disponibilité, points forts à mettre en avant).
+          <div class="step__tip"><strong>Important :</strong> votre profil est sauvegardé automatiquement dans votre navigateur. Vous n'aurez à le remplir qu'une seule fois, même si vous fermez et rouvrez l'outil.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step step--3">
+      <div class="step__num">03</div>
+      <div>
+        <div class="step__title">Choisissez vos paramètres</div>
+        <div class="step__body">
+          <strong>Mode :</strong> "Répondre à une offre" (collez le texte de l'annonce) ou "Candidature spontanée" (décrivez l'entreprise et le poste visé).<br><br>
+          <strong>Longueur :</strong> Court (200-270 mots), Standard (260-330 mots) ou Long (330-400 mots).<br><br>
+          <strong>Ton :</strong> Adaptez selon le secteur —
+          🤝 <em>Associatif</em> pour les associations et fédérations,
+          🏢 <em>Privé</em> pour les entreprises (orienté résultats),
+          🏛 <em>Public</em> pour les collectivités et administrations.<br><br>
+          <strong>Règles d'écriture :</strong> activez/désactivez les chips (mots interdits, tirets longs, chiffres inventés...) ou ajoutez vos propres instructions dans le champ libre.
+        </div>
+      </div>
+    </div>
+
+    <div class="step step--4">
+      <div class="step__num">04</div>
+      <div>
+        <div class="step__title">Générez et exportez</div>
+        <div class="step__body">
+          Cliquez <strong>"Générer lettre + mail + profil ATS"</strong>. En 15 à 25 secondes, vous obtenez :<br><br>
+          — La <strong>lettre de motivation</strong> avec audit qualité automatique et score<br>
+          — Deux <strong>versions de mail</strong> d'accompagnement (sobre et personnalisée)<br>
+          — Un <strong>profil CV optimisé ATS</strong> avec checklist de mots-clés<br><br>
+          Utilisez les boutons <strong>Copier</strong> pour chaque élément, ou <strong>Imprimer / PDF</strong> pour exporter la lettre mise en page.
+          <div class="step__tip"><strong>Pas satisfait(e) ?</strong> Cliquez "↻ Régénérer" pour obtenir une nouvelle version, ou "✏️ Éditer" pour modifier la lettre directement dans l'outil.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CE QUE VOUS OBTENEZ -->
+<div class="divider"></div>
+<div class="section">
+  <div class="section-label">Résultats</div>
+  <h2 class="section-title">Ce que l'outil génère</h2>
+  <p class="section-intro">À chaque génération, trois livrables distincts sont produits en parallèle.</p>
+
+  <div class="outputs">
+    <div class="output-card">
+      <div class="output-card__icon">📝</div>
+      <div class="output-card__title">Lettre de motivation</div>
+      <div class="output-card__body">Structurée, personnalisée et auditée automatiquement. Score qualité, détection des mots interdits, compteur de mots. Export PDF intégré.</div>
+    </div>
+    <div class="output-card">
+      <div class="output-card__icon">📧</div>
+      <div class="output-card__title">Mail d'accompagnement</div>
+      <div class="output-card__body">Deux versions : sobre (3 lignes efficaces) et personnalisée (ancrée sur l'entreprise). Objet prêt à copier.</div>
+    </div>
+    <div class="output-card">
+      <div class="output-card__icon">🎯</div>
+      <div class="output-card__title">Profil CV optimisé ATS</div>
+      <div class="output-card__body">Titre de poste adapté, profil court et long avec mots-clés de l'annonce intégrés. Checklist de conformité.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COÛT -->
+<div class="divider"></div>
+<div class="section">
+  <div class="section-label">Budget</div>
+  <h2 class="section-title">Combien ça coûte ?</h2>
+  <p class="section-intro">L'IA est facturée au token — la consommation réelle est très faible pour ce type d'usage.</p>
+
+  <table class="cost-table">
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Coût estimé</th>
+        <th>Avec 5 $ de crédits</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Une génération complète (lettre + mail + ATS)</td>
+        <td>~0,06 à 0,10 €</td>
+        <td class="highlight">~50 à 80 générations</td>
+      </tr>
+      <tr>
+        <td>Régénération d'une lettre seule</td>
+        <td>~0,04 €</td>
+        <td class="highlight">~120 régénérations</td>
+      </tr>
+      <tr>
+        <td>Recharge manuelle 10 €</td>
+        <td>10 €</td>
+        <td class="highlight">~100 à 150 générations supplémentaires</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:var(--ink-muted);margin-top:10px">Les crédits sont rechargés manuellement sur <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a> → Billing. Aucun prélèvement automatique par défaut.</p>
+</div>
+
+<!-- FAQ -->
+<div class="divider"></div>
+<div class="section">
+  <div class="section-label">Questions fréquentes</div>
+  <h2 class="section-title">FAQ</h2>
+  <p class="section-intro" style="margin-bottom:16px">Les réponses aux questions les plus courantes.</p>
+
+  <div class="faq">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Mes données sont-elles sécurisées ?
+        <span class="chevron">▼</span>
+      </button>
+      <div class="faq-a">
+        Votre profil (CV, LinkedIn, coordonnées) est stocké uniquement dans le stockage local de <strong>votre navigateur</strong> sur <strong>votre ordinateur</strong>. Il n'est jamais envoyé à un serveur tiers. Seul le contenu nécessaire à la génération est transmis à l'API Anthropic (Claude), dans les mêmes conditions que si vous utilisiez Claude.ai directement. Votre clé API est également stockée localement.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Mon compte Claude.ai suffit-il ?
+        <span class="chevron">▼</span>
+      </button>
+      <div class="faq-a">
+        Non. L'abonnement Claude.ai (Pro, Max...) et l'accès API sont deux produits séparés chez Anthropic. Même avec un abonnement Claude.ai, vous devez créer un compte distinct sur <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> pour obtenir une clé API. Les nouveaux comptes reçoivent ~5 $ de crédits offerts.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Que faire si la génération échoue ?
+        <span class="chevron">▼</span>
+      </button>
+      <div class="faq-a">
+        Si un message d'erreur apparaît, vérifiez dans l'ordre : (1) votre clé API est correctement saisie et commence par <code style="font-family:var(--font-mono);background:var(--paper-warm);padding:1px 5px;border-radius:3px">sk-ant-</code>, (2) votre compte Anthropic dispose de crédits suffisants sur console.anthropic.com → Billing, (3) la connexion internet est active. Si le problème persiste, contactez la personne qui vous a partagé l'outil.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Comment modifier les règles d'écriture ?
+        <span class="chevron">▼</span>
+      </button>
+      <div class="faq-a">
+        Dans le formulaire de profil (cliquez "Modifier" si déjà enregistré), la section "Règles d'écriture" permet d'activer ou désactiver des règles prédéfinies via les chips colorées, et d'ajouter vos propres instructions dans le champ texte libre. Ces règles sont transmises directement à l'IA à chaque génération. Cliquez "↺ Preset" pour revenir aux réglages d'origine.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        L'outil fonctionne-t-il sur mobile ?
+        <span class="chevron">▼</span>
+      </button>
+      <div class="faq-a">
+        Oui, l'interface est responsive. Cependant, pour coller le texte de votre CV et LinkedIn, un ordinateur est plus pratique. La génération et la copie des résultats fonctionnent bien sur mobile.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Puis-je effacer mes données ?
+        <span class="chevron">▼</span>
+      </button>
+      <div class="faq-a">
+        Oui. Dans le formulaire de profil, cliquez "Tout effacer" pour supprimer toutes vos données du navigateur. Vous pouvez également effacer le stockage local directement depuis les paramètres de votre navigateur (Paramètres → Confidentialité → Données du site).
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Générateur de candidature IA · Propulsé par Claude (Anthropic)</p>
+  <p style="margin-top:4px">Vos données restent sur votre ordinateur · Aucun tracking · Aucune publicité</p>
+</div>
+
+<script>
+function toggleFaq(btn) {
+  var item = btn.closest('.faq-item');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+  if(!isOpen) item.classList.add('open');
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+</script>
+</body>
+</html>

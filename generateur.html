@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Générateur de candidature IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══ TOKENS ═══ */
+:root {
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --transition: .18s cubic-bezier(.4,0,.2,1);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.1);
+}
+
+/* ═══ LIGHT THEME ═══ */
+[data-theme="light"] {
+  --bg-root: #f5f6f8;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-elevated: #f8f9fb;
+  --bg-hover: #f0f2f6;
+  --bg-input: #ffffff;
+  --border: #e4e7ed;
+  --border-active: #c5ccda;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  --accent: #2563eb;
+  --accent-soft: #eff6ff;
+  --accent-border: #bfdbfe;
+  --accent-hover: #1d4ed8;
+  --green: #059669;
+  --green-soft: #ecfdf5;
+  --green-border: #a7f3d0;
+  --amber: #d97706;
+  --amber-soft: #fffbeb;
+  --amber-border: #fde68a;
+  --red: #dc2626;
+  --red-soft: #fef2f2;
+  --red-border: #fecaca;
+  --violet: #7c3aed;
+  --violet-soft: #f5f3ff;
+  --violet-border: #ddd6fe;
+  --tag-neutral-bg: #f1f5f9;
+  --tag-neutral-color: #475569;
+}
+
+/* ═══ DARK THEME ═══ */
+[data-theme="dark"] {
+  --bg-root: #0f1117;
+  --bg-surface: #161b27;
+  --bg-card: #1c2333;
+  --bg-elevated: #222840;
+  --bg-hover: #283050;
+  --bg-input: #161b27;
+  --border: #2a3450;
+  --border-active: #3d5080;
+  --text-primary: #e8ecf4;
+  --text-secondary: #8896b0;
+  --text-muted: #4a5578;
+  --accent: #4d90ff;
+  --accent-soft: rgba(77,144,255,.1);
+  --accent-border: rgba(77,144,255,.25);
+  --accent-hover: #6ba3ff;
+  --green: #10d98a;
+  --green-soft: rgba(16,217,138,.1);
+  --green-border: rgba(16,217,138,.25);
+  --amber: #f59e0b;
+  --amber-soft: rgba(245,158,11,.1);
+  --amber-border: rgba(245,158,11,.25);
+  --red: #f87171;
+  --red-soft: rgba(248,113,113,.1);
+  --red-border: rgba(248,113,113,.25);
+  --violet: #a78bfa;
+  --violet-soft: rgba(167,139,250,.1);
+  --violet-border: rgba(167,139,250,.25);
+  --tag-neutral-bg: rgba(255,255,255,.06);
+  --tag-neutral-color: #8896b0;
+}
+
+/* ═══ RESET ═══ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-root);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ═══ LAYOUT ═══ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar__logo {
+  width: 28px;
+  height: 28px;
+  background: var(--accent);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+}
+
+.topbar__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.topbar__user {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.topbar__actions { display: flex; align-items: center; gap: 8px; }
+
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all var(--transition);
+}
+.theme-toggle:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+.app { max-width: 720px; margin: 0 auto; padding: 28px 16px 80px; }
+
+/* ═══ CARD ═══ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), background var(--transition);
+}
+.card:hover { border-color: var(--border-active); }
+.card--accent { border-top: 3px solid var(--accent); }
+.card--green { border-top: 3px solid var(--green); }
+.card--amber { border-left: 3px solid var(--amber); background: var(--amber-soft); }
+.card--violet { border-top: 3px solid var(--violet); }
+.card--setup { border: 1px dashed var(--border-active); background: var(--bg-elevated); }
+.card--output { border-top: 3px solid var(--accent); }
+
+/* ═══ SECTION HEADER ═══ */
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-title--accent { color: var(--accent); }
+.section-title--green { color: var(--green); }
+.section-title--violet { color: var(--violet); }
+.section-title--amber { color: var(--amber); }
+
+/* ═══ LABELS ═══ */
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.label span { font-weight: 400; color: var(--text-muted); }
+
+/* ═══ INPUTS ═══ */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+textarea { resize: vertical; line-height: 1.65; }
+::placeholder { color: var(--text-muted); }
+
+/* ═══ GRID ═══ */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.row--between { justify-content: space-between; }
+
+/* ═══ BUTTONS ═══ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+  line-height: 1;
+}
+.btn:hover { background: var(--bg-hover); color: var(--text-primary); border-color: var(--border-active); }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.btn:active { transform: scale(.98); }
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 600;
+  padding: 11px 20px;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(37,99,235,.3);
+}
+.btn--primary:hover { background: var(--accent-hover); box-shadow: 0 4px 16px rgba(37,99,235,.4); }
+
+.btn--sm { font-size: 12px; padding: 5px 12px; }
+.btn--accent { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-border); }
+.btn--green { background: var(--green-soft); color: var(--green); border-color: var(--green-border); }
+.btn--amber { background: var(--amber-soft); color: var(--amber); border-color: var(--amber-border); }
+.btn--violet { background: var(--violet-soft); color: var(--violet); border-color: var(--violet-border); }
+.btn--danger { background: var(--red-soft); color: var(--red); border-color: var(--red-border); }
+
+.btn--copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent-border);
+  background: var(--accent-soft);
+  color: var(--accent);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn--copy:hover { background: var(--accent); color: #fff; }
+.btn--copy.ok { background: var(--green); color: #fff; border-color: var(--green); }
+
+/* ═══ TABS ═══ */
+.tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 3px;
+  margin-bottom: 12px;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.tab:hover { color: var(--text-secondary); background: var(--bg-hover); }
+.tab.active { background: var(--bg-card); color: var(--accent); font-weight: 600; box-shadow: var(--shadow-sm); }
+
+/* ═══ TONE SELECTOR ═══ */
+.tone-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.tone-card {
+  padding: 10px 10px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--bg-elevated);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: center;
+}
+.tone-card:hover { border-color: var(--border-active); background: var(--bg-hover); }
+.tone-card.active { border-color: var(--accent); background: var(--accent-soft); }
+.tone-card__icon { font-size: 18px; margin-bottom: 4px; }
+.tone-card__label { font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+.tone-card.active .tone-card__label { color: var(--accent); }
+
+/* ═══ BADGES ═══ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+.badge--green { background: var(--green-soft); color: var(--green); }
+.badge--amber { background: var(--amber-soft); color: var(--amber); }
+.badge--accent { background: var(--accent-soft); color: var(--accent); }
+.badge--neutral { background: var(--tag-neutral-bg); color: var(--tag-neutral-color); }
+
+/* ═══ PROGRESS ═══ */
+.progress { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.progress__fill { height: 100%; border-radius: 2px; transition: width .5s ease; background: var(--accent); }
+
+/* ═══ LOADER ═══ */
+.loader { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary); padding: 8px 0; }
+.loader__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 1.2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.2} }
+
+/* ═══ OUTPUT TEXT ═══ */
+.letter-text { white-space: pre-wrap; font-family: Georgia, serif; font-size: 14px; line-height: 1.9; color: var(--text-primary); }
+.preview-box { padding: 14px 16px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); white-space: pre-wrap; font-family: Georgia, serif; font-size: 13px; line-height: 1.75; color: var(--text-secondary); }
+
+/* ═══ STATUS BAR ═══ */
+.status-row { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--green-soft); border: 1px solid var(--green-border); border-radius: var(--radius); }
+.status-icon { font-size: 16px; }
+
+/* ═══ UTILS ═══ */
+.hidden { display: none !important; }
+.mt-xs { margin-top: 4px; } .mt-sm { margin-top: 8px; } .mt-md { margin-top: 14px; } .mt-lg { margin-top: 20px; }
+.mb-xs { margin-bottom: 4px; } .mb-sm { margin-bottom: 8px; } .mb-md { margin-bottom: 14px; }
+.text-xs { font-size: 11px; } .text-sm { font-size: 12px; } .text-muted { color: var(--text-muted); }
+.text-accent { color: var(--accent); } .text-green { color: var(--green); }
+.mono { font-family: var(--font-mono); }
+.fw-600 { font-weight: 600; } .fw-700 { font-weight: 700; }
+.divider { width: 100%; height: 1px; background: var(--border); margin: 16px 0; }
+.tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; }
+
+/* ═══ PRESET RULES ═══ */
+.rule-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 20px;
+  background: var(--tag-neutral-bg);
+  color: var(--tag-neutral-color);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+}
+.rule-chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-border); }
+.rule-chip:hover { border-color: var(--border-active); }
+
+@media (max-width: 600px) {
+  .app { padding: 16px 12px 60px; }
+  .g2, .g3 { grid-template-columns: 1fr; }
+  .tone-grid { grid-template-columns: 1fr; }
+  .topbar { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar__brand">
+    <div class="topbar__logo">✦</div>
+    <div>
+      <div class="topbar__title">Générateur de candidature IA</div>
+    </div>
+  </div>
+  <div class="topbar__actions">
+    <a href="/portfolio" style="font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;padding:5px 12px;border:1px solid var(--accent-border);border-radius:20px;background:var(--accent-soft);transition:all var(--transition)" onmouseover="this.style.background='var(--accent)';this.style.color='#fff'" onmouseout="this.style.background='var(--accent-soft)';this.style.color='var(--accent)'">← Portfolio</a>
+    <span id="topUser" class="text-xs text-muted hidden"></span>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème" id="themeBtn">🌙</button>
+  </div>
+</div>
+
+<div class="app">
+
+<!-- ═══ CLÉ API ═══ -->
+<div id="apiBox" class="card card--amber mb-md">
+  <div class="section-title section-title--amber">Clé API Anthropic</div>
+  <div class="row">
+    <input type="password" id="apiKey" placeholder="sk-ant-api03-..." style="flex:1">
+    <button class="btn btn--amber" onclick="saveKey()">Enregistrer</button>
+  </div>
+  <p class="text-xs text-muted mt-sm">Stockée dans ce navigateur uniquement · <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">Obtenir une clé</a></p>
+</div>
+
+<!-- ═══ ÉTAPE 1 : PROFIL ═══ -->
+<div id="setupCard" class="card card--setup">
+  <div class="row row--between mb-md">
+    <div class="section-title" style="margin-bottom:0;flex:1">Votre profil</div>
+    <span id="setupBadge" class="badge badge--amber">À compléter</span>
+  </div>
+
+  <!-- Identité -->
+  <div class="label">Identité</div>
+  <div class="g2 mb-md">
+    <div>
+      <label class="label" style="margin-bottom:4px">Prénom Nom <span style="color:var(--red)">*</span></label>
+      <input type="text" id="profNom" placeholder="ex: Marie Dupont">
+    </div>
+    <div>
+      <label class="label" style="margin-bottom:4px">Ville</label>
+      <input type="text" id="profVille" placeholder="ex: Lyon (69003)">
+    </div>
+    <div>
+      <label class="label" style="margin-bottom:4px">Email</label>
+      <input type="email" id="profEmail" placeholder="marie.dupont@email.com">
+    </div>
+    <div>
+      <label class="label" style="margin-bottom:4px">Téléphone</label>
+      <input type="tel" id="profTel" placeholder="06 12 34 56 78">
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CV -->
+  <label class="label">Texte du CV <span>— colle le texte brut copié depuis ton PDF <span style="color:var(--red)">*</span></span></label>
+  <textarea id="profCV" rows="10" placeholder="Colle ici l'intégralité de ton CV : formation, expériences, compétences, bénévolat...
+
+Astuce : ouvre le PDF → Ctrl+A → Ctrl+C → Colle ici."></textarea>
+
+  <div class="divider"></div>
+
+  <!-- LinkedIn -->
+  <label class="label mt-md">Résumé LinkedIn <span>— optionnel mais recommandé</span></label>
+  <textarea id="profLinkedin" rows="6" placeholder="Colle ici le contenu de ton profil LinkedIn : section 'Infos', expériences, compétences...
+
+Astuce : Profil LinkedIn → 'Plus' → 'Enregistrer en PDF' puis copie le texte."></textarea>
+
+  <div class="divider"></div>
+
+  <!-- Contexte -->
+  <label class="label mt-md">Contexte de recherche <span>— optionnel</span></label>
+  <textarea id="profContexte" rows="2" placeholder="Ex : Je cherche un poste de Directrice Marketing en CDI en Île-de-France. Disponible immédiatement. Points forts à valoriser : ..."></textarea>
+
+  <div class="divider"></div>
+
+  <!-- ═══ RÈGLES D'ÉCRITURE ═══ -->
+  <div class="row row--between mb-sm">
+    <div class="section-title" style="margin-bottom:0;flex:1">Règles d'écriture</div>
+    <button class="btn btn--sm" onclick="resetRegles()">↺ Preset</button>
+  </div>
+  <p class="text-xs text-muted mb-sm">Cocher pour activer les règles prédéfinies, ou modifier directement le texte ci-dessous.</p>
+
+  <div id="chipContainer" class="mb-sm" style="display:flex;flex-wrap:wrap;gap:6px">
+    <span class="rule-chip active" data-rule="nowords" onclick="toggleChip(this)">🚫 Mots interdits</span>
+    <span class="rule-chip active" data-rule="nodash" onclick="toggleChip(this)">— Pas de tirets longs</span>
+    <span class="rule-chip active" data-rule="short" onclick="toggleChip(this)">✂️ Phrases courtes</span>
+    <span class="rule-chip active" data-rule="nofig" onclick="toggleChip(this)">📊 Pas de chiffres inventés</span>
+    <span class="rule-chip active" data-rule="fem" onclick="toggleChip(this)">🙋 Féminiser les intitulés</span>
+    <span class="rule-chip active" data-rule="nosynth" onclick="toggleChip(this)">❌ Pas de phrase synthèse</span>
+  </div>
+
+  <label class="label">Règles personnalisées <span>— modifie librement</span></label>
+  <textarea id="reglesCustom" rows="7" style="font-family:var(--font-mono);font-size:12px;line-height:1.7"></textarea>
+  <p class="text-xs text-muted mt-xs">Ces règles seront transmises telles quelles à l'IA pour guider la rédaction.</p>
+
+  <div class="mt-md row">
+    <button class="btn btn--accent fw-600" style="padding:10px 20px" onclick="sauvegarderProfil()">✓ Enregistrer le profil</button>
+    <button class="btn btn--sm text-muted" onclick="viderProfil()">Tout effacer</button>
+  </div>
+</div>
+
+<!-- PROFIL STATUS -->
+<div id="profilStatus" class="card hidden">
+  <div class="status-row">
+    <span class="status-icon">✅</span>
+    <div style="flex:1">
+      <div class="fw-600 text-sm" id="profilStatusNom"></div>
+      <div class="text-xs text-muted mt-xs" id="profilStatusMeta"></div>
+    </div>
+    <button class="btn btn--sm" onclick="editerProfil()">Modifier</button>
+  </div>
+</div>
+
+<!-- ═══ ÉTAPE 2 : CANDIDATURE ═══ -->
+<div id="step2" class="hidden">
+
+<!-- MODE TABS -->
+<div class="tabs">
+  <button class="tab active" id="modeBtn1" onclick="setMode('offre')">📋 Répondre à une offre</button>
+  <button class="tab" id="modeBtn2" onclick="setMode('spontanee')">✨ Candidature spontanée</button>
+</div>
+
+<!-- BLOC OFFRE -->
+<div id="blocOffre" class="card">
+  <label class="label">Texte de l'annonce</label>
+  <textarea id="annonce" rows="8" placeholder="Colle ici le texte complet de l'offre d'emploi..."></textarea>
+</div>
+
+<!-- BLOC SPONTANÉE -->
+<div id="blocSpontanee" class="card hidden">
+  <label class="label">URL de l'entreprise <span>— optionnel</span></label>
+  <div class="row mb-md">
+    <input type="url" id="entrepriseUrl" placeholder="https://..." style="flex:1">
+    <button class="btn btn--sm" onclick="ouvrirUrl()">Ouvrir ↗</button>
+  </div>
+  <label class="label">Descriptif de l'entreprise / poste visé</label>
+  <textarea id="descriptif" rows="6" placeholder="Décris l'entreprise, le poste que tu vises, pourquoi tu les contactes..."></textarea>
+</div>
+
+<!-- PARAMÈTRES -->
+<div class="card">
+  <div class="g2" style="gap:16px">
+    <div>
+      <div class="section-title" style="margin-bottom:10px">Longueur</div>
+      <div class="row mb-sm">
+        <div class="row" style="gap:5px"><span class="text-xs text-muted">Min</span><input type="number" id="minMots" value="260" style="width:64px;text-align:center"></div>
+        <div class="row" style="gap:5px"><span class="text-xs text-muted">Max</span><input type="number" id="maxMots" value="330" style="width:64px;text-align:center"></div>
+      </div>
+      <div class="row">
+        <button class="btn btn--sm" onclick="setLen(200,270)">Court</button>
+        <button class="btn btn--sm btn--accent" onclick="setLen(260,330)">Standard</button>
+        <button class="btn btn--sm" onclick="setLen(330,400)">Long</button>
+      </div>
+    </div>
+    <div>
+      <div class="section-title" style="margin-bottom:10px">Ton</div>
+      <div class="tone-grid">
+        <div class="tone-card active" id="toneAsso" onclick="setTone('associatif')">
+          <div class="tone-card__icon">🤝</div>
+          <div class="tone-card__label">Associatif</div>
+        </div>
+        <div class="tone-card" id="tonePriv" onclick="setTone('prive')">
+          <div class="tone-card__icon">🏢</div>
+          <div class="tone-card__label">Privé</div>
+        </div>
+        <div class="tone-card" id="tonePub" onclick="setTone('public')">
+          <div class="tone-card__icon">🏛</div>
+          <div class="tone-card__label">Public</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOUTON GÉNÉRER -->
+<div class="card" style="background:var(--accent-soft);border:1px solid var(--accent-border)">
+  <div class="row">
+    <button class="btn--primary" id="btnGen" onclick="generer()" style="flex:1;border:none;border-radius:var(--radius);cursor:pointer">
+      ✦ Générer lettre + mail + profil ATS
+    </button>
+    <button class="btn btn--sm hidden" id="btnReset" onclick="resetAll()">↺ Nouveau</button>
+  </div>
+  <div id="errBox" class="hidden mt-sm" style="padding:10px 14px;background:var(--red-soft);border:1px solid var(--red-border);border-radius:var(--radius);color:var(--red);font-size:13px"></div>
+</div>
+
+<!-- LOADER -->
+<div id="loadBox" class="card hidden">
+  <div class="loader"><div class="loader__dot"></div><span id="loadMsg">Rédaction en cours...</span></div>
+  <div class="progress mt-sm"><div class="progress__fill" id="loadBar" style="width:0%"></div></div>
+</div>
+
+<!-- ═══ LETTRE ═══ -->
+<div id="lettreBlock" class="card card--output hidden">
+  <div class="row row--between mb-md" style="flex-wrap:wrap;gap:8px">
+    <div>
+      <div class="section-title section-title--accent" style="margin-bottom:4px">Lettre de motivation</div>
+      <span id="motsCpt" class="text-xs mono fw-600"></span>
+    </div>
+    <div class="row">
+      <button class="btn btn--sm" id="btnEdit" onclick="toggleEdit()">✏️ Éditer</button>
+      <button class="btn btn--sm" onclick="generer()">↻ Régénérer</button>
+      <button class="btn--copy" id="cpL" onclick="cpTxt(getLettreActive(),'cpL')">📋 Copier</button>
+    </div>
+  </div>
+  <div id="lettreTxt" class="letter-text"></div>
+  <textarea id="lettreEdit" class="hidden" rows="22" style="font-family:Georgia,serif;font-size:14px;line-height:1.9;border:1.5px solid var(--amber)"></textarea>
+
+  <!-- AUDIT -->
+  <div id="auditBox" class="hidden mt-md">
+    <div class="row row--between mb-sm">
+      <span class="text-xs fw-700 text-muted" style="text-transform:uppercase;letter-spacing:.06em">Audit qualité</span>
+      <button class="btn btn--sm" onclick="toggleAudit()">Réduire</button>
+    </div>
+    <div id="auditContent"></div>
+  </div>
+
+  <!-- PDF -->
+  <div class="mt-md" style="padding:14px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius)">
+    <div class="label mb-sm">Export PDF</div>
+    <div class="row mb-sm">
+      <input type="text" id="pdfPoste" placeholder="Intitulé du poste" style="flex:1;min-width:120px">
+      <input type="text" id="pdfSociete" placeholder="Entreprise" style="flex:1;min-width:120px">
+    </div>
+    <button class="btn btn--sm fw-600" onclick="imprimer()">🖨 Imprimer / Sauvegarder PDF</button>
+  </div>
+</div>
+
+<!-- ═══ MAIL ═══ -->
+<div id="mailBlock" class="card card--accent hidden">
+  <div class="section-title section-title--accent">Mail d'accompagnement</div>
+  <div id="mailLoad" class="loader"><div class="loader__dot"></div>Génération en arrière-plan...</div>
+  <div id="mailContent" class="hidden">
+    <div class="text-sm mb-md" style="padding:8px 12px;background:var(--bg-elevated);border-radius:var(--radius);border:1px solid var(--border)"><strong>Objet :</strong> <span id="mailObj"></span></div>
+    <div class="mb-md">
+      <div class="text-xs fw-700 text-muted mb-sm" style="text-transform:uppercase;letter-spacing:.06em">Version sobre</div>
+      <div id="mailSEl" class="letter-text" style="font-size:13px;padding:12px;background:var(--bg-elevated);border-radius:var(--radius)"></div>
+      <button class="btn--copy mt-sm" id="cpMS" onclick="cpTxt(getMailSobre(),'cpMS')">📋 Copier</button>
+    </div>
+    <div id="mailPBlock">
+      <div class="text-xs fw-700 text-muted mb-sm" style="text-transform:uppercase;letter-spacing:.06em">Version personnalisée</div>
+      <div id="mailPEl" class="letter-text" style="font-size:13px;padding:12px;background:var(--bg-elevated);border-radius:var(--radius)"></div>
+      <button class="btn--copy mt-sm" id="cpMP" onclick="cpTxt(getMailPers(),'cpMP')">📋 Copier</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROFIL ATS ═══ -->
+<div id="profilBlock" class="card card--violet hidden">
+  <div class="row row--between mb-sm" style="flex-wrap:wrap;gap:8px">
+    <div>
+      <div class="section-title section-title--violet" style="margin-bottom:4px">Profil CV optimisé ATS</div>
+      <p class="text-xs text-muted">À coller dans la section profil de ton CV.</p>
+    </div>
+    <div id="profilSc"></div>
+  </div>
+  <div id="profilLoad" class="loader"><div class="loader__dot" style="background:var(--violet)"></div>Analyse ATS en arrière-plan...</div>
+  <div id="profilContent" class="hidden"></div>
+</div>
+
+</div><!-- /step2 -->
+</div><!-- /app -->
+
+<script>
+// ═══ PRESET RÈGLES ═══
+var REGLES_PRESET = {
+  nowords: 'MOTS INTERDITS (à remplacer systématiquement) : notamment, ainsi, par ailleurs, levier, synergie, écosystème, constitue, représente, déployer, valoriser, permettre de, dynamique et motivé(e).',
+  nodash: 'INTERDITS : tirets longs (— ou –). Les remplacer par deux-points ou virgule.',
+  short: 'STYLE : phrases courtes et directes. Pas de bullet points dans la lettre. Pas de jargon corporate.',
+  nofig: 'CHIFFRES : utiliser UNIQUEMENT les chiffres présents dans le profil fourni. Ne jamais inventer de résultats, volumes ou taux.',
+  fem: 'INTITULÉS : féminiser tous les intitulés de poste si applicable.',
+  nosynth: 'STRUCTURE : pas de phrase de synthèse creuse en fin de paragraphe (ex: "Cette expérience m\'a permis de..."). Supprimer.'
+};
+
+var activeChips = {nowords:true, nodash:true, short:true, nofig:true, fem:true, nosynth:true};
+
+function buildRegles() {
+  var lines = [];
+  Object.keys(REGLES_PRESET).forEach(function(k) {
+    if(activeChips[k]) lines.push(REGLES_PRESET[k]);
+  });
+  var custom = document.getElementById('reglesCustom').value.trim();
+  if(custom) lines.push('', 'RÈGLES SUPPLÉMENTAIRES :', custom);
+  return lines.join('\n');
+}
+
+function toggleChip(el) {
+  var rule = el.dataset.rule;
+  activeChips[rule] = !activeChips[rule];
+  el.classList.toggle('active', activeChips[rule]);
+  syncReglesPreview();
+}
+
+function syncReglesPreview() {
+  var lines = [];
+  Object.keys(REGLES_PRESET).forEach(function(k) {
+    if(activeChips[k]) lines.push(REGLES_PRESET[k]);
+  });
+  var ta = document.getElementById('reglesCustom');
+  var existingCustom = ta.value.split('\nRÈGLES SUPPLÉMENTAIRES :')[1] || '';
+  ta.placeholder = 'Ajoute ici des règles spécifiques...\n\nEx :\n- Mentionner ma disponibilité immédiate\n- Adapter le ton au secteur associatif\n- Ne pas citer mon ancien employeur X';
+}
+
+function resetRegles() {
+  Object.keys(activeChips).forEach(function(k){ activeChips[k] = true; });
+  document.querySelectorAll('.rule-chip').forEach(function(c){ c.classList.add('active'); });
+  document.getElementById('reglesCustom').value = '';
+}
+
+// ═══ THEME ═══
+var currentTheme = 'light';
+function toggleTheme() {
+  currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  document.getElementById('themeBtn').textContent = currentTheme === 'light' ? '🌙' : '☀️';
+  try { localStorage.setItem('PP_THEME', currentTheme); } catch(e){}
+}
+function loadTheme() {
+  try {
+    var t = localStorage.getItem('PP_THEME') || 'light';
+    currentTheme = t;
+    document.documentElement.setAttribute('data-theme', t);
+    document.getElementById('themeBtn').textContent = t === 'light' ? '🌙' : '☀️';
+  } catch(e){}
+}
+
+// ═══ TON ═══
+var currentTone = 'associatif';
+function setTone(t) {
+  currentTone = t;
+  document.querySelectorAll('.tone-card').forEach(function(c){ c.classList.remove('active'); });
+  var map = {associatif:'toneAsso', prive:'tonePriv', public:'tonePub'};
+  document.getElementById(map[t]).classList.add('active');
+}
+function getToneTxt() {
+  if(currentTone==='prive') return 'Leadership senior, orienté résultats et valeur ajoutée immédiate. Ton direct et assuré.';
+  if(currentTone==='public') return 'Ton institutionnel, valorisant le service public, l\'intérêt général, la rigueur méthodologique.';
+  return 'Ton collectif et engagé, valorisant le projet associatif, les valeurs, l\'impact terrain.';
+}
+
+// ═══ PROFIL ═══
+var profilData_ = {nom:'',ville:'',email:'',tel:'',cv:'',linkedin:'',contexte:''};
+var PROFIL_STR = '';
+
+function buildProfilString(p) {
+  var lines = [];
+  lines.push('=== PROFIL CANDIDAT ===');
+  if(p.nom) lines.push('Nom : ' + p.nom);
+  if(p.ville) lines.push('Localisation : ' + p.ville);
+  var contact = [];
+  if(p.email) contact.push(p.email);
+  if(p.tel) contact.push(p.tel);
+  if(contact.length) lines.push('Contact : ' + contact.join(' | '));
+  if(p.cv) { lines.push(''); lines.push('--- CV ---'); lines.push(p.cv.slice(0, 5000)); }
+  if(p.linkedin) { lines.push(''); lines.push('--- LINKEDIN ---'); lines.push(p.linkedin.slice(0, 3000)); }
+  if(p.contexte) { lines.push(''); lines.push('--- CONTEXTE RECHERCHE ---'); lines.push(p.contexte); }
+  return lines.join('\n');
+}
+
+function sauvegarderProfil() {
+  var nom = document.getElementById('profNom').value.trim();
+  var cv = document.getElementById('profCV').value.trim();
+  if(!nom) { alert('Merci de renseigner le prénom et nom.'); return; }
+  if(!cv) { alert('Merci de coller le texte du CV.'); return; }
+  profilData_ = {
+    nom: nom,
+    ville: document.getElementById('profVille').value.trim(),
+    email: document.getElementById('profEmail').value.trim(),
+    tel: document.getElementById('profTel').value.trim(),
+    cv: cv,
+    linkedin: document.getElementById('profLinkedin').value.trim(),
+    contexte: document.getElementById('profContexte').value.trim()
+  };
+  PROFIL_STR = buildProfilString(profilData_);
+  try { localStorage.setItem('GEN_PROFIL', JSON.stringify(profilData_)); } catch(e){}
+  afficherProfilStatus();
+}
+
+function chargerProfil() {
+  try {
+    var s = localStorage.getItem('GEN_PROFIL');
+    if(s) {
+      profilData_ = JSON.parse(s);
+      PROFIL_STR = buildProfilString(profilData_);
+      document.getElementById('profNom').value = profilData_.nom || '';
+      document.getElementById('profVille').value = profilData_.ville || '';
+      document.getElementById('profEmail').value = profilData_.email || '';
+      document.getElementById('profTel').value = profilData_.tel || '';
+      document.getElementById('profCV').value = profilData_.cv || '';
+      document.getElementById('profLinkedin').value = profilData_.linkedin || '';
+      document.getElementById('profContexte').value = profilData_.contexte || '';
+      afficherProfilStatus();
+    }
+  } catch(e){}
+}
+
+function afficherProfilStatus() {
+  var p = profilData_;
+  var cvW = p.cv ? p.cv.trim().split(/\s+/).length : 0;
+  var liW = p.linkedin ? p.linkedin.trim().split(/\s+/).length : 0;
+  document.getElementById('profilStatusNom').textContent = p.nom + (p.ville ? ' · ' + p.ville : '') + (p.email ? ' · ' + p.email : '');
+  var meta = [];
+  if(cvW > 0) meta.push('CV : ' + cvW + ' mots');
+  if(liW > 0) meta.push('LinkedIn : ' + liW + ' mots');
+  if(p.contexte) meta.push('Contexte : ✓');
+  document.getElementById('profilStatusMeta').textContent = meta.join(' · ');
+  var badge = document.getElementById('setupBadge');
+  badge.textContent = '✓ Enregistré';
+  badge.className = 'badge badge--green';
+  show('profilStatus');
+  document.getElementById('setupCard').style.display = 'none';
+  show('step2');
+  // Topbar user
+  var tu = document.getElementById('topUser');
+  tu.textContent = p.nom;
+  tu.classList.remove('hidden');
+}
+
+function editerProfil() {
+  document.getElementById('setupCard').style.display = 'block';
+  hide('step2');
+  hide('profilStatus');
+  document.getElementById('topUser').classList.add('hidden');
+}
+
+function viderProfil() {
+  if(!confirm('Effacer toutes les données du profil ?')) return;
+  ['profNom','profVille','profEmail','profTel','profCV','profLinkedin','profContexte'].forEach(function(id){ document.getElementById(id).value = ''; });
+  profilData_ = {nom:'',ville:'',email:'',tel:'',cv:'',linkedin:'',contexte:''};
+  PROFIL_STR = '';
+  try { localStorage.removeItem('GEN_PROFIL'); } catch(e){}
+  document.getElementById('setupBadge').textContent = 'À compléter';
+  document.getElementById('setupBadge').className = 'badge badge--amber';
+}
+
+// ═══ STORAGE ═══
+function load() {
+  loadTheme();
+  try { var k = localStorage.getItem('ANTHROPIC_KEY'); if(k){ document.getElementById('apiKey').value = k; document.getElementById('apiBox').style.display = 'none'; } } catch(e){}
+  chargerProfil();
+  syncReglesPreview();
+}
+function saveKey() {
+  var k = document.getElementById('apiKey').value.trim();
+  if(!k.startsWith('sk-')) { alert('La clé doit commencer par sk-'); return; }
+  localStorage.setItem('ANTHROPIC_KEY', k);
+  document.getElementById('apiBox').style.display = 'none';
+}
+function getKey() { return document.getElementById('apiKey').value.trim() || localStorage.getItem('ANTHROPIC_KEY') || ''; }
+
+// ═══ API ═══
+async function callAPI(sys, msg, maxT) {
+  maxT = maxT || 900;
+  var key = getKey();
+  if(!key) { document.getElementById('apiBox').style.display = 'block'; throw new Error('Clé API manquante'); }
+  var r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true' },
+    body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:maxT, system:sys, messages:[{role:'user',content:msg}] })
+  });
+  var d = await r.json();
+  if(d.error) throw new Error(d.error.message);
+  return d.content.map(function(b){ return b.text || ''; }).join('');
+}
+
+// ═══ HELPERS ═══
+function pj(s){try{return JSON.parse(s.replace(/```json|```/g,'').trim());}catch(e){}try{var m=s.match(/\{[\s\S]*\}/);if(m)return JSON.parse(m[0]);}catch(e){}return null;}
+function cw(t){return t.trim().split(/\s+/).filter(Boolean).length;}
+function tod(){return new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});}
+function show(id){var el=document.getElementById(id);if(el)el.classList.remove('hidden');}
+function hide(id){var el=document.getElementById(id);if(el)el.classList.add('hidden');}
+function cpTxt(txt,btnId){if(!txt)return;navigator.clipboard.writeText(txt).catch(function(){});var el=document.getElementById(btnId);if(!el)return;var o=el.innerHTML;el.innerHTML='✓ Copié';el.classList.add('ok');setTimeout(function(){el.innerHTML=o;el.classList.remove('ok');},1800);}
+function getLettreActive(){return editMode?document.getElementById('lettreEdit').value:lettreTxt;}
+function getMailSobre(){return 'Objet : '+mailO+'\n\n'+mailS;}
+function getMailPers(){return 'Objet : '+mailO+'\n\n'+mailP;}
+function setLen(a,b){document.getElementById('minMots').value=a;document.getElementById('maxMots').value=b;}
+function ouvrirUrl(){var u=document.getElementById('entrepriseUrl').value;if(u)window.open(u,'_blank');}
+
+var _loadInterval;
+function startLoadBar(){var bar=document.getElementById('loadBar');bar.style.width='0%';var w=0;_loadInterval=setInterval(function(){w+=(100-w)*0.03;bar.style.width=Math.min(w,92)+'%';},200);}
+function stopLoadBar(){clearInterval(_loadInterval);var bar=document.getElementById('loadBar');bar.style.width='100%';setTimeout(function(){bar.style.width='0%';},600);}
+
+// ═══ STATE ═══
+var lettreTxt='', mailO='', mailS='', mailP='', profilATS=null, profilVer='long';
+var editMode=false, mode='offre';
+var _auditVisible=true;
+
+// ═══ MODE ═══
+function setMode(m) {
+  mode = m;
+  document.getElementById('modeBtn1').classList.toggle('active', m==='offre');
+  document.getElementById('modeBtn2').classList.toggle('active', m==='spontanee');
+  document.getElementById('blocOffre').classList.toggle('hidden', m!=='offre');
+  document.getElementById('blocSpontanee').classList.toggle('hidden', m!=='spontanee');
+}
+function getContexte() {
+  if(mode==='offre') return document.getElementById('annonce').value.slice(0,4000);
+  var url = document.getElementById('entrepriseUrl').value;
+  var desc = document.getElementById('descriptif').value;
+  return (url ? 'URL entreprise : '+url+'\n\n' : '') + desc.slice(0,4000);
+}
+
+// ═══ GÉNÉRATION ═══
+async function generer() {
+  if(!PROFIL_STR) { alert('Enregistre d\'abord ton profil (Étape 1).'); editerProfil(); return; }
+  var ctx = getContexte();
+  if(!ctx.trim()) { alert('Remplis d\'abord '+(mode==='offre'?'le texte de l\'annonce':'le descriptif de l\'entreprise')); return; }
+  var min = parseInt(document.getElementById('minMots').value)||260;
+  var max = parseInt(document.getElementById('maxMots').value)||330;
+  var hardMax = Math.max(min+10, max-15);
+  var isSpontanee = mode==='spontanee';
+  var nom = profilData_.nom || 'La candidate';
+  var ville = profilData_.ville || 'Paris';
+  var regles = buildRegles();
+
+  document.getElementById('btnGen').disabled=true;
+  document.getElementById('btnGen').textContent='⟳ Génération en cours...';
+  show('loadBox'); startLoadBar();
+  ['lettreBlock','mailBlock','profilBlock','errBox'].forEach(hide);
+  show('btnReset');
+  lettreTxt=''; profilATS=null; mailO=''; mailS=''; mailP='';
+
+  try {
+    var sysLM = 'Tu rédiges une lettre de motivation pour ' + nom + '.\n\n' +
+      PROFIL_STR + '\n\n' +
+      'POSTURE : Professionnel(le) expérimenté(e). Valoriser l\'expertise, les réalisations concrètes, la valeur ajoutée immédiate. Ton affirmatif et précis.\n\n' +
+      'TON SECTEUR : ' + getToneTxt() + '\n\n' +
+      (isSpontanee ?
+        'TYPE : CANDIDATURE SPONTANÉE. Montrer une connaissance réelle de l\'entreprise. Ancrer l\'accroche sur leur activité spécifique. Exprimer clairement le poste ou domaine visé.\n\n' :
+        'TYPE : RÉPONSE À OFFRE. Chaque paragraphe répond à un besoin précis de l\'annonce.\n\n') +
+      'RÈGLES D\'ÉCRITURE :\n' + regles + '\n\n' +
+      'STRUCTURE :\n' +
+      '1. "' + ville + ', le ' + tod() + '"\n' +
+      '2. Objet : [intitulé du poste]\n' +
+      '3. Formule d\'appel\n' +
+      '4. ACCROCHE 2-3 phrases sur l\'activité/mission de la structure. Pas de "je".\n' +
+      '5. Expérience la plus pertinente → preuve concrète tirée du profil\n' +
+      '6. Compétence complémentaire → preuve concrète tirée du profil\n' +
+      '7. Motivation pour CE poste / CETTE structure\n' +
+      '8. Conclusion + disponibilité + formule de politesse + "' + nom + '"\n\n' +
+      'LONGUEUR : ' + min + '–' + hardMax + ' mots. Réponds uniquement avec la lettre.';
+
+    document.getElementById('loadMsg').textContent = 'Rédaction de la lettre...';
+    var r1 = await callAPI(sysLM, (isSpontanee?'Descriptif entreprise/poste :\n\n':'Annonce :\n\n') + ctx, 1100);
+
+    document.getElementById('loadMsg').textContent = 'Correction automatique...';
+    var sysCorr = 'Relecteur expert. Applique ces corrections en suivant les règles d\'écriture :\n' + regles + '\n\nCorrige également :\n1. Toute erreur de préposition devant les noms d\'entreprise\n2. Les chiffres absents du profil → supprimer ou reformuler en qualitatif\nConserve la structure et les faits. Réponds uniquement avec la lettre corrigée.';
+    var r2 = await callAPI(sysCorr, 'Profil :\n' + PROFIL_STR.slice(0,800) + '\n\nLettre à corriger :\n\n' + r1.trim(), 1100);
+    lettreTxt = r2.trim();
+
+    var objetM = lettreTxt.match(/[Oo]bjet\s*:\s*(.+)/);
+    if(objetM) document.getElementById('pdfPoste').value = objetM[1].trim();
+    var socM = ctx.match(/(?:chez|société|groupe|agence|entreprise|association|fédération)\s+([A-ZÀÁÂÄÆÇÈÉÊËÎÏÔÙÛÜ][A-Za-zÀ-ÿ\s&\-.]{2,25})/i);
+    var socBL=['nous','notre','votre','vous','son','ses','une','des','les','pour','dans','avec','par','sur','cette'];
+    if(socM && socBL.indexOf(socM[1].trim().toLowerCase()) > -1) socM = null;
+    if(socM) document.getElementById('pdfSociete').value = socM[1].trim();
+
+    stopLoadBar(); hide('loadBox');
+    document.getElementById('btnGen').disabled = false;
+    document.getElementById('btnGen').textContent = '✦ Générer lettre + mail + profil ATS';
+    afficherLettre(min, max);
+    show('lettreBlock');
+
+    var poste = objetM ? objetM[1].trim() : '';
+    var soc = document.getElementById('pdfSociete').value || '';
+
+    // ─ Mail ─
+    show('mailBlock'); show('mailLoad'); hide('mailContent');
+    callAPI(
+      'Tu rédiges des mails de candidature en français. L\'EXPÉDITEUR est ' + nom + '. Le DESTINATAIRE est le recruteur. Formule d\'appel : "Madame, Monsieur,". JSON sans backticks.',
+      'Mail de candidature' + (isSpontanee?' spontanée':'') + ' pour le poste de ' + poste + ' chez ' + soc + '.\n\n' +
+      'SOBRE : 3 phrases max. Commence par "Madame, Monsieur,\\n\\nVous trouverez ci-joint ma candidature' + (isSpontanee?' spontanée':'') + ' au poste de ' + poste + '." Termine par "Cordialement,\\n' + nom + '".\n\n' +
+      'PERSONNALISÉ : commence par "Madame, Monsieur," puis 1 phrase sur la mission/activité de ' + soc + ', puis amène le poste et la disponibilité. Termine par "Cordialement,\\n' + nom + '".\n\n' +
+      'OBJET : "Candidature – ' + poste + '"\n\n{"objet":"...","sobre":"...","personnalise":"..."}', 900
+    ).then(function(r){
+      var p = pj(r) || {objet:'Candidature – '+poste, sobre:'Madame, Monsieur,\n\nVous trouverez ci-joint ma candidature.\n\nCordialement,\n'+nom, personnalise:''};
+      mailO=p.objet; mailS=p.sobre; mailP=p.personnalise;
+      document.getElementById('mailObj').textContent = p.objet;
+      document.getElementById('mailSEl').textContent = p.sobre;
+      document.getElementById('mailPEl').textContent = p.personnalise;
+      document.getElementById('mailPBlock').style.display = p.personnalise ? 'block' : 'none';
+      hide('mailLoad'); show('mailContent');
+    }).catch(function(e){ hide('mailLoad'); document.getElementById('mailContent').innerHTML='<p class="text-xs" style="color:var(--red)">Erreur mail : '+e.message+'</p>'; show('mailContent'); });
+
+    // ─ ATS ─
+    show('profilBlock'); show('profilLoad'); hide('profilContent');
+    callAPI(
+      'Expert ATS pour CV. Réponds UNIQUEMENT en JSON sans backticks.',
+      'Pour ' + nom + ', professionnel(le) en recherche active.\n\nPROFIL :\n' + PROFIL_STR.slice(0,2000) + '\n\n' +
+      'INSTRUCTIONS :\n1. Identifie 5 mots-clés ATS de l\'annonce/descriptif.\n2. Titre de poste adapté.\n3. Profil COURT : 2-3 lignes avec AU MINIMUM 3 mots-clés.\n4. Profil LONG : 4-5 lignes avec les 5 mots-clés. Mentionner la disponibilité. PAS de chiffres inventés.\n5. Mots interdits dans le profil : ' + (activeChips.nowords ? 'déployer, valoriser, représente, constitue, notamment' : '') + '\n\nFORMAT JSON :\n{"titre":"...","court":"...","long":"...","mots_cles":["mc1","mc2","mc3","mc4","mc5"],"score":8,"detail":"..."}\n\n' + (isSpontanee?'DESCRIPTIF :\n':'ANNONCE :\n') + ctx.slice(0,3500), 1000
+    ).then(function(r){
+      var p = pj(r);
+      if(p){ profilATS=p; afficherProfilATS(); }
+      else { document.getElementById('profilContent').innerHTML='<p class="text-xs" style="color:var(--amber)">Réponse inattendue. Régénère.</p>'; }
+      hide('profilLoad'); show('profilContent');
+    }).catch(function(e){ hide('profilLoad'); document.getElementById('profilContent').innerHTML='<p class="text-xs" style="color:var(--red)">Erreur ATS : '+e.message+'</p>'; show('profilContent'); });
+
+  } catch(e) {
+    stopLoadBar(); hide('loadBox');
+    document.getElementById('btnGen').disabled = false;
+    document.getElementById('btnGen').textContent = '✦ Générer lettre + mail + profil ATS';
+    document.getElementById('errBox').textContent = 'Erreur : ' + e.message;
+    show('errBox');
+  }
+}
+
+// ═══ AUDIT ═══
+function toggleAudit(){ _auditVisible=!_auditVisible; document.getElementById('auditContent').style.display=_auditVisible?'block':'none'; }
+
+function auditLettre(txt){
+  var alertes=[];
+  function getCtx(src,idx,len){var s=Math.max(0,idx-50),e=Math.min(src.length,idx+len+50);return (s>0?'…':'')+src.slice(s,e).replace(/\n/g,' ')+(e<src.length?'…':'');}
+  var reglesStr = buildRegles();
+  if(activeChips.nowords){
+    ['notamment','ainsi','par ailleurs','levier','synergie','constitue','représente','déployer','valoriser','permettre de','dynamique','motivé'].forEach(function(mot){
+      var re=new RegExp(mot.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m;
+      while((m=re.exec(txt))!==null) alertes.push({sev:'error',label:'Mot interdit',extrait:'"'+mot+'"',ctx:getCtx(txt,m.index,mot.length)});
+    });
+  }
+  if(activeChips.nodash){
+    ['—','–'].forEach(function(f){
+      var re=new RegExp(f,'g'),m;
+      while((m=re.exec(txt))!==null) alertes.push({sev:'error',label:'Tiret long interdit',extrait:'"'+f+'"',ctx:getCtx(txt,m.index,1)});
+    });
+  }
+  var paras=txt.split(/\n\n+/).filter(function(p){return p.trim().length>30;});
+  paras.forEach(function(p,i){
+    var clean=p.trim();
+    if(/objet\s*:|madame|monsieur|cordialement/i.test(clean.slice(0,80)))return;
+    if(/^je\b/i.test(clean)) alertes.push({sev:'warn',label:'Commence par "Je"',extrait:'§'+(i+1),ctx:clean.slice(0,90)+'…'});
+  });
+  var err=alertes.filter(function(a){return a.sev==='error';}).length;
+  var wrn=alertes.filter(function(a){return a.sev==='warn';}).length;
+  var score=Math.round(Math.max(0,Math.min(10,10-err*2-wrn*0.75))*10)/10;
+  return {score:score,alertes:alertes};
+}
+
+function renderAudit(txt){
+  var res=auditLettre(txt);
+  var sc=res.score,al=res.alertes;
+  var cl=sc>=8?'var(--green)':sc>=5?'var(--amber)':'var(--red)';
+  var bg=sc>=8?'var(--green-soft)':sc>=5?'var(--amber-soft)':'var(--red-soft)';
+  var brd=sc>=8?'var(--green-border)':sc>=5?'var(--amber-border)':'var(--red-border)';
+  var vrd=sc>=8?'✓ Lettre propre':sc>=5?'À corriger':'Révision nécessaire';
+  var sm={error:{c:'var(--red)',bg:'var(--red-soft)',b:'var(--red-border)',ic:'✕'},warn:{c:'var(--amber)',bg:'var(--amber-soft)',b:'var(--amber-border)',ic:'⚠'},info:{c:'var(--accent)',bg:'var(--accent-soft)',b:'var(--accent-border)',ic:'○'}};
+  var html='<div style="padding:12px 16px;background:'+bg+';border:1px solid '+brd+';border-radius:var(--radius);margin-bottom:10px"><div class="row row--between"><div class="row" style="gap:8px"><span class="text-xs fw-700" style="color:'+cl+'">SCORE QUALITÉ</span><span class="badge" style="background:'+bg+';color:'+cl+'">'+vrd+'</span></div><span class="mono fw-700" style="font-size:20px;color:'+cl+'">'+sc+'/10</span></div><div class="progress mt-sm"><div class="progress__fill" style="width:'+sc*10+'%;background:'+cl+'"></div></div></div>';
+  if(!al.length){ html+='<div style="padding:10px 14px;background:var(--green-soft);border:1px solid var(--green-border);border-radius:var(--radius)"><p class="text-sm fw-600 text-green">Aucune alerte — lettre conforme aux règles.</p></div>'; }
+  else { al.forEach(function(a){var s=sm[a.sev]||sm.info;html+='<div style="padding:9px 12px;background:'+s.bg+';border:1px solid '+s.b+';border-radius:var(--radius);margin-bottom:5px"><div class="row mb-xs" style="gap:6px;flex-wrap:wrap"><span class="badge" style="background:'+s.bg+';color:'+s.c+'">'+s.ic+' '+a.label+'</span><span class="text-xs mono" style="color:'+s.c+'">'+a.extrait+'</span></div><p class="text-xs" style="color:var(--text-secondary);font-style:italic;line-height:1.5">'+a.ctx+'</p></div>'; }); }
+  _auditVisible=true;
+  document.getElementById('auditContent').innerHTML=html;
+  document.getElementById('auditContent').style.display='block';
+  show('auditBox');
+}
+
+// ═══ AFFICHAGE LETTRE ═══
+function afficherLettre(min,max){
+  min=min||parseInt(document.getElementById('minMots').value)||260;
+  max=max||parseInt(document.getElementById('maxMots').value)||330;
+  var nb=cw(lettreTxt),ok=nb>=min&&nb<=max;
+  document.getElementById('lettreTxt').textContent=lettreTxt;
+  document.getElementById('lettreEdit').value=lettreTxt;
+  var mc=document.getElementById('motsCpt');
+  mc.style.color=ok?'var(--green)':nb<min?'var(--amber)':'var(--red)';
+  mc.textContent=nb+' mots '+(ok?'✓':nb<min?'↑ trop court':'↓ trop long')+' · cible '+min+'–'+max;
+  renderAudit(lettreTxt);
+}
+
+function toggleEdit(){
+  editMode=!editMode;
+  document.getElementById('lettreTxt').classList.toggle('hidden',editMode);
+  document.getElementById('lettreEdit').classList.toggle('hidden',!editMode);
+  var btn=document.getElementById('btnEdit');
+  if(editMode){ btn.textContent='✓ Terminer'; btn.classList.add('btn--amber'); }
+  else { btn.textContent='✏️ Éditer'; btn.classList.remove('btn--amber'); lettreTxt=document.getElementById('lettreEdit').value; afficherLettre(); }
+}
+
+// ═══ AFFICHAGE ATS ═══
+function afficherProfilATS(){
+  if(!profilATS)return;
+  var cl=profilATS.score>=7?'var(--green)':profilATS.score>=5?'var(--amber)':'var(--red)';
+  document.getElementById('profilSc').innerHTML='<div class="row" style="gap:8px"><div class="progress" style="flex:1;width:80px"><div class="progress__fill" style="width:'+(profilATS.score||0)*10+'%;background:'+cl+'"></div></div><span class="mono fw-700" style="color:'+cl+';font-size:15px">'+(profilATS.score||0)+'/10</span></div>';
+  document.getElementById('profilContent').innerHTML=
+    '<div class="mb-md"><div class="text-xs fw-700 text-muted mb-sm" style="text-transform:uppercase;letter-spacing:.06em">Titre adapté</div><div class="row"><div style="flex:1;padding:10px 14px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:14px;font-weight:600">'+(profilATS.titre||'')+'</div><button class="btn--copy" id="cpT" onclick="cpTxt(profilATS.titre||\'\',' + "'cpT'" + ')">📋 Copier</button></div></div>'+
+    (profilATS.detail?'<p class="text-xs text-muted mb-md">'+profilATS.detail+'</p>':'')+
+    '<div class="row mb-sm"><button class="btn btn--sm" id="btnPC" onclick="setPV(\'court\')" style="'+(profilVer==='court'?'background:var(--violet-soft);color:var(--violet);border-color:var(--violet-border)':'')+'">Court</button><button class="btn btn--sm" id="btnPL" onclick="setPV(\'long\')" style="'+(profilVer==='long'?'background:var(--violet-soft);color:var(--violet);border-color:var(--violet-border)':'')+'">Long</button></div>'+
+    '<div id="profilTxt" class="preview-box mb-md">'+(profilVer==='long'?(profilATS.long||''):(profilATS.court||''))+'</div>'+
+    '<button class="btn--copy mb-md" id="cpP" onclick="cpProfil()">📋 Copier le profil</button>'+
+    '<div class="text-xs fw-700 text-muted mb-sm" style="text-transform:uppercase;letter-spacing:.06em">Checklist mots-clés ATS</div>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:6px">'+(profilATS.mots_cles||[]).map(function(mot){var inP=(profilATS.long||'').toLowerCase().includes(mot.toLowerCase());return '<span class="badge" style="background:'+(inP?'var(--green-soft)':'var(--red-soft)')+';color:'+(inP?'var(--green)':'var(--red)')+'">'+(inP?'✓':'✗')+' '+mot+'</span>';}).join('')+'</div>';
+}
+function setPV(v){profilVer=v;if(profilATS)document.getElementById('profilTxt').textContent=v==='court'?(profilATS.court||''):(profilATS.long||'');document.getElementById('btnPC').style.cssText=v==='court'?'background:var(--violet-soft);color:var(--violet);border-color:var(--violet-border)':'';document.getElementById('btnPL').style.cssText=v==='long'?'background:var(--violet-soft);color:var(--violet);border-color:var(--violet-border)':'';}
+function cpProfil(){cpTxt(profilVer==='court'?(profilATS?profilATS.court:''):(profilATS?profilATS.long:''),'cpP');}
+
+// ═══ PDF ═══
+function imprimer(){
+  var txt=lettreTxt; if(!txt)return;
+  var esc=txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  var nom=profilData_.nom||'';
+  var contact=[];
+  if(profilData_.tel) contact.push(profilData_.tel);
+  if(profilData_.email) contact.push(profilData_.email);
+  if(profilData_.ville) contact.push(profilData_.ville);
+  var w=window.open('','_blank','width=860,height=700');
+  if(w){w.document.write('<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Lettre de motivation</title><style>@page{margin:2.5cm}body{font-family:Georgia,serif;font-size:11pt;line-height:1.75;color:#1a1a1a}pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:11pt;line-height:1.75;margin:0}hr{border:none;border-top:1px solid #ddd;margin:1em 0}.header{margin-bottom:1.5em}</style></head><body><div class="header"><strong>'+nom+'</strong><br><span style="font-size:10pt;color:#555">'+contact.join(' · ')+'</span></div><hr><pre>'+esc+'</pre></body></html>');w.document.close();setTimeout(function(){w.print();},600);}
+}
+
+// ═══ RESET ═══
+function resetAll(){
+  if(mode==='offre') document.getElementById('annonce').value='';
+  else { document.getElementById('entrepriseUrl').value=''; document.getElementById('descriptif').value=''; }
+  ['lettreBlock','mailBlock','profilBlock','errBox','loadBox'].forEach(hide);
+  hide('btnReset');
+  document.getElementById('pdfPoste').value=''; document.getElementById('pdfSociete').value='';
+  document.getElementById('btnGen').disabled=false;
+  document.getElementById('btnGen').textContent='✦ Générer lettre + mail + profil ATS';
+  document.getElementById('btnEdit').textContent='✏️ Éditer';
+  document.getElementById('btnEdit').className='btn btn--sm';
+  lettreTxt=''; profilATS=null; editMode=false; mailO=''; mailS=''; mailP='';
+}
+
+load();
+</script>
+</body>
+</html>
