@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+*{box-sizing:border-box;margin:0;padding:0;}
+
 /* ── NORTHIA NAV ── */
 .northia-nav{position:sticky;top:0;z-index:100;background:#222222;border-bottom:2px solid #5E95C8;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
 .northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
@@ -18,29 +20,23 @@
 .northia-nav__back:hover{color:#fff;border-color:rgba(255,255,255,.4);}
 .mock-badge{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;letter-spacing:.07em;padding:3px 10px;border-radius:20px;background:rgba(228,158,198,.15);color:#E49EC6;border:1px solid rgba(228,158,198,.25);}
 
-/* ── PAGE WRAPPER ── */
-*{box-sizing:border-box;margin:0;padding:0;}
+/* ── PAGE OUTER ── */
 body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;}
+.page-outer{background:#1a2235;padding:24px 16px 48px;min-height:100vh;}
+
+/* ── EMAIL META BAR ── */
+.email-meta-bar{max-width:640px;margin:0 auto 12px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 16px;font-size:12px;color:rgba(255,255,255,.4);display:flex;gap:16px;flex-wrap:wrap;}
+.email-meta-bar strong{color:rgba(255,255,255,.65);}
 
 /* ── EMAIL SHELL ── */
 .email-wrap{max-width:640px;margin:0 auto;background:#0d1526;padding:0 0 32px;}
 
 /* ── HEADER ── */
-.email-header{
-  background:#0d1526;
-  padding:32px 40px 20px;
-  text-align:center;
-  border-bottom:1px solid rgba(94,149,200,.2);
-}
+.email-header{background:#0d1526;padding:32px 40px 20px;text-align:center;border-bottom:1px solid rgba(94,149,200,.2);}
 .email-header__logo{height:80px;width:auto;margin-bottom:16px;}
-.email-header__divider{width:100%;height:1px;background:rgba(94,149,200,.25);margin:0 0 14px;}
-.email-header__date{
-  font-size:14px;font-weight:600;
-  color:#E49EC6;
-  letter-spacing:.02em;
-  margin-bottom:8px;
-}
-.email-header__divider2{width:100%;height:1px;background:rgba(94,149,200,.25);}
+.email-header__div{width:100%;height:1px;background:rgba(94,149,200,.25);margin:0 0 14px;}
+.email-header__date{font-size:14px;font-weight:600;color:#E49EC6;letter-spacing:.02em;margin-bottom:8px;}
+.email-header__div2{width:100%;height:1px;background:rgba(94,149,200,.25);}
 
 /* ── EDITORIAL ── */
 .email-edito{padding:28px 40px 24px;border-bottom:1px solid rgba(255,255,255,.07);}
@@ -55,64 +51,28 @@ body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-f
 .article:last-child{border-bottom:none;}
 .article-inner{display:flex;gap:20px;align-items:flex-start;margin-bottom:16px;}
 .article-img{
-  width:140px;height:140px;flex-shrink:0;
+  width:150px;height:150px;flex-shrink:0;
   border-radius:8px;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  font-size:36px;position:relative;
+  border:1px solid rgba(255,255,255,.1);
 }
-/* Article images — CSS backgrounds matching DALL-E aesthetics */
-.ai-google{background:linear-gradient(135deg,#0a0f1a 0%,#0d1a30 50%,#102040 100%);}
-.ai-google::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 30% 40%,rgba(91,126,201,.5),transparent),radial-gradient(ellipse 40% 40% at 80% 70%,rgba(232,121,160,.3),transparent);}
-.ai-openai{background:linear-gradient(135deg,#080c14 0%,#0f1525 50%,#0a1020 100%);}
-.ai-openai::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 35% 45%,rgba(130,90,220,.4),transparent),radial-gradient(ellipse 40% 45% at 70% 30%,rgba(228,158,198,.3),transparent);}
-.ai-video{background:linear-gradient(135deg,#060810 0%,#0c1020 50%,#0a0c1a 100%);}
-.ai-video::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 40% 50%,rgba(40,160,200,.35),transparent),radial-gradient(ellipse 35% 40% at 75% 25%,rgba(180,80,200,.3),transparent);}
-.ai-spacex{background:linear-gradient(135deg,#050810 0%,#080d1a 50%,#06091a 100%);}
-.ai-spacex::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 30% 60%,rgba(60,80,160,.4),transparent),radial-gradient(ellipse 40% 40% at 70% 20%,rgba(100,180,240,.25),transparent);}
-.ai-wordpress{background:linear-gradient(135deg,#08050a 0%,#100810 50%,#0a0510 100%);}
-.ai-wordpress::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 55% at 25% 55%,rgba(200,40,40,.35),transparent),radial-gradient(ellipse 35% 40% at 72% 28%,rgba(91,126,201,.3),transparent);}
-.ai-ikea{background:linear-gradient(135deg,#060810 0%,#0a0c1a 50%,#0c0f20 100%);}
-.ai-ikea::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 35% 45%,rgba(32,200,232,.3),transparent),radial-gradient(ellipse 35% 45% at 72% 28%,rgba(232,121,160,.25),transparent);}
-.article-img .img-icon{position:relative;z-index:1;filter:drop-shadow(0 0 12px rgba(255,255,255,.2));}
+.article-img img{width:100%;height:100%;object-fit:cover;display:block;}
 .article-content{}
 .article-title{font-size:16px;font-weight:700;color:#fff;line-height:1.35;margin-bottom:10px;}
 .article-summary{font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;}
-.article-cta{margin-top:0;text-align:left;}
-.cta-btn{
-  display:inline-block;
-  background:#5E95C8;
-  color:#fff;
-  font-size:13px;font-weight:600;
-  padding:10px 28px;
-  border-radius:20px;
-  text-decoration:none;
-  transition:background .15s;
-}
+.article-cta{text-align:left;}
+.cta-btn{display:inline-block;background:#5E95C8;color:#fff;font-size:13px;font-weight:600;padding:10px 28px;border-radius:20px;text-decoration:none;transition:background .15s;}
 .cta-btn:hover{background:#27618C;}
 
-/* ── FOOTER EMAIL ── */
-.email-footer{
-  padding:20px 40px;
-  text-align:center;
-  border-top:1px solid rgba(94,149,200,.2);
-  margin-top:8px;
-}
+/* ── FOOTER ── */
+.email-footer{padding:20px 40px;text-align:center;border-top:1px solid rgba(94,149,200,.2);margin-top:8px;}
 .email-footer__text{font-size:11px;color:rgba(255,255,255,.25);line-height:1.7;}
 .email-footer__link{color:rgba(94,149,200,.6);text-decoration:none;}
 
-/* ── OUTER WRAPPER ── */
-.page-outer{background:#1a2235;padding:24px 16px 48px;min-height:100vh;}
-.email-meta-bar{
-  max-width:640px;margin:0 auto 12px;
-  background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);
-  border-radius:8px;padding:10px 16px;
-  font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,.4);
-  display:flex;gap:16px;flex-wrap:wrap;
-}
-.email-meta-bar strong{color:rgba(255,255,255,.65);}
+/* ── DALLE NOTE ── */
+.dalle-note{max-width:640px;margin:0 auto 12px;background:rgba(94,149,200,.08);border:1px solid rgba(94,149,200,.2);border-radius:8px;padding:10px 16px;font-family:'Orbitron',sans-serif;font-size:10px;color:rgba(94,149,200,.7);letter-spacing:.05em;display:flex;align-items:center;gap:8px;}
 
 @media(max-width:600px){
-  .northia-nav__links .northia-nav__link{display:none;}
+  .northia-nav__link{display:none;}
   .email-header{padding:24px 20px 16px;}
   .email-edito{padding:20px 20px 18px;}
   .articles{padding:0 20px;}
@@ -129,39 +89,43 @@ body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-f
     <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
   </a>
   <div class="northia-nav__links">
-    <span class="mock-badge">Démonstration · Rendu réel</span>
+    <span class="mock-badge">Rendu réel · Édition du 22 avril</span>
     <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
     <a href="/portfolio/index.html" class="northia-nav__back">← Portfolio</a>
   </div>
 </nav>
 
-<!-- OUTER -->
 <div class="page-outer">
 
-  <!-- EMAIL META BAR (simule le client mail) -->
+  <!-- META BAR -->
   <div class="email-meta-bar">
     <span><strong>De :</strong> NorthIA &lt;newsletter@northia.fr&gt;</span>
     <span><strong>À :</strong> Bonjour Pierre-Olivier,</span>
-    <span><strong>Objet :</strong> Revue de presse IA — 24 avril 2026</span>
-    <span>Vendredi 24 avril 2026 · 08:04</span>
+    <span><strong>Objet :</strong> Revue de presse IA — 22 avril 2026</span>
+    <span>Mercredi 22 avril 2026 · 08:04</span>
   </div>
 
-  <!-- EMAIL BODY -->
+  <!-- DALL-E NOTE -->
+  <div class="dalle-note">
+    🎨 Images éditoriales générées par DALL-E 3 via pipeline Make · Une image unique par article · Liée au contenu, pas à un template
+  </div>
+
+  <!-- EMAIL -->
   <div class="email-wrap">
 
     <!-- HEADER -->
     <div class="email-header">
       <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="email-header__logo">
-      <div class="email-header__divider"></div>
-      <div class="email-header__date">Revue de presse — 24 avril 2026</div>
-      <div class="email-header__divider2"></div>
+      <div class="email-header__div"></div>
+      <div class="email-header__date">Revue de presse — 22 avril 2026</div>
+      <div class="email-header__div2"></div>
     </div>
 
     <!-- ÉDITO -->
     <div class="email-edito">
       <p class="edito-greeting">Bonjour Pierre-Olivier,</p>
       <h2 class="edito-title">L'IA s'accélère. Vos organisations suivent&nbsp;?</h2>
-      <p class="edito-body">Google rebaptise ses plateformes. OpenAI relance la génération d'images. SpaceX s'allie à un éditeur de code pour 60 milliards. En une semaine, les grandes manœuvres se multiplient. Pendant ce temps, les organisations cherchent encore leur gouvernance IA, leurs cas d'usage, leur sponsor interne. L'écart entre la vitesse des éditeurs et la lenteur des directions n'est pas un problème technique. C'est un problème de décision. La vraie question n'est pas de savoir si vous utilisez l'IA. C'est de savoir qui dans votre entreprise a le droit de dire non.</p>
+      <p class="edito-body">Google rebaptise ses plateformes. OpenAI relance la génération d'images. SpaceX rachète un éditeur de code pour 60 milliards. En une semaine, les grandes manœuvres se multiplient. Pendant ce temps, les organisations cherchent encore leur gouvernance IA, leurs cas d'usage, leur sponsor interne. L'écart entre la vitesse des éditeurs et la lenteur des directions n'est pas un problème technique. C'est un problème de décision. La vraie question n'est pas de savoir si vous utilisez l'IA. C'est de savoir qui dans votre entreprise a le droit de dire non.</p>
       <p class="edito-sign">NorthIA</p>
     </div>
 
@@ -170,7 +134,9 @@ body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-f
 
       <div class="article">
         <div class="article-inner">
-          <div class="article-img ai-google"><span class="img-icon">🤖</span></div>
+          <div class="article-img">
+            <img src="/portfolio/img-google-cloud.png" alt="Agents IA autonomes Google Cloud" loading="lazy">
+          </div>
           <div class="article-content">
             <h3 class="article-title">Google Cloud mise tout sur les agents autonomes</h3>
             <p class="article-summary">Lors de Google Cloud Next 26 à Las Vegas, Google a recentré toute sa stratégie autour des agents IA autonomes. Vertex AI devient Gemini Enterprise Agent Platform. Deux nouveaux TPU de 8e génération sont dévoilés. Des clients comme Tata Steel, Macy's ou la NASA pour Artemis II illustrent une adoption déjà industrielle. En France, Valeo figure parmi les références annoncées.</p>
@@ -181,7 +147,9 @@ body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-f
 
       <div class="article">
         <div class="article-inner">
-          <div class="article-img ai-openai"><span class="img-icon">🎨</span></div>
+          <div class="article-img">
+            <img src="/portfolio/img-openai-images.png" alt="OpenAI génération d'images" loading="lazy">
+          </div>
           <div class="article-content">
             <h3 class="article-title">OpenAI relance la génération d'images et cible le marketing</h3>
             <p class="article-summary">OpenAI déploie ChatGPT Images 2.0, version améliorée de son outil de génération visuelle. La cible est explicite : les professionnels du marketing et de la communication. Une offensive stratégique dans un marché très concurrentiel, alors que Midjourney, Adobe Firefly et les acteurs chinois renforcent leurs positions.</p>
@@ -192,7 +160,9 @@ body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-f
 
       <div class="article">
         <div class="article-inner">
-          <div class="article-img ai-video"><span class="img-icon">🎬</span></div>
+          <div class="article-img">
+            <img src="/portfolio/img-video-ia.png" alt="Vidéo IA Synthesia Runway" loading="lazy">
+          </div>
           <div class="article-content">
             <h3 class="article-title">Vidéo IA : Synthesia, Runway et Veo tiennent la route</h3>
             <p class="article-summary">Malgré l'arrêt de Sora jugé trop coûteux, le marché de la vidéo générée par IA progresse. Synthesia est valorisée 4 milliards après une levée de 200 millions, Runway lève 315 millions pour 5,3 milliards de valorisation. Google, Meta et les acteurs chinois accélèrent aussi. Les défis restent réels : énergie, droits d'auteur, deepfakes.</p>
@@ -203,7 +173,9 @@ body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-f
 
       <div class="article">
         <div class="article-inner">
-          <div class="article-img ai-spacex"><span class="img-icon">🚀</span></div>
+          <div class="article-img">
+            <img src="/portfolio/img-spacex-cursor.png" alt="SpaceX Cursor code" loading="lazy">
+          </div>
           <div class="article-content">
             <h3 class="article-title">SpaceX s'allie à Cursor pour 60 milliards de dollars</h3>
             <p class="article-summary">SpaceX noue un partenariat stratégique avec Cursor, éditeur de code assisté par IA, incluant une option de rachat à 60 milliards de dollars. L'opération confirme l'intensification de la bataille pour capter les développeurs professionnels. SpaceX signale ainsi une ambition claire de diversification au-delà de l'aérospatial.</p>
@@ -214,7 +186,9 @@ body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-f
 
       <div class="article">
         <div class="article-inner">
-          <div class="article-img ai-wordpress"><span class="img-icon">🐺</span></div>
+          <div class="article-img">
+            <img src="/portfolio/img-wordpress.png" alt="WordPress plugins infectés cybersécurité" loading="lazy">
+          </div>
           <div class="article-content">
             <h3 class="article-title">Plugins WordPress infectés après un changement de propriétaire</h3>
             <p class="article-summary">Après le rachat de plus de 30 plugins WordPress sur Flippa, un acheteur y a introduit des portes dérobées dormantes pendant 8 mois. Activées le 5 avril 2026, elles ont transformé des sites en relais de spam SEO. L'infrastructure utilisait la blockchain Ethereum. WordPress.org a bloqué les plugins, mais la gestion des transferts de propriété reste un angle mort structurel.</p>
@@ -225,16 +199,18 @@ body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-f
 
       <div class="article">
         <div class="article-inner">
-          <div class="article-img ai-ikea"><span class="img-icon">💡</span></div>
+          <div class="article-img">
+            <img src="/portfolio/img-ikea-samsung.png" alt="IKEA Samsung domotique Matter" loading="lazy">
+          </div>
           <div class="article-content">
             <h3 class="article-title">IKEA et Samsung : la domotique Matter franchit un cap</h3>
-            <p class="article-summary">Samsung intègre nativement les appareils Matter d'IKEA dans SmartThings. Ampoules, capteurs et télécommandes de la gamme IKEA, lancée en novembre 2025, fonctionnent désormais sans hub dédié. Ils rejoignent un écosystème incluant Hue, Eve, Ring et Nuki, ainsi que les électroménagers Samsung. Plusieurs cycles de validation ont été nécessaires pour stabiliser l'expérience utilisateur.</p>
+            <p class="article-summary">Samsung intègre nativement les appareils Matter d'IKEA dans SmartThings. Ampoules, capteurs et télécommandes de la gamme IKEA fonctionnent désormais sans hub dédié. Ils rejoignent un écosystème incluant Hue, Eve, Ring et Nuki, ainsi que les électroménagers Samsung. Plusieurs cycles de validation ont été nécessaires pour stabiliser l'expérience utilisateur.</p>
           </div>
         </div>
         <div class="article-cta"><a href="#" class="cta-btn">Lire l'article</a></div>
       </div>
 
-    </div><!-- /articles -->
+    </div>
 
     <!-- FOOTER -->
     <div class="email-footer">
@@ -245,8 +221,8 @@ body{background:#1a2235;font-family:'DM Sans',-apple-system,sans-serif;-webkit-f
       </p>
     </div>
 
-  </div><!-- /email-wrap -->
-</div><!-- /page-outer -->
+  </div>
+</div>
 
 </body>
 </html>
