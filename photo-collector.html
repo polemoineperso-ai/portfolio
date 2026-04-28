@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Photothèque Rédaction IA — NorthIA · Pierre-Olivier Lemoine</title>
+<meta name="description" content="Upload iOS en 5 secondes, légende automatique Claude vision, galerie collaborative. De l'iPhone au stock photo organisé sans friction. Par Pierre-Olivier Lemoine · NorthIA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;--nia-black:#222222;
+  --ink:#1a1d23;--ink-soft:#3d4251;--ink-muted:#8892a4;
+  --paper:#fafbfc;--paper-warm:#f4f2ee;--paper-card:#fff;--line:#e8eaef;
+  --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --display:'Cinzel',Georgia,serif;--ui:'Orbitron',sans-serif;
+  --r:8px;--r-lg:12px;--shadow:0 1px 4px rgba(0,0,0,.06),0 2px 12px rgba(0,0,0,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.northia-nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
+.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
+.northia-nav__logo{height:36px;width:auto;}
+.northia-nav__links{display:flex;align-items:center;gap:4px;}
+.northia-nav__home{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.12);transition:all .15s;margin-right:6px;}
+.northia-nav__home:hover{color:#fff;border-color:rgba(255,255,255,.3);}
+.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
+.northia-nav__link:hover{color:var(--nia-pink);background:rgba(255,255,255,.06);}
+.northia-nav__link--active{color:var(--nia-blue);}
+.hero{background:var(--nia-black);color:#fff;padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(94,149,200,.3),transparent);pointer-events:none;}
+.hero__tag{display:inline-block;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:20px;}
+.hero__title{font-family:var(--display);font-size:clamp(26px,5vw,44px);font-weight:700;line-height:1.1;margin-bottom:14px;}
+.hero__title em{font-style:italic;color:var(--nia-pink);}
+.hero__sub{font-size:15px;color:rgba(255,255,255,.55);max-width:520px;margin:0 auto 24px;line-height:1.65;}
+.hero__metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.metric{text-align:center;padding:11px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);}
+.metric__n{font-family:var(--ui);font-size:18px;font-weight:700;color:#fff;display:block;}
+.metric__l{font-size:11px;color:rgba(255,255,255,.4);display:block;margin-top:2px;}
+.hero__time{font-size:12px;color:rgba(255,255,255,.35);}
+.hero__time strong{color:var(--nia-blue);}
+.wrap{max-width:700px;margin:0 auto;padding:0 24px;}
+.section{padding:44px 0 0;}
+.section:last-of-type{padding-bottom:72px;}
+.slabel{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
+.stitle{font-family:var(--display);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:12px;}
+.prose{font-size:14px;color:var(--ink-soft);line-height:1.75;max-width:580px;}
+.prose+.prose{margin-top:10px;}
+.rule8020{background:var(--nia-black);border-left:4px solid var(--nia-pink);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.rule8020__title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-pink);margin-bottom:8px;}
+.rule8020__text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;}
+.rule8020__text strong{color:#fff;font-weight:700;}
+/* GENESIS */
+.genesis-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;}
+.genesis-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.genesis-card:hover{border-color:var(--nia-blue);}
+.genesis-card--diag{border-top:3px solid var(--nia-blue);}
+.genesis-card--think{border-top:3px solid var(--nia-pink);}
+.genesis-card--result{border-top:3px solid #1a9e6e;}
+.genesis-card__icon{font-size:22px;margin-bottom:8px;}
+.genesis-card__label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
+.genesis-card--diag .genesis-card__label{color:var(--nia-blue);}
+.genesis-card--think .genesis-card__label{color:var(--nia-pink);}
+.genesis-card--result .genesis-card__label{color:#1a9e6e;}
+.genesis-card__text{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+@media(max-width:700px){.genesis-grid{grid-template-columns:1fr;}}
+/* FLOW */
+.flow{display:flex;flex-direction:column;gap:3px;margin-top:20px;}
+.flow-step{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:flex-start;background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.flow-step:hover{border-color:var(--nia-blue);}
+.ficon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.fi-b{background:rgba(94,149,200,.12);border:1px solid rgba(94,149,200,.25);}
+.fi-p{background:rgba(228,158,198,.12);border:1px solid rgba(228,158,198,.25);}
+.fi-g{background:rgba(34,211,160,.1);border:1px solid rgba(34,211,160,.2);}
+.fname{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.fdesc{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+.fsub{font-size:11px;color:var(--ink-muted);margin-top:4px;font-family:var(--mono);}
+/* API CALLS */
+.api-calls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
+.api-card{background:var(--paper-card);border:1px solid var(--line);border-left:3px solid var(--nia-blue);border-radius:var(--r);padding:14px 16px;}
+.api-card--pink{border-left-color:var(--nia-pink);}
+.api-card--green{border-left-color:#1a9e6e;}
+.api-label{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:6px;}
+.api-card--pink .api-label{color:var(--nia-pink);}
+.api-card--green .api-label{color:#1a9e6e;}
+.api-desc{font-size:12px;color:var(--ink-soft);line-height:1.6;}
+.api-mono{font-family:var(--mono);font-size:11px;color:var(--ink-muted);margin-top:4px;}
+/* SHEETS */
+.sheets-box{background:var(--paper-warm);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 18px;margin-top:16px;}
+.sheets-label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px;}
+.sheets-cols{display:flex;flex-wrap:wrap;gap:5px;}
+.scol{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:4px;background:var(--paper-card);border:1px solid var(--line);color:var(--ink-soft);}
+/* STACK TABLE */
+.stack-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;background:var(--paper-card);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);}
+.stack-table th{background:var(--nia-black);color:rgba(255,255,255,.6);font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;text-align:left;}
+.stack-table td{padding:10px 16px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+.stack-table tr:last-child td{border-bottom:none;}
+.stack-table tr:nth-child(odd) td{background:var(--paper-warm);}
+.mono-td{font-family:var(--mono);font-size:12px;}
+/* RESULTS */
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.rcard{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);}
+.rcard__n{font-family:var(--ui);font-size:20px;font-weight:700;color:var(--nia-blue);display:block;margin-bottom:4px;}
+.rcard__l{font-size:13px;color:var(--ink-soft);line-height:1.5;}
+/* NAV BOTTOM */
+.nav-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;}
+.nav-btn{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.05em;padding:10px 18px;border-radius:var(--r);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
+.nav-btn--out{border:1px solid var(--line);color:var(--ink-muted);background:var(--paper-card);}
+.nav-btn--out:hover{border-color:var(--nia-blue);color:var(--nia-blue);}
+.nav-btn--pri{background:var(--nia-blue);color:#fff;border:none;}
+.nav-btn--pri:hover{background:var(--nia-blue-dark);}
+.northia-footer{background:#222;border-top:2px solid var(--nia-blue);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.northia-footer__logo{height:28px;width:auto;}
+.northia-footer__name{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
+.northia-footer__sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
+.northia-footer__links{display:flex;gap:14px;}
+.northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
+.northia-footer__lnk:hover{color:var(--nia-pink);}
+@media(max-width:600px){.northia-nav__links{display:none;}.results-grid{grid-template-columns:1fr;}.api-calls{grid-template-columns:1fr;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
+</style>
+</head>
+<body>
+
+<nav class="northia-nav">
+  <a href="/portfolio/index.html" class="northia-nav__brand">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
+  </a>
+  <div class="northia-nav__links">
+    <a href="/portfolio/index.html" class="northia-nav__home">← Accueil</a>
+    <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
+    <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
+    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
+    <a href="/portfolio/photo-collector.html" class="northia-nav__link northia-nav__link--active">Photothèque</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero__tag">Projet 04 / 04 · FastAPI · Claude Vision · iOS</div>
+  <h1 class="hero__title">Photothèque <em>Rédaction IA</em></h1>
+  <p class="hero__sub">De l'iPhone au stock photo organisé en 5 secondes. Upload iOS natif, légende LinkedIn générée par Claude vision, galerie collaborative instantanément à jour.</p>
+  <div class="hero__metrics">
+    <div class="metric"><span class="metric__n">5 sec</span><span class="metric__l">depuis l'app Photos iOS</span></div>
+    <div class="metric"><span class="metric__n">1 tap</span><span class="metric__l">Raccourcis Apple</span></div>
+    <div class="metric"><span class="metric__n">Claude</span><span class="metric__l">vision par photo</span></div>
+    <div class="metric"><span class="metric__n">0</span><span class="metric__l">renommage manuel</span></div>
+  </div>
+  <div class="hero__time">Gestion photos événement : <strong>15 à 30 min manuelles → 5 secondes par photo</strong></div>
+</div>
+
+<div class="wrap">
+
+<div class="section">
+  <div class="slabel">Genèse du projet</div>
+  <h2 class="stitle">Diagnostic, réflexion, décision</h2>
+
+  <div class="genesis-grid">
+    <div class="genesis-card genesis-card--diag">
+      <div class="genesis-card__icon">🔍</div>
+      <div class="genesis-card__label">Diagnostic</div>
+      <div class="genesis-card__text">Lors de chaque événement, les photos prises par les équipes terrain n'arrivent jamais au bon endroit au bon moment. Email, AirDrop, WhatsApp — chacun sa méthode. Résultat : des photos dispersées, mal nommées, sans contexte, souvent inexploitées. Le contenu existe. Le process pour le valoriser, non.</div>
+    </div>
+    <div class="genesis-card genesis-card--think">
+      <div class="genesis-card__icon">💡</div>
+      <div class="genesis-card__label">Réflexion</div>
+      <div class="genesis-card__text">Changer les habitudes des équipes terrain est illusoire. La seule solution viable : zéro friction côté contributeur. Tout le monde a l'app Photos sur son iPhone. Un Raccourci Apple natif, c'est un bouton de partage de plus — pas une nouvelle app à installer, pas un compte à créer. L'IA prend en charge ce qui prend du temps : le nommage, la légende, la référence.</div>
+    </div>
+    <div class="genesis-card genesis-card--result">
+      <div class="genesis-card__icon">✓</div>
+      <div class="genesis-card__label">Résultat</div>
+      <div class="genesis-card__text">Un Shortcut iOS en 1 tap. Une galerie collaborative à jour en temps réel. Une légende LinkedIn prête à publier générée par Claude vision. Le tout sans changer un seul réflexe des équipes — juste en ajoutant un point de partage dans leur app Photos habituelle.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Problème résolu</div>
+  <h2 class="stitle">La friction invisible des équipes terrain</h2>
+  <p class="prose">Après chaque salon, conférence ou événement, les équipes terrain perdent un temps considérable à transférer leurs photos : email, AirDrop, WhatsApp, renommage manuel, légende à écrire. Un process répétitif et sans valeur qui décourage les contributeurs et retarde la publication.</p>
+  <p class="prose">L'objectif : supprimer toute friction entre la prise de vue et le stock photo utilisable — sans changer les habitudes des équipes. Tout le monde a l'app Photos sur son iPhone.</p>
+
+  <div class="rule8020">
+    <div class="rule8020__title">Règle 80/20 — <strong>L'humain reste le décideur</strong></div>
+    <div class="rule8020__text">Claude propose une légende professionnelle à partir de l'analyse visuelle de la photo — l'auteur la valide, la corrige ou l'ignore. <strong>Les photos sont approuvées et publiées par l'équipe éditoriale, jamais automatiquement.</strong> L'IA réduit la friction, l'humain garde le contrôle éditorial.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Architecture</div>
+  <h2 class="stitle">Comment ça fonctionne</h2>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="ficon fi-b">📱</div>
+      <div>
+        <div class="fname">Upload iOS — 1 tap via Raccourcis Apple</div>
+        <div class="fdesc">L'utilisateur sélectionne une photo dans l'app Photos iOS et la partage via le Shortcut natif. Aucune app à installer, aucun compte à créer — le partage iOS standard suffit.</div>
+        <div class="fsub">Apple Shortcuts → HTTP POST multipart → FastAPI</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="ficon fi-b">☁️</div>
+      <div>
+        <div class="fname">Stockage Cloudinary — métadonnées automatiques</div>
+        <div class="fdesc">La photo est uploadée sur Cloudinary qui retourne instantanément l'URL sécurisée, les dimensions (largeur × hauteur) et le poids du fichier. Utile pour les gabarits presse.</div>
+        <div class="fsub">1 appel API · URL · dimensions · poids · format</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="ficon fi-p">🧠</div>
+      <div>
+        <div class="fname">Légende Claude vision — analyse de l'image</div>
+        <div class="fdesc">Claude analyse la photo (modèle vision) et génère une légende professionnelle prête à publier sur LinkedIn. Format : description de la scène, contexte événement, ton éditorial NorthIA. Skippé automatiquement pour les vidéos.</div>
+        <div class="fsub">1 appel API Claude vision · légende LinkedIn · skippé pour vidéos</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="ficon fi-g">📊</div>
+      <div>
+        <div class="fname">Journalisation Google Sheets — 9 colonnes</div>
+        <div class="fdesc">Chaque photo est référencée dans un Google Sheet partagé avec l'équipe : date, événement, auteur, description, nom de fichier, lien Cloudinary, légende IA, dimensions, poids.</div>
+        <div class="fsub">date · événement · auteur · description · fichier · lien · légende IA · dimensions · poids</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="ficon fi-b">🖼</div>
+      <div>
+        <div class="fname">Galerie web — filtres et suppression synchronisée</div>
+        <div class="fdesc">Interface web accessible depuis n'importe quel appareil. Filtrage par auteur et par événement. Suppression en un clic : synchronisée Cloudinary + Sheets, aucune ligne orpheline.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Spécifications techniques</div>
+  <h2 class="stitle">2 appels API par photo</h2>
+  <div class="api-calls">
+    <div class="api-card">
+      <div class="api-label">Appel 1 · Cloudinary</div>
+      <div class="api-desc">Upload de la photo, stockage permanent, extraction des métadonnées (dimensions, poids, format, URL sécurisée).</div>
+      <div class="api-mono">POST /upload → URL + width + height + bytes</div>
+    </div>
+    <div class="api-card api-card--pink">
+      <div class="api-label">Appel 2 · Claude Vision</div>
+      <div class="api-desc">Analyse visuelle de la photo, génération d'une légende LinkedIn professionnelle. Ignoré pour les vidéos.</div>
+      <div class="api-mono">claude-opus-4-7 · vision · légende auto</div>
+    </div>
+  </div>
+
+  <div class="sheets-box">
+    <div class="sheets-label">Google Sheets · 9 colonnes journalisées</div>
+    <div class="sheets-cols">
+      <span class="scol">date</span>
+      <span class="scol">événement</span>
+      <span class="scol">auteur</span>
+      <span class="scol">description</span>
+      <span class="scol">fichier</span>
+      <span class="scol">lien_cloudinary</span>
+      <span class="scol">légende_IA</span>
+      <span class="scol">dimensions</span>
+      <span class="scol">poids</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Stack technique</div>
+  <h2 class="stitle">Technologies utilisées</h2>
+  <table class="stack-table">
+    <thead><tr><th>Catégorie</th><th>Outil</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td class="mono-td">Python · FastAPI</td></tr>
+      <tr><td>IA / Vision</td><td class="mono-td">Claude API (claude-opus-4-7) · vision</td></tr>
+      <tr><td>Stockage photos</td><td class="mono-td">Cloudinary · API v2</td></tr>
+      <tr><td>Journalisation</td><td class="mono-td">Google Sheets API v4</td></tr>
+      <tr><td>Upload mobile</td><td class="mono-td">Apple Shortcuts · iOS natif</td></tr>
+      <tr><td>Hébergement</td><td class="mono-td">Render</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="slabel">Résultats</div>
+  <h2 class="stitle">Ce que ça change concrètement</h2>
+  <div class="results-grid">
+    <div class="rcard"><span class="rcard__n">5 sec</span><span class="rcard__l">de l'app Photos iOS au stock organisé, légendé, référencé</span></div>
+    <div class="rcard"><span class="rcard__n">0</span><span class="rcard__l">renommage manuel, email, AirDrop ou WhatsApp après événement</span></div>
+    <div class="rcard"><span class="rcard__n">Auto</span><span class="rcard__l">légende LinkedIn professionnelle générée par Claude vision à l'upload</span></div>
+    <div class="rcard"><span class="rcard__n">1 clic</span><span class="rcard__l">suppression synchronisée Cloudinary + Sheets, aucune ligne orpheline</span></div>
+  </div>
+</div>
+
+<div class="nav-bottom">
+  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
+  <a href="https://photo-collector.onrender.com/gallery" target="_blank" class="nav-btn nav-btn--pri">Voir la galerie →</a>
+  <a href="https://github.com/polemoineperso-ai/photo-collector" target="_blank" class="nav-btn nav-btn--out">Code source GitHub ↗</a>
+</div>
+
+</div>
+
+<footer class="northia-footer">
+  <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
+  <div><div class="northia-footer__name">Pierre-Olivier Lemoine · NorthIA · 2026</div><div class="northia-footer__sub">Claude Vision (Anthropic) · FastAPI · Cloudinary · iOS</div></div>
+  <div class="northia-footer__links">
+    <a href="https://northia.fr" target="_blank" class="northia-footer__lnk">northia.fr</a>
+    <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
+  </div>
+</footer>
+</body>
+</html>
