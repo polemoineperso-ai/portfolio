@@ -116,6 +116,22 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
 .northia-footer__lnk:hover{color:var(--nia-pink);}
 @media(max-width:600px){.northia-nav__links{display:none;}.rules-grid{grid-template-columns:1fr;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
+
+/* GENESIS */
+.genesis-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;}
+.genesis-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.genesis-card:hover{border-color:var(--nia-blue);}
+.genesis-card--diag{border-top:3px solid var(--nia-blue);}
+.genesis-card--think{border-top:3px solid var(--nia-pink);}
+.genesis-card--result{border-top:3px solid #1a9e6e;}
+.genesis-card__icon{font-size:22px;margin-bottom:8px;}
+.genesis-card__label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
+.genesis-card--diag .genesis-card__label{color:var(--nia-blue);}
+.genesis-card--think .genesis-card__label{color:var(--nia-pink);}
+.genesis-card--result .genesis-card__label{color:#1a9e6e;}
+.genesis-card__text{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+@media(max-width:700px){.genesis-grid{grid-template-columns:1fr;}}
+
 </style>
 </head>
 <body>
