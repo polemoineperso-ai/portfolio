@@ -46,14 +46,15 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .hero__stat-n{font-family:var(--ui);font-size:20px;font-weight:700;color:#fff;display:block;}
 .hero__stat-l{font-size:11px;color:rgba(255,255,255,.35);display:block;margin-top:2px;}
 /* WRAP */
-.wrap{max-width:740px;margin:0 auto;padding:0 24px;}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px;}
 .section{padding:52px 0 0;}
 .section:last-of-type{padding-bottom:72px;}
 .slabel{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
 .stitle{font-family:var(--display);font-size:26px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em;}
 .sintro{font-size:15px;color:var(--ink-soft);max-width:560px;margin-bottom:28px;line-height:1.65;}
 /* PROJECT CARDS */
-.projects{display:flex;flex-direction:column;gap:20px;}
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:780px){.projects{grid-template-columns:1fr;}}
 .pcard{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);transition:box-shadow .2s,border-color .2s,transform .2s;}
 .pcard:hover{box-shadow:var(--shadow-lg);border-color:var(--nia-blue);transform:translateY(-2px);}
 .pcard__top{display:flex;align-items:center;gap:16px;padding:20px 24px 16px;border-bottom:1px solid var(--line);}
@@ -115,7 +116,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
     <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
     <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
-    <a href="/portfolio/generateur.html" class="northia-nav__cta">Tester le générateur →</a>
+    <a href="/portfolio/photo-collector.html" class="northia-nav__link">Photothèque</a>
   </div>
 </nav>
 
