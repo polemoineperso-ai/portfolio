@@ -132,6 +132,8 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .nav-mobile a:hover{color:var(--nia-pink);}
 .nav-mobile .nm-contact{color:var(--nia-pink)!important;}
 @media(max-width:640px){
+  .northia-nav{position:fixed!important;top:0;left:0;right:0;z-index:1000;}
+  body{padding-top:58px;}
   .northia-nav__links{display:none!important;}
   .nav-burger{display:flex;}
   .nav-mobile.open{display:block;}
