@@ -139,7 +139,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .northia-nav__cta--contact:hover{background:var(--nia-blue);}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
 .nav-burger span{width:22px;height:2px;background:rgba(255,255,255,.7);border-radius:2px;}
-.nav-mobile{display:none;position:absolute;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:99;}
+.nav-mobile{display:none;position:fixed;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:999;}
 .nav-mobile a{display:block;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
 .nav-mobile a:hover{color:var(--nia-pink);}
 .nav-mobile .nm-contact{color:var(--nia-pink)!important;}
@@ -149,6 +149,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   .nav-mobile.open{display:block;}
   .northia-nav{position:relative;}
 }
+
+.screen-section{margin:32px 0;padding:24px 0;border-top:1px solid var(--line);}
+.screen-label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:14px;}
+.screen-img{width:100%;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.15);border:1px solid var(--line);display:block;}
+.screen-caption{font-size:12px;color:#8892a4;margin-top:10px;text-align:center;font-style:italic;}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.15);}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF396K2Y0E"></script>
@@ -310,6 +317,14 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   </table>
 </div>
 
+
+<div class="screen-section">
+  <div class="screen-label">🎬 Démo — Génération en temps réel</div>
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/-Eq8sI2zPg0" title="Générateur de candidature IA — Démo" allowfullscreen></iframe>
+  </div>
+  <p class="screen-caption">Lettre structurée + mail d'accompagnement + profil ATS + score qualité — en 20 secondes</p>
+</div>
 <div class="nav-bottom">
   <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
   <a href="/portfolio/agent-veille.html" class="nav-btn nav-btn--pri">Projet suivant : Agent de veille →</a>
@@ -325,5 +340,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
   </div>
 </footer>
+<script>
+function toggleMenu(){var m=document.getElementById('navMobile');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('navMobile');if(m&&!e.target.closest('.nav-burger')&&!e.target.closest('#navMobile'))m.classList.remove('open');});
+</script>
 </body>
 </html>
