@@ -99,10 +99,20 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .northia-footer__links{display:flex;gap:14px;}
 .northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
 .northia-footer__lnk:hover{color:var(--nia-pink);}
+/* HAMBURGER */
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
+.nav-burger span{width:22px;height:2px;background:rgba(255,255,255,.7);border-radius:2px;transition:all .2s;}
+.nav-mobile{display:none;position:absolute;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:99;}
+.nav-mobile a{display:block;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
+.nav-mobile a:hover{color:var(--nia-pink);background:rgba(255,255,255,.04);}
+.nav-mobile.open{display:block;}
 @media(max-width:600px){
   .hero{padding:56px 20px 52px;}.hero__stats{gap:20px;}
   .pcard__top{flex-wrap:wrap;}.about-card{flex-direction:column;gap:16px;}
-  .northia-nav__links{display:none;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}
+  .northia-nav__links{display:none;}
+  .nav-burger{display:flex;}
+  .northia-footer{flex-direction:column;align-items:center;text-align:center;}
+  .northia-nav{position:relative;}
 }
 </style>
 <!-- Google tag (gtag.js) -->
@@ -126,7 +136,16 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
     <a href="/portfolio/photo-collector.html" class="northia-nav__link">Photothèque</a>
   </div>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/portfolio/generateur-projet.html">Générateur</a>
+  <a href="/portfolio/agent-veille.html">Agent de veille</a>
+  <a href="/portfolio/newsletter.html">Newsletter IA</a>
+  <a href="/portfolio/photo-collector.html">Photothèque</a>
+</div>
 
 <div class="hero">
   <div class="hero__tag">Portfolio — 3 projets IA × Communication</div>
@@ -134,6 +153,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <p class="hero__author">Pierre-Olivier Lemoine · NorthIA · 2025–2026</p>
   <p class="hero__sub">Quatre agents et pipelines construits de A à Z — pour automatiser, qualifier et produire là où les communicants perdent le plus de temps.</p>
   <div class="hero__principle"><strong>L'IA est un facilitateur. L'humain reste le décideur.</strong><br>Chaque projet applique la règle 80/20 : l'IA prend en charge le volume, l'humain conserve le jugement et la validation.</div>
+  <div style="margin-bottom:24px;">
+    <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta" style="display:inline-flex;align-items:center;gap:8px;font-size:11px;">
+      ⬇ Télécharger la plaquette PDF
+    </a>
+  </div>
   <div class="hero__stats">
     <div class="hero__stat"><span class="hero__stat-n">4</span><span class="hero__stat-l">projets en production</span></div>
     <div class="hero__stat"><span class="hero__stat-n">0</span><span class="hero__stat-l">intervention pour le volume</span></div>
@@ -295,5 +319,17 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
   </div>
 </footer>
+<script>
+function toggleMenu(){
+  var m = document.getElementById('navMobile');
+  m.classList.toggle('open');
+}
+document.addEventListener('click', function(e){
+  var m = document.getElementById('navMobile');
+  if(!e.target.closest('.nav-burger') && !e.target.closest('#navMobile')){
+    m.classList.remove('open');
+  }
+});
+</script>
 </body>
 </html>
