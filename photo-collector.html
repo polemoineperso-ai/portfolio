@@ -130,6 +130,23 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
 .northia-footer__lnk:hover{color:var(--nia-pink);}
 @media(max-width:600px){.northia-nav__links{display:none;}.results-grid{grid-template-columns:1fr;}.api-calls{grid-template-columns:1fr;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
+
+.northia-nav__cta{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
+.northia-nav__cta:hover{background:var(--nia-pink);}
+.northia-nav__cta--contact{background:var(--nia-pink);color:#fff;margin-left:2px;}
+.northia-nav__cta--contact:hover{background:var(--nia-blue);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
+.nav-burger span{width:22px;height:2px;background:rgba(255,255,255,.7);border-radius:2px;}
+.nav-mobile{display:none;position:absolute;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:99;}
+.nav-mobile a{display:block;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
+.nav-mobile a:hover{color:var(--nia-pink);}
+.nav-mobile .nm-contact{color:var(--nia-pink)!important;}
+@media(max-width:640px){
+  .northia-nav__links{display:none!important;}
+  .nav-burger{display:flex;}
+  .nav-mobile.open{display:block;}
+  .northia-nav{position:relative;}
+}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF396K2Y0E"></script>
@@ -151,8 +168,21 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
     <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
     <a href="/portfolio/photo-collector.html" class="northia-nav__link northia-nav__link--active">Photothèque</a>
+    <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta">⬇ Plaquette</a>
+    <a href="mailto:p-o.lemoine@northia.fr" class="northia-nav__cta northia-nav__cta--contact">✉ Me contacter</a>
   </div>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/portfolio/generateur-projet.html">Générateur</a>
+  <a href="/portfolio/agent-veille.html">Agent de veille</a>
+  <a href="/portfolio/newsletter.html">Newsletter IA</a>
+  <a href="/portfolio/photo-collector.html">Photothèque</a>
+  <a href="/portfolio/plaquette-northia.pdf" download>⬇ Plaquette PDF</a>
+  <a href="mailto:p-o.lemoine@northia.fr" class="nm-contact">✉ Me contacter</a>
+</div>
 
 <div class="hero">
   <div class="hero__icon">
