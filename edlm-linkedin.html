@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Article → LinkedIn EDLM · NorthIA · Pierre-Olivier Lemoine</title>
+<meta name="description" content="Application web sur-mesure pour Énergies de la Mer : transforme un article WordPress en post LinkedIn en moins de 30 secondes, publie via Geckosocial. 9 modules TOFU/MOFU/BOFU. Par Pierre-Olivier Lemoine · NorthIA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;--nia-pink-dark:#C179A0;--nia-black:#222222;
+  --ink:#1a1d23;--ink-soft:#3d4251;--ink-muted:#8892a4;
+  --paper:#fafbfc;--paper-warm:#f4f2ee;--paper-card:#fff;--line:#e8eaef;
+  --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --display:'Cinzel',Georgia,serif;--ui:'Orbitron',sans-serif;
+  --r:8px;--r-lg:12px;--shadow:0 1px 4px rgba(0,0,0,.06),0 2px 12px rgba(0,0,0,.04);
+  --ocean:#0ea5e9;--teal:#14b8a6;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.northia-nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
+.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
+.northia-nav__logo{height:36px;width:auto;}
+.northia-nav__links{display:flex;align-items:center;gap:4px;}
+.northia-nav__home{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.12);transition:all .15s;margin-right:6px;}
+.northia-nav__home:hover{color:#fff;border-color:rgba(255,255,255,.3);}
+.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
+.northia-nav__link:hover{color:var(--nia-pink);background:rgba(255,255,255,.06);}
+.northia-nav__link--active{color:var(--ocean);}
+.northia-nav__cta{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
+.northia-nav__cta:hover{background:var(--nia-pink);}
+.northia-nav__cta--contact{background:var(--nia-pink);color:#fff;margin-left:2px;}
+.northia-nav__cta--contact:hover{background:var(--nia-blue);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
+.nav-burger span{width:22px;height:2px;background:rgba(255,255,255,.7);border-radius:2px;}
+.nav-mobile{display:none;position:fixed;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:999;}
+.nav-mobile a{display:block;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
+.nav-mobile a:hover{color:var(--nia-pink);}
+.nav-mobile .nm-contact{color:var(--nia-pink)!important;}
+@media(max-width:640px){
+  .northia-nav{position:fixed!important;top:0;left:0;right:0;z-index:1000;}
+  body{padding-top:58px;}
+  .northia-nav__links{display:none!important;}
+  .nav-burger{display:flex;}
+  .nav-mobile.open{display:block;}
+}
+
+/* HERO */
+.hero{background:var(--nia-black);color:#fff;padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(14,165,233,.25),transparent);pointer-events:none;}
+.hero__client{display:inline-flex;align-items:center;gap:8px;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:20px;}
+.hero__client-dot{width:7px;height:7px;border-radius:50%;background:var(--ocean);display:inline-block;}
+.hero__title{font-family:var(--display);font-size:clamp(28px,5vw,46px);font-weight:700;line-height:1.1;margin-bottom:14px;}
+.hero__title em{font-style:italic;color:var(--ocean);}
+.hero__sub{font-size:15px;color:rgba(255,255,255,.55);max-width:540px;margin:0 auto 24px;line-height:1.65;}
+.hero__cta{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.18);font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.06em;padding:10px 20px;border-radius:6px;text-decoration:none;margin-bottom:20px;cursor:default;}
+.hero__metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.metric{text-align:center;padding:11px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);}
+.metric__n{font-family:var(--ui);font-size:18px;font-weight:700;color:#fff;display:block;}
+.metric__l{font-size:11px;color:rgba(255,255,255,.4);display:block;margin-top:2px;}
+.hero__time{font-size:12px;color:rgba(255,255,255,.35);}
+.hero__time strong{color:var(--ocean);}
+
+/* LAYOUT */
+.wrap{max-width:700px;margin:0 auto;padding:0 24px;}
+.section{padding:44px 0 0;}
+.section:last-of-type{padding-bottom:72px;}
+.slabel{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
+.stitle{font-family:var(--display);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:12px;}
+.prose{font-size:14px;color:var(--ink-soft);line-height:1.75;max-width:580px;}
+.prose+.prose{margin-top:10px;}
+
+/* GENESIS */
+.genesis-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;}
+.genesis-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.genesis-card:hover{border-color:var(--nia-blue);}
+.genesis-card--diag{border-top:3px solid var(--nia-blue);}
+.genesis-card--think{border-top:3px solid var(--ocean);}
+.genesis-card--result{border-top:3px solid #1a9e6e;}
+.genesis-card__icon{font-size:22px;margin-bottom:8px;}
+.genesis-card__label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
+.genesis-card--diag .genesis-card__label{color:var(--nia-blue);}
+.genesis-card--think .genesis-card__label{color:var(--ocean);}
+.genesis-card--result .genesis-card__label{color:#1a9e6e;}
+.genesis-card__text{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+@media(max-width:700px){.genesis-grid{grid-template-columns:1fr;}}
+
+/* RULE 80/20 */
+.rule8020{background:var(--nia-black);border-left:4px solid var(--ocean);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.rule8020__title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ocean);margin-bottom:8px;}
+.rule8020__text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;}
+.rule8020__text strong{color:#fff;font-weight:700;}
+
+/* HUMAN TOUCH */
+.human-touch{background:var(--paper-warm);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;margin:20px 0;}
+.ht-title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.ht-steps{display:flex;flex-direction:column;gap:8px;}
+.ht-step{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--ink-soft);}
+.ht-step__n{width:24px;height:24px;border-radius:50%;background:var(--nia-blue);color:#fff;font-family:var(--ui);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.ht-step strong{color:var(--ink);font-weight:600;}
+
+/* PIPELINE */
+.pipeline{display:flex;flex-direction:column;gap:3px;margin-top:20px;}
+.pipe-step{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:flex-start;background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.pipe-step:hover{border-color:var(--ocean);}
+.pipe-step--human{border-left:3px solid var(--nia-pink);}
+.picon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.pi-b{background:rgba(14,165,233,.12);border:1px solid rgba(14,165,233,.25);}
+.pi-p{background:rgba(228,158,198,.15);border:1px solid rgba(228,158,198,.3);}
+.pi-t{background:rgba(20,184,166,.12);border:1px solid rgba(20,184,166,.25);}
+.pname{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px;display:flex;align-items:center;gap:8px;}
+.human-badge{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:20px;background:rgba(228,158,198,.15);color:var(--nia-pink);border:1px solid rgba(228,158,198,.3);}
+.pdesc{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+.psub{font-size:11px;color:var(--ink-muted);margin-top:4px;font-family:var(--mono);}
+
+/* MODULES GRID */
+.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px;}
+.module-chip{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 16px;box-shadow:var(--shadow);display:flex;align-items:flex-start;gap:12px;transition:border-color .18s;}
+.module-chip:hover{border-color:var(--ocean);}
+.module-chip--featured{border-color:var(--ocean);background:rgba(14,165,233,.03);}
+.module-chip__icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.mc-tofu{background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);}
+.mc-mofu{background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.2);}
+.mc-bofu{background:rgba(228,158,198,.15);border:1px solid rgba(228,158,198,.3);}
+.module-chip__name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.module-chip__desc{font-size:12px;color:var(--ink-muted);line-height:1.5;}
+.module-chip__tag{display:inline-block;font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 7px;border-radius:10px;margin-top:4px;}
+.tag-tofu{background:rgba(14,165,233,.1);color:var(--ocean);}
+.tag-mofu{background:rgba(20,184,166,.1);color:var(--teal);}
+.tag-bofu{background:rgba(228,158,198,.15);color:var(--nia-pink);}
+@media(max-width:580px){.modules-grid{grid-template-columns:1fr;}}
+
+/* STACK TABLE */
+.stack-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;background:var(--paper-card);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);}
+.stack-table th{background:var(--nia-black);color:rgba(255,255,255,.6);font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;text-align:left;}
+.stack-table td{padding:10px 16px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+.stack-table tr:last-child td{border-bottom:none;}
+.stack-table tr:nth-child(odd) td{background:var(--paper-warm);}
+.mono-td{font-family:var(--mono);font-size:12px;}
+
+/* RESULTS */
+.results-list{display:flex;flex-direction:column;gap:8px;margin-top:20px;}
+.rrow{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r);}
+.rrow__icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.rrow__text{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+.rrow__text strong{color:var(--ink);font-weight:600;}
+
+/* PILOTAGE PREVIEW */
+.pilotage-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:20px;}
+.pil-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;box-shadow:var(--shadow);text-align:center;}
+.pil-card__n{font-family:var(--ui);font-size:22px;font-weight:700;color:var(--ocean);display:block;margin-bottom:4px;}
+.pil-card__l{font-size:12px;color:var(--ink-muted);}
+@media(max-width:580px){.pilotage-cards{grid-template-columns:1fr;}}
+
+/* NAV BOTTOM */
+.nav-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;}
+.nav-btn{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.05em;padding:10px 18px;border-radius:var(--r);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
+.nav-btn--out{border:1px solid var(--line);color:var(--ink-muted);background:var(--paper-card);}
+.nav-btn--out:hover{border-color:var(--nia-blue);color:var(--nia-blue);}
+.nav-btn--pri{background:var(--nia-blue);color:#fff;border:none;}
+.nav-btn--pri:hover{background:var(--nia-blue-dark);}
+
+/* FOOTER */
+.northia-footer{background:#222;border-top:2px solid var(--nia-blue);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.northia-footer__logo{height:28px;width:auto;}
+.northia-footer__name{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
+.northia-footer__sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
+.northia-footer__links{display:flex;gap:14px;}
+.northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
+.northia-footer__lnk:hover{color:var(--nia-pink);}
+@media(max-width:600px){.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
+
+/* SCREEN */
+.screen-section{margin:32px 0;padding:24px 0;border-top:1px solid var(--line);}
+.screen-label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:14px;}
+.screen-img{width:100%;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.15);border:1px solid var(--line);display:block;}
+.screen-caption{font-size:12px;color:#8892a4;margin-top:10px;text-align:center;font-style:italic;}
+
+/* CONFIDENTIAL BANNER */
+.confidential{background:rgba(14,165,233,.07);border:1px solid rgba(14,165,233,.25);border-radius:var(--r-lg);padding:14px 18px;margin-top:28px;display:flex;align-items:flex-start;gap:12px;}
+.confidential__icon{font-size:18px;flex-shrink:0;margin-top:2px;}
+.confidential__text{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+.confidential__text strong{color:var(--ink);}
+.confidential__cta{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:var(--nia-blue);color:#fff;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;padding:9px 18px;border-radius:6px;text-decoration:none;transition:background .15s;}
+.confidential__cta:hover{background:var(--nia-pink);}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JF396K2Y0E"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JF396K2Y0E');</script>
+</head>
+<body>
+
+<nav class="northia-nav">
+  <a href="/portfolio/index.html" class="northia-nav__brand">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
+  </a>
+  <div class="northia-nav__links">
+    <a href="/portfolio/index.html" class="northia-nav__home">← Retour</a>
+    <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
+    <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
+    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
+    <a href="/portfolio/photo-collector.html" class="northia-nav__link">Photothèque</a>
+    <a href="/portfolio/edlm-linkedin.html" class="northia-nav__link northia-nav__link--active">EDLM LinkedIn</a>
+    <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta">⬇ Plaquette</a>
+    <a href="mailto:p-o.lemoine@northia.fr" class="northia-nav__cta northia-nav__cta--contact">✉ Me contacter</a>
+  </div>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/portfolio/generateur-projet.html">Générateur</a>
+  <a href="/portfolio/agent-veille.html">Agent de veille</a>
+  <a href="/portfolio/newsletter.html">Newsletter IA</a>
+  <a href="/portfolio/photo-collector.html">Photothèque</a>
+  <a href="/portfolio/edlm-linkedin.html">EDLM LinkedIn</a>
+  <a href="/portfolio/plaquette-northia.pdf" download>⬇ Plaquette PDF</a>
+  <a href="mailto:p-o.lemoine@northia.fr" class="nm-contact">✉ Me contacter</a>
+</div>
+
+<div class="hero">
+  <div class="hero__client"><span class="hero__client-dot"></span> Projet 01 · Client · Énergies de la Mer · Juin 2026</div>
+  <h1 class="hero__title">Article → LinkedIn <em>EDLM</em></h1>
+  <p class="hero__sub">Application web sur-mesure pour Énergies de la Mer : 9 modules couvrant toute la stratégie LinkedIn TOFU / MOFU / BOFU. Du contenu WordPress au post publié en moins de 30 secondes.</p>
+  <div class="hero__cta">🔒 Outil en production · Accès sur demande</div>
+  <div class="hero__metrics">
+    <div class="metric"><span class="metric__n">&lt; 30s</span><span class="metric__l">article → post LinkedIn</span></div>
+    <div class="metric"><span class="metric__n">9</span><span class="metric__l">modules éditoriaux</span></div>
+    <div class="metric"><span class="metric__n">0</span><span class="metric__l">copier-coller</span></div>
+    <div class="metric"><span class="metric__n">12 sem.</span><span class="metric__l">pilotage éditorial</span></div>
+  </div>
+  <div class="hero__time">Avant : rédaction + mise en forme manuelle &nbsp;→&nbsp; <strong>relecture et publication en 5 minutes</strong></div>
+</div>
+
+<div class="wrap">
+
+<div class="section">
+  <div class="slabel">Genèse du projet</div>
+  <h2 class="stitle">Diagnostic, réflexion, décision</h2>
+  <div class="genesis-grid">
+    <div class="genesis-card genesis-card--diag">
+      <div class="genesis-card__icon">🔍</div>
+      <div class="genesis-card__label">Diagnostic</div>
+      <div class="genesis-card__text">Énergies de la Mer (EDLM) publie chaque semaine 5 à 6 posts LinkedIn couvrant articles, nominations, appels d'offres, agenda et événements. Sans outil dédié, chaque post demande 20 à 40 minutes de rédaction — et la cohérence de ton entre les formats n'est pas garantie.</div>
+    </div>
+    <div class="genesis-card genesis-card--think">
+      <div class="genesis-card__icon">💡</div>
+      <div class="genesis-card__label">Réflexion</div>
+      <div class="genesis-card__text">Un outil générique comme ChatGPT ne connaît pas le ton EDLM, les règles éditoriales internes, ni le workflow de publication vers Geckosocial. Il fallait une application métier embarquant les prompts, les règles, et la publication — avec l'humain au centre de la validation.</div>
+    </div>
+    <div class="genesis-card genesis-card--result">
+      <div class="genesis-card__icon">✓</div>
+      <div class="genesis-card__label">Résultat</div>
+      <div class="genesis-card__text">9 modules couvrant toute la stratégie TOFU/MOFU/BOFU, un calendrier éditorial intégré, publication directe dans Geckosocial, et un tableau de bord pour suivre les KPIs semaine par semaine. L'IA génère, l'humain valide et publie.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Contexte</div>
+  <h2 class="stitle">Un outil de production LinkedIn sur-mesure</h2>
+  <p class="prose">EDLM est un média B2B indépendant spécialisé dans les énergies marines renouvelables — ~4 900 abonnés LinkedIn, newsletter EMR Hebdo, site energiesdelamer.eu. La présence LinkedIn est un levier commercial et éditorial central.</p>
+  <p class="prose">La mission NorthIA : concevoir, développer et déployer une application web qui couvre l'intégralité du workflow de production — de l'article WordPress au post LinkedIn publié dans Geckosocial — en moins de 30 secondes par post.</p>
+  <div class="rule8020">
+    <div class="rule8020__title">Règle 80/20 — L'humain reste le décideur</div>
+    <div class="rule8020__text">L'IA prend en charge la rédaction, la structure et le formatage. <strong>L'humain relit dans l'éditeur intégré, ajuste si besoin, et choisit quand publier.</strong> La publication dans Geckosocial est toujours un acte volontaire — jamais automatique.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Architecture éditoriale</div>
+  <h2 class="stitle">9 modules, 3 niveaux TOFU / MOFU / BOFU</h2>
+  <p class="prose" style="margin-bottom:4px">Chaque module correspond à un type de contenu précis avec ses règles, son ton, et son format LinkedIn adapté.</p>
+  <div class="modules-grid">
+    <div class="module-chip module-chip--featured">
+      <div class="module-chip__icon mc-tofu">📰</div>
+      <div>
+        <div class="module-chip__name">Article phare</div>
+        <div class="module-chip__desc">Extrait et transforme un article WordPress en post structuré via l'URL.</div>
+        <span class="module-chip__tag tag-tofu">TOFU · Mardi</span>
+      </div>
+    </div>
+    <div class="module-chip">
+      <div class="module-chip__icon mc-tofu">📅</div>
+      <div>
+        <div class="module-chip__name">Agenda EMR</div>
+        <div class="module-chip__desc">Génère le post agenda depuis les événements du site EDLM.</div>
+        <span class="module-chip__tag tag-tofu">TOFU · Lundi</span>
+      </div>
+    </div>
+    <div class="module-chip">
+      <div class="module-chip__icon mc-tofu">👤</div>
+      <div>
+        <div class="module-chip__name">Nominations</div>
+        <div class="module-chip__desc">Post structuré pour chaque nomination sectorielle de la semaine.</div>
+        <span class="module-chip__tag tag-tofu">TOFU · Mercredi</span>
+      </div>
+    </div>
+    <div class="module-chip">
+      <div class="module-chip__icon mc-tofu">📋</div>
+      <div>
+        <div class="module-chip__name">AO · AMI · AAP</div>
+        <div class="module-chip__desc">Transforme un appel d'offres en post actionnable avec tous les détails clés.</div>
+        <span class="module-chip__tag tag-tofu">TOFU · Jeudi</span>
+      </div>
+    </div>
+    <div class="module-chip">
+      <div class="module-chip__icon mc-tofu">📊</div>
+      <div>
+        <div class="module-chip__name">Rapport / Étude</div>
+        <div class="module-chip__desc">Synthèse d'un rapport sectoriel avec les enseignements clés.</div>
+        <span class="module-chip__tag tag-tofu">TOFU · Jeudi</span>
+      </div>
+    </div>
+    <div class="module-chip">
+      <div class="module-chip__icon mc-tofu">📧</div>
+      <div>
+        <div class="module-chip__name">Newsletter EMR Hebdo</div>
+        <div class="module-chip__desc">Post de promotion de l'édition LinkedIn hebdomadaire.</div>
+        <span class="module-chip__tag tag-tofu">TOFU · Vendredi</span>
+      </div>
+    </div>
+    <div class="module-chip">
+      <div class="module-chip__icon mc-mofu">⚡</div>
+      <div>
+        <div class="module-chip__name">Flash brève</div>
+        <div class="module-chip__desc">Post court et percutant pour une actualité chaude.</div>
+        <span class="module-chip__tag tag-mofu">MOFU · Ponctuel</span>
+      </div>
+    </div>
+    <div class="module-chip">
+      <div class="module-chip__icon mc-mofu">📍</div>
+      <div>
+        <div class="module-chip__name">Terrain EDLM</div>
+        <div class="module-chip__desc">Post de retour terrain depuis un événement, salon ou conférence.</div>
+        <span class="module-chip__tag tag-mofu">MOFU · Ponctuel</span>
+      </div>
+    </div>
+    <div class="module-chip">
+      <div class="module-chip__icon mc-bofu">↔️</div>
+      <div>
+        <div class="module-chip__name">Conversion EDLM</div>
+        <div class="module-chip__desc">6 modes : Teaser NL, CTA abonnement, Milestone, Fil info, Abonn. site, Annonceurs.</div>
+        <span class="module-chip__tag tag-bofu">BOFU · Ponctuel</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Workflow de production</div>
+  <h2 class="stitle">De l'URL au post publié</h2>
+  <div class="pipeline">
+    <div class="pipe-step">
+      <div class="picon pi-b">🔗</div>
+      <div>
+        <div class="pname">Saisie du contenu source</div>
+        <div class="pdesc">Selon le module : URL d'un article WordPress (extraction automatique), données saisies dans les champs dédiés (nomination, AO, agenda), ou texte libre (flash, terrain).</div>
+      </div>
+    </div>
+    <div class="pipe-step">
+      <div class="picon pi-b">🧠</div>
+      <div>
+        <div class="pname">Génération Claude (Haiku ou Sonnet)</div>
+        <div class="pdesc">Le serveur choisit le modèle selon la complexité : Haiku pour les modules courts (Flash, Sondage, AO, Agenda), Sonnet pour les modules longs (Article, Rapport, Nominations, Conversion). Prompts métier intégrés avec règles éditoriales EDLM.</div>
+        <div class="psub">Haiku : AO · Agenda · Flash · Sondage &nbsp;|&nbsp; Sonnet : Article · Nominations · Rapport · Terrain · Conversion</div>
+      </div>
+    </div>
+    <div class="pipe-step pipe-step--human">
+      <div class="picon pi-p">✏️</div>
+      <div>
+        <div class="pname">Relecture dans l'éditeur intégré <span class="human-badge">👤 Décision humaine</span></div>
+        <div class="pdesc">Le post généré s'affiche dans un éditeur texte avec compteur de caractères. Le rédacteur relit, corrige si besoin, et sauvegarde les bons posts comme "Exemples validés" pour améliorer les prochaines générations.</div>
+      </div>
+    </div>
+    <div class="pipe-step pipe-step--human">
+      <div class="picon pi-p">📤</div>
+      <div>
+        <div class="pname">Publication Geckosocial <span class="human-badge">👤 Acte volontaire</span></div>
+        <div class="pdesc">Un clic sur "Envoyer → Geckosocial" crée le brouillon dans l'outil de planification. La date et l'heure de publication restent entre les mains du rédacteur. Jamais de publication automatique.</div>
+      </div>
+    </div>
+    <div class="pipe-step">
+      <div class="picon pi-t">📈</div>
+      <div>
+        <div class="pname">Enregistrement automatique dans le pilotage</div>
+        <div class="pdesc">Chaque post copié ou envoyé est tracé dans l'historique (module, semaine, contenu). Le tableau de bord sur 12 semaines agrège les KPIs : posts produits, abonnés, reach, taux d'engagement.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Pilotage éditorial</div>
+  <h2 class="stitle">12 semaines de KPIs intégrés</h2>
+  <p class="prose" style="margin-bottom:16px">Au-delà de la génération de posts, l'application embarque un tableau de bord éditorial complet — sans outil tiers.</p>
+  <div class="pilotage-cards">
+    <div class="pil-card"><span class="pil-card__n">12</span><span class="pil-card__l">semaines de suivi glissant</span></div>
+    <div class="pil-card"><span class="pil-card__n">KPIs</span><span class="pil-card__l">abonnés · posts · reach · engagement</span></div>
+    <div class="pil-card"><span class="pil-card__n">Redis</span><span class="pil-card__l">sync cloud Upstash</span></div>
+  </div>
+  <p class="prose" style="margin-top:16px">Le pilotage suit semaine par semaine : nombre de posts produits par module, abonnés LinkedIn, portée estimée, taux d'engagement. Les données sont synchronisées dans Upstash Redis — accessibles depuis n'importe quel appareil, persistantes entre les sessions.</p>
+</div>
+
+<div class="section">
+  <div class="slabel">Stack technique</div>
+  <h2 class="stitle">Node.js · Claude · Geckosocial · Vercel</h2>
+  <table class="stack-table">
+    <thead><tr><th>Composant</th><th>Technologie</th><th>Rôle</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td class="mono-td">Node.js + Express</td><td>Serveur API, routage, orchestration des modules</td></tr>
+      <tr><td>Frontend</td><td class="mono-td">HTML/CSS/JS vanilla</td><td>SPA monopage — pas de framework, zéro dépendance</td></tr>
+      <tr><td>IA génération</td><td class="mono-td">Claude API (Haiku + Sonnet)</td><td>Rédaction des posts selon les prompts métier EDLM</td></tr>
+      <tr><td>Publication</td><td class="mono-td">Geckosocial API</td><td>Envoi en brouillon LinkedIn depuis l'application</td></tr>
+      <tr><td>Contenu source</td><td class="mono-td">WordPress REST API</td><td>Extraction automatique des articles EDLM</td></tr>
+      <tr><td>Persistance</td><td class="mono-td">localStorage + Upstash Redis</td><td>Historique, KPIs, exemples validés, URLs utilisées</td></tr>
+      <tr><td>Hébergement</td><td class="mono-td">Vercel</td><td>Déploiement continu — push = mise en prod</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="slabel">Résultats</div>
+  <h2 class="stitle">Ce que ça change concrètement</h2>
+  <div class="results-list">
+    <div class="rrow"><div class="rrow__icon">⏱</div><div class="rrow__text"><strong>20 à 40 minutes de rédaction → 5 minutes de relecture et publication</strong> par post, quel que soit le module.</div></div>
+    <div class="rrow"><div class="rrow__icon">🎯</div><div class="rrow__text"><strong>Cohérence éditoriale garantie</strong> — les règles de ton EDLM sont embarquées dans chaque prompt. Le rédacteur n'a pas à se rappeler les consignes.</div></div>
+    <div class="rrow"><div class="rrow__icon">🔗</div><div class="rrow__text"><strong>Zéro copier-coller</strong> entre l'outil et Geckosocial — la publication se fait depuis l'interface, en un clic.</div></div>
+    <div class="rrow"><div class="rrow__icon">📊</div><div class="rrow__text"><strong>Pilotage éditorial intégré</strong> — plus besoin de tableur externe pour suivre les KPIs semaine par semaine.</div></div>
+    <div class="rrow"><div class="rrow__icon">🧠</div><div class="rrow__text"><strong>L'IA s'améliore avec l'usage</strong> — chaque post validé comme "Exemple" est réinjecté dans les futurs prompts du même module.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Accès</div>
+  <h2 class="stitle">Outil en production · Accès sur demande</h2>
+  <p class="prose">Cette application est déployée en production pour Énergies de la Mer. L'accès public n'est pas ouvert pour protéger les données et le workflow éditorial du client.</p>
+  <div class="confidential">
+    <div class="confidential__icon">🔒</div>
+    <div class="confidential__text">
+      <strong>Démo disponible sur demande.</strong> Je peux vous montrer l'outil en fonctionnement lors d'un échange — génération de posts en live, pilotage éditorial, publication Geckosocial.
+      <br>
+      <a href="mailto:p-o.lemoine@northia.fr?subject=Demande demo EDLM LinkedIn" class="confidential__cta">✉ Demander une démo →</a>
+    </div>
+  </div>
+</div>
+
+<div class="nav-bottom">
+  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
+  <a href="mailto:p-o.lemoine@northia.fr" class="nav-btn nav-btn--pri">✉ Me contacter</a>
+</div>
+
+</div><!-- /wrap -->
+
+<footer class="northia-footer">
+  <div>
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
+  </div>
+  <div>
+    <div class="northia-footer__name">Pierre-Olivier Lemoine</div>
+    <div class="northia-footer__sub">IA × Communication · NorthIA · 2025–2026</div>
+  </div>
+  <div class="northia-footer__links">
+    <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-northia/" target="_blank" rel="noopener" class="northia-footer__lnk">LinkedIn</a>
+    <a href="mailto:p-o.lemoine@northia.fr" class="northia-footer__lnk">Contact</a>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('navMobile').classList.toggle('open');}
+</script>
+</body>
+</html>
