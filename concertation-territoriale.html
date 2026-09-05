@@ -117,6 +117,17 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .genesis-card--think .genesis-card__label{color:var(--nia-pink);}
 .genesis-card--result .genesis-card__label{color:#1a9e6e;}
 .genesis-card__text{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;}
+.feat-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;box-shadow:var(--shadow);transition:border-color .18s;}
+.feat-card:hover{border-color:var(--nia-blue);}
+.feat-card__icon{font-size:18px;margin-bottom:8px;}
+.feat-card__title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.feat-card__text{font-size:12px;color:var(--ink-soft);line-height:1.6;}
+@media(max-width:700px){.feat-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.feat-grid{grid-template-columns:1fr;}}
+.method{background:var(--paper-card);border:1px solid var(--line);border-left:4px solid #1a9e6e;border-radius:0 var(--r-lg) var(--r-lg) 0;padding:18px 20px;margin-top:20px;}
+.method__title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1a9e6e;margin-bottom:8px;}
+.method__text{font-size:13px;color:var(--ink-soft);line-height:1.7;}
 .screen-section{margin:32px 0;padding:24px 0;border-top:1px solid var(--line);text-align:center;}
 .screen-label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:14px;}
 .screen-caption{font-size:12px;color:#8892a4;margin-top:10px;font-style:italic;}
@@ -163,8 +174,8 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <div class="hero__metrics">
     <div class="metric"><span class="metric__n">5</span><span class="metric__l">modules reliés</span></div>
     <div class="metric"><span class="metric__n">17</span><span class="metric__l">projets réels suivis</span></div>
+    <div class="metric"><span class="metric__n">12</span><span class="metric__l">types d'alertes</span></div>
     <div class="metric"><span class="metric__n">60</span><span class="metric__l">tests automatisés</span></div>
-    <div class="metric"><span class="metric__n">100%</span><span class="metric__l">Next.js 16 / TypeScript</span></div>
   </div>
   <div class="hero__time">Avant : suivi éparpillé entre tableurs, e-mails et mémoire. <strong>Après : un tableau de bord unique, à jour.</strong></div>
 </div>
@@ -216,12 +227,41 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 </div>
 
 <div class="section">
+  <div class="slabel">Fonctionnalités</div>
+  <h2 class="stitle">Ce que couvre l'outil, au-delà des 5 modules</h2>
+  <p class="prose">Un pilotage réel ne s'arrête pas à la saisie — il faut pouvoir agir en masse, remonter un rapport, savoir qui porte quoi, et ne jamais perdre la trace d'un changement.</p>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-card__icon">📅</div><div class="feat-card__title">Parcours réglementaire</div><div class="feat-card__text">Jalons CNDP typés (saisine, décision, concertation, enquête publique...) — chacun génère automatiquement sa propre checklist d'actions.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">📄</div><div class="feat-card__title">Reporting PDF</div><div class="feat-card__text">Rapport de portefeuille et rapport par projet, bilan de la concertation — générés à la demande, pas maintenus à la main.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">☑️</div><div class="feat-card__title">Actions en masse</div><div class="feat-card__text">Changer le statut ou supprimer plusieurs actions, risques ou engagements sélectionnés en un clic, plutôt qu'un par un.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">📜</div><div class="feat-card__title">Journal d'audit complet</div><div class="feat-card__text">Chaque modification tracée — qui, quoi, quand, avant/après — sur les 5 modules et les parties prenantes.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">👥</div><div class="feat-card__title">Équipe &amp; charge de travail</div><div class="feat-card__text">Qui fait quoi, par personne et par projet — vue agrégée sur les actions, risques, engagements et communications assignés.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">📎</div><div class="feat-card__title">Gestion documentaire</div><div class="feat-card__text">Documents catégorisés et rattachés à un échange, une communication, un engagement ou un jalon réglementaire précis.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🔍</div><div class="feat-card__title">Détection de doublons</div><div class="feat-card__text">Une même personne repérée sous deux fiches, ou déjà contact d'une autre partie prenante — signalé avant de recréer un doublon.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">✎</div><div class="feat-card__title">Édition en ligne</div><div class="feat-card__text">Statut, priorité, échéance, responsable — modifiables directement depuis la liste, sans ouvrir un formulaire complet.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">☎</div><div class="feat-card__title">Contacts en un clic</div><div class="feat-card__text">Appeler ou écrire à une partie prenante directement depuis le tableau — sans ouvrir sa fiche.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Méthode</div>
+  <h2 class="stitle">Un vrai portefeuille, pas une démo vide</h2>
+  <p class="prose">Une application testée uniquement avec des données inventées ne prouve rien sur son utilisabilité réelle. Les 17 projets ont été importés à partir de sources publiques — sites de concertation officiels, décisions et avis de la CNDP, pages projet des porteurs — jamais improvisés.</p>
+  <div class="method">
+    <div class="method__title">✓ Discipline appliquée à l'import</div>
+    <div class="method__text">Dates clés réglementaires, intervenants et documents officiels : uniquement quand une source publique les confirmait. Aucune partie prenante, aucun risque, aucune position n'a été inventé faute de base pour l'évaluer honnêtement — mieux vaut un champ vide qu'une donnée plausible mais fausse.</div>
+  </div>
+</div>
+
+<div class="section">
   <div class="slabel">Défis techniques</div>
   <h2 class="stitle">Les vrais problèmes à résoudre</h2>
   <div class="challenges">
     <div class="challenge"><div class="ctitle">Frontière serveur/client React franchie par erreur</div><div class="cbody">Une fonction passée en prop d'une page serveur à un composant client — interdit en React Server Components, plantage en production (erreur #441). Détecté via les logs serveur (pas la console minifiée du navigateur) et corrigé avant tout déploiement réel.</div></div>
     <div class="challenge"><div class="ctitle">Un projet réel à cheval sur deux communes</div><div class="cbody">Une centrale solaire s'étendant sur deux communes limitrophes ne tenait pas dans un simple champ texte — migré en cours de route vers une vraie relation many-to-many (<span class="ccode">ProjectCommune</span>), avec migration Prisma en deux temps pour ne perdre aucune donnée déjà en base.</div></div>
     <div class="challenge"><div class="ctitle">Date affichée en heure locale, valeur stockée en UTC</div><div class="cbody">Un libellé de date formaté avec le fuseau du navigateur pouvait afficher un jour différent de la valeur réellement stockée (UTC) — décalage silencieux dans un fuseau négatif, corrigé par un formatage explicite en UTC.</div></div>
+    <div class="challenge"><div class="ctitle">Un score calculé qui ne doit jamais mentir sur son absence</div><div class="cbody">Sans aucune partie prenante ni risque renseigné, le score d'acceptabilité retombait sur sa base neutre (70) — un chiffre qui avait l'air d'une vraie évaluation. Ajout d'un indicateur explicite « pas encore de données » pour ne jamais confondre un calcul vide avec un résultat favorable.</div></div>
+    <div class="challenge"><div class="ctitle">Le bon contact masqué par le mauvais champ</div><div class="cbody">Un contact nommé (ex. le maire d'une commune) pouvait être éclipsé dans l'affichage par un champ générique de la partie prenante laissé vide puis renseigné par erreur — corrigé en donnant toujours la priorité au contact le plus spécifique.</div></div>
     <div class="challenge"><div class="ctitle">Import de données réelles sans rien inventer</div><div class="cbody">17 projets réels importés avec leurs jalons réglementaires, intervenants et documents officiels — uniquement des faits publiquement sourcés (sites de concertation, décisions CNDP) ; jamais de partie prenante ou de risque fabriqué faute de base pour l'évaluer honnêtement.</div></div>
   </div>
 </div>
@@ -252,6 +292,10 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <div class="rcard"><span class="rcard__n">60</span><span class="rcard__l">tests automatisés sur les permissions, calculs et validations</span></div>
     <div class="rcard"><span class="rcard__n">5</span><span class="rcard__l">modules reliés — écoute, réponse, et un module transverse</span></div>
     <div class="rcard"><span class="rcard__n">0</span><span class="rcard__l">note d'acceptabilité saisie à la main — toujours calculée</span></div>
+    <div class="rcard"><span class="rcard__n">12</span><span class="rcard__l">types d'alertes proactives sur le portefeuille</span></div>
+    <div class="rcard"><span class="rcard__n">4</span><span class="rcard__l">types d'entités éditables en ligne, sans formulaire</span></div>
+    <div class="rcard"><span class="rcard__n">5</span><span class="rcard__l">rôles avec permissions par projet, pas seulement globales</span></div>
+    <div class="rcard"><span class="rcard__n">2</span><span class="rcard__l">rapports PDF générés à la demande — portefeuille et par projet</span></div>
   </div>
 </div>
 
