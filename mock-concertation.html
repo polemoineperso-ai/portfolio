@@ -90,6 +90,36 @@ tr:last-child td{border-bottom:none;}
 .cs-validated{background:rgba(0,206,124,.14);color:var(--stable);}
 .cs-published{background:rgba(0,206,124,.28);color:var(--stable);}
 
+/* PRIORITÉ ACTIONS */
+.prio{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+.prio--critical{background:rgba(209,52,56,.16);color:#e5787a;}
+.prio--high{background:rgba(242,128,47,.16);color:var(--risk);}
+.prio--medium{background:rgba(245,166,35,.16);color:var(--vigilance);}
+.prio--low{background:var(--secondary);color:var(--muted);}
+.astatus{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+.as-todo{background:var(--secondary);color:var(--muted);}
+.as-progress{background:rgba(77,142,224,.16);color:var(--primary);}
+.as-done{background:rgba(0,206,124,.14);color:var(--stable);}
+.overdue{color:#e5787a;font-weight:600;}
+
+/* PARCOURS RÉGLEMENTAIRE — timeline */
+.timeline{position:relative;padding:20px 18px 20px 44px;}
+.timeline::before{content:'';position:absolute;left:23px;top:24px;bottom:24px;width:2px;background:var(--border);}
+.tl-item{position:relative;padding-bottom:22px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-dot{position:absolute;left:-31px;top:2px;width:16px;height:16px;border-radius:50%;border:3px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;}
+.tl-dot--done{background:var(--stable);}
+.tl-dot--progress{background:var(--vigilance);}
+.tl-dot--todo{background:var(--secondary);}
+.tl-label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
+.tl-name{font-weight:600;font-size:13px;}
+.tl-date{font-size:11px;color:var(--muted);margin-top:2px;}
+.tl-check{font-size:11px;color:var(--vigilance);margin-top:4px;}
+
+/* ÉQUIPE */
+.eq-bar{height:6px;border-radius:3px;background:var(--secondary);margin-top:6px;overflow:hidden;}
+.eq-bar__fill{height:100%;background:var(--primary);border-radius:3px;}
+
 .footer-note{max-width:960px;margin:16px auto 0;text-align:center;font-size:12px;color:#8892a4;font-style:italic;}
 @media(max-width:640px){.shell{padding:18px;}.ph-top{flex-direction:column;}table{font-size:12px;}th,td{padding:9px 10px;}}
 </style>
@@ -98,7 +128,7 @@ tr:last-child td{border-bottom:none;}
 
 <div class="annotation">
   <div class="annotation__dot"></div>
-  <div><strong>Démonstration</strong> — Reconstitution fidèle de l'interface réelle (couleurs, mise en page, composants), 4 écrans. Projets, parties prenantes et alertes sont fictifs, aucune donnée d'un client réel.</div>
+  <div><strong>Démonstration</strong> — Reconstitution fidèle de l'interface réelle (couleurs, mise en page, composants), 8 écrans couvrant les 5 modules. Projets, parties prenantes et alertes sont fictifs, aucune donnée d'un client réel.</div>
 </div>
 
 <div class="tabs">
@@ -106,6 +136,10 @@ tr:last-child td{border-bottom:none;}
   <button class="tab" onclick="showView('fiche', this)">📋 Fiche projet</button>
   <button class="tab" onclick="showView('risques', this)">⚠ Risques &amp; opportunités</button>
   <button class="tab" onclick="showView('communication', this)">📣 Communication</button>
+  <button class="tab" onclick="showView('engagements', this)">🤝 Engagements</button>
+  <button class="tab" onclick="showView('actions', this)">☑ Actions</button>
+  <button class="tab" onclick="showView('parcours', this)">📅 Parcours réglementaire</button>
+  <button class="tab" onclick="showView('equipe', this)">👥 Équipe</button>
 </div>
 
 <div class="shell">
@@ -300,6 +334,121 @@ tr:last-child td{border-bottom:none;}
             <td>Digitale</td>
             <td><span class="cstatus cs-idea">Idée</span></td>
             <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- VUE ENGAGEMENTS -->
+  <div class="view" id="view-engagements">
+    <div class="panel">
+      <div class="panel__head">Engagements <span>· Projet Solaire Nord · 3 en cours</span></div>
+      <table>
+        <thead><tr><th>Description</th><th>Parties prenantes</th><th>Échéance</th><th>Statut</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div class="sh-name">Maintenir le bruit sous 45 dB(A) en limite de propriété</div></td>
+            <td>Mairie de Sainte-Ombre, Groupement Riverains</td>
+            <td>Mise en service 2027</td>
+            <td><span class="pos pos--neutral">Ouvert</span></td>
+          </tr>
+          <tr>
+            <td><div class="sh-name">Réunion d'information annuelle avec le comité de suivi</div></td>
+            <td>Mairie de Sainte-Ombre</td>
+            <td>Annuel</td>
+            <td><span class="pos pos--fav">En cours</span></td>
+          </tr>
+          <tr>
+            <td><div class="sh-name">Compensation écologique — 3 ha de haies bocagères</div></td>
+            <td>Chambre d'agriculture</td>
+            <td>28/02/2028</td>
+            <td><span class="pos pos--neutral">Ouvert</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- VUE ACTIONS -->
+  <div class="view" id="view-actions">
+    <div class="panel">
+      <div class="panel__head">Actions <span>· Projet Solaire Nord · 4 ouvertes</span></div>
+      <table>
+        <thead><tr><th>Titre</th><th>Priorité</th><th>Échéance</th><th>Responsable</th><th>Statut</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div class="sh-name">Répondre aux questions sur la ressource en eau</div><div class="sh-sub">Issue de l'échange du 12/08/2026</div></td>
+            <td><span class="prio prio--critical">Critique</span></td>
+            <td class="overdue">28/08/2026 (retard)</td>
+            <td>Camille Aubert</td>
+            <td><span class="astatus as-progress">En cours</span></td>
+          </tr>
+          <tr>
+            <td><div class="sh-name">Relancer la Préfecture avant publication</div><div class="sh-sub">Issue de la communication liée</div></td>
+            <td><span class="prio prio--high">Haute</span></td>
+            <td>15/10/2026</td>
+            <td>Camille Aubert</td>
+            <td><span class="astatus as-todo">À faire</span></td>
+          </tr>
+          <tr>
+            <td><div class="sh-name">Organiser une réunion avec le Groupement Riverains</div></td>
+            <td><span class="prio prio--medium">Moyenne</span></td>
+            <td>10/11/2026</td>
+            <td>Camille Aubert</td>
+            <td><span class="astatus as-todo">À faire</span></td>
+          </tr>
+          <tr>
+            <td><div class="sh-name">Valider le message clé sur le raccordement réseau</div></td>
+            <td><span class="prio prio--low">Faible</span></td>
+            <td>30/09/2026</td>
+            <td>Denis Léotard</td>
+            <td><span class="astatus as-done">Terminé</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- VUE PARCOURS RÉGLEMENTAIRE -->
+  <div class="view" id="view-parcours">
+    <div class="panel">
+      <div class="panel__head">Parcours réglementaire <span>· Projet Solaire Nord</span></div>
+      <div class="timeline">
+        <div class="tl-item"><span class="tl-dot tl-dot--done"></span><div class="tl-label">Publication des caractéristiques</div><div class="tl-name">Dossier préalable publié</div><div class="tl-date">15 janvier 2026 · ✓ Fait</div></div>
+        <div class="tl-item"><span class="tl-dot tl-dot--done"></span><div class="tl-label">Saisine &amp; décision CNDP</div><div class="tl-name">Concertation préalable retenue</div><div class="tl-date">10 mars 2026 · ✓ Fait</div></div>
+        <div class="tl-item"><span class="tl-dot tl-dot--done"></span><div class="tl-label">Concertation préalable</div><div class="tl-name">Ouverture → clôture</div><div class="tl-date">5 mai – 20 juillet 2026 · ✓ Fait</div></div>
+        <div class="tl-item"><span class="tl-dot tl-dot--progress"></span><div class="tl-label">Bilan de la concertation</div><div class="tl-name">Rédaction en cours</div><div class="tl-date">Attendu 15 septembre 2026 · ⧗ En cours</div><div class="tl-check">☑ 2/4 actions de la checklist réalisées</div></div>
+        <div class="tl-item"><span class="tl-dot tl-dot--todo"></span><div class="tl-label">Dépôt du dossier</div><div class="tl-name">Demande d'autorisation environnementale</div><div class="tl-date">À venir</div></div>
+        <div class="tl-item"><span class="tl-dot tl-dot--todo"></span><div class="tl-label">Enquête publique</div><div class="tl-name">Non planifiée</div><div class="tl-date">À venir</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VUE ÉQUIPE -->
+  <div class="view" id="view-equipe">
+    <div class="panel">
+      <div class="panel__head">Équipe <span>· Charge de travail par personne</span></div>
+      <table>
+        <thead><tr><th>Personne</th><th>Rôle</th><th>Projets</th><th>Charge assignée</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div class="sh-name">Camille Aubert</div></td>
+            <td>Responsable de projet</td>
+            <td>Solaire Nord, Hydrogène Vallée</td>
+            <td>5 actions · 2 risques · 1 engagement<div class="eq-bar"><div class="eq-bar__fill" style="width:78%"></div></div></td>
+          </tr>
+          <tr>
+            <td><div class="sh-name">Julien Faure</div></td>
+            <td>Contributeur · Communication</td>
+            <td>Solaire Nord, Éolien Littoral</td>
+            <td>3 communications · 2 actions<div class="eq-bar"><div class="eq-bar__fill" style="width:45%"></div></div></td>
+          </tr>
+          <tr>
+            <td><div class="sh-name">Sophie Renard</div></td>
+            <td>Contributeur · Affaires publiques</td>
+            <td>Agrivoltaïque Plateau</td>
+            <td>4 actions · 1 risque<div class="eq-bar"><div class="eq-bar__fill" style="width:52%"></div></div></td>
           </tr>
         </tbody>
       </table>
