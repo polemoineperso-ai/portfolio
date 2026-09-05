@@ -128,6 +128,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .method{background:var(--paper-card);border:1px solid var(--line);border-left:4px solid #1a9e6e;border-radius:0 var(--r-lg) var(--r-lg) 0;padding:18px 20px;margin-top:20px;}
 .method__title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1a9e6e;margin-bottom:8px;}
 .method__text{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+.scale-band{background:linear-gradient(135deg,#16295c,#0d1a3d);padding:32px 24px;text-align:center;border-bottom:2px solid var(--nia-blue);}
+.scale-band__label{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px;}
+.scale-band__grid{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;max-width:900px;margin:0 auto;}
+.scale-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:14px 20px;min-width:110px;}
+.scale-stat__n{font-family:var(--ui);font-size:22px;font-weight:700;color:#fff;display:block;}
+.scale-stat__l{font-size:11px;color:rgba(255,255,255,.5);display:block;margin-top:3px;}
+@media(max-width:640px){.scale-band__grid{gap:8px;}.scale-stat{min-width:90px;padding:10px 12px;}}
 .screen-section{margin:32px 0;padding:24px 0;border-top:1px solid var(--line);text-align:center;}
 .screen-label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:14px;}
 .screen-caption{font-size:12px;color:#8892a4;margin-top:10px;font-style:italic;}
@@ -178,6 +185,18 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <div class="metric"><span class="metric__n">60</span><span class="metric__l">tests automatisés</span></div>
   </div>
   <div class="hero__time">Avant : suivi éparpillé entre tableurs, e-mails et mémoire. <strong>Après : un tableau de bord unique, à jour.</strong></div>
+</div>
+
+<div class="scale-band">
+  <div class="scale-band__label">L'ampleur du chantier — mesurée sur l'historique réel du dépôt, pas une estimation</div>
+  <div class="scale-band__grid">
+    <div class="scale-stat"><span class="scale-stat__n">157</span><span class="scale-stat__l">commits</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">37 091</span><span class="scale-stat__l">lignes de TypeScript</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">76</span><span class="scale-stat__l">pages / écrans</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">26</span><span class="scale-stat__l">migrations de schéma</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">381</span><span class="scale-stat__l">fichiers</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">8</span><span class="scale-stat__l">jours de développement intensif</span></div>
+  </div>
 </div>
 
 <div class="wrap">
@@ -250,6 +269,10 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <div class="method">
     <div class="method__title">✓ Discipline appliquée à l'import</div>
     <div class="method__text">Dates clés réglementaires, intervenants et documents officiels : uniquement quand une source publique les confirmait. Aucune partie prenante, aucun risque, aucune position n'a été inventé faute de base pour l'évaluer honnêtement — mieux vaut un champ vide qu'une donnée plausible mais fausse.</div>
+  </div>
+  <div class="method" style="border-left-color:var(--nia-blue);margin-top:12px;">
+    <div class="method__title" style="color:var(--nia-blue);">✓ Un cas réel — retrouver un élu, pas l'inventer</div>
+    <div class="method__text">Une partie prenante affichait « Mairie » sans nom d'interlocuteur. Plutôt que de laisser un champ vide ou d'en inventer un, recherche du nom réel du maire, recoupé sur deux sources publiques indépendantes, avec sa date de mandat et sa réserve (élection municipale de mars 2026 non reconfirmée depuis) — puis ajouté comme contact nommé de l'institution, pas comme une nouvelle partie prenante avec une position politique qu'il n'y avait aucune base réelle pour évaluer.</div>
   </div>
 </div>
 
