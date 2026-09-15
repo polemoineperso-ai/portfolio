@@ -22,9 +22,16 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{background:#e4e7ee;font-family:var(--font);font-size:14px;color:#1a1d23;-webkit-font-smoothing:antialiased;padding:24px 16px 56px;}
-.annotation{max-width:1080px;margin:0 auto 16px;background:#1a1d23;border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(255,255,255,.6);}
-.annotation strong{color:rgba(255,255,255,.9);}
-.annotation__dot{width:8px;height:8px;border-radius:50%;background:var(--vigilance);flex-shrink:0;}
+/* Badge fixe — reste visible en permanence, pendant qu'on navigue entre les
+   onglets, pas seulement au chargement de la page (§ retour utilisateur :
+   "pas assez visible ou mis en avant"). */
+.light-badge{position:fixed;top:16px;right:16px;z-index:999;background:var(--vigilance);color:#3d2600;font-weight:800;font-size:12.5px;letter-spacing:.02em;padding:9px 16px 9px 13px;border-radius:24px;box-shadow:0 6px 20px rgba(0,0,0,.3);display:flex;align-items:center;gap:7px;border:2px solid #fff;}
+.light-badge__ic{font-size:14px;}
+@media(max-width:640px){.light-badge{top:8px;right:8px;font-size:10.5px;padding:7px 12px 7px 10px;}}
+
+.annotation{max-width:1080px;margin:0 auto 16px;background:#3d2600;border:1px solid rgba(245,166,35,.4);border-radius:8px;padding:12px 18px;display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,231,194,.85);line-height:1.55;}
+.annotation strong{color:#ffd580;}
+.annotation__dot{width:8px;height:8px;border-radius:50%;background:var(--vigilance);flex-shrink:0;margin-top:6px;}
 
 /* SHELL — sidebar + zone principale, comme l'application réelle */
 .app-shell{max-width:1080px;margin:0 auto;display:flex;background:var(--bg);border-radius:14px;overflow:hidden;box-shadow:0 10px 44px rgba(0,0,0,.22);border:1px solid var(--border);min-height:640px;}
@@ -210,9 +217,11 @@ tr:last-child td{border-bottom:none;}
 </head>
 <body>
 
+<div class="light-badge"><span class="light-badge__ic">⚡</span> VERSION LIGHT — échantillon</div>
+
 <div class="annotation">
   <div class="annotation__dot"></div>
-  <div><strong>Échantillon (sample)</strong> — Version simplifiée et stylisée de l'application réelle : structure et couleurs fidèles (sidebar, thème clair, onglets), mais contenu allégé — 8 sections sur les 12 que compte un projet, données fictives, aucune interaction réelle (formulaires, édition, IA...). <strong>L'application réelle est nettement plus complète</strong> que cet aperçu.</div>
+  <div><strong>Échantillon (sample) — version light</strong> — Version simplifiée et stylisée de l'application réelle : structure et couleurs fidèles (sidebar, thème clair, onglets), mais contenu allégé — 8 sections sur les 12 que compte un projet, données fictives, aucune interaction réelle (formulaires, édition, IA...). <strong>L'application réelle est nettement plus complète</strong> que cet aperçu.</div>
 </div>
 
 <div class="app-shell">

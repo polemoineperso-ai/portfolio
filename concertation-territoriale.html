@@ -49,8 +49,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .hero__title{font-family:var(--display);font-size:clamp(28px,5vw,46px);font-weight:700;line-height:1.1;margin-bottom:14px;}
 .hero__title em{font-style:italic;color:var(--nia-pink);}
 .hero__sub{font-size:15px;color:rgba(255,255,255,.55);max-width:560px;margin:0 auto 24px;line-height:1.65;}
-.hero__demo{display:inline-flex;align-items:center;gap:8px;background:var(--nia-blue);color:#fff;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.06em;padding:12px 24px;border-radius:6px;text-decoration:none;transition:all .15s;margin-bottom:20px;}
+.hero__demo{display:inline-flex;align-items:center;gap:8px;background:var(--nia-blue);color:#fff;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.06em;padding:12px 24px;border-radius:6px;text-decoration:none;transition:all .15s;}
 .hero__demo:hover{background:var(--nia-pink);}
+.demo-wrap{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
+/* Visible avant même de cliquer — § retour utilisateur : "pas assez visible ou mis en avant". */
+.light-pill{display:inline-flex;align-items:center;gap:4px;background:#f5a623;color:#3d2600;font-family:var(--ui);font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:5px 10px;border-radius:20px;white-space:nowrap;}
 .hero__metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
 .metric{text-align:center;padding:11px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);}
 .metric__n{font-family:var(--ui);font-size:18px;font-weight:700;color:#fff;display:block;}
@@ -177,7 +180,10 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <div class="hero__tag">Projet 01 / 06 · Next.js · Concertation territoriale</div>
   <h1 class="hero__title">Pilotage de concertation <em>territoriale</em></h1>
   <p class="hero__sub">Parties prenantes, risques, communication, engagements et actions dans un seul outil, pour des projets d'infrastructure énergétique — avec un score d'acceptabilité calculé, pas déclaratif.</p>
-  <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo">🖥 Voir un échantillon de l'interface →</a>
+  <div class="demo-wrap">
+    <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo">🖥 Voir un échantillon de l'interface →</a>
+    <span class="light-pill">⚡ Version light</span>
+  </div>
   <div class="hero__metrics">
     <div class="metric"><span class="metric__n">5</span><span class="metric__l">modules reliés</span></div>
     <div class="metric"><span class="metric__n">17</span><span class="metric__l">projets réels suivis</span></div>
@@ -330,8 +336,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 
 <div class="screen-section">
   <div class="screen-label">🖥 Interface — fiche projet, données de démonstration</div>
-  <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo" style="background:var(--nia-blue-dark);">Voir un échantillon de l'interface →</a>
-  <p class="screen-caption">Échantillon simplifié et stylisé (structure et couleurs fidèles, contenu allégé) — score d'acceptabilité, alertes, table des parties prenantes. L'application réelle est nettement plus complète. Données de démonstration, pas de portefeuille client.</p>
+  <div class="demo-wrap">
+    <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo" style="background:var(--nia-blue-dark);">Voir un échantillon de l'interface →</a>
+    <span class="light-pill">⚡ Version light</span>
+  </div>
+  <p class="screen-caption">Échantillon simplifié et stylisé (structure et couleurs fidèles, contenu allégé) — score d'acceptabilité, alertes, table des parties prenantes. <strong style="color:var(--ink);">L'application réelle est nettement plus complète.</strong> Données de démonstration, pas de portefeuille client.</p>
 </div>
 
 <div class="nav-bottom">
