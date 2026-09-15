@@ -9,53 +9,92 @@
 <style>
 :root {
   --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
-  --bg:#0a1530;--card:#0f1d40;--fg:#eaf1fb;--muted:#93a4c9;--border:rgba(234,241,251,.12);
-  --primary:#4d8ee0;--secondary:#16295c;
+  /* Palette reprise telle quelle de globals.css — thème clair, celui que voit
+     la majorité des utilisateurs (le thème sombre existe aussi dans l'appli
+     réelle, non reconstitué ici). */
+  --bg:#f8f9fb;--card:#ffffff;--fg:#14181f;--muted:#64708a;--border:#e6e9f0;
+  --primary:#001e60;--secondary:#eef1f6;
   --stable:#00ce7c;--vigilance:#f5a623;--risk:#f2802f;--critical:#d13438;
+  /* La sidebar reste volontairement identique en thème clair et sombre dans
+     l'appli réelle (bleu nuit institutionnel) — mêmes tokens ici. */
+  --sb-bg:#071d49;--sb-fg:#a9bbdc;--sb-fg-strong:#f4f6fb;--sb-accent-fg:#10b981;
+  --sb-hover:rgba(255,255,255,.06);--sb-border:rgba(255,255,255,.07);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:#eef0f5;font-family:var(--font);font-size:14px;color:#1a1d23;-webkit-font-smoothing:antialiased;padding:24px 16px 56px;}
-.annotation{max-width:960px;margin:0 auto 16px;background:#1a1d23;border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(255,255,255,.6);}
+body{background:#e4e7ee;font-family:var(--font);font-size:14px;color:#1a1d23;-webkit-font-smoothing:antialiased;padding:24px 16px 56px;}
+.annotation{max-width:1080px;margin:0 auto 16px;background:#1a1d23;border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(255,255,255,.6);}
 .annotation strong{color:rgba(255,255,255,.9);}
 .annotation__dot{width:8px;height:8px;border-radius:50%;background:var(--vigilance);flex-shrink:0;}
 
-.tabs{max-width:960px;margin:0 auto 12px;display:flex;gap:6px;flex-wrap:wrap;}
-.tab{font-family:var(--font);font-size:12px;font-weight:600;padding:9px 16px;border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;background:#dde1ea;color:#5c6479;cursor:pointer;transition:all .15s;}
-.tab:hover{background:#cfd4e0;}
-.tab.active{background:var(--bg);color:var(--fg);border-color:var(--border);}
+/* SHELL — sidebar + zone principale, comme l'application réelle */
+.app-shell{max-width:1080px;margin:0 auto;display:flex;background:var(--bg);border-radius:14px;overflow:hidden;box-shadow:0 10px 44px rgba(0,0,0,.22);border:1px solid var(--border);min-height:640px;}
+.sidebar{width:208px;flex-shrink:0;background:var(--sb-bg);padding:16px 10px;display:flex;flex-direction:column;gap:20px;}
+.sb-brand{display:flex;align-items:center;gap:9px;padding:2px 6px 14px;border-bottom:1px solid var(--sb-border);}
+.sb-brand__mark{width:26px;height:26px;border-radius:7px;background:var(--sb-accent-fg);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;}
+.sb-brand__name{font-size:12px;font-weight:700;line-height:1.3;color:var(--sb-fg-strong);letter-spacing:.01em;}
+.sb-section{display:flex;flex-direction:column;}
+.sb-section__label{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(169,187,220,.5);padding:0 9px;margin-bottom:6px;}
+.sb-item{display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:500;color:var(--sb-fg);background:none;border:none;padding:8px 9px;border-radius:7px;cursor:pointer;transition:all .15s;margin-bottom:1px;width:100%;text-align:left;font-family:var(--font);}
+.sb-item:hover{background:var(--sb-hover);color:var(--sb-fg-strong);}
+.sb-item.active{background:var(--sb-hover);color:var(--sb-fg-strong);font-weight:700;box-shadow:inset 2px 0 0 var(--sb-accent-fg);}
+.sb-item__ic{width:15px;text-align:center;flex-shrink:0;}
+.sb-project{display:flex;align-items:center;gap:9px;padding:9px;border-radius:8px;cursor:pointer;transition:background .15s;}
+.sb-project:hover, .sb-project.active{background:var(--sb-hover);}
+.sb-project__dot{width:7px;height:7px;border-radius:50%;background:var(--stable);flex-shrink:0;}
+.sb-project__name{font-size:12.5px;font-weight:700;color:var(--sb-fg-strong);}
+.sb-project__sub{font-size:10.5px;color:var(--sb-fg);margin-top:1px;}
 
-.shell{max-width:960px;margin:0 auto;background:var(--bg);color:var(--fg);border-radius:0 14px 14px 14px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.25);border:1px solid var(--border);padding:28px;}
+.main{flex:1;min-width:0;background:var(--bg);display:flex;flex-direction:column;}
+.topbar{height:50px;flex-shrink:0;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:0 18px;}
+.tb-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;position:relative;}
+.tb-badge{position:absolute;top:-3px;right:-3px;background:var(--critical);color:#fff;font-size:9px;font-weight:700;min-width:14px;height:14px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 3px;}
+.tb-user{display:flex;align-items:center;gap:8px;padding-left:12px;border-left:1px solid var(--border);}
+.tb-user__name{font-size:12px;font-weight:600;line-height:1.3;}
+.tb-user__role{font-size:10px;color:var(--muted);}
+.tb-avatar{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;flex-shrink:0;}
+
+.content{flex:1;padding:22px 24px 32px;}
+.page{display:none;}
+.page.active{display:block;}
+
+/* Onglets d'un projet (Vue générale, Risques, etc.) */
+.ptabs{display:flex;gap:2px;margin-bottom:22px;border-bottom:1px solid var(--border);overflow-x:auto;}
+.ptab{font-size:12.5px;font-weight:600;color:var(--muted);background:none;border:none;padding:9px 11px 11px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-family:var(--font);transition:color .15s;}
+.ptab:hover{color:var(--fg);}
+.ptab.active{color:var(--primary);border-bottom-color:var(--primary);}
 .view{display:none;}
 .view.active{display:block;}
 
 .ph-top{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px;}
-.ph-title{font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.ph-title{font-size:21px;font-weight:700;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;}
-.badge--vigilance{background:rgba(245,166,35,.16);color:var(--vigilance);border:1px solid rgba(245,166,35,.3);}
-.badge--stable{background:rgba(0,206,124,.14);color:var(--stable);border:1px solid rgba(0,206,124,.3);}
-.badge--risk{background:rgba(242,128,47,.16);color:var(--risk);border:1px solid rgba(242,128,47,.3);}
+.badge--vigilance{background:rgba(245,166,35,.14);color:#a06400;border:1px solid rgba(245,166,35,.35);}
+.badge--stable{background:rgba(0,206,124,.12);color:#00753f;border:1px solid rgba(0,206,124,.3);}
+.badge--risk{background:rgba(242,128,47,.14);color:var(--risk);border:1px solid rgba(242,128,47,.3);}
 .ph-desc{font-size:13px;color:var(--muted);margin-top:6px;max-width:480px;line-height:1.6;}
 .ph-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted);}
 .ph-meta span{display:inline-flex;align-items:center;gap:5px;}
 .pill{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--secondary);color:var(--fg);}
-.gauge-card{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;}
+.gauge-card{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;box-shadow:0 1px 3px rgba(20,24,31,.04);}
 .gauge{position:relative;width:76px;height:76px;flex-shrink:0;}
 .gauge svg{transform:rotate(-90deg);}
-.gauge__n{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;font-family:var(--mono);}
+.gauge__n{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;font-family:var(--mono);color:var(--fg);}
 .gauge__label{font-size:11px;color:var(--muted);margin-bottom:2px;}
-.gauge__level{font-size:13px;font-weight:600;color:var(--vigilance);}
+.gauge__level{font-size:13px;font-weight:600;color:#a06400;}
 .retenir{margin:16px 0 20px;font-size:12px;}
 .retenir__label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-.retenir__row{display:flex;gap:18px;flex-wrap:wrap;}
+.retenir__row{display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
 .retenir__item{display:flex;align-items:center;gap:6px;font-weight:500;}
 .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px;}
-.panel__head{padding:14px 18px;font-weight:600;font-size:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px;box-shadow:0 1px 3px rgba(20,24,31,.04);}
+.panel__head{padding:14px 18px;font-weight:600;font-size:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:rgba(0,30,96,.035);}
 .panel__head span{font-weight:400;color:var(--muted);font-size:12px;}
 .alert-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid var(--border);font-size:13px;}
 .alert-row:last-child{border-bottom:none;}
 .alert-row__text{display:flex;align-items:center;gap:10px;}
-.alert-actions{display:flex;gap:6px;color:var(--muted);font-size:11px;white-space:nowrap;}
+.alert-actions{display:flex;align-items:center;gap:6px;color:var(--muted);white-space:nowrap;}
+.al-btn{font-size:11px;font-weight:600;color:var(--primary);border:1px solid var(--border);background:var(--card);padding:4px 9px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;}
+.al-icon{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);}
 table{width:100%;border-collapse:collapse;font-size:13px;}
 th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 18px;border-bottom:1px solid var(--border);}
 td{padding:12px 18px;border-bottom:1px solid var(--border);vertical-align:top;}
@@ -64,17 +103,17 @@ tr:last-child td{border-bottom:none;}
 .sh-sub{font-size:11px;color:var(--muted);margin-top:2px;}
 .contact-icons{display:flex;align-items:center;gap:8px;color:var(--muted);}
 .pos{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;}
-.pos--fav{background:rgba(0,206,124,.14);color:var(--stable);}
+.pos--fav{background:rgba(0,206,124,.12);color:#00753f;}
 .pos--neutral{background:var(--secondary);color:var(--muted);}
-.pos--opp{background:rgba(209,52,56,.14);color:#e5787a;}
+.pos--opp{background:rgba(209,52,56,.1);color:var(--critical);}
 .crit{font-family:var(--mono);font-weight:700;}
-.crit--high{color:#e5787a;}
-.crit--mid{color:var(--vigilance);}
-.crit--low{color:var(--stable);}
+.crit--high{color:var(--critical);}
+.crit--mid{color:#a06400;}
+.crit--low{color:#00753f;}
 
-/* PORTFOLIO */
+/* PORTEFEUILLE (page de niveau supérieur — pas un onglet de projet) */
 .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.pcard-mock{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.pcard-mock{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;box-shadow:0 1px 3px rgba(20,24,31,.04);}
 .pcard-mock__top{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
 .pcard-mock__name{font-weight:700;font-size:14px;}
 .pcard-mock__meta{font-size:12px;color:var(--muted);margin-bottom:10px;}
@@ -85,36 +124,36 @@ tr:last-child td{border-bottom:none;}
 /* COMM STATUS */
 .cstatus{font-size:10px;font-weight:700;letter-spacing:.03em;padding:3px 9px;border-radius:20px;white-space:nowrap;}
 .cs-idea{background:var(--secondary);color:var(--muted);}
-.cs-prep{background:rgba(77,142,224,.16);color:var(--primary);}
-.cs-review{background:rgba(245,166,35,.16);color:var(--vigilance);}
-.cs-validated{background:rgba(0,206,124,.14);color:var(--stable);}
-.cs-published{background:rgba(0,206,124,.28);color:var(--stable);}
+.cs-prep{background:rgba(0,85,184,.1);color:#0055b8;}
+.cs-review{background:rgba(245,166,35,.14);color:#a06400;}
+.cs-validated{background:rgba(0,206,124,.12);color:#00753f;}
+.cs-published{background:rgba(0,206,124,.22);color:#00753f;}
 
 /* PRIORITÉ ACTIONS */
 .prio{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;}
-.prio--critical{background:rgba(209,52,56,.16);color:#e5787a;}
-.prio--high{background:rgba(242,128,47,.16);color:var(--risk);}
-.prio--medium{background:rgba(245,166,35,.16);color:var(--vigilance);}
+.prio--critical{background:rgba(209,52,56,.1);color:var(--critical);}
+.prio--high{background:rgba(242,128,47,.12);color:var(--risk);}
+.prio--medium{background:rgba(245,166,35,.14);color:#a06400;}
 .prio--low{background:var(--secondary);color:var(--muted);}
 .astatus{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;}
 .as-todo{background:var(--secondary);color:var(--muted);}
-.as-progress{background:rgba(77,142,224,.16);color:var(--primary);}
-.as-done{background:rgba(0,206,124,.14);color:var(--stable);}
-.overdue{color:#e5787a;font-weight:600;}
+.as-progress{background:rgba(0,85,184,.1);color:#0055b8;}
+.as-done{background:rgba(0,206,124,.12);color:#00753f;}
+.overdue{color:var(--critical);font-weight:600;}
 
 /* PARCOURS RÉGLEMENTAIRE — timeline */
 .timeline{position:relative;padding:20px 18px 20px 44px;}
 .timeline::before{content:'';position:absolute;left:23px;top:24px;bottom:24px;width:2px;background:var(--border);}
 .tl-item{position:relative;padding-bottom:22px;}
 .tl-item:last-child{padding-bottom:0;}
-.tl-dot{position:absolute;left:-31px;top:2px;width:16px;height:16px;border-radius:50%;border:3px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;}
+.tl-dot{position:absolute;left:-31px;top:2px;width:16px;height:16px;border-radius:50%;border:3px solid var(--card);display:flex;align-items:center;justify-content:center;font-size:9px;}
 .tl-dot--done{background:var(--stable);}
 .tl-dot--progress{background:var(--vigilance);}
-.tl-dot--todo{background:var(--secondary);}
+.tl-dot--todo{background:var(--secondary);border-color:var(--card);}
 .tl-label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
 .tl-name{font-weight:600;font-size:13px;}
 .tl-date{font-size:11px;color:var(--muted);margin-top:2px;}
-.tl-check{font-size:11px;color:var(--vigilance);margin-top:4px;}
+.tl-check{font-size:11px;color:#a06400;margin-top:4px;}
 
 /* ÉQUIPE */
 .eq-bar{height:6px;border-radius:3px;background:var(--secondary);margin-top:6px;overflow:hidden;}
@@ -135,420 +174,470 @@ tr:last-child td{border-bottom:none;}
 .qa-block{padding:16px 18px;}
 .qa-q__label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
 .qa-q__text{font-size:13px;color:var(--fg);margin-bottom:14px;line-height:1.6;}
-.qa-ai{background:rgba(77,142,224,.08);border:1px dashed rgba(77,142,224,.35);border-radius:8px;padding:12px 14px;}
-.qa-ai__label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary);margin-bottom:7px;display:flex;align-items:center;gap:5px;}
+.qa-ai{background:rgba(0,85,184,.05);border:1px dashed rgba(0,85,184,.3);border-radius:8px;padding:12px 14px;}
+.qa-ai__label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#0055b8;margin-bottom:7px;display:flex;align-items:center;gap:5px;}
 .qa-ai__text{font-size:12px;color:var(--fg);line-height:1.65;}
 .qa-ai__note{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic;}
 
 /* REPORTING */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
-.kpi-mini{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 15px;}
+.kpi-mini{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 15px;box-shadow:0 1px 3px rgba(20,24,31,.04);}
 .kpi-mini__label{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
-.kpi-mini__n{font-size:22px;font-weight:700;font-family:var(--mono);}
+.kpi-mini__n{font-size:22px;font-weight:700;font-family:var(--mono);color:var(--fg);}
 .kpi-mini__hint{font-size:11px;color:var(--muted);margin-top:3px;}
 .reporting-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .bbars{display:flex;flex-direction:column;gap:9px;padding:16px 18px;}
 .bbar-row{display:flex;align-items:center;gap:10px;font-size:12px;cursor:pointer;border-radius:6px;padding:4px 6px;margin:-4px -6px;transition:background .15s;}
-.bbar-row:hover{background:rgba(77,142,224,.12);}
-.bbar-row:hover .bbar-label{color:var(--primary);}
+.bbar-row:hover{background:rgba(0,85,184,.07);}
+.bbar-row:hover .bbar-label{color:#0055b8;}
 .bbar-label{width:112px;flex-shrink:0;color:var(--muted);transition:color .15s;}
 .bbar-track{flex:1;height:7px;border-radius:4px;background:var(--secondary);overflow:hidden;}
 .bbar-fill{height:100%;border-radius:4px;}
-.bbar-n{width:20px;text-align:right;font-weight:700;font-family:var(--mono);flex-shrink:0;}
+.bbar-n{width:20px;text-align:right;font-weight:700;font-family:var(--mono);flex-shrink:0;color:var(--fg);}
 .reporting-hint{font-size:11px;color:var(--muted);margin:2px 18px 18px;font-style:italic;}
 @media(max-width:640px){.kpi-grid{grid-template-columns:1fr 1fr;}.reporting-grid{grid-template-columns:1fr;}}
 
-.footer-note{max-width:960px;margin:16px auto 0;text-align:center;font-size:12px;color:#8892a4;font-style:italic;}
-@media(max-width:640px){.shell{padding:18px;}.ph-top{flex-direction:column;}table{font-size:12px;}th,td{padding:9px 10px;}}
+.footer-note{max-width:1080px;margin:16px auto 0;text-align:center;font-size:12px;color:#8892a4;font-style:italic;}
+@media(max-width:760px){
+  .app-shell{flex-direction:column;}
+  .sidebar{width:100%;flex-direction:row;flex-wrap:wrap;gap:10px;padding:12px;}
+  .sb-section{flex-direction:row;flex-wrap:wrap;}
+  .content{padding:16px;}
+  .ph-top{flex-direction:column;}
+  table{font-size:12px;}th,td{padding:9px 10px;}
+}
 </style>
 </head>
 <body>
 
 <div class="annotation">
   <div class="annotation__dot"></div>
-  <div><strong>Démonstration</strong> — Reconstitution fidèle de l'interface réelle (couleurs, mise en page, composants), 9 écrans couvrant les 5 modules. Projets, parties prenantes et alertes sont fictifs, aucune donnée d'un client réel.</div>
+  <div><strong>Démonstration</strong> — Reconstitution fidèle de la structure réelle (sidebar, thème clair, onglets de projet, composants) : 8 sections sur les 12 que compte un projet, plus Portefeuille et Équipe. Projets, parties prenantes et alertes sont fictifs, aucune donnée d'un client réel.</div>
 </div>
 
-<div class="tabs">
-  <button class="tab active" onclick="showView('portfolio', this)">📁 Portefeuille</button>
-  <button class="tab" onclick="showView('fiche', this)">📋 Fiche projet</button>
-  <button class="tab" onclick="showView('risques', this)">⚠ Risques &amp; opportunités</button>
-  <button class="tab" onclick="showView('communication', this)">📣 Communication</button>
-  <button class="tab" onclick="showView('engagements', this)">🤝 Engagements</button>
-  <button class="tab" onclick="showView('actions', this)">☑ Actions</button>
-  <button class="tab" onclick="showView('parcours', this)">📅 Parcours réglementaire</button>
-  <button class="tab" onclick="showView('reporting', this)">📊 Reporting</button>
-  <button class="tab" onclick="showView('equipe', this)">👥 Équipe</button>
-</div>
+<div class="app-shell">
 
-<div class="shell">
-
-  <!-- VUE PORTEFEUILLE -->
-  <div class="view active" id="view-portfolio">
-    <div class="panel__head" style="background:none;border:none;padding:0 0 14px;">Projets <span>· 4 projets · 1 sous vigilance · 1 à risque</span></div>
-    <div class="pgrid">
-      <div class="pcard-mock">
-        <div class="pcard-mock__top"><span class="dot" style="background:var(--vigilance);width:8px;height:8px;"></span><span class="pcard-mock__name">Projet Solaire Nord</span></div>
-        <div class="pcard-mock__meta">☀️ Solaire · 18 MWc · Mise en service 2027</div>
-        <span class="badge badge--vigilance">⚠ Sous vigilance</span>
-        <div class="pcard-mock__row"><span>📍 Sainte-Ombre, Grand Est</span><span class="score" style="color:var(--vigilance)">54/100</span></div>
-      </div>
-      <div class="pcard-mock">
-        <div class="pcard-mock__top"><span class="dot" style="background:var(--stable);width:8px;height:8px;"></span><span class="pcard-mock__name">Projet Éolien Littoral</span></div>
-        <div class="pcard-mock__meta">🌬️ Éolien · 42 MW · Mise en service 2028</div>
-        <span class="badge badge--stable">✓ Stable</span>
-        <div class="pcard-mock__row"><span>📍 Presqu'Île-aux-Vents, Bretagne</span><span class="score" style="color:var(--stable)">81/100</span></div>
-      </div>
-      <div class="pcard-mock">
-        <div class="pcard-mock__top"><span class="dot" style="background:var(--risk);width:8px;height:8px;"></span><span class="pcard-mock__name">Projet Agrivoltaïque Plateau</span></div>
-        <div class="pcard-mock__meta">🌾 Agrivoltaïque · 21 MWc · Mise en service 2027</div>
-        <span class="badge badge--risk">⚠ Risque</span>
-        <div class="pcard-mock__row"><span>📍 Haut-Plateau, Occitanie</span><span class="score" style="color:var(--risk)">38/100</span></div>
-      </div>
-      <div class="pcard-mock">
-        <div class="pcard-mock__top"><span class="dot" style="background:var(--stable);width:8px;height:8px;"></span><span class="pcard-mock__name">Projet Hydrogène Vallée</span></div>
-        <div class="pcard-mock__meta">💧 Hydrogène · 60 MWe · Mise en service 2029</div>
-        <span class="badge badge--stable">✓ Stable</span>
-        <div class="pcard-mock__row"><span>📍 Val-de-Combe, Auvergne-Rhône-Alpes</span><span class="score" style="color:var(--stable)">72/100</span></div>
+  <div class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-brand__mark">🧭</div>
+      <div class="sb-brand__name">Concertation<br>Territoriale</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section__label">Vue d'ensemble</div>
+      <button class="sb-item" onclick="showTop('portfolio', this)"><span class="sb-item__ic">🏠</span> Dashboard Direction</button>
+      <button class="sb-item" onclick="showTop('portfolio', this)"><span class="sb-item__ic">📊</span> Dashboard Projets</button>
+      <button class="sb-item active" onclick="showTop('portfolio', this)"><span class="sb-item__ic">📁</span> Projets</button>
+      <button class="sb-item" onclick="showTop('portfolio', this)"><span class="sb-item__ic">📈</span> Reporting</button>
+      <button class="sb-item" onclick="showTop('equipe', this)"><span class="sb-item__ic">👤</span> Équipe</button>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section__label">Projet actif</div>
+      <div class="sb-project" onclick="showTop('project', this)">
+        <span class="sb-project__dot"></span>
+        <div><div class="sb-project__name">Projet Solaire Nord</div><div class="sb-project__sub">Sainte-Ombre, Grand Est</div></div>
       </div>
     </div>
   </div>
 
-  <!-- VUE FICHE PROJET -->
-  <div class="view" id="view-fiche">
-    <div class="ph-top">
-      <div>
-        <div class="ph-title">Projet Solaire Nord <span class="badge badge--vigilance">⚠ Sous vigilance</span></div>
-        <p class="ph-desc">Centrale photovoltaïque au sol, 18 MWc — commune fictive de Sainte-Ombre, Grand Est.</p>
-        <div class="ph-meta">
-          <span>📍 Sainte-Ombre, Grand Est</span>
-          <span>👤 Camille Aubert</span>
-          <span class="pill">☀️ Solaire</span>
-          <span class="pill">📋 Concertation</span>
-        </div>
-      </div>
-      <div class="gauge-card">
-        <div class="gauge">
-          <svg width="76" height="76" viewBox="0 0 76 76">
-            <circle cx="38" cy="38" r="33" fill="none" stroke="rgba(234,241,251,.12)" stroke-width="6"/>
-            <circle cx="38" cy="38" r="33" fill="none" stroke="#f5a623" stroke-width="6" stroke-linecap="round"
-              stroke-dasharray="207.3" stroke-dashoffset="95.4"/>
-          </svg>
-          <div class="gauge__n">54</div>
-        </div>
-        <div>
-          <div class="gauge__label">Acceptabilité territoriale</div>
-          <div class="gauge__level">⚠ Situation sous contrôle</div>
-        </div>
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-icon">🔍</div>
+      <div class="tb-icon">🔔<span class="tb-badge">6</span></div>
+      <div class="tb-icon">📖</div>
+      <div class="tb-icon">☀️</div>
+      <div class="tb-user">
+        <div><div class="tb-user__name">Camille Aubert</div><div class="tb-user__role">Responsable de projet</div></div>
+        <div class="tb-avatar">CA</div>
       </div>
     </div>
 
-    <div class="retenir">
-      <div class="retenir__label">À retenir</div>
-      <div class="retenir__row">
-        <span class="retenir__item"><span class="dot" style="background:var(--vigilance)"></span>Situation sous contrôle</span>
-        <span class="retenir__item"><span class="dot" style="background:var(--critical)"></span>4 alertes à traiter</span>
-      </div>
-    </div>
+    <div class="content">
 
-    <div class="panel">
-      <div class="panel__head">Alertes <span>· 4 à traiter</span></div>
-      <div class="alert-row"><div class="alert-row__text"><span class="dot" style="background:var(--critical)"></span>Risque « Opposition sur la ressource en eau » évalué critique (probabilité 4/5, impact 4/5).</div><div class="alert-actions">✓ 🗑</div></div>
-      <div class="alert-row"><div class="alert-row__text"><span class="dot" style="background:var(--critical)"></span>L'action « Répondre aux questions sur la ressource » est en retard de 6 jours.</div><div class="alert-actions">✓ 🗑</div></div>
-      <div class="alert-row"><div class="alert-row__text"><span class="dot" style="background:var(--vigilance)"></span>Association Vallée Vivante (influence 4/5) en position Opposé sur le projet.</div><div class="alert-actions">💬 ✓ 🗑</div></div>
-      <div class="alert-row"><div class="alert-row__text"><span class="dot" style="background:var(--primary)"></span>Aucun échange consigné avec la Préfecture depuis le début de la concertation.</div><div class="alert-actions">💬 ✓ 🗑</div></div>
-    </div>
-
-    <div class="panel">
-      <div class="panel__head">Parties prenantes <span>· 5 associées à ce projet</span></div>
-      <table>
-        <thead><tr><th>Nom</th><th>Catégorie</th><th>Contact</th><th>Infl.</th><th>Position</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="sh-name">Mairie de Sainte-Ombre</div><div class="sh-sub">Denis Léotard · Maire</div></td>
-            <td>Institution</td>
-            <td><div class="contact-icons">✉ 📞 ✎</div></td>
-            <td>5/5</td>
-            <td><span class="pos pos--fav">👍 Favorable</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Préfecture du Grand Est</div></td>
-            <td>Institution</td>
-            <td><div class="contact-icons">+</div></td>
-            <td>5/5</td>
-            <td><span class="pos pos--neutral">— Neutre</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Association Vallée Vivante</div></td>
-            <td>Association · ONG</td>
-            <td><div class="contact-icons">+</div></td>
-            <td>4/5</td>
-            <td><span class="pos pos--opp">👎 Opposé</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Chambre d'agriculture</div></td>
-            <td>Institution</td>
-            <td><div class="contact-icons">✉ +</div></td>
-            <td>3/5</td>
-            <td><span class="pos pos--fav">↑ Plutôt favorable</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Groupement Riverains Sainte-Ombre</div></td>
-            <td>Collectif</td>
-            <td><div class="contact-icons">+</div></td>
-            <td>3/5</td>
-            <td><span class="pos pos--neutral">— Neutre</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- VUE RISQUES -->
-  <div class="view" id="view-risques">
-    <div class="panel">
-      <div class="panel__head">Risques &amp; opportunités <span>· Projet Solaire Nord · 3 ouverts</span></div>
-      <table>
-        <thead><tr><th>Titre</th><th>Type</th><th>Criticité</th><th>Tendance</th><th>Statut</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="sh-name">Opposition sur la ressource en eau</div><div class="sh-sub">Probabilité 4/5 × impact 4/5</div></td>
-            <td>Risque</td>
-            <td><span class="crit crit--high">16/25</span></td>
-            <td>↘ Dégradation</td>
-            <td><span class="pos pos--opp">Sous surveillance</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Financement participatif local</div><div class="sh-sub">Probabilité 3/5 × impact 3/5</div></td>
-            <td>Opportunité</td>
-            <td><span class="crit crit--mid">9/25</span></td>
-            <td>→ Stable</td>
-            <td><span class="pos pos--fav">Ouvert</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Retard de raccordement au réseau</div><div class="sh-sub">Probabilité 3/5 × impact 2/5</div></td>
-            <td>Risque</td>
-            <td><span class="crit crit--low">6/25</span></td>
-            <td>→ Stable</td>
-            <td><span class="pos pos--neutral">Atténué</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- VUE COMMUNICATION -->
-  <div class="view" id="view-communication">
-    <div class="panel">
-      <div class="panel__head">Communication <span>· Calendrier éditorial · Projet Solaire Nord</span></div>
-      <table>
-        <thead><tr><th>Titre</th><th>Catégorie</th><th>Statut</th><th>Date prévue</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="sh-name">Réponse aux questions sur la ressource en eau</div></td>
-            <td>Sensible</td>
-            <td><span class="cstatus cs-published">Publié</span></td>
-            <td>03/09/2026</td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Lettre d'information n°3</div></td>
-            <td>Newsletter</td>
-            <td><span class="cstatus cs-validated">Validé</span></td>
-            <td>12/10/2026</td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Communiqué — lancement des travaux</div></td>
-            <td>Communiqué de presse</td>
-            <td><span class="cstatus cs-review">En validation</span></td>
-            <td>28/10/2026</td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">FAQ mise à jour — impacts agricoles</div></td>
-            <td>FAQ</td>
-            <td><span class="cstatus cs-prep">À préparer</span></td>
-            <td>—</td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Point d'étape réseaux sociaux</div></td>
-            <td>Digitale</td>
-            <td><span class="cstatus cs-idea">Idée</span></td>
-            <td>—</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="panel">
-      <div class="panel__head">Questions &amp; avis du public <span>· 1 en attente de réponse</span></div>
-      <div class="qa-block">
-        <div class="qa-q__label">Question reçue — 04/09/2026</div>
-        <div class="qa-q__text">« Le chantier va-t-il augmenter le trafic de camions sur la route de Sainte-Ombre pendant les travaux ? »</div>
-        <div class="qa-ai">
-          <div class="qa-ai__label">✨ Réponse suggérée (IA)</div>
-          <div class="qa-ai__text">Merci pour votre question. Le chantier générera effectivement une augmentation temporaire du trafic de poids lourds sur cet axe, principalement lors de la phase de terrassement et d'acheminement des panneaux. Les itinéraires précis et leurs horaires seront communiqués aux riverains avant le démarrage des travaux.</div>
-          <div class="qa-ai__note">Brouillon ancré sur le message clé validé « Trafic chantier » — à relire et compléter avant d'enregistrer, jamais publié automatiquement.</div>
+      <!-- PAGE PORTEFEUILLE -->
+      <div class="page active" id="page-portfolio">
+        <div class="panel__head" style="background:none;border:none;padding:0 0 16px;font-size:16px;">Projets <span>· 4 projets · 1 sous vigilance · 1 à risque</span></div>
+        <div class="pgrid">
+          <div class="pcard-mock">
+            <div class="pcard-mock__top"><span class="dot" style="background:var(--vigilance);width:8px;height:8px;"></span><span class="pcard-mock__name">Projet Solaire Nord</span></div>
+            <div class="pcard-mock__meta">☀️ Solaire · 18 MWc · Mise en service 2027</div>
+            <span class="badge badge--vigilance">⚠ Sous vigilance</span>
+            <div class="pcard-mock__row"><span>📍 Sainte-Ombre, Grand Est</span><span class="score" style="color:#a06400">54/100</span></div>
+          </div>
+          <div class="pcard-mock">
+            <div class="pcard-mock__top"><span class="dot" style="background:var(--stable);width:8px;height:8px;"></span><span class="pcard-mock__name">Projet Éolien Littoral</span></div>
+            <div class="pcard-mock__meta">🌬️ Éolien · 42 MW · Mise en service 2028</div>
+            <span class="badge badge--stable">✓ Stable</span>
+            <div class="pcard-mock__row"><span>📍 Presqu'Île-aux-Vents, Bretagne</span><span class="score" style="color:#00753f">81/100</span></div>
+          </div>
+          <div class="pcard-mock">
+            <div class="pcard-mock__top"><span class="dot" style="background:var(--risk);width:8px;height:8px;"></span><span class="pcard-mock__name">Projet Agrivoltaïque Plateau</span></div>
+            <div class="pcard-mock__meta">🌾 Agrivoltaïque · 21 MWc · Mise en service 2027</div>
+            <span class="badge badge--risk">⚠ Risque</span>
+            <div class="pcard-mock__row"><span>📍 Haut-Plateau, Occitanie</span><span class="score" style="color:var(--risk)">38/100</span></div>
+          </div>
+          <div class="pcard-mock">
+            <div class="pcard-mock__top"><span class="dot" style="background:var(--stable);width:8px;height:8px;"></span><span class="pcard-mock__name">Projet Hydrogène Vallée</span></div>
+            <div class="pcard-mock__meta">💧 Hydrogène · 60 MWe · Mise en service 2029</div>
+            <span class="badge badge--stable">✓ Stable</span>
+            <div class="pcard-mock__row"><span>📍 Val-de-Combe, Auvergne-Rhône-Alpes</span><span class="score" style="color:#00753f">72/100</span></div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- VUE ENGAGEMENTS -->
-  <div class="view" id="view-engagements">
-    <div class="panel">
-      <div class="panel__head">Engagements <span>· Projet Solaire Nord · 3 en cours</span></div>
-      <table>
-        <thead><tr><th>Description</th><th>Parties prenantes</th><th>Échéance</th><th>Statut</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="sh-name">Maintenir le bruit sous 45 dB(A) en limite de propriété</div></td>
-            <td>Mairie de Sainte-Ombre, Groupement Riverains</td>
-            <td>Mise en service 2027</td>
-            <td><span class="pos pos--neutral">Ouvert</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Réunion d'information annuelle avec le comité de suivi</div></td>
-            <td>Mairie de Sainte-Ombre</td>
-            <td>Annuel</td>
-            <td><span class="pos pos--fav">En cours</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Compensation écologique — 3 ha de haies bocagères</div></td>
-            <td>Chambre d'agriculture</td>
-            <td>28/02/2028</td>
-            <td><span class="pos pos--neutral">Ouvert</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- VUE ACTIONS -->
-  <div class="view" id="view-actions">
-    <div class="panel">
-      <div class="panel__head">Actions <span>· Projet Solaire Nord · 4 ouvertes</span></div>
-      <table>
-        <thead><tr><th>Titre</th><th>Priorité</th><th>Échéance</th><th>Responsable</th><th>Statut</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="sh-name">Répondre aux questions sur la ressource en eau</div><div class="sh-sub">Issue de l'échange du 12/08/2026</div></td>
-            <td><span class="prio prio--critical">Critique</span></td>
-            <td class="overdue">28/08/2026 (retard)</td>
-            <td>Camille Aubert</td>
-            <td><span class="astatus as-progress">En cours</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Relancer la Préfecture avant publication</div><div class="sh-sub">Issue de la communication liée</div></td>
-            <td><span class="prio prio--high">Haute</span></td>
-            <td>15/10/2026</td>
-            <td>Camille Aubert</td>
-            <td><span class="astatus as-todo">À faire</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Organiser une réunion avec le Groupement Riverains</div></td>
-            <td><span class="prio prio--medium">Moyenne</span></td>
-            <td>10/11/2026</td>
-            <td>Camille Aubert</td>
-            <td><span class="astatus as-todo">À faire</span></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Valider le message clé sur le raccordement réseau</div></td>
-            <td><span class="prio prio--low">Faible</span></td>
-            <td>30/09/2026</td>
-            <td>Denis Léotard</td>
-            <td><span class="astatus as-done">Terminé</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- VUE PARCOURS RÉGLEMENTAIRE -->
-  <div class="view" id="view-parcours">
-    <div class="panel">
-      <div class="panel__head">Parcours réglementaire <span>· Projet Solaire Nord</span></div>
-      <div class="timeline">
-        <div class="tl-item"><span class="tl-dot tl-dot--done"></span><div class="tl-label">Publication des caractéristiques</div><div class="tl-name">Dossier préalable publié</div><div class="tl-date">15 janvier 2026 · ✓ Fait</div></div>
-        <div class="tl-item"><span class="tl-dot tl-dot--done"></span><div class="tl-label">Saisine &amp; décision CNDP</div><div class="tl-name">Concertation préalable retenue</div><div class="tl-date">10 mars 2026 · ✓ Fait</div></div>
-        <div class="tl-item"><span class="tl-dot tl-dot--done"></span><div class="tl-label">Concertation préalable</div><div class="tl-name">Ouverture → clôture</div><div class="tl-date">5 mai – 20 juillet 2026 · ✓ Fait</div></div>
-        <div class="tl-item"><span class="tl-dot tl-dot--progress"></span><div class="tl-label">Bilan de la concertation</div><div class="tl-name">Rédaction en cours</div><div class="tl-date">Attendu 15 septembre 2026 · ⧗ En cours</div><div class="tl-check">☑ 2/4 actions de la checklist réalisées</div></div>
-        <div class="tl-item"><span class="tl-dot tl-dot--todo"></span><div class="tl-label">Dépôt du dossier</div><div class="tl-name">Demande d'autorisation environnementale</div><div class="tl-date">À venir</div></div>
-        <div class="tl-item"><span class="tl-dot tl-dot--todo"></span><div class="tl-label">Enquête publique</div><div class="tl-name">Non planifiée</div><div class="tl-date">À venir</div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- VUE REPORTING -->
-  <div class="view" id="view-reporting">
-    <div class="panel__head" style="background:none;border:none;padding:0 0 14px;">Reporting <span>· Projet Solaire Nord · synthèse générée à chaque visite</span></div>
-    <div class="kpi-grid">
-      <div class="kpi-mini"><div class="kpi-mini__label">Parties prenantes</div><div class="kpi-mini__n">5</div></div>
-      <div class="kpi-mini"><div class="kpi-mini__label">Actions en retard</div><div class="kpi-mini__n" style="color:var(--critical)">1</div><div class="kpi-mini__hint">sur 4 action(s) au total</div></div>
-      <div class="kpi-mini"><div class="kpi-mini__label">Risques critiques</div><div class="kpi-mini__n" style="color:var(--critical)">1</div><div class="kpi-mini__hint">sur 3 risque(s)/opportunité(s) au total</div></div>
-      <div class="kpi-mini"><div class="kpi-mini__label">Questions en attente</div><div class="kpi-mini__n">0</div><div class="kpi-mini__hint">sur 6 question(s) au total</div></div>
-    </div>
-    <div class="reporting-grid">
-      <div class="panel" style="margin-bottom:0;">
-        <div class="panel__head">Actions par statut</div>
-        <div class="bbars">
-          <div class="bbar-row"><span class="bbar-label">À faire</span><span class="bbar-track"><span class="bbar-fill" style="width:50%;background:var(--muted)"></span></span><span class="bbar-n">2</span></div>
-          <div class="bbar-row"><span class="bbar-label">En cours</span><span class="bbar-track"><span class="bbar-fill" style="width:25%;background:var(--primary)"></span></span><span class="bbar-n">1</span></div>
-          <div class="bbar-row"><span class="bbar-label">Terminé</span><span class="bbar-track"><span class="bbar-fill" style="width:25%;background:var(--stable)"></span></span><span class="bbar-n">1</span></div>
+      <!-- PAGE ÉQUIPE -->
+      <div class="page" id="page-equipe">
+        <div class="panel__head" style="background:none;border:none;padding:0 0 16px;font-size:16px;">Équipe <span>· Charge de travail par personne</span></div>
+        <div class="panel">
+          <table>
+            <thead><tr><th>Personne</th><th>Rôle</th><th>Projets</th><th>Charge assignée</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="sh-name">Camille Aubert</div></td>
+                <td>Responsable de projet</td>
+                <td>Solaire Nord, Hydrogène Vallée</td>
+                <td>5 actions · 2 risques · 1 engagement<div class="eq-bar"><div class="eq-bar__fill" style="width:78%"></div></div></td>
+              </tr>
+              <tr>
+                <td><div class="sh-name">Julien Faure</div></td>
+                <td>Contributeur · Communication</td>
+                <td>Solaire Nord, Éolien Littoral</td>
+                <td>3 communications · 2 actions<div class="eq-bar"><div class="eq-bar__fill" style="width:45%"></div></div></td>
+              </tr>
+              <tr>
+                <td><div class="sh-name">Sophie Renard</div></td>
+                <td>Contributeur · Affaires publiques</td>
+                <td>Agrivoltaïque Plateau</td>
+                <td>4 actions · 1 risque<div class="eq-bar"><div class="eq-bar__fill" style="width:52%"></div></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="panel__head">Demandes de création de compte <span>· 1 en attente</span></div>
+          <div class="req-row">
+            <div>
+              <div class="req-name">Nadia Berger</div>
+              <div class="req-email">n.berger@sainte-ombre.fr</div>
+              <div class="req-meta">Demandé par Camille Aubert pour <strong style="color:var(--fg);font-weight:600;">Solaire Nord</strong> · Rôle souhaité : Contributeur · Chargée de mission environnement</div>
+            </div>
+            <div class="req-actions">
+              <button class="req-btn req-btn--ok">✓ Créer le compte</button>
+              <button class="req-btn req-btn--no">✕ Refuser</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="panel" style="margin-bottom:0;">
-        <div class="panel__head">Risques &amp; opportunités</div>
-        <div class="bbars">
-          <div class="bbar-row"><span class="bbar-label">Sous surveillance</span><span class="bbar-track"><span class="bbar-fill" style="width:34%;background:var(--risk)"></span></span><span class="bbar-n">1</span></div>
-          <div class="bbar-row"><span class="bbar-label">Ouvert</span><span class="bbar-track"><span class="bbar-fill" style="width:34%;background:var(--vigilance)"></span></span><span class="bbar-n">1</span></div>
-          <div class="bbar-row"><span class="bbar-label">Atténué</span><span class="bbar-track"><span class="bbar-fill" style="width:34%;background:var(--stable)"></span></span><span class="bbar-n">1</span></div>
-        </div>
-      </div>
-    </div>
-    <p class="reporting-hint">→ Chaque ligne renvoie vers la liste correspondante, déjà filtrée sur la valeur cliquée.</p>
-  </div>
 
-  <!-- VUE ÉQUIPE -->
-  <div class="view" id="view-equipe">
-    <div class="panel">
-      <div class="panel__head">Équipe <span>· Charge de travail par personne</span></div>
-      <table>
-        <thead><tr><th>Personne</th><th>Rôle</th><th>Projets</th><th>Charge assignée</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="sh-name">Camille Aubert</div></td>
-            <td>Responsable de projet</td>
-            <td>Solaire Nord, Hydrogène Vallée</td>
-            <td>5 actions · 2 risques · 1 engagement<div class="eq-bar"><div class="eq-bar__fill" style="width:78%"></div></div></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Julien Faure</div></td>
-            <td>Contributeur · Communication</td>
-            <td>Solaire Nord, Éolien Littoral</td>
-            <td>3 communications · 2 actions<div class="eq-bar"><div class="eq-bar__fill" style="width:45%"></div></div></td>
-          </tr>
-          <tr>
-            <td><div class="sh-name">Sophie Renard</div></td>
-            <td>Contributeur · Affaires publiques</td>
-            <td>Agrivoltaïque Plateau</td>
-            <td>4 actions · 1 risque<div class="eq-bar"><div class="eq-bar__fill" style="width:52%"></div></div></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <!-- PAGE PROJET — onglets internes -->
+      <div class="page" id="page-project">
+        <div class="ph-top">
+          <div>
+            <div class="ph-title">Projet Solaire Nord <span class="badge badge--vigilance">⚠ Sous vigilance</span></div>
+            <p class="ph-desc">Centrale photovoltaïque au sol, 18 MWc — commune fictive de Sainte-Ombre, Grand Est.</p>
+            <div class="ph-meta">
+              <span>📍 Sainte-Ombre, Grand Est</span>
+              <span>👤 Camille Aubert</span>
+              <span class="pill">☀️ Solaire</span>
+              <span class="pill">📋 Concertation</span>
+            </div>
+          </div>
+          <div class="gauge-card">
+            <div class="gauge">
+              <svg width="76" height="76" viewBox="0 0 76 76">
+                <circle cx="38" cy="38" r="33" fill="none" stroke="#eef1f6" stroke-width="6"/>
+                <circle cx="38" cy="38" r="33" fill="none" stroke="#f5a623" stroke-width="6" stroke-linecap="round"
+                  stroke-dasharray="207.3" stroke-dashoffset="95.4"/>
+              </svg>
+              <div class="gauge__n">54</div>
+            </div>
+            <div>
+              <div class="gauge__label">Acceptabilité territoriale</div>
+              <div class="gauge__level">⚠ Situation sous contrôle</div>
+            </div>
+          </div>
+        </div>
 
-    <div class="panel">
-      <div class="panel__head">Demandes de création de compte <span>· 1 en attente</span></div>
-      <div class="req-row">
-        <div>
-          <div class="req-name">Nadia Berger</div>
-          <div class="req-email">n.berger@sainte-ombre.fr</div>
-          <div class="req-meta">Demandé par Camille Aubert pour <strong style="color:var(--fg);font-weight:600;">Solaire Nord</strong> · Rôle souhaité : Contributeur · Chargée de mission environnement</div>
+        <div class="retenir">
+          <div class="retenir__label">À retenir</div>
+          <div class="retenir__row">
+            <span class="retenir__item"><span class="dot" style="background:var(--vigilance)"></span>Situation sous contrôle</span>
+            <span class="retenir__item"><span class="dot" style="background:var(--critical)"></span>4 alertes à traiter</span>
+          </div>
         </div>
-        <div class="req-actions">
-          <button class="req-btn req-btn--ok">✓ Créer le compte</button>
-          <button class="req-btn req-btn--no">✕ Refuser</button>
+
+        <div class="ptabs">
+          <button class="ptab active" onclick="showView('generale', this)">Vue générale</button>
+          <button class="ptab" onclick="showView('parties', this)">Parties prenantes</button>
+          <button class="ptab" onclick="showView('risques', this)">Risques</button>
+          <button class="ptab" onclick="showView('communication', this)">Communication</button>
+          <button class="ptab" onclick="showView('engagements', this)">Engagements</button>
+          <button class="ptab" onclick="showView('actions', this)">Actions</button>
+          <button class="ptab" onclick="showView('parcours', this)">Parcours</button>
+          <button class="ptab" onclick="showView('reporting', this)">Reporting</button>
         </div>
+
+        <!-- VUE GÉNÉRALE -->
+        <div class="view active" id="view-generale">
+          <div class="panel">
+            <div class="panel__head">Alertes <span>· 4 à traiter</span></div>
+            <div class="alert-row"><div class="alert-row__text"><span class="dot" style="background:var(--critical)"></span>Risque « Opposition sur la ressource en eau » évalué critique (probabilité 4/5, impact 4/5).</div><div class="alert-actions"><span class="al-icon">✓</span><span class="al-icon">🗄</span></div></div>
+            <div class="alert-row"><div class="alert-row__text"><span class="dot" style="background:var(--critical)"></span>L'action « Répondre aux questions sur la ressource » est en retard de 6 jours.</div><div class="alert-actions"><span class="al-icon">✓</span><span class="al-icon">🗄</span></div></div>
+            <div class="alert-row"><div class="alert-row__text"><span class="dot" style="background:var(--critical)"></span>Association Vallée Vivante (influence 4/5) en position Opposé sur le projet.</div><div class="alert-actions"><span class="al-btn">↗ Échange</span><span class="al-icon">✓</span><span class="al-icon">🗄</span></div></div>
+            <div class="alert-row"><div class="alert-row__text"><span class="dot" style="background:#0055b8"></span>Aucun échange consigné avec la Préfecture depuis le début de la concertation.</div><div class="alert-actions"><span class="al-btn">↗ Échange</span><span class="al-icon">✓</span><span class="al-icon">🗄</span></div></div>
+          </div>
+        </div>
+
+        <!-- VUE PARTIES PRENANTES -->
+        <div class="view" id="view-parties">
+          <div class="panel">
+            <div class="panel__head">Parties prenantes <span>· 5 associées à ce projet</span></div>
+            <table>
+              <thead><tr><th>Nom</th><th>Catégorie</th><th>Contact</th><th>Infl.</th><th>Position</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="sh-name">Mairie de Sainte-Ombre</div><div class="sh-sub">Denis Léotard · Maire</div></td>
+                  <td>Institution</td>
+                  <td><div class="contact-icons">✉ 📞 ✎</div></td>
+                  <td>5/5</td>
+                  <td><span class="pos pos--fav">👍 Favorable</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Préfecture du Grand Est</div></td>
+                  <td>Institution</td>
+                  <td><div class="contact-icons">+</div></td>
+                  <td>5/5</td>
+                  <td><span class="pos pos--neutral">— Neutre</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Association Vallée Vivante</div></td>
+                  <td>Association · ONG</td>
+                  <td><div class="contact-icons">+</div></td>
+                  <td>4/5</td>
+                  <td><span class="pos pos--opp">👎 Opposé</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Chambre d'agriculture</div></td>
+                  <td>Institution</td>
+                  <td><div class="contact-icons">✉ +</div></td>
+                  <td>3/5</td>
+                  <td><span class="pos pos--fav">↑ Plutôt favorable</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Groupement Riverains Sainte-Ombre</div></td>
+                  <td>Collectif</td>
+                  <td><div class="contact-icons">+</div></td>
+                  <td>3/5</td>
+                  <td><span class="pos pos--neutral">— Neutre</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- VUE RISQUES -->
+        <div class="view" id="view-risques">
+          <div class="panel">
+            <div class="panel__head">Risques &amp; opportunités <span>· 3 ouverts</span></div>
+            <table>
+              <thead><tr><th>Titre</th><th>Type</th><th>Criticité</th><th>Tendance</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="sh-name">Opposition sur la ressource en eau</div><div class="sh-sub">Probabilité 4/5 × impact 4/5</div></td>
+                  <td>Risque</td>
+                  <td><span class="crit crit--high">16/25</span></td>
+                  <td>↘ Dégradation</td>
+                  <td><span class="pos pos--opp">Sous surveillance</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Financement participatif local</div><div class="sh-sub">Probabilité 3/5 × impact 3/5</div></td>
+                  <td>Opportunité</td>
+                  <td><span class="crit crit--mid">9/25</span></td>
+                  <td>→ Stable</td>
+                  <td><span class="pos pos--fav">Ouvert</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Retard de raccordement au réseau</div><div class="sh-sub">Probabilité 3/5 × impact 2/5</div></td>
+                  <td>Risque</td>
+                  <td><span class="crit crit--low">6/25</span></td>
+                  <td>→ Stable</td>
+                  <td><span class="pos pos--neutral">Atténué</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- VUE COMMUNICATION -->
+        <div class="view" id="view-communication">
+          <div class="panel">
+            <div class="panel__head">Communication <span>· Calendrier éditorial</span></div>
+            <table>
+              <thead><tr><th>Titre</th><th>Catégorie</th><th>Statut</th><th>Date prévue</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="sh-name">Réponse aux questions sur la ressource en eau</div></td>
+                  <td>Sensible</td>
+                  <td><span class="cstatus cs-published">Publié</span></td>
+                  <td>03/09/2026</td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Lettre d'information n°3</div></td>
+                  <td>Newsletter</td>
+                  <td><span class="cstatus cs-validated">Validé</span></td>
+                  <td>12/10/2026</td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Communiqué — lancement des travaux</div></td>
+                  <td>Communiqué de presse</td>
+                  <td><span class="cstatus cs-review">En validation</span></td>
+                  <td>28/10/2026</td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">FAQ mise à jour — impacts agricoles</div></td>
+                  <td>FAQ</td>
+                  <td><span class="cstatus cs-prep">À préparer</span></td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Point d'étape réseaux sociaux</div></td>
+                  <td>Digitale</td>
+                  <td><span class="cstatus cs-idea">Idée</span></td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="panel">
+            <div class="panel__head">Questions &amp; avis du public <span>· 1 en attente de réponse</span></div>
+            <div class="qa-block">
+              <div class="qa-q__label">Question reçue — 04/09/2026</div>
+              <div class="qa-q__text">« Le chantier va-t-il augmenter le trafic de camions sur la route de Sainte-Ombre pendant les travaux ? »</div>
+              <div class="qa-ai">
+                <div class="qa-ai__label">✨ Réponse suggérée (IA)</div>
+                <div class="qa-ai__text">Merci pour votre question. Le chantier générera effectivement une augmentation temporaire du trafic de poids lourds sur cet axe, principalement lors de la phase de terrassement et d'acheminement des panneaux. Les itinéraires précis et leurs horaires seront communiqués aux riverains avant le démarrage des travaux.</div>
+                <div class="qa-ai__note">Brouillon ancré sur le message clé validé « Trafic chantier » — à relire et compléter avant d'enregistrer, jamais publié automatiquement.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VUE ENGAGEMENTS -->
+        <div class="view" id="view-engagements">
+          <div class="panel">
+            <div class="panel__head">Engagements <span>· 3 en cours</span></div>
+            <table>
+              <thead><tr><th>Description</th><th>Parties prenantes</th><th>Échéance</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="sh-name">Maintenir le bruit sous 45 dB(A) en limite de propriété</div></td>
+                  <td>Mairie de Sainte-Ombre, Groupement Riverains</td>
+                  <td>Mise en service 2027</td>
+                  <td><span class="pos pos--neutral">Ouvert</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Réunion d'information annuelle avec le comité de suivi</div></td>
+                  <td>Mairie de Sainte-Ombre</td>
+                  <td>Annuel</td>
+                  <td><span class="pos pos--fav">En cours</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Compensation écologique — 3 ha de haies bocagères</div></td>
+                  <td>Chambre d'agriculture</td>
+                  <td>28/02/2028</td>
+                  <td><span class="pos pos--neutral">Ouvert</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- VUE ACTIONS -->
+        <div class="view" id="view-actions">
+          <div class="panel">
+            <div class="panel__head">Actions <span>· 4 ouvertes</span></div>
+            <table>
+              <thead><tr><th>Titre</th><th>Priorité</th><th>Échéance</th><th>Responsable</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="sh-name">Répondre aux questions sur la ressource en eau</div><div class="sh-sub">Issue de l'échange du 12/08/2026</div></td>
+                  <td><span class="prio prio--critical">Critique</span></td>
+                  <td class="overdue">28/08/2026 (retard)</td>
+                  <td>Camille Aubert</td>
+                  <td><span class="astatus as-progress">En cours</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Relancer la Préfecture avant publication</div><div class="sh-sub">Issue de la communication liée</div></td>
+                  <td><span class="prio prio--high">Haute</span></td>
+                  <td>15/10/2026</td>
+                  <td>Camille Aubert</td>
+                  <td><span class="astatus as-todo">À faire</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Organiser une réunion avec le Groupement Riverains</div></td>
+                  <td><span class="prio prio--medium">Moyenne</span></td>
+                  <td>10/11/2026</td>
+                  <td>Camille Aubert</td>
+                  <td><span class="astatus as-todo">À faire</span></td>
+                </tr>
+                <tr>
+                  <td><div class="sh-name">Valider le message clé sur le raccordement réseau</div></td>
+                  <td><span class="prio prio--low">Faible</span></td>
+                  <td>30/09/2026</td>
+                  <td>Denis Léotard</td>
+                  <td><span class="astatus as-done">Terminé</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- VUE PARCOURS -->
+        <div class="view" id="view-parcours">
+          <div class="panel">
+            <div class="panel__head">Parcours réglementaire</div>
+            <div class="timeline">
+              <div class="tl-item"><span class="tl-dot tl-dot--done"></span><div class="tl-label">Publication des caractéristiques</div><div class="tl-name">Dossier préalable publié</div><div class="tl-date">15 janvier 2026 · ✓ Fait</div></div>
+              <div class="tl-item"><span class="tl-dot tl-dot--done"></span><div class="tl-label">Saisine &amp; décision CNDP</div><div class="tl-name">Concertation préalable retenue</div><div class="tl-date">10 mars 2026 · ✓ Fait</div></div>
+              <div class="tl-item"><span class="tl-dot tl-dot--done"></span><div class="tl-label">Concertation préalable</div><div class="tl-name">Ouverture → clôture</div><div class="tl-date">5 mai – 20 juillet 2026 · ✓ Fait</div></div>
+              <div class="tl-item"><span class="tl-dot tl-dot--progress"></span><div class="tl-label">Bilan de la concertation</div><div class="tl-name">Rédaction en cours</div><div class="tl-date">Attendu 15 septembre 2026 · ⧗ En cours</div><div class="tl-check">☑ 2/4 actions de la checklist réalisées</div></div>
+              <div class="tl-item"><span class="tl-dot tl-dot--todo"></span><div class="tl-label">Dépôt du dossier</div><div class="tl-name">Demande d'autorisation environnementale</div><div class="tl-date">À venir</div></div>
+              <div class="tl-item"><span class="tl-dot tl-dot--todo"></span><div class="tl-label">Enquête publique</div><div class="tl-name">Non planifiée</div><div class="tl-date">À venir</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VUE REPORTING -->
+        <div class="view" id="view-reporting">
+          <div class="kpi-grid">
+            <div class="kpi-mini"><div class="kpi-mini__label">Parties prenantes</div><div class="kpi-mini__n">5</div></div>
+            <div class="kpi-mini"><div class="kpi-mini__label">Actions en retard</div><div class="kpi-mini__n" style="color:var(--critical)">1</div><div class="kpi-mini__hint">sur 4 action(s) au total</div></div>
+            <div class="kpi-mini"><div class="kpi-mini__label">Risques critiques</div><div class="kpi-mini__n" style="color:var(--critical)">1</div><div class="kpi-mini__hint">sur 3 risque(s)/opportunité(s) au total</div></div>
+            <div class="kpi-mini"><div class="kpi-mini__label">Questions en attente</div><div class="kpi-mini__n">0</div><div class="kpi-mini__hint">sur 6 question(s) au total</div></div>
+          </div>
+          <div class="reporting-grid">
+            <div class="panel" style="margin-bottom:0;">
+              <div class="panel__head">Actions par statut</div>
+              <div class="bbars">
+                <div class="bbar-row"><span class="bbar-label">À faire</span><span class="bbar-track"><span class="bbar-fill" style="width:50%;background:var(--muted)"></span></span><span class="bbar-n">2</span></div>
+                <div class="bbar-row"><span class="bbar-label">En cours</span><span class="bbar-track"><span class="bbar-fill" style="width:25%;background:#0055b8"></span></span><span class="bbar-n">1</span></div>
+                <div class="bbar-row"><span class="bbar-label">Terminé</span><span class="bbar-track"><span class="bbar-fill" style="width:25%;background:var(--stable)"></span></span><span class="bbar-n">1</span></div>
+              </div>
+            </div>
+            <div class="panel" style="margin-bottom:0;">
+              <div class="panel__head">Risques &amp; opportunités</div>
+              <div class="bbars">
+                <div class="bbar-row"><span class="bbar-label">Sous surveillance</span><span class="bbar-track"><span class="bbar-fill" style="width:34%;background:var(--risk)"></span></span><span class="bbar-n">1</span></div>
+                <div class="bbar-row"><span class="bbar-label">Ouvert</span><span class="bbar-track"><span class="bbar-fill" style="width:34%;background:var(--vigilance)"></span></span><span class="bbar-n">1</span></div>
+                <div class="bbar-row"><span class="bbar-label">Atténué</span><span class="bbar-track"><span class="bbar-fill" style="width:34%;background:var(--stable)"></span></span><span class="bbar-n">1</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="reporting-hint">→ Chaque ligne renvoie vers la liste correspondante, déjà filtrée sur la valeur cliquée.</p>
+        </div>
+
       </div>
+
     </div>
   </div>
 
@@ -557,10 +646,21 @@ tr:last-child td{border-bottom:none;}
 <p class="footer-note">Pierre-Olivier Lemoine · NorthIA — <a href="/portfolio/concertation-territoriale.html" style="color:#5E95C8;">← Retour au projet</a></p>
 
 <script>
+function showTop(id, btn){
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(function(i){ i.classList.remove('active'); });
+  document.querySelector('.sb-project').classList.remove('active');
+  if (id === 'project') {
+    document.querySelector('.sb-project').classList.add('active');
+  } else if (btn) {
+    btn.classList.add('active');
+  }
+}
 function showView(id, btn){
   document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
   document.getElementById('view-' + id).classList.add('active');
-  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.ptab').forEach(function(t){ t.classList.remove('active'); });
   btn.classList.add('active');
 }
 </script>
