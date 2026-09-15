@@ -182,7 +182,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <div class="metric"><span class="metric__n">5</span><span class="metric__l">modules reliés</span></div>
     <div class="metric"><span class="metric__n">17</span><span class="metric__l">projets réels suivis</span></div>
     <div class="metric"><span class="metric__n">12</span><span class="metric__l">types d'alertes</span></div>
-    <div class="metric"><span class="metric__n">60</span><span class="metric__l">tests automatisés</span></div>
+    <div class="metric"><span class="metric__n">73</span><span class="metric__l">tests automatisés</span></div>
   </div>
   <div class="hero__time">Avant : suivi éparpillé entre tableurs, e-mails et mémoire. <strong>Après : un tableau de bord unique, à jour.</strong></div>
 </div>
@@ -190,12 +190,12 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 <div class="scale-band">
   <div class="scale-band__label">L'ampleur du chantier — mesurée sur l'historique réel du dépôt, pas une estimation</div>
   <div class="scale-band__grid">
-    <div class="scale-stat"><span class="scale-stat__n">157</span><span class="scale-stat__l">commits</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">37 091</span><span class="scale-stat__l">lignes de TypeScript</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">208</span><span class="scale-stat__l">commits</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">43 966</span><span class="scale-stat__l">lignes de TypeScript</span></div>
     <div class="scale-stat"><span class="scale-stat__n">76</span><span class="scale-stat__l">pages / écrans</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">26</span><span class="scale-stat__l">migrations de schéma</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">381</span><span class="scale-stat__l">fichiers</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">8</span><span class="scale-stat__l">jours de développement intensif</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">7</span><span class="scale-stat__l">migrations de schéma</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">417</span><span class="scale-stat__l">fichiers</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">11</span><span class="scale-stat__l">jours de développement intensif</span></div>
   </div>
 </div>
 
@@ -259,6 +259,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <div class="feat-card"><div class="feat-card__icon">🔍</div><div class="feat-card__title">Détection de doublons</div><div class="feat-card__text">Une même personne repérée sous deux fiches, ou déjà contact d'une autre partie prenante — signalé avant de recréer un doublon.</div></div>
     <div class="feat-card"><div class="feat-card__icon">✎</div><div class="feat-card__title">Édition en ligne</div><div class="feat-card__text">Statut, priorité, échéance, responsable — modifiables directement depuis la liste, sans ouvrir un formulaire complet.</div></div>
     <div class="feat-card"><div class="feat-card__icon">☎</div><div class="feat-card__title">Contacts en un clic</div><div class="feat-card__text">Appeler ou écrire à une partie prenante directement depuis le tableau — sans ouvrir sa fiche.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🙋</div><div class="feat-card__title">Demande de compte en libre-service</div><div class="feat-card__text">Un responsable de projet fait remonter un besoin d'accès sans jamais quitter l'application ni écrire un e-mail — l'admin valide, le rattachement à l'équipe du projet se fait tout seul.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">💬</div><div class="feat-card__title">Brouillon de réponse au public</div><div class="feat-card__text">Sur une question ou un avis déposé, un brouillon de réponse s'appuie sur le message clé déjà validé — sans jamais inventer un fait ou un chiffre qui n'y figure pas.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">📈</div><div class="feat-card__title">Reporting interactif</div><div class="feat-card__text">Chaque graphique de répartition (statuts, positions, canaux) renvoie vers la liste filtrée correspondante, en un clic.</div></div>
   </div>
 </div>
 
@@ -286,6 +289,8 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <div class="challenge"><div class="ctitle">Un score calculé qui ne doit jamais mentir sur son absence</div><div class="cbody">Sans aucune partie prenante ni risque renseigné, le score d'acceptabilité retombait sur sa base neutre (70) — un chiffre qui avait l'air d'une vraie évaluation. Ajout d'un indicateur explicite « pas encore de données » pour ne jamais confondre un calcul vide avec un résultat favorable.</div></div>
     <div class="challenge"><div class="ctitle">Le bon contact masqué par le mauvais champ</div><div class="cbody">Un contact nommé (ex. le maire d'une commune) pouvait être éclipsé dans l'affichage par un champ générique de la partie prenante laissé vide puis renseigné par erreur — corrigé en donnant toujours la priorité au contact le plus spécifique.</div></div>
     <div class="challenge"><div class="ctitle">Import de données réelles sans rien inventer</div><div class="cbody">17 projets réels importés avec leurs jalons réglementaires, intervenants et documents officiels — uniquement des faits publiquement sourcés (sites de concertation, décisions CNDP) ; jamais de partie prenante ou de risque fabriqué faute de base pour l'évaluer honnêtement.</div></div>
+    <div class="challenge"><div class="ctitle">PostgreSQL n'indexe pas une clé étrangère par défaut</div><div class="cbody">Contrairement à une idée reçue, une colonne <span class="ccode">projectId</span> n'est indexée automatiquement par aucun moteur PostgreSQL — or c'est le filtre le plus répété de toute l'application. Invisible avec 17 projets réels, mais un balayage séquentiel complet à chaque requête dès que le volume grossit. Audit exhaustif des 30 modèles du schéma, 13 index ajoutés sur les tables qui n'étaient pas déjà couvertes par une contrainte d'unicité existante.</div></div>
+    <div class="challenge"><div class="ctitle">Pas de débordement horizontal, mais illisible sur téléphone</div><div class="cbody">Un en-tête « phrase de contexte + bouton(s) » sans <span class="ccode">flex-wrap</span> ne débordait pas de l'écran (aucune alerte des vérifications automatiques classiques) — il comprimait le texte sur 4-5 lignes étroites à côté d'un bouton resté sur une seule ligne. Repéré en testant en vrai à 375px de large, pas en relisant le code.</div></div>
   </div>
 </div>
 
@@ -297,12 +302,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <tbody>
       <tr><td>Framework</td><td class="mono-td">Next.js 16 · App Router · Server Actions</td></tr>
       <tr><td>Langage</td><td class="mono-td">TypeScript</td></tr>
-      <tr><td>Base de données</td><td class="mono-td">Prisma ORM · SQLite</td></tr>
+      <tr><td>Base de données</td><td class="mono-td">Prisma ORM · PostgreSQL (Neon)</td></tr>
       <tr><td>Authentification</td><td class="mono-td">Auth.js (NextAuth v5)</td></tr>
       <tr><td>IA</td><td class="mono-td">Claude API · Anthropic</td></tr>
       <tr><td>Interface</td><td class="mono-td">Tailwind CSS · Base UI</td></tr>
       <tr><td>Cartographie</td><td class="mono-td">Leaflet · OpenStreetMap</td></tr>
-      <tr><td>Tests</td><td class="mono-td">Vitest — 60 tests automatisés</td></tr>
+      <tr><td>Hébergement</td><td class="mono-td">Vercel</td></tr>
+      <tr><td>Tests</td><td class="mono-td">Vitest — 73 tests automatisés</td></tr>
     </tbody>
   </table>
 </div>
@@ -312,7 +318,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <h2 class="stitle">Ce que ça produit concrètement</h2>
   <div class="results-grid">
     <div class="rcard"><span class="rcard__n">17</span><span class="rcard__l">projets réels importés, jalons réglementaires et documents officiels sourcés publiquement</span></div>
-    <div class="rcard"><span class="rcard__n">60</span><span class="rcard__l">tests automatisés sur les permissions, calculs et validations</span></div>
+    <div class="rcard"><span class="rcard__n">73</span><span class="rcard__l">tests automatisés sur les permissions, calculs et validations</span></div>
     <div class="rcard"><span class="rcard__n">5</span><span class="rcard__l">modules reliés — écoute, réponse, et un module transverse</span></div>
     <div class="rcard"><span class="rcard__n">0</span><span class="rcard__l">note d'acceptabilité saisie à la main — toujours calculée</span></div>
     <div class="rcard"><span class="rcard__n">12</span><span class="rcard__l">types d'alertes proactives sur le portefeuille</span></div>
