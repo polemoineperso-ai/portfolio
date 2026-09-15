@@ -120,6 +120,44 @@ tr:last-child td{border-bottom:none;}
 .eq-bar{height:6px;border-radius:3px;background:var(--secondary);margin-top:6px;overflow:hidden;}
 .eq-bar__fill{height:100%;background:var(--primary);border-radius:3px;}
 
+/* DEMANDE DE COMPTE */
+.req-row{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;}
+.req-row:last-child{border-bottom:none;}
+.req-name{font-weight:600;font-size:13px;}
+.req-email{font-size:11px;color:var(--muted);margin-top:2px;}
+.req-meta{font-size:12px;color:var(--muted);margin-top:6px;}
+.req-actions{display:flex;gap:8px;flex-shrink:0;}
+.req-btn{font-size:11px;font-weight:600;padding:6px 12px;border-radius:6px;border:none;cursor:pointer;white-space:nowrap;}
+.req-btn--ok{background:var(--primary);color:#fff;}
+.req-btn--no{background:transparent;color:var(--muted);border:1px solid var(--border);}
+
+/* QUESTIONS DU PUBLIC — brouillon IA */
+.qa-block{padding:16px 18px;}
+.qa-q__label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.qa-q__text{font-size:13px;color:var(--fg);margin-bottom:14px;line-height:1.6;}
+.qa-ai{background:rgba(77,142,224,.08);border:1px dashed rgba(77,142,224,.35);border-radius:8px;padding:12px 14px;}
+.qa-ai__label{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--primary);margin-bottom:7px;display:flex;align-items:center;gap:5px;}
+.qa-ai__text{font-size:12px;color:var(--fg);line-height:1.65;}
+.qa-ai__note{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic;}
+
+/* REPORTING */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
+.kpi-mini{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 15px;}
+.kpi-mini__label{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+.kpi-mini__n{font-size:22px;font-weight:700;font-family:var(--mono);}
+.kpi-mini__hint{font-size:11px;color:var(--muted);margin-top:3px;}
+.reporting-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.bbars{display:flex;flex-direction:column;gap:9px;padding:16px 18px;}
+.bbar-row{display:flex;align-items:center;gap:10px;font-size:12px;cursor:pointer;border-radius:6px;padding:4px 6px;margin:-4px -6px;transition:background .15s;}
+.bbar-row:hover{background:rgba(77,142,224,.12);}
+.bbar-row:hover .bbar-label{color:var(--primary);}
+.bbar-label{width:112px;flex-shrink:0;color:var(--muted);transition:color .15s;}
+.bbar-track{flex:1;height:7px;border-radius:4px;background:var(--secondary);overflow:hidden;}
+.bbar-fill{height:100%;border-radius:4px;}
+.bbar-n{width:20px;text-align:right;font-weight:700;font-family:var(--mono);flex-shrink:0;}
+.reporting-hint{font-size:11px;color:var(--muted);margin:2px 18px 18px;font-style:italic;}
+@media(max-width:640px){.kpi-grid{grid-template-columns:1fr 1fr;}.reporting-grid{grid-template-columns:1fr;}}
+
 .footer-note{max-width:960px;margin:16px auto 0;text-align:center;font-size:12px;color:#8892a4;font-style:italic;}
 @media(max-width:640px){.shell{padding:18px;}.ph-top{flex-direction:column;}table{font-size:12px;}th,td{padding:9px 10px;}}
 </style>
@@ -128,7 +166,7 @@ tr:last-child td{border-bottom:none;}
 
 <div class="annotation">
   <div class="annotation__dot"></div>
-  <div><strong>Démonstration</strong> — Reconstitution fidèle de l'interface réelle (couleurs, mise en page, composants), 8 écrans couvrant les 5 modules. Projets, parties prenantes et alertes sont fictifs, aucune donnée d'un client réel.</div>
+  <div><strong>Démonstration</strong> — Reconstitution fidèle de l'interface réelle (couleurs, mise en page, composants), 9 écrans couvrant les 5 modules. Projets, parties prenantes et alertes sont fictifs, aucune donnée d'un client réel.</div>
 </div>
 
 <div class="tabs">
@@ -139,6 +177,7 @@ tr:last-child td{border-bottom:none;}
   <button class="tab" onclick="showView('engagements', this)">🤝 Engagements</button>
   <button class="tab" onclick="showView('actions', this)">☑ Actions</button>
   <button class="tab" onclick="showView('parcours', this)">📅 Parcours réglementaire</button>
+  <button class="tab" onclick="showView('reporting', this)">📊 Reporting</button>
   <button class="tab" onclick="showView('equipe', this)">👥 Équipe</button>
 </div>
 
@@ -338,6 +377,19 @@ tr:last-child td{border-bottom:none;}
         </tbody>
       </table>
     </div>
+
+    <div class="panel">
+      <div class="panel__head">Questions &amp; avis du public <span>· 1 en attente de réponse</span></div>
+      <div class="qa-block">
+        <div class="qa-q__label">Question reçue — 04/09/2026</div>
+        <div class="qa-q__text">« Le chantier va-t-il augmenter le trafic de camions sur la route de Sainte-Ombre pendant les travaux ? »</div>
+        <div class="qa-ai">
+          <div class="qa-ai__label">✨ Réponse suggérée (IA)</div>
+          <div class="qa-ai__text">Merci pour votre question. Le chantier générera effectivement une augmentation temporaire du trafic de poids lourds sur cet axe, principalement lors de la phase de terrassement et d'acheminement des panneaux. Les itinéraires précis et leurs horaires seront communiqués aux riverains avant le démarrage des travaux.</div>
+          <div class="qa-ai__note">Brouillon ancré sur le message clé validé « Trafic chantier » — à relire et compléter avant d'enregistrer, jamais publié automatiquement.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- VUE ENGAGEMENTS -->
@@ -425,6 +477,36 @@ tr:last-child td{border-bottom:none;}
     </div>
   </div>
 
+  <!-- VUE REPORTING -->
+  <div class="view" id="view-reporting">
+    <div class="panel__head" style="background:none;border:none;padding:0 0 14px;">Reporting <span>· Projet Solaire Nord · synthèse générée à chaque visite</span></div>
+    <div class="kpi-grid">
+      <div class="kpi-mini"><div class="kpi-mini__label">Parties prenantes</div><div class="kpi-mini__n">5</div></div>
+      <div class="kpi-mini"><div class="kpi-mini__label">Actions en retard</div><div class="kpi-mini__n" style="color:var(--critical)">1</div><div class="kpi-mini__hint">sur 4 action(s) au total</div></div>
+      <div class="kpi-mini"><div class="kpi-mini__label">Risques critiques</div><div class="kpi-mini__n" style="color:var(--critical)">1</div><div class="kpi-mini__hint">sur 3 risque(s)/opportunité(s) au total</div></div>
+      <div class="kpi-mini"><div class="kpi-mini__label">Questions en attente</div><div class="kpi-mini__n">0</div><div class="kpi-mini__hint">sur 6 question(s) au total</div></div>
+    </div>
+    <div class="reporting-grid">
+      <div class="panel" style="margin-bottom:0;">
+        <div class="panel__head">Actions par statut</div>
+        <div class="bbars">
+          <div class="bbar-row"><span class="bbar-label">À faire</span><span class="bbar-track"><span class="bbar-fill" style="width:50%;background:var(--muted)"></span></span><span class="bbar-n">2</span></div>
+          <div class="bbar-row"><span class="bbar-label">En cours</span><span class="bbar-track"><span class="bbar-fill" style="width:25%;background:var(--primary)"></span></span><span class="bbar-n">1</span></div>
+          <div class="bbar-row"><span class="bbar-label">Terminé</span><span class="bbar-track"><span class="bbar-fill" style="width:25%;background:var(--stable)"></span></span><span class="bbar-n">1</span></div>
+        </div>
+      </div>
+      <div class="panel" style="margin-bottom:0;">
+        <div class="panel__head">Risques &amp; opportunités</div>
+        <div class="bbars">
+          <div class="bbar-row"><span class="bbar-label">Sous surveillance</span><span class="bbar-track"><span class="bbar-fill" style="width:34%;background:var(--risk)"></span></span><span class="bbar-n">1</span></div>
+          <div class="bbar-row"><span class="bbar-label">Ouvert</span><span class="bbar-track"><span class="bbar-fill" style="width:34%;background:var(--vigilance)"></span></span><span class="bbar-n">1</span></div>
+          <div class="bbar-row"><span class="bbar-label">Atténué</span><span class="bbar-track"><span class="bbar-fill" style="width:34%;background:var(--stable)"></span></span><span class="bbar-n">1</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="reporting-hint">→ Chaque ligne renvoie vers la liste correspondante, déjà filtrée sur la valeur cliquée.</p>
+  </div>
+
   <!-- VUE ÉQUIPE -->
   <div class="view" id="view-equipe">
     <div class="panel">
@@ -452,6 +534,21 @@ tr:last-child td{border-bottom:none;}
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="panel">
+      <div class="panel__head">Demandes de création de compte <span>· 1 en attente</span></div>
+      <div class="req-row">
+        <div>
+          <div class="req-name">Nadia Berger</div>
+          <div class="req-email">n.berger@sainte-ombre.fr</div>
+          <div class="req-meta">Demandé par Camille Aubert pour <strong style="color:var(--fg);font-weight:600;">Solaire Nord</strong> · Rôle souhaité : Contributeur · Chargée de mission environnement</div>
+        </div>
+        <div class="req-actions">
+          <button class="req-btn req-btn--ok">✓ Créer le compte</button>
+          <button class="req-btn req-btn--no">✕ Refuser</button>
+        </div>
+      </div>
     </div>
   </div>
 
