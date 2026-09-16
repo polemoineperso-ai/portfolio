@@ -39,6 +39,12 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .hero__title em{font-style:italic;color:var(--nia-pink);}
 .hero__author{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:18px;font-family:var(--ui);font-size:11px;letter-spacing:.04em;}
 .hero__sub{font-size:16px;color:rgba(255,255,255,.55);max-width:520px;margin:0 auto 32px;line-height:1.65;}
+.hero__video{margin-bottom:32px;}
+.hero__video-link{position:relative;display:inline-block;width:320px;max-width:100%;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.15);}
+.hero__video-thumb{display:block;width:100%;height:auto;}
+.hero__video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(228,158,198,.92);color:#222;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .15s;}
+.hero__video-link:hover .hero__video-play{background:var(--nia-pink);transform:translate(-50%,-50%) scale(1.08);}
+.hero__video-label{position:absolute;bottom:8px;right:10px;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.05em;color:#fff;background:rgba(0,0,0,.6);padding:3px 8px;border-radius:4px;}
 .hero__principle{display:inline-block;background:rgba(228,158,198,.12);border:1px solid rgba(228,158,198,.25);border-radius:8px;padding:12px 20px;margin-bottom:28px;font-size:13px;color:rgba(255,255,255,.7);max-width:520px;}
 .hero__principle strong{color:var(--nia-pink);}
 .hero__stats{display:flex;justify-content:center;gap:32px;margin-top:0;}
@@ -165,6 +171,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <h1 class="hero__title">L'IA au service<br><em>de la communication</em></h1>
   <p class="hero__author">Pierre-Olivier Lemoine · NorthIA · 2025–2026</p>
   <p class="hero__sub">Six agents, pipelines et applications construits de A à Z — pour automatiser, qualifier et produire là où les communicants perdent le plus de temps.</p>
+  <div class="hero__video">
+    <a href="https://youtu.be/IweqDPSjFzc" target="_blank" rel="noopener" class="hero__video-link">
+      <img src="https://img.youtube.com/vi/IweqDPSjFzc/hqdefault.jpg" alt="Vidéo de présentation : L'IA au service de la communication, par Pierre-Olivier Lemoine" class="hero__video-thumb" loading="lazy">
+      <span class="hero__video-play">▶</span>
+      <span class="hero__video-label">1:27</span>
+    </a>
+  </div>
   <div class="hero__principle"><strong>L'IA est un facilitateur. L'humain reste le décideur.</strong><br>Chaque projet applique la règle 80/20 : l'IA prend en charge le volume, l'humain conserve le jugement et la validation.</div>
   <div style="margin-bottom:24px;">
     <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta" style="display:inline-flex;align-items:center;gap:8px;font-size:11px;">
