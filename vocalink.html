@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vocalink — Capture vocale d'idées · NorthIA · Pierre-Olivier Lemoine</title>
+<meta name="description" content="Application personnelle de capture vocale d'idées : transcription Whisper, classification Claude, routage préparé (projet, e-mail, appel, rappel), synchronisation Notion et Google Tasks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;--nia-pink-dark:#C179A0;--nia-black:#222222;
+  --ink:#1a1d23;--ink-soft:#3d4251;--ink-muted:#8892a4;
+  --paper:#fafbfc;--paper-warm:#f4f2ee;--paper-card:#fff;--line:#e8eaef;
+  --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --display:'Cinzel',Georgia,serif;--ui:'Orbitron',sans-serif;
+  --r:8px;--r-lg:12px;--shadow:0 1px 4px rgba(0,0,0,.06),0 2px 12px rgba(0,0,0,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.northia-nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
+.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
+.northia-nav__logo{height:36px;width:auto;}
+.northia-nav__links{display:flex;align-items:center;gap:4px;}
+.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
+.northia-nav__link:hover{color:var(--nia-pink);background:rgba(255,255,255,.06);}
+.northia-nav__link--active{color:var(--nia-blue);}
+.northia-nav__cta{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
+.northia-nav__cta:hover{background:var(--nia-pink);}
+.northia-nav__cta--contact{background:var(--nia-pink);color:#fff;margin-left:2px;}
+.northia-nav__cta--contact:hover{background:var(--nia-blue);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
+.nav-burger span{width:22px;height:2px;background:rgba(255,255,255,.7);border-radius:2px;}
+.nav-mobile{display:none;position:fixed;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:999;}
+.nav-mobile a{display:block;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
+.nav-mobile a:hover{color:var(--nia-pink);}
+.nav-mobile .nm-contact{color:var(--nia-pink)!important;}
+@media(max-width:640px){
+  .northia-nav{position:fixed!important;top:0;left:0;right:0;z-index:1000;}
+  body{padding-top:58px;}
+  .northia-nav__links{display:none!important;}
+  .nav-burger{display:flex;}
+  .nav-mobile.open{display:block;}
+  .northia-nav{position:relative;}
+}
+.hero{background:var(--nia-black);color:#fff;padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(94,149,200,.35),transparent);pointer-events:none;}
+.hero__tag{display:inline-block;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:20px;}
+.hero__title{font-family:var(--display);font-size:clamp(28px,5vw,46px);font-weight:700;line-height:1.1;margin-bottom:14px;}
+.hero__title em{font-style:italic;color:var(--nia-pink);}
+.hero__sub{font-size:15px;color:rgba(255,255,255,.55);max-width:560px;margin:0 auto 24px;line-height:1.65;}
+.hero__demo{display:inline-flex;align-items:center;gap:8px;background:var(--nia-blue);color:#fff;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.06em;padding:12px 24px;border-radius:6px;text-decoration:none;transition:all .15s;}
+.hero__demo:hover{background:var(--nia-pink);}
+.demo-wrap{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
+.light-pill{display:inline-flex;align-items:center;gap:4px;background:#f5a623;color:#3d2600;font-family:var(--ui);font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:5px 10px;border-radius:20px;white-space:nowrap;}
+.hero__metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.metric{text-align:center;padding:11px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);}
+.metric__n{font-family:var(--ui);font-size:18px;font-weight:700;color:#fff;display:block;}
+.metric__l{font-size:11px;color:rgba(255,255,255,.4);display:block;margin-top:2px;}
+.hero__time{font-size:12px;color:rgba(255,255,255,.35);}
+.hero__time strong{color:var(--nia-blue);}
+.wrap{max-width:700px;margin:0 auto;padding:0 24px;}
+.section{padding:44px 0 0;}
+.section:last-of-type{padding-bottom:72px;}
+.slabel{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
+.stitle{font-family:var(--display);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:12px;letter-spacing:-.01em;}
+.prose{font-size:14px;color:var(--ink-soft);line-height:1.75;max-width:580px;}
+.rule8020{background:var(--nia-black);border-left:4px solid var(--nia-pink);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.rule8020__title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-pink);margin-bottom:8px;}
+.rule8020__text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;}
+.rule8020__text strong{color:#fff;font-weight:700;}
+.flow{display:flex;flex-direction:column;gap:3px;margin-top:20px;}
+.flow-step{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:flex-start;background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.flow-step:hover{border-color:var(--nia-blue);}
+.ficon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.fi-b{background:rgba(94,149,200,.12);border:1px solid rgba(94,149,200,.25);}
+.fi-p{background:rgba(228,158,198,.12);border:1px solid rgba(228,158,198,.25);}
+.fi-a{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);}
+.fname{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.fdesc{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+.fsub{font-size:11px;color:var(--ink-muted);margin-top:4px;font-family:var(--mono);}
+.challenges{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.challenge{background:var(--paper-card);border:1px solid var(--line);border-left:3px solid var(--nia-blue);border-radius:var(--r);padding:14px 16px;}
+.ctitle{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.cbody{font-size:13px;color:var(--ink-soft);line-height:1.65;}
+.ccode{font-family:var(--mono);font-size:11px;background:var(--paper-warm);padding:2px 6px;border-radius:3px;}
+.stack-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;background:var(--paper-card);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);}
+.stack-table th{background:var(--nia-black);color:rgba(255,255,255,.6);font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;text-align:left;}
+.stack-table td{padding:10px 16px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+.stack-table tr:last-child td{border-bottom:none;}
+.stack-table tr:nth-child(odd) td{background:var(--paper-warm);}
+.mono-td{font-family:var(--mono);font-size:12px;}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.rcard{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);}
+.rcard__n{font-family:var(--ui);font-size:22px;font-weight:700;color:var(--nia-blue);display:block;margin-bottom:4px;}
+.rcard__l{font-size:13px;color:var(--ink-soft);line-height:1.5;}
+.nav-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;}
+.nav-btn{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.05em;padding:10px 18px;border-radius:var(--r);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
+.nav-btn--out{border:1px solid var(--line);color:var(--ink-muted);background:var(--paper-card);}
+.nav-btn--out:hover{border-color:var(--nia-blue);color:var(--nia-blue);}
+.nav-btn--pri{background:var(--nia-blue);color:#fff;border:none;}
+.nav-btn--pri:hover{background:var(--nia-blue-dark);}
+.northia-footer{background:#222;border-top:2px solid var(--nia-blue);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.northia-footer__logo{height:28px;width:auto;}
+.northia-footer__name{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
+.northia-footer__sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
+.northia-footer__links{display:flex;gap:14px;}
+.northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
+.northia-footer__lnk:hover{color:var(--nia-pink);}
+.genesis-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;}
+.genesis-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.genesis-card:hover{border-color:var(--nia-blue);}
+.genesis-card--diag{border-top:3px solid var(--nia-blue);}
+.genesis-card--think{border-top:3px solid var(--nia-pink);}
+.genesis-card--result{border-top:3px solid #1a9e6e;}
+.genesis-card__icon{font-size:22px;margin-bottom:8px;}
+.genesis-card__label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
+.genesis-card--diag .genesis-card__label{color:var(--nia-blue);}
+.genesis-card--think .genesis-card__label{color:var(--nia-pink);}
+.genesis-card--result .genesis-card__label{color:#1a9e6e;}
+.genesis-card__text{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;}
+.feat-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;box-shadow:var(--shadow);transition:border-color .18s;}
+.feat-card:hover{border-color:var(--nia-blue);}
+.feat-card__icon{font-size:18px;margin-bottom:8px;}
+.feat-card__title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.feat-card__text{font-size:12px;color:var(--ink-soft);line-height:1.6;}
+@media(max-width:700px){.feat-grid{grid-template-columns:1fr 1fr;}.genesis-grid{grid-template-columns:1fr;}}
+@media(max-width:480px){.feat-grid{grid-template-columns:1fr;}}
+.scale-band{background:linear-gradient(135deg,#16295c,#0d1a3d);padding:32px 24px;text-align:center;border-bottom:2px solid var(--nia-blue);}
+.scale-band__label{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px;}
+.scale-band__grid{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;max-width:900px;margin:0 auto;}
+.scale-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:14px 20px;min-width:110px;}
+.scale-stat__n{font-family:var(--ui);font-size:22px;font-weight:700;color:#fff;display:block;}
+.scale-stat__l{font-size:11px;color:rgba(255,255,255,.5);display:block;margin-top:3px;}
+@media(max-width:640px){.scale-band__grid{gap:8px;}.scale-stat{min-width:90px;padding:10px 12px;}}
+.screen-section{margin:32px 0;padding:24px 0;border-top:1px solid var(--line);text-align:center;}
+.screen-label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:14px;}
+.screen-caption{font-size:12px;color:#8892a4;margin-top:10px;font-style:italic;}
+@media(max-width:600px){.northia-nav__links{display:none;}.results-grid{grid-template-columns:1fr;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
+</style>
+</head>
+<body>
+
+<nav class="northia-nav">
+  <a href="/portfolio/index.html" class="northia-nav__brand">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
+  </a>
+  <div class="northia-nav__links">
+    <a href="/portfolio/concertation-territoriale.html" class="northia-nav__link">Concertation</a>
+    <a href="/portfolio/edlm-linkedin.html" class="northia-nav__link">EDLM LinkedIn</a>
+    <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
+    <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
+    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
+    <a href="/portfolio/photo-collector.html" class="northia-nav__link">Photothèque</a>
+    <a href="/portfolio/vocalink.html" class="northia-nav__link northia-nav__link--active">Vocalink</a>
+    <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta">⬇ Plaquette</a>
+    <a href="mailto:p-o.lemoine@northia.fr" class="northia-nav__cta northia-nav__cta--contact">✉ Me contacter</a>
+  </div>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/portfolio/concertation-territoriale.html">Concertation</a>
+  <a href="/portfolio/edlm-linkedin.html">EDLM LinkedIn</a>
+  <a href="/portfolio/generateur-projet.html">Générateur</a>
+  <a href="/portfolio/agent-veille.html">Agent de veille</a>
+  <a href="/portfolio/newsletter.html">Newsletter IA</a>
+  <a href="/portfolio/photo-collector.html">Photothèque</a>
+  <a href="/portfolio/vocalink.html">Vocalink</a>
+  <a href="/portfolio/plaquette-northia.pdf" download>⬇ Plaquette PDF</a>
+  <a href="mailto:p-o.lemoine@northia.fr" class="nm-contact">✉ Me contacter</a>
+</div>
+
+<div class="hero">
+  <div class="hero__tag">Projet 07 / 07 · Next.js · Capture vocale d'idées</div>
+  <h1 class="hero__title">Vocalink — dire une idée, <em>déclencher une action</em></h1>
+  <p class="hero__sub">Un enregistrement vocal sur téléphone, transcrit et classé automatiquement, prêt à devenir un projet, un e-mail, un appel ou un rappel — synchronisé avec Notion et Google Tasks, avec un digest quotidien pour ne rien laisser filer.</p>
+  <div class="demo-wrap">
+    <a href="/portfolio/mock-vocalink.html" target="_blank" class="hero__demo">🖥 Voir un échantillon de l'interface →</a>
+    <span class="light-pill">⚡ Version light</span>
+  </div>
+  <div class="hero__metrics">
+    <div class="metric"><span class="metric__n">4</span><span class="metric__l">catégories d'action routées</span></div>
+    <div class="metric"><span class="metric__n">2</span><span class="metric__l">synchronisations externes</span></div>
+    <div class="metric"><span class="metric__n">1</span><span class="metric__l">digest quotidien automatique</span></div>
+    <div class="metric"><span class="metric__n">25</span><span class="metric__l">tests automatisés</span></div>
+  </div>
+  <div class="hero__time">Avant : une idée dite à voix haute, puis oubliée avant d'être notée. <strong>Après : transcrite, classée et prête à agir en quelques secondes.</strong></div>
+</div>
+
+<div class="scale-band">
+  <div class="scale-band__label">L'ampleur du chantier — mesurée sur l'historique réel du dépôt, pas une estimation</div>
+  <div class="scale-band__grid">
+    <div class="scale-stat"><span class="scale-stat__n">23</span><span class="scale-stat__l">commits</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">2 085</span><span class="scale-stat__l">lignes de TypeScript</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">59</span><span class="scale-stat__l">fichiers</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">5</span><span class="scale-stat__l">fichiers de tests</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">2</span><span class="scale-stat__l">jours de développement intensif</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="section">
+  <div class="slabel">Genèse du projet</div>
+  <h2 class="stitle">Diagnostic, réflexion, décision</h2>
+  <div class="genesis-grid">
+    <div class="genesis-card genesis-card--diag">
+      <div class="genesis-card__icon">🔍</div>
+      <div class="genesis-card__label">Diagnostic</div>
+      <div class="genesis-card__text">Une idée surgit souvent au pire moment pour l'écrire — en marchant, en conduisant, entre deux réunions. Le temps de sortir le téléphone et de taper une note, l'idée a perdu la moitié de sa substance, ou elle est simplement oubliée. Aucun outil du quotidien ne fait le lien entre « la dire » et « agir dessus ».</div>
+    </div>
+    <div class="genesis-card genesis-card--think">
+      <div class="genesis-card__icon">💡</div>
+      <div class="genesis-card__label">Réflexion</div>
+      <div class="genesis-card__text">Pas un simple mémo vocal : une page web ouverte en un geste, qui transcrit et classe automatiquement selon quatre catégories d'action (projet, e-mail, appel, rappel). Pas de PWA à installer, pas d'automatisation OAuth complexe pour l'envoi — des actions préparées, jamais déclenchées seules.</div>
+    </div>
+    <div class="genesis-card genesis-card--result">
+      <div class="genesis-card__icon">✓</div>
+      <div class="genesis-card__label">Résultat</div>
+      <div class="genesis-card__text">Une application déployée et utilisée au quotidien depuis un iPhone : transcription, classification, regroupement de projets, priorité et échéance, synchronisation Notion et Google Tasks, digest e-mail quotidien, authentification compatible Face ID.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Problème résolu</div>
+  <h2 class="stitle">De l'idée dite à l'action préparée</h2>
+  <p class="prose">Noter une idée à la main, c'est déjà une friction ; la retrouver ensuite dans les bonnes notes, au bon endroit, avec le bon contexte, en est une seconde. La plupart des idées perdues le sont non pas faute d'avoir été capturées, mais faute d'avoir été classées et reliées à une action concrète.</p>
+  <div class="rule8020">
+    <div class="rule8020__title">Règle 80/20 — <strong>L'humain reste le décideur</strong></div>
+    <div class="rule8020__text">L'IA transcrit la voix et propose une classification (catégorie, titre, résumé, priorité, échéance) — <strong>rien n'est envoyé, appelé ou publié automatiquement.</strong> Un e-mail reste un brouillon <span class="ccode">mailto:</span> à valider, un appel un lien à ouvrir, un rappel un lien calendrier à confirmer. Seules les synchronisations Notion et Google Tasks sont automatiques, et elles ne font que refléter une idée déjà relue — jamais agir à la place de l'utilisateur.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Architecture</div>
+  <h2 class="stitle">Comment ça fonctionne</h2>
+  <div class="flow">
+    <div class="flow-step"><div class="ficon fi-b">🎙️</div><div><div class="fname">Capture vocale, sans installation</div><div class="fdesc">Une page web ouverte depuis l'écran d'accueil de l'iPhone — volontairement pas une PWA, pour rester la solution la plus simple qui marche vraiment.</div></div></div>
+    <div class="flow-step"><div class="ficon fi-b">📝</div><div><div class="fname">Transcription</div><div class="fdesc">L'enregistrement est envoyé à l'API Whisper, qui renvoie le texte intégral — toujours affiché en clair, jamais résumé de force, pour ne jamais avoir à ré-écouter un enregistrement long.</div><div class="fsub">OpenAI Whisper</div></div></div>
+    <div class="flow-step"><div class="ficon fi-p">🧠</div><div><div class="fname">Classification</div><div class="fdesc">Claude Haiku extrait, par appel d'outil forcé, la catégorie (projet, e-mail, appel, rappel), un titre, un résumé, des tags, une priorité et une échéance — jamais du texte libre à réinterpréter.</div><div class="fsub">Claude API · Anthropic</div></div></div>
+    <div class="flow-step"><div class="ficon fi-a">🔀</div><div><div class="fname">Routage préparé, pas automatisé</div><div class="fdesc">Selon la catégorie : un brouillon d'e-mail (mailto:), un lien d'appel, un lien calendrier avec échéance, ou un rattachement à un projet existant — toujours une action à valider, jamais un envoi silencieux.</div></div></div>
+    <div class="flow-step"><div class="ficon fi-b">🔄</div><div><div class="fname">Synchronisation externe</div><div class="fdesc">Les idées de catégorie Projet se créent dans Notion ; toutes les idées se synchronisent dans Google Tasks (coché/décoché selon le statut) ; un digest e-mail quotidien signale les idées en attente depuis plus de 3 jours.</div><div class="fsub">Notion API · Google Tasks API · Resend</div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Fonctionnalités</div>
+  <h2 class="stitle">Ce que couvre l'outil</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-card__icon">🗂️</div><div class="feat-card__title">Regroupement de projets</div><div class="feat-card__text">Une idée peut être rattachée manuellement à une autre comme sous-idée d'un même projet, avec garde-fou anti-cycle.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">⏱️</div><div class="feat-card__title">Priorité et échéance</div><div class="feat-card__text">Un champ de date/heure universel, résolu explicitement en fuseau Europe/Paris quelle que soit la localisation du serveur.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🔍</div><div class="feat-card__title">Recherche et filtres</div><div class="feat-card__text">Recherche texte et filtres combinés par catégorie, statut et priorité sur la liste complète des idées.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">📧</div><div class="feat-card__title">Digest quotidien</div><div class="feat-card__text">Un e-mail chaque matin liste les idées en attente depuis plus de 3 jours, triées par priorité puis ancienneté.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🔊</div><div class="feat-card__title">Confirmation vocale</div><div class="feat-card__text">Le résumé généré peut être écouté en synthèse vocale, pour confirmer une idée sans avoir à tout relire à l'écran.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🔐</div><div class="feat-card__title">Authentification Face ID</div><div class="feat-card__text">Formulaire de connexion avec cookie de session, compatible autoremplissage et Face ID — pas de popup Basic Auth natif.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Défis techniques</div>
+  <h2 class="stitle">Les vrais problèmes à résoudre</h2>
+  <div class="challenges">
+    <div class="challenge"><div class="ctitle">Prisma introuvable en production, alors que le fichier existait</div><div class="cbody">Après déploiement sur Vercel, <span class="ccode">PrismaClientInitializationError</span> persistant malgré un moteur bien présent dans le bundle. Cause réelle trouvée après plusieurs fausses pistes : le nouveau générateur ESM <span class="ccode">prisma-client</span> avec un chemin de sortie personnalisé cherchait le fichier à un chemin légèrement décalé sous Turbopack. Résolu en repassant au générateur classique <span class="ccode">prisma-client-js</span>, chemin par défaut.</div></div>
+    <div class="challenge"><div class="ctitle">Une échéance décalée de deux heures en production</div><div class="cbody">Une échéance saisie « 11h » s'enregistrait comme 11h UTC au lieu de 11h Europe/Paris, car <span class="ccode">new Date()</span> interprète une chaîne naïve dans le fuseau du serveur — UTC sur Vercel. Corrigé avec <span class="ccode">date-fns-tz</span> et deux tests de non-régression reproduisant explicitement le scénario CET/CEST.</div></div>
+    <div class="challenge"><div class="ctitle">Le popup d'authentification natif bloquait Face ID</div><div class="cbody">La protection par mot de passe initiale (HTTP Basic Auth) ouvre un popup natif du navigateur qui ne s'intègre à aucun gestionnaire de mots de passe — confirmé en testant en vrai sur iPhone : aucune proposition d'autoremplissage, aucun déclenchement de Face ID. Remplacé par un vrai formulaire HTML avec <span class="ccode">autoComplete="current-password"</span> et un cookie de session.</div></div>
+    <div class="challenge"><div class="ctitle">Autoriser Google Tasks sans exposer de connexion interactive</div><div class="cbody">Contrairement à Notion ou Resend (clé API simple), Google Tasks impose un vrai flux OAuth. Pour une app mono-utilisateur, un script d'autorisation lancé une seule fois, en local, produit un refresh token stocké comme n'importe quel autre secret — l'application déployée ne fait ensuite que des échanges silencieux, sans jamais rouvrir de connexion interactive.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Stack technique</div>
+  <h2 class="stitle">Technologies utilisées</h2>
+  <table class="stack-table">
+    <thead><tr><th>Catégorie</th><th>Outil</th></tr></thead>
+    <tbody>
+      <tr><td>Framework</td><td class="mono-td">Next.js 16 · App Router · Server Actions</td></tr>
+      <tr><td>Langage</td><td class="mono-td">TypeScript</td></tr>
+      <tr><td>Base de données</td><td class="mono-td">Prisma ORM · PostgreSQL (Neon)</td></tr>
+      <tr><td>Transcription</td><td class="mono-td">Whisper API · OpenAI</td></tr>
+      <tr><td>Classification</td><td class="mono-td">Claude Haiku · Anthropic</td></tr>
+      <tr><td>Intégrations</td><td class="mono-td">Notion API · Google Tasks API (OAuth 2.0) · Resend</td></tr>
+      <tr><td>Authentification</td><td class="mono-td">Formulaire + cookie de session (Web Crypto)</td></tr>
+      <tr><td>Hébergement</td><td class="mono-td">Vercel · vocalink.northia.fr</td></tr>
+      <tr><td>Tests</td><td class="mono-td">Vitest — 25 tests automatisés</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="slabel">Résultats</div>
+  <h2 class="stitle">Ce que ça produit concrètement</h2>
+  <div class="results-grid">
+    <div class="rcard"><span class="rcard__n">4</span><span class="rcard__l">catégories d'action routées — projet, e-mail, appel, rappel</span></div>
+    <div class="rcard"><span class="rcard__n">2</span><span class="rcard__l">synchronisations externes automatiques — Notion et Google Tasks</span></div>
+    <div class="rcard"><span class="rcard__n">1</span><span class="rcard__l">digest e-mail quotidien des idées oubliées depuis 3 jours</span></div>
+    <div class="rcard"><span class="rcard__n">0</span><span class="rcard__l">envoi ou appel déclenché automatiquement — toujours un brouillon à valider</span></div>
+    <div class="rcard"><span class="rcard__n">25</span><span class="rcard__l">tests automatisés, dont la régression du fuseau horaire</span></div>
+    <div class="rcard"><span class="rcard__n">180j</span><span class="rcard__l">durée de session avant nouvelle connexion — usage personnel quotidien</span></div>
+  </div>
+</div>
+
+<div class="screen-section">
+  <div class="screen-label">🖥 Interface — accueil et liste des idées, données de démonstration</div>
+  <div class="demo-wrap">
+    <a href="/portfolio/mock-vocalink.html" target="_blank" class="hero__demo" style="background:var(--nia-blue-dark);">Voir un échantillon de l'interface →</a>
+    <span class="light-pill">⚡ Version light</span>
+  </div>
+  <p class="screen-caption">Échantillon simplifié et stylisé (structure et couleurs fidèles, contenu allégé) — capture, liste filtrable, fiche d'idée. <strong style="color:var(--ink);">L'application réelle est protégée par un accès personnel.</strong> Données de démonstration, pas d'idées réelles.</p>
+</div>
+
+<div class="nav-bottom">
+  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
+  <a href="/portfolio/photo-collector.html" class="nav-btn nav-btn--out">← Projet précédent : Photothèque Rédaction IA</a>
+</div>
+
+</div>
+
+<footer class="northia-footer">
+  <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
+  <div><div class="northia-footer__name">Pierre-Olivier Lemoine · NorthIA · 2026</div><div class="northia-footer__sub">Claude Sonnet (Anthropic) · Next.js 16 · TypeScript</div></div>
+  <div class="northia-footer__links">
+    <a href="https://northia.fr" target="_blank" class="northia-footer__lnk">northia.fr</a>
+    <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
+  </div>
+</footer>
+<script>
+function toggleMenu(){var m=document.getElementById('navMobile');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('navMobile');if(m&&!e.target.closest('.nav-burger')&&!e.target.closest('#navMobile'))m.classList.remove('open');});
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mock — Interface · Vocalink · NorthIA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  /* Palette reprise telle quelle de l'app réelle — Tailwind par défaut,
+     volontairement minimale (noir/blanc/gris), pas de thème custom. */
+  --bg:#ffffff;--card:#ffffff;--fg:#111827;--muted:#6b7280;--muted-lt:#9ca3af;--border:#e5e7eb;
+  --black:#000000;--vigilance:#f5a623;
+  --cat-projet:#2563eb;--cat-email:#7c3aed;--cat-appel:#059669;--cat-rappel:#d97706;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#e4e7ee;font-family:var(--font);font-size:14px;color:var(--fg);-webkit-font-smoothing:antialiased;padding:24px 16px 56px;}
+.light-badge{position:fixed;top:16px;right:16px;z-index:999;background:var(--vigilance);color:#3d2600;font-weight:800;font-size:12.5px;letter-spacing:.02em;padding:9px 16px 9px 13px;border-radius:24px;box-shadow:0 6px 20px rgba(0,0,0,.3);display:flex;align-items:center;gap:7px;border:2px solid #fff;}
+.light-badge__ic{font-size:14px;}
+@media(max-width:640px){.light-badge{top:8px;right:8px;font-size:10.5px;padding:7px 12px 7px 10px;}}
+
+.annotation{max-width:920px;margin:0 auto 16px;background:#3d2600;border:1px solid rgba(245,166,35,.4);border-radius:8px;padding:12px 18px;display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,231,194,.85);line-height:1.55;}
+.annotation strong{color:#ffd580;}
+.annotation__dot{width:8px;height:8px;border-radius:50%;background:var(--vigilance);flex-shrink:0;margin-top:6px;}
+
+.stage{max-width:920px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap;align-items:flex-start;}
+
+.tabs{max-width:920px;margin:0 auto 16px;display:flex;gap:6px;justify-content:center;}
+.tab{font-family:var(--font);font-size:12.5px;font-weight:600;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:8px 16px;border-radius:20px;cursor:pointer;transition:all .15s;}
+.tab:hover{color:var(--fg);}
+.tab.active{background:var(--black);color:#fff;border-color:var(--black);}
+
+.phone{width:360px;max-width:100%;background:var(--bg);border-radius:28px;overflow:hidden;box-shadow:0 10px 44px rgba(0,0,0,.22);border:1px solid var(--border);min-height:640px;}
+.phone__notch{height:28px;background:#000;display:flex;align-items:center;justify-content:center;}
+.phone__notch::before{content:'';width:80px;height:6px;background:#333;border-radius:4px;}
+.phone__screen{padding:20px 18px 24px;min-height:600px;}
+.screen{display:none;}
+.screen.active{display:block;}
+
+.app-title{font-size:19px;font-weight:700;margin-bottom:4px;}
+.app-sub{font-size:12px;color:var(--muted);margin-bottom:22px;line-height:1.6;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:12.5px;font-weight:600;border-radius:8px;padding:10px 16px;text-decoration:none;cursor:pointer;border:none;font-family:var(--font);}
+.btn-black{background:var(--black);color:#fff;}
+.btn-outline{background:#fff;color:var(--fg);border:1px solid var(--border);}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.btn-row .btn{flex:1;min-width:140px;}
+.logout{font-size:11.5px;color:var(--muted-lt);text-decoration:underline;background:none;border:none;cursor:pointer;font-family:var(--font);}
+
+.rec-zone{margin-top:28px;text-align:center;}
+.rec-btn{width:88px;height:88px;border-radius:50%;background:#dc2626;border:6px solid #fee2e2;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 4px 18px rgba(220,38,38,.35);}
+.rec-btn__ic{width:26px;height:26px;background:#fff;border-radius:4px;}
+.rec-label{font-size:12px;color:var(--muted);margin-bottom:24px;}
+.transcript-box{background:#f9fafb;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:12.5px;color:var(--fg);line-height:1.6;text-align:left;margin-bottom:16px;}
+.transcript-label{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-lt);margin-bottom:6px;}
+.field{margin-bottom:14px;text-align:left;}
+.field label{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;}
+.field select,.field input{width:100%;font-family:var(--font);font-size:12.5px;padding:8px 10px;border:1px solid var(--border);border-radius:7px;background:#fff;color:var(--fg);}
+.cat-pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;}
+.cat-projet{background:rgba(37,99,235,.1);color:var(--cat-projet);}
+.cat-email{background:rgba(124,58,237,.1);color:var(--cat-email);}
+.cat-appel{background:rgba(5,150,105,.1);color:var(--cat-appel);}
+.cat-rappel{background:rgba(217,119,6,.1);color:var(--cat-rappel);}
+
+.filter-row{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px;}
+.filter-chip{font-size:11px;font-weight:600;padding:5px 11px;border-radius:20px;border:1px solid var(--border);color:var(--muted);white-space:nowrap;background:#fff;}
+.filter-chip.active{background:var(--black);color:#fff;border-color:var(--black);}
+.search-box{width:100%;font-family:var(--font);font-size:12.5px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;margin-bottom:14px;color:var(--muted);}
+
+.idea-card{border:1px solid var(--border);border-radius:10px;padding:13px 14px;margin-bottom:10px;background:#fff;}
+.idea-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;}
+.idea-title{font-size:13px;font-weight:700;line-height:1.4;}
+.idea-summary{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:8px;}
+.idea-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:10.5px;color:var(--muted-lt);}
+.priority-high{color:#dc2626;font-weight:700;}
+.sync-tag{font-size:10px;color:#059669;font-weight:600;}
+.idea-actions{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+.idea-actions .btn{font-size:11px;padding:6px 10px;}
+
+.caption{max-width:920px;margin:18px auto 0;font-size:12px;color:rgba(255,255,255,.55);text-align:center;font-style:italic;}
+</style>
+</head>
+<body>
+
+<div class="light-badge"><span class="light-badge__ic">⚡</span> Version light — échantillon</div>
+
+<div class="annotation">
+  <div class="annotation__dot"></div>
+  <div><strong>Échantillon simplifié et stylisé</strong> (structure et couleurs fidèles à l'application réelle, contenu allégé). Données de démonstration, pas d'idées réelles — l'application déployée est protégée par un accès personnel.</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-screen="home">Accueil</button>
+  <button class="tab" data-screen="capture">Capturer une idée</button>
+  <button class="tab" data-screen="ideas">Mes idées</button>
+</div>
+
+<div class="stage">
+  <div class="phone">
+    <div class="phone__notch"></div>
+    <div class="phone__screen">
+
+      <div class="screen active" id="screen-home">
+        <div class="app-title">Vocalink</div>
+        <div class="app-sub">Dites une idée, elle se transforme en projet, email, appel ou rappel.</div>
+        <div class="btn-row">
+          <span class="btn btn-black">Enregistrer une idée</span>
+          <span class="btn btn-outline">Voir mes idées</span>
+        </div>
+        <span class="btn btn-outline" style="margin-bottom:18px;">Ouvrir Notion ↗</span>
+        <div><button class="logout">Se déconnecter</button></div>
+      </div>
+
+      <div class="screen" id="screen-capture">
+        <div class="app-title" style="font-size:15px;">Nouvelle idée</div>
+        <div class="rec-zone">
+          <div class="rec-btn"><div class="rec-btn__ic"></div></div>
+          <div class="rec-label">Enregistrement en cours… appuyez pour arrêter</div>
+        </div>
+        <div class="transcript-box">
+          <div class="transcript-label">Transcription</div>
+          « Il faut que je relance Marc pour le devis de l'imprimeur avant vendredi, et penser à regrouper ça avec le projet refonte plaquette. »
+        </div>
+        <div class="field">
+          <label>Catégorie détectée</label>
+          <span class="cat-pill cat-rappel">⏰ Rappel</span>
+        </div>
+        <div class="field">
+          <label>Titre</label>
+          <input value="Relancer Marc — devis imprimeur" readonly>
+        </div>
+        <div class="field">
+          <label>Échéance</label>
+          <input value="Vendredi 25 septembre 2026, 9h00" readonly>
+        </div>
+        <div class="btn-row">
+          <span class="btn btn-black" style="flex:1;">Enregistrer</span>
+          <span class="btn btn-outline">🔊</span>
+        </div>
+      </div>
+
+      <div class="screen" id="screen-ideas">
+        <div class="app-title" style="font-size:15px;margin-bottom:12px;">Mes idées</div>
+        <input class="search-box" value="Rechercher…" readonly>
+        <div class="filter-row">
+          <span class="filter-chip active">Toutes</span>
+          <span class="filter-chip">Projet</span>
+          <span class="filter-chip">Email</span>
+          <span class="filter-chip">Appel</span>
+          <span class="filter-chip">Rappel</span>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-top">
+            <div class="idea-title">Relancer Marc — devis imprimeur</div>
+            <span class="cat-pill cat-rappel">Rappel</span>
+          </div>
+          <div class="idea-summary">Relancer avant vendredi pour le devis, regrouper avec refonte plaquette.</div>
+          <div class="idea-meta"><span class="priority-high">● Priorité haute</span><span>· Échéance ven. 25/09</span><span class="sync-tag">✓ Dans Google Tasks</span></div>
+          <div class="idea-actions"><span class="btn btn-outline">Modifier</span><span class="btn btn-outline">Marquer traité</span></div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-top">
+            <div class="idea-title">Refonte plaquette NorthIA</div>
+            <span class="cat-pill cat-projet">Projet</span>
+          </div>
+          <div class="idea-summary">Regrouper les idées liées au nouveau visuel de la plaquette commerciale.</div>
+          <div class="idea-meta"><span>2 sous-idées</span><span class="sync-tag">✓ Dans Notion</span><span class="sync-tag">✓ Dans Google Tasks</span></div>
+          <div class="idea-actions"><span class="btn btn-outline">Ouvrir dans Notion ↗</span><span class="btn btn-outline">Modifier</span></div>
+        </div>
+
+        <div class="idea-card">
+          <div class="idea-top">
+            <div class="idea-title">Répondre à l'agence sur le brief</div>
+            <span class="cat-pill cat-email">Email</span>
+          </div>
+          <div class="idea-summary">Brouillon préparé — préciser le budget et le délai de livraison.</div>
+          <div class="idea-meta"><span>Statut : en attente</span><span class="sync-tag">✓ Dans Google Tasks</span></div>
+          <div class="idea-actions"><span class="btn btn-outline">Ouvrir le brouillon ✉</span><span class="btn btn-outline">Modifier</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<p class="caption">Trois écrans de l'application réelle — accueil, capture avec transcription et classification, liste filtrable des idées.</p>
+
+<script>
+document.querySelectorAll('.tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+    document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+    tab.classList.add('active');
+    document.getElementById('screen-' + tab.dataset.screen).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

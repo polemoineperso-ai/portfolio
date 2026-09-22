@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pierre-Olivier Lemoine — Projets IA × Communication · NorthIA</title>
-<meta name="description" content="6 projets IA appliqués à la communication : générateur de candidature, agent de veille emploi, newsletter automatisée, photothèque rédaction, pilotage de concertation territoriale. Par Pierre-Olivier Lemoine · NorthIA.">
+<meta name="description" content="7 projets IA appliqués à la communication : générateur de candidature, agent de veille emploi, newsletter automatisée, photothèque rédaction, pilotage de concertation territoriale, capture vocale d'idées. Par Pierre-Olivier Lemoine · NorthIA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -147,6 +147,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
     <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
     <a href="/portfolio/photo-collector.html" class="northia-nav__link">Photothèque</a>
+    <a href="/portfolio/vocalink.html" class="northia-nav__link">Vocalink</a>
     <a href="/portfolio/edlm-linkedin.html" class="northia-nav__link">EDLM LinkedIn</a>
     <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta">⬇ Plaquette</a>
     <a href="mailto:p-o.lemoine@northia.fr" class="northia-nav__cta" style="background:var(--nia-pink);margin-left:2px;">✉ Me contacter</a>
@@ -161,6 +162,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <a href="/portfolio/agent-veille.html">Agent de veille</a>
   <a href="/portfolio/newsletter.html">Newsletter IA</a>
   <a href="/portfolio/photo-collector.html">Photothèque</a>
+  <a href="/portfolio/vocalink.html">Vocalink</a>
   <a href="https://edlm-linkedin-v2.vercel.app" target="_blank" rel="noopener">EDLM LinkedIn</a>
   <a href="/portfolio/plaquette-northia.pdf" download style="color:var(--nia-pink)!important">⬇ Plaquette PDF</a>
   <a href="mailto:p-o.lemoine@northia.fr" style="color:var(--nia-pink)!important">✉ Me contacter</a>
@@ -170,7 +172,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <div class="hero__tag">Portfolio IA × Communication · Pierre-Olivier Lemoine</div>
   <h1 class="hero__title">L'IA au service<br><em>de la communication</em></h1>
   <p class="hero__author">Pierre-Olivier Lemoine · NorthIA · 2025–2026</p>
-  <p class="hero__sub">Six agents, pipelines et applications construits de A à Z — pour automatiser, qualifier et produire là où les communicants perdent le plus de temps.</p>
+  <p class="hero__sub">Sept agents, pipelines et applications construits de A à Z — pour automatiser, qualifier et produire là où les communicants perdent le plus de temps.</p>
   <div class="hero__video">
     <a href="https://youtu.be/MJ5KL21HpmE" target="_blank" rel="noopener" class="hero__video-link">
       <img src="https://img.youtube.com/vi/MJ5KL21HpmE/hqdefault.jpg" alt="Vidéo de présentation : L'IA au service de la communication, par Pierre-Olivier Lemoine" class="hero__video-thumb" loading="lazy">
@@ -185,7 +187,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     </a>
   </div>
   <div class="hero__stats">
-    <div class="hero__stat"><span class="hero__stat-n">6</span><span class="hero__stat-l">outils construits</span></div>
+    <div class="hero__stat"><span class="hero__stat-n">7</span><span class="hero__stat-l">outils construits</span></div>
     <div class="hero__stat"><span class="hero__stat-n">80/20</span><span class="hero__stat-l">règle appliquée à chaque outil</span></div>
     <div class="hero__stat"><span class="hero__stat-n">20 ans</span><span class="hero__stat-l">expérience communication</span></div>
   </div>
@@ -194,7 +196,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 <div class="wrap">
 <div class="section">
   <div class="slabel">Réalisations</div>
-  <h2 class="stitle">Six projets, six problèmes résolus</h2>
+  <h2 class="stitle">Sept projets, sept problèmes résolus</h2>
   <p class="sintro">Chaque outil répond à une perte de temps réelle ou à un besoin de pilotage réel. Conçus pour être utilisés — pas en démo.</p>
 
   <div class="projects">
@@ -369,6 +371,34 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
       </div>
     </div>
 
+    <div class="pcard">
+      <div class="pcard__top">
+        <div class="pcard__num pn-p">07</div>
+        <div class="pcard__meta">
+          <div class="pcard__title">Vocalink — capture vocale d'idées</div>
+          <div class="pcard__sub">Next.js · Prisma · Whisper · Claude API · Google Tasks</div>
+        </div>
+        <span class="pbadge pb-ok">✓ En production</span>
+      </div>
+      <div class="pcard__body">
+        <p class="pcard__desc">Dire une idée à voix haute sur son téléphone, et la retrouver déjà transcrite, classée et prête à devenir une action : un projet à regrouper, un e-mail préparé, un appel ou un rappel avec échéance. Synchronisée avec Notion et Google Tasks, avec un digest quotidien des idées oubliées.</p>
+        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> l'IA transcrit et classe, mais n'envoie jamais rien elle-même — l'e-mail reste un brouillon à valider, l'appel un lien à ouvrir, la tâche une synchronisation à confirmer d'un coup d'œil.</div>
+        <ul class="pcard__results">
+          <li>Transcription Whisper + classification Claude Haiku en un seul enregistrement vocal, sans PWA à installer</li>
+          <li>Routage préparé par catégorie : projet regroupable, e-mail pré-rempli, lien d'appel, rappel avec échéance</li>
+          <li>Synchronisation Notion (idées projet) et Google Tasks (toutes catégories), digest e-mail quotidien des idées en attente</li>
+          <li>Authentification par formulaire avec Face ID — pas de popup natif, 25 tests automatisés</li>
+        </ul>
+        <div class="pcard__stack">
+          <span class="schip">Next.js 16</span><span class="schip">TypeScript</span><span class="schip">Prisma</span><span class="schip">PostgreSQL</span><span class="schip">Whisper API</span><span class="schip">Claude API</span><span class="schip">Notion API</span><span class="schip">Google Tasks</span>
+        </div>
+        <div class="pcard__links">
+          <a href="/portfolio/vocalink.html" class="plink pl-pri">Voir le projet →</a>
+          <a href="/portfolio/mock-vocalink.html" target="_blank" class="plink pl-sec">🖥 Voir l'interface ↗</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -381,7 +411,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <div>
       <div class="about-name">Pierre-Olivier Lemoine</div>
       <div class="about-role">Responsable Communication Stratégique & Transformation · Vincennes · NorthIA</div>
-      <p class="about-bio">20 ans d'expérience en communication et marketing BtoB dans l'énergie, la santé, l'automobile et le secteur associatif. Depuis 2025, je développe NorthIA, une activité de conseil en communication digitale et IA — dont ces six projets sont des réalisations concrètes, déployées et documentées.</p>
+      <p class="about-bio">20 ans d'expérience en communication et marketing BtoB dans l'énergie, la santé, l'automobile et le secteur associatif. Depuis 2025, je développe NorthIA, une activité de conseil en communication digitale et IA — dont ces sept projets sont des réalisations concrètes, déployées et documentées.</p>
       <div class="about-links">
         <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="about-link">LinkedIn</a>
         <a href="https://northia.fr" target="_blank" class="about-link">northia.fr</a>
