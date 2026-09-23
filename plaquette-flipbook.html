@@ -179,10 +179,18 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   // spreads stay face to face.
   var COVER_MAX_WIDTH = 460;
   var SPREAD_MAX_WIDTH = 900 * 2;
+  var syncing = false;
   function syncCoverLayout(){
+    // update() only recalculates the layout bounds/orientation; it does not
+    // redraw which pages are visible. turnToPage() forces that redraw, but it
+    // re-fires the 'flip' event on its own, so guard against re-entering here.
+    if (syncing) return;
+    syncing = true;
     var cover = isCoverIndex(pageFlip.getCurrentPageIndex());
     el.style.maxWidth = (cover ? COVER_MAX_WIDTH : SPREAD_MAX_WIDTH) + 'px';
     pageFlip.update();
+    pageFlip.turnToPage(pageFlip.getCurrentPageIndex());
+    syncing = false;
   }
 
   updateCount();
