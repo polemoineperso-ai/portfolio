@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plaquette — L'IA au service de la communication · NorthIA</title>
+<meta name="description" content="Plaquette « L'IA au service de la communication » en version feuilletable, par Pierre-Olivier Lemoine · NorthIA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<style>
+:root {
+  --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;--nia-pink-dark:#C179A0;--nia-black:#222222;
+  --ink:#1a1d23;--ink-soft:#3d4251;--ink-muted:#8892a4;--ink-faint:#c8cedb;
+  --paper:#fafbfc;--paper-warm:#f4f2ee;--paper-card:#fff;--line:#e8eaef;
+  --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --display:'Cinzel',Georgia,serif;--ui:'Orbitron',sans-serif;
+  --r:8px;--r-lg:12px;
+  --shadow:0 1px 4px rgba(0,0,0,.06),0 2px 12px rgba(0,0,0,.04);
+  --shadow-md:0 4px 20px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+/* NAV */
+.northia-nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
+.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
+.northia-nav__logo{height:36px;width:auto;}
+.northia-nav__links{display:flex;align-items:center;gap:4px;}
+.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
+.northia-nav__link:hover{color:var(--nia-pink);background:rgba(255,255,255,.06);}
+.northia-nav__cta{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
+.northia-nav__cta:hover{background:var(--nia-pink);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
+.nav-burger span{width:22px;height:2px;background:rgba(255,255,255,.7);border-radius:2px;transition:all .2s;}
+.nav-mobile{display:none;position:absolute;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:99;}
+.nav-mobile a{display:block;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
+.nav-mobile a:hover{color:var(--nia-pink);background:rgba(255,255,255,.04);}
+.nav-mobile.open{display:block;}
+@media(max-width:600px){.northia-nav__links{display:none;}.nav-burger{display:flex;}.northia-nav{position:relative;}}
+/* HEADER */
+.fb-head{background:var(--nia-black);color:#fff;padding:44px 24px 36px;text-align:center;}
+.fb-tag{display:inline-block;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:16px;}
+.fb-title{font-family:var(--display);font-size:clamp(24px,4.5vw,34px);font-weight:700;letter-spacing:-.01em;margin-bottom:8px;}
+.fb-title em{font-style:italic;color:var(--nia-pink);}
+.fb-sub{font-size:14px;color:rgba(255,255,255,.5);}
+/* FLIPBOOK */
+.fb-wrap{max-width:1000px;margin:0 auto;padding:40px 20px 12px;display:flex;flex-direction:column;align-items:center;}
+#flipbook{box-shadow:var(--shadow-lg);}
+#flipbook .page{background:#fff;}
+#flipbook .page img{width:100%;height:100%;object-fit:contain;display:block;}
+.fb-controls{display:flex;align-items:center;gap:18px;margin-top:22px;}
+.fb-btn{font-family:var(--ui);font-size:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--paper-card);color:var(--ink-soft);cursor:pointer;box-shadow:var(--shadow);transition:all .15s;display:flex;align-items:center;justify-content:center;}
+.fb-btn:hover{background:var(--nia-blue);color:#fff;border-color:var(--nia-blue);}
+.fb-btn:disabled{opacity:.35;cursor:default;pointer-events:none;}
+.fb-count{font-family:var(--mono);font-size:12px;color:var(--ink-muted);min-width:60px;text-align:center;}
+.fb-hint{font-size:12px;color:var(--ink-muted);margin-top:10px;text-align:center;}
+.fb-dl{margin:28px auto 64px;text-align:center;}
+.fb-dl a{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.05em;padding:11px 22px;border-radius:var(--r);text-decoration:none;background:var(--nia-blue);color:#fff;display:inline-flex;align-items:center;gap:8px;transition:all .15s;}
+.fb-dl a:hover{background:var(--nia-blue-dark);}
+/* FOOTER */
+.northia-footer{background:#222;border-top:2px solid var(--nia-blue);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.northia-footer__logo{height:28px;width:auto;}
+.northia-footer__name{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
+.northia-footer__sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
+.northia-footer__links{display:flex;gap:14px;}
+.northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
+.northia-footer__lnk:hover{color:var(--nia-pink);}
+@media(max-width:600px){.fb-wrap{padding:28px 12px 8px;}}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JF396K2Y0E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JF396K2Y0E');
+</script>
+</head>
+<body>
+
+<nav class="northia-nav">
+  <a href="/portfolio/index.html" class="northia-nav__brand">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
+  </a>
+  <div class="northia-nav__links">
+    <a href="/portfolio/index.html" class="northia-nav__link">Portfolio</a>
+    <a href="/portfolio/concertation-territoriale.html" class="northia-nav__link">Concertation</a>
+    <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
+    <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
+    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
+    <a href="/portfolio/vocalink.html" class="northia-nav__link">Vocalink</a>
+    <a href="https://polemoineperso-ai.github.io/portfolio/carte-visite.html" class="northia-nav__cta" style="background:var(--nia-pink);margin-left:2px;">✉ Me contacter</a>
+  </div>
+  <button class="nav-burger" onclick="document.getElementById('navMobile').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/portfolio/index.html">Portfolio</a>
+  <a href="/portfolio/concertation-territoriale.html">Concertation</a>
+  <a href="/portfolio/generateur-projet.html">Générateur</a>
+  <a href="/portfolio/agent-veille.html">Agent de veille</a>
+  <a href="/portfolio/newsletter.html">Newsletter IA</a>
+  <a href="/portfolio/vocalink.html">Vocalink</a>
+  <a href="https://polemoineperso-ai.github.io/portfolio/carte-visite.html" style="color:var(--nia-pink)!important">✉ Me contacter</a>
+</div>
+
+<header class="fb-head">
+  <div class="fb-tag">Plaquette NorthIA</div>
+  <h1 class="fb-title">L'IA au service<br><em>de la communication</em></h1>
+  <p class="fb-sub">Pierre-Olivier Lemoine · NorthIA · à feuilleter ci-dessous</p>
+</header>
+
+<div class="fb-wrap">
+  <div id="flipbook">
+    <div class="page"><img src="/portfolio/plaquette-pages/page-1.jpg" alt="Plaquette, page 1"></div>
+    <div class="page"><img src="/portfolio/plaquette-pages/page-2.jpg" alt="Plaquette, page 2"></div>
+    <div class="page"><img src="/portfolio/plaquette-pages/page-3.jpg" alt="Plaquette, page 3"></div>
+    <div class="page"><img src="/portfolio/plaquette-pages/page-4.jpg" alt="Plaquette, page 4"></div>
+    <div class="page"><img src="/portfolio/plaquette-pages/page-5.jpg" alt="Plaquette, page 5"></div>
+    <div class="page"><img src="/portfolio/plaquette-pages/page-6.jpg" alt="Plaquette, page 6"></div>
+    <div class="page"><img src="/portfolio/plaquette-pages/page-7.jpg" alt="Plaquette, page 7"></div>
+    <div class="page"><img src="/portfolio/plaquette-pages/page-8.jpg" alt="Plaquette, page 8"></div>
+  </div>
+  <div class="fb-controls">
+    <button class="fb-btn" id="fbPrev" aria-label="Page précédente">←</button>
+    <span class="fb-count" id="fbCount">1 / 8</span>
+    <button class="fb-btn" id="fbNext" aria-label="Page suivante">→</button>
+  </div>
+  <p class="fb-hint">Clique sur un coin de page, glisse, ou utilise les flèches du clavier.</p>
+</div>
+
+<div class="fb-dl">
+  <a href="/portfolio/plaquette-northia.pdf" download>⬇ Télécharger le PDF</a>
+</div>
+
+<footer class="northia-footer">
+  <div>
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
+    <div class="northia-footer__sub">Pierre-Olivier Lemoine · 2025–2026</div>
+  </div>
+  <div class="northia-footer__links">
+    <a href="/portfolio/index.html" class="northia-footer__lnk">Portfolio</a>
+    <a href="https://www.linkedin.com/in/polemoine" target="_blank" rel="noopener" class="northia-footer__lnk">LinkedIn</a>
+    <a href="https://polemoineperso-ai.github.io/portfolio/carte-visite.html" class="northia-footer__lnk">Contact</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var el = document.getElementById('flipbook');
+  var pageFlip = new St.PageFlip(el, {
+    width: 500,
+    height: 707,
+    size: "stretch",
+    minWidth: 280,
+    maxWidth: 900,
+    minHeight: 396,
+    maxHeight: 1273,
+    maxShadowOpacity: 0.5,
+    showCover: false,
+    mobileScrollSupport: true,
+    usePortrait: true
+  });
+  pageFlip.loadFromHTML(document.querySelectorAll('#flipbook .page'));
+
+  var countEl = document.getElementById('fbCount');
+  var total = pageFlip.getPageCount();
+  function updateCount(){
+    countEl.textContent = (pageFlip.getCurrentPageIndex() + 1) + ' / ' + total;
+  }
+  updateCount();
+  pageFlip.on('flip', updateCount);
+
+  document.getElementById('fbPrev').addEventListener('click', function(){ pageFlip.flipPrev(); });
+  document.getElementById('fbNext').addEventListener('click', function(){ pageFlip.flipNext(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft') pageFlip.flipPrev();
+    if (e.key === 'ArrowRight') pageFlip.flipNext();
+  });
+})();
+</script>
+
+</body>
+</html>
