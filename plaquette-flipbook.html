@@ -40,8 +40,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 @media(max-width:600px){.northia-nav__links{display:none;}.nav-burger{display:flex;}.northia-nav{position:relative;}}
 /* FLIPBOOK */
 .fb-wrap{max-width:1000px;margin:0 auto;padding:40px 20px 12px;display:flex;flex-direction:column;align-items:center;}
-#flipbook{box-shadow:var(--shadow-lg);max-width:900px;}
-#flipbook.is-cover{max-width:460px;}
+#flipbook{box-shadow:var(--shadow-lg);}
 .stf__parent{background:var(--paper);}
 #flipbook .page{background:#fff;}
 #flipbook .page img{width:100%;height:100%;object-fit:contain;display:block;}
@@ -145,10 +144,6 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 (function(){
   var el = document.getElementById('flipbook');
 
-  // Front cover (page 1) is shown alone: start narrow so the library lays out
-  // a single page instead of reserving a double-page spread with an empty half.
-  el.classList.add('is-cover');
-
   var pageFlip = new St.PageFlip(el, {
     width: 500,
     height: 707,
@@ -175,15 +170,23 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     countEl.textContent = (pageFlip.getCurrentPageIndex() + 1) + ' / ' + total;
   }
 
-  // On the front/back cover, narrow the container below the library's own
-  // portrait threshold (minWidth*2) so it switches to single-page layout on
-  // its own. On interior pages, widen it back so spreads stay face to face.
+  // page-flip itself sets an inline max-width of maxWidth*2 on the container
+  // when it loads (so it can show a double-page spread). That's what reserves
+  // an empty half whenever a single cover page is shown. We override that
+  // same inline style ourselves: narrow it below the library's own portrait
+  // threshold (minWidth*2 = 560) on a cover, so it switches to single-page
+  // layout on its own; back to the library's own width on interior pages, so
+  // spreads stay face to face.
+  var COVER_MAX_WIDTH = 460;
+  var SPREAD_MAX_WIDTH = 900 * 2;
   function syncCoverLayout(){
-    el.classList.toggle('is-cover', isCoverIndex(pageFlip.getCurrentPageIndex()));
+    var cover = isCoverIndex(pageFlip.getCurrentPageIndex());
+    el.style.maxWidth = (cover ? COVER_MAX_WIDTH : SPREAD_MAX_WIDTH) + 'px';
     pageFlip.update();
   }
 
   updateCount();
+  syncCoverLayout();
   pageFlip.on('flip', function(){
     updateCount();
     syncCoverLayout();
