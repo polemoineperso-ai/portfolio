@@ -195,7 +195,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 <div class="hero">
   <div class="hero__tag">Next.js · Concertation territoriale</div>
   <h1 class="hero__title">Pilotage de concertation <em>territoriale</em></h1>
-  <p class="hero__sub">Parties prenantes, risques, communication, engagements et actions dans un seul outil, pour des projets d'infrastructure énergétique — avec un score d'acceptabilité calculé, pas déclaratif.</p>
+  <p class="hero__sub">Parties prenantes, risques, communication, engagements et actions dans un seul outil, pour les projets d'infrastructure énergétique. Le score d'acceptabilité y est calculé, pas déclaré.</p>
   <div class="demo-wrap">
     <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo">Voir un échantillon de l'interface →</a>
     <span class="light-pill">Version light</span>
@@ -210,7 +210,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 </div>
 
 <div class="scale-band">
-  <div class="scale-band__label">L'ampleur du chantier — mesurée sur l'historique réel du dépôt, pas une estimation</div>
+  <div class="scale-band__label">L'ampleur du chantier, mesurée sur l'historique réel du dépôt</div>
   <div class="scale-band__grid">
     <div class="scale-stat"><span class="scale-stat__n">208</span><span class="scale-stat__l">commits</span></div>
     <div class="scale-stat"><span class="scale-stat__n">43 966</span><span class="scale-stat__l">lignes de TypeScript</span></div>
@@ -229,12 +229,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="genesis-card genesis-card--diag">
       <div class="genesis-card__icon">🔍</div>
       <div class="genesis-card__label">Diagnostic</div>
-      <div class="genesis-card__text">Un projet d'infrastructure énergétique (solaire, hydrogène, e-fuels...) génère des dizaines de parties prenantes, des risques à suivre, des engagements pris à l'oral, des jalons réglementaires (CNDP) et une communication à piloter — dispersés entre tableurs, e-mails et mémoire des équipes. Aucune vue d'ensemble, aucun indicateur calculé : l'acceptabilité territoriale s'évaluait au ressenti.</div>
+      <div class="genesis-card__text">Un projet d'infrastructure énergétique (solaire, hydrogène, e-fuels...) génère des dizaines de parties prenantes, des risques à suivre, des engagements pris à l'oral, des jalons réglementaires (CNDP) et une communication à piloter. Tout cela était éparpillé entre tableurs, e-mails et mémoire des équipes. Aucune vue d'ensemble, aucun indicateur calculé : l'acceptabilité territoriale s'évaluait au ressenti.</div>
     </div>
     <div class="genesis-card genesis-card--think">
       <div class="genesis-card__icon">💡</div>
       <div class="genesis-card__label">Réflexion</div>
-      <div class="genesis-card__text">Pas un tableur de plus : un outil structuré autour de 5 modules distincts mais reliés — deux d'écoute (Concertation, Risques), deux de réponse (Communication, Engagements), un transverse (Actions, toujours rattachée à sa source). Des permissions réelles par rôle et par projet. Et l'IA seulement là où elle a une vraie valeur : suggérer, jamais décider.</div>
+      <div class="genesis-card__text">Je ne voulais pas d'un tableur de plus. L'outil repose sur 5 modules reliés : deux d'écoute (Concertation, Risques), deux de réponse (Communication, Engagements), un transverse (Actions, toujours rattachée à sa source). Des permissions réelles par rôle et par projet. L'IA n'intervient que là où elle sert : elle suggère, elle ne décide pas.</div>
     </div>
     <div class="genesis-card genesis-card--result">
       <div class="genesis-card__icon">✓</div>
@@ -246,67 +246,67 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 
 <div class="section">
   <h2 class="stitle">L'acceptabilité au ressenti, pas au calcul</h2>
-  <p class="prose">Un chef de projet sait rarement dire, un matin donné, si son projet est en train de gagner ou de perdre l'acceptation de son territoire — l'information existe, mais dispersée : qui s'est exprimé, avec quelle influence, sur quel ton ; quels risques restent ouverts ; quelle tendance se dessine. Sans un endroit unique pour la croiser, la décision reste au feeling.</p>
+  <p class="prose">Un chef de projet sait rarement dire, un matin donné, si son projet est en train de gagner ou de perdre l'acceptation de son territoire. L'information existe, mais elle est éparpillée : qui s'est exprimé, avec quelle influence, sur quel ton ; quels risques restent ouverts ; quelle tendance se dessine. Sans un endroit unique pour la croiser, la décision reste au feeling.</p>
   <div class="rule8020">
-    <div class="rule8020__title">Règle 80/20 — <strong>L'humain reste le décideur</strong></div>
-    <div class="rule8020__text">L'IA suggère un sentiment et des sujets sur les échanges et les contributions du public consignés — <strong>rien n'est enregistré sans relecture et validation humaine.</strong> Le score d'acceptabilité, lui, n'est jamais une note libre : il se recalcule à partir de données réelles (position, influence, mobilisation des parties prenantes, criticité des risques, tendance récente), pour ne jamais confondre un chiffre calculé avec une impression.</div>
+    <div class="rule8020__title">Règle 80/20 : <strong>l'humain reste le décideur</strong></div>
+    <div class="rule8020__text">L'IA suggère un sentiment et des sujets sur les échanges et les contributions du public consignés. <strong>Rien n'est enregistré sans relecture et validation humaine.</strong> Le score d'acceptabilité, lui, n'est pas une note libre : il se recalcule à partir de données réelles (position, influence, mobilisation des parties prenantes, criticité des risques, tendance récente), pour ne pas confondre un chiffre calculé avec une impression.</div>
   </div>
 </div>
 
 <div class="section">
   <h2 class="stitle">Comment ça fonctionne</h2>
   <div class="flow">
-    <div class="flow-step"><div class="ficon fi-b">🔐</div><div><div class="fname">Permissions par rôle et par projet</div><div class="fdesc">Auth.js (NextAuth v5) — Admin et Direction voient tout le portefeuille, un Responsable de projet ne gère que les siens, un Contributeur consulte et contribue, un Lecteur ne fait que consulter.</div></div></div>
-    <div class="flow-step"><div class="ficon fi-b">🗂️</div><div><div class="fname">5 modules reliés, pas 5 listes séparées</div><div class="fdesc">Concertation (échanges terrain), Risques &amp; Opportunités, Communication (calendrier éditorial à 7 statuts), Engagements (promesses formelles), Actions — le seul module transverse, toujours rattaché à sa source.</div></div></div>
-    <div class="flow-step"><div class="ficon fi-p">🤖</div><div><div class="fname">Suggestion IA sur les échanges</div><div class="fdesc">Claude propose un sentiment et des sujets à partir du texte saisi sur un échange ou une contribution du public. L'utilisateur valide, corrige ou ignore — jamais enregistré automatiquement.</div><div class="fsub">Claude API · Anthropic</div></div></div>
-    <div class="flow-step"><div class="ficon fi-a">📊</div><div><div class="fname">Score d'acceptabilité calculé</div><div class="fdesc">Combine la position/influence/mobilisation des parties prenantes, la criticité des risques ouverts et la tendance récente du projet — recalculé à chaque consultation, jamais saisi à la main.</div></div></div>
-    <div class="flow-step"><div class="ficon fi-b">🔔</div><div><div class="fname">Alertes proactives</div><div class="fdesc">Risque critique, échéance dépassée, partie prenante influente jamais recontactée, sujet récurrent sur plusieurs projets du portefeuille — remontées automatiquement, pas à découvrir au hasard d'une relecture.</div></div></div>
+    <div class="flow-step"><div class="ficon fi-b">🔐</div><div><div class="fname">Permissions par rôle et par projet</div><div class="fdesc">Auth.js (NextAuth v5). Admin et Direction voient tout le portefeuille, un Responsable de projet ne gère que les siens, un Contributeur consulte et contribue, un Lecteur ne fait que consulter.</div></div></div>
+    <div class="flow-step"><div class="ficon fi-b">🗂️</div><div><div class="fname">5 modules reliés, pas 5 listes séparées</div><div class="fdesc">Concertation (échanges terrain), Risques &amp; Opportunités, Communication (calendrier éditorial à 7 statuts), Engagements (promesses formelles) et Actions, seul module transverse, toujours rattaché à sa source.</div></div></div>
+    <div class="flow-step"><div class="ficon fi-p">🤖</div><div><div class="fname">Suggestion IA sur les échanges</div><div class="fdesc">Claude propose un sentiment et des sujets à partir du texte saisi sur un échange ou une contribution du public. L'utilisateur valide, corrige ou ignore : rien ne s'enregistre tout seul.</div><div class="fsub">Claude API · Anthropic</div></div></div>
+    <div class="flow-step"><div class="ficon fi-a">📊</div><div><div class="fname">Score d'acceptabilité calculé</div><div class="fdesc">Combine la position/influence/mobilisation des parties prenantes, la criticité des risques ouverts et la tendance récente du projet. Il est recalculé à chaque consultation, personne ne le saisit à la main.</div></div></div>
+    <div class="flow-step"><div class="ficon fi-b">🔔</div><div><div class="fname">Alertes proactives</div><div class="fdesc">Risque critique, échéance dépassée, partie prenante influente jamais recontactée, sujet récurrent sur plusieurs projets du portefeuille. Ces alertes remontent seules, au lieu d'être découvertes au hasard d'une relecture.</div></div></div>
   </div>
 </div>
 
 <div class="section">
   <h2 class="stitle">Ce que couvre l'outil, au-delà des 5 modules</h2>
-  <p class="prose">Un pilotage réel ne s'arrête pas à la saisie — il faut pouvoir agir en masse, remonter un rapport, savoir qui porte quoi, et ne jamais perdre la trace d'un changement.</p>
+  <p class="prose">Un pilotage réel ne s'arrête pas à la saisie. Il faut agir en masse, sortir un rapport, savoir qui porte quoi, et garder la trace de chaque changement.</p>
   <div class="feat-grid">
-    <div class="feat-card"><div class="feat-card__icon">📅</div><div class="feat-card__title">Parcours réglementaire</div><div class="feat-card__text">Jalons CNDP typés (saisine, décision, concertation, enquête publique...) — chacun génère automatiquement sa propre checklist d'actions.</div></div>
-    <div class="feat-card"><div class="feat-card__icon">📄</div><div class="feat-card__title">Reporting PDF</div><div class="feat-card__text">Rapport de portefeuille et rapport par projet, bilan de la concertation — générés à la demande, pas maintenus à la main.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">📅</div><div class="feat-card__title">Parcours réglementaire</div><div class="feat-card__text">Jalons CNDP typés (saisine, décision, concertation, enquête publique...). Chacun génère automatiquement sa propre checklist d'actions.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">📄</div><div class="feat-card__title">Reporting PDF</div><div class="feat-card__text">Rapport de portefeuille et rapport par projet, bilan de la concertation, générés à la demande.</div></div>
     <div class="feat-card"><div class="feat-card__icon">☑️</div><div class="feat-card__title">Actions en masse</div><div class="feat-card__text">Changer le statut ou supprimer plusieurs actions, risques ou engagements sélectionnés en un clic, plutôt qu'un par un.</div></div>
-    <div class="feat-card"><div class="feat-card__icon">📜</div><div class="feat-card__title">Journal d'audit complet</div><div class="feat-card__text">Chaque modification tracée — qui, quoi, quand, avant/après — sur les 5 modules et les parties prenantes.</div></div>
-    <div class="feat-card"><div class="feat-card__icon">👥</div><div class="feat-card__title">Équipe &amp; charge de travail</div><div class="feat-card__text">Qui fait quoi, par personne et par projet — vue agrégée sur les actions, risques, engagements et communications assignés.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">📜</div><div class="feat-card__title">Journal d'audit complet</div><div class="feat-card__text">Chaque modification est tracée (qui, quoi, quand, avant/après) sur les 5 modules et les parties prenantes.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">👥</div><div class="feat-card__title">Équipe &amp; charge de travail</div><div class="feat-card__text">Qui fait quoi, par personne et par projet, avec une vue agrégée sur les actions, risques, engagements et communications assignés.</div></div>
     <div class="feat-card"><div class="feat-card__icon">📎</div><div class="feat-card__title">Gestion documentaire</div><div class="feat-card__text">Documents catégorisés et rattachés à un échange, une communication, un engagement ou un jalon réglementaire précis.</div></div>
-    <div class="feat-card"><div class="feat-card__icon">🔍</div><div class="feat-card__title">Détection de doublons</div><div class="feat-card__text">Une même personne repérée sous deux fiches, ou déjà contact d'une autre partie prenante — signalé avant de recréer un doublon.</div></div>
-    <div class="feat-card"><div class="feat-card__icon">✎</div><div class="feat-card__title">Édition en ligne</div><div class="feat-card__text">Statut, priorité, échéance, responsable — modifiables directement depuis la liste, sans ouvrir un formulaire complet.</div></div>
-    <div class="feat-card"><div class="feat-card__icon">☎</div><div class="feat-card__title">Contacts en un clic</div><div class="feat-card__text">Appeler ou écrire à une partie prenante directement depuis le tableau — sans ouvrir sa fiche.</div></div>
-    <div class="feat-card"><div class="feat-card__icon">🙋</div><div class="feat-card__title">Demande de compte en libre-service</div><div class="feat-card__text">Un responsable de projet fait remonter un besoin d'accès sans jamais quitter l'application ni écrire un e-mail — l'admin valide, le rattachement à l'équipe du projet se fait tout seul.</div></div>
-    <div class="feat-card"><div class="feat-card__icon">💬</div><div class="feat-card__title">Brouillon de réponse au public</div><div class="feat-card__text">Sur une question ou un avis déposé, un brouillon de réponse s'appuie sur le message clé déjà validé — sans jamais inventer un fait ou un chiffre qui n'y figure pas.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🔍</div><div class="feat-card__title">Détection de doublons</div><div class="feat-card__text">Une même personne repérée sous deux fiches, ou déjà contact d'une autre partie prenante : l'outil le signale avant qu'on crée un doublon.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">✎</div><div class="feat-card__title">Édition en ligne</div><div class="feat-card__text">Statut, priorité, échéance et responsable se modifient directement depuis la liste, sans ouvrir de formulaire.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">☎</div><div class="feat-card__title">Contacts en un clic</div><div class="feat-card__text">Appeler ou écrire à une partie prenante directement depuis le tableau, sans ouvrir sa fiche.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🙋</div><div class="feat-card__title">Demande de compte en libre-service</div><div class="feat-card__text">Un responsable de projet fait remonter un besoin d'accès sans quitter l'application ni écrire d'e-mail. L'admin valide, le rattachement à l'équipe du projet se fait tout seul.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">💬</div><div class="feat-card__title">Brouillon de réponse au public</div><div class="feat-card__text">Sur une question ou un avis déposé, un brouillon de réponse s'appuie sur le message clé déjà validé, sans ajouter de fait ni de chiffre qui n'y figure pas.</div></div>
     <div class="feat-card"><div class="feat-card__icon">📈</div><div class="feat-card__title">Reporting interactif</div><div class="feat-card__text">Chaque graphique de répartition (statuts, positions, canaux) renvoie vers la liste filtrée correspondante, en un clic.</div></div>
   </div>
 </div>
 
 <div class="section">
   <h2 class="stitle">Un vrai portefeuille, pas une démo vide</h2>
-  <p class="prose">Une application testée uniquement avec des données inventées ne prouve rien sur son utilisabilité réelle. Les 17 projets ont été importés à partir de sources publiques — sites de concertation officiels, décisions et avis de la CNDP, pages projet des porteurs — jamais improvisés.</p>
+  <p class="prose">Une application testée uniquement avec des données inventées ne prouve rien sur son utilisabilité réelle. Les 17 projets ont été importés à partir de sources publiques : sites de concertation officiels, décisions et avis de la CNDP, pages projet des porteurs.</p>
   <div class="method">
     <div class="method__title">✓ Discipline appliquée à l'import</div>
-    <div class="method__text">Dates clés réglementaires, intervenants et documents officiels : uniquement quand une source publique les confirmait. Aucune partie prenante, aucun risque, aucune position n'a été inventé faute de base pour l'évaluer honnêtement — mieux vaut un champ vide qu'une donnée plausible mais fausse.</div>
+    <div class="method__text">Dates clés réglementaires, intervenants et documents officiels : uniquement quand une source publique les confirmait. Aucune partie prenante, aucun risque, aucune position n'a été inventé faute de base pour l'évaluer honnêtement. Je préfère un champ vide à une donnée plausible mais fausse.</div>
   </div>
   <div class="method" style="border-left-color:var(--nia-blue);margin-top:12px;">
-    <div class="method__title" style="color:var(--nia-blue);">✓ Un cas réel — retrouver un élu, pas l'inventer</div>
-    <div class="method__text">Une partie prenante affichait « Mairie » sans nom d'interlocuteur. Plutôt que de laisser un champ vide ou d'en inventer un, recherche du nom réel du maire, recoupé sur deux sources publiques indépendantes, avec sa date de mandat et sa réserve (élection municipale de mars 2026 non reconfirmée depuis) — puis ajouté comme contact nommé de l'institution, pas comme une nouvelle partie prenante avec une position politique qu'il n'y avait aucune base réelle pour évaluer.</div>
+    <div class="method__title" style="color:var(--nia-blue);">Un cas réel : retrouver un élu plutôt que l'inventer</div>
+    <div class="method__text">Une partie prenante affichait « Mairie » sans nom d'interlocuteur. Plutôt que de laisser un champ vide ou d'en inventer un, recherche du nom réel du maire, recoupé sur deux sources publiques indépendantes, avec sa date de mandat et sa réserve (élection municipale de mars 2026 non reconfirmée depuis), puis ajouté comme contact nommé de l'institution, pas comme une nouvelle partie prenante avec une position politique qu'il n'y avait aucune base réelle pour évaluer.</div>
   </div>
 </div>
 
 <div class="section">
   <h2 class="stitle">Les vrais problèmes à résoudre</h2>
   <div class="challenges">
-    <div class="challenge"><div class="ctitle">Frontière serveur/client React franchie par erreur</div><div class="cbody">Une fonction passée en prop d'une page serveur à un composant client — interdit en React Server Components, plantage en production (erreur #441). Détecté via les logs serveur (pas la console minifiée du navigateur) et corrigé avant tout déploiement réel.</div></div>
-    <div class="challenge"><div class="ctitle">Un projet réel à cheval sur deux communes</div><div class="cbody">Une centrale solaire s'étendant sur deux communes limitrophes ne tenait pas dans un simple champ texte — migré en cours de route vers une vraie relation many-to-many (<span class="ccode">ProjectCommune</span>), avec migration Prisma en deux temps pour ne perdre aucune donnée déjà en base.</div></div>
-    <div class="challenge"><div class="ctitle">Date affichée en heure locale, valeur stockée en UTC</div><div class="cbody">Un libellé de date formaté avec le fuseau du navigateur pouvait afficher un jour différent de la valeur réellement stockée (UTC) — décalage silencieux dans un fuseau négatif, corrigé par un formatage explicite en UTC.</div></div>
-    <div class="challenge"><div class="ctitle">Un score calculé qui ne doit jamais mentir sur son absence</div><div class="cbody">Sans aucune partie prenante ni risque renseigné, le score d'acceptabilité retombait sur sa base neutre (70) — un chiffre qui avait l'air d'une vraie évaluation. Ajout d'un indicateur explicite « pas encore de données » pour ne jamais confondre un calcul vide avec un résultat favorable.</div></div>
-    <div class="challenge"><div class="ctitle">Le bon contact masqué par le mauvais champ</div><div class="cbody">Un contact nommé (ex. le maire d'une commune) pouvait être éclipsé dans l'affichage par un champ générique de la partie prenante laissé vide puis renseigné par erreur — corrigé en donnant toujours la priorité au contact le plus spécifique.</div></div>
-    <div class="challenge"><div class="ctitle">Import de données réelles sans rien inventer</div><div class="cbody">17 projets réels importés avec leurs jalons réglementaires, intervenants et documents officiels — uniquement des faits publiquement sourcés (sites de concertation, décisions CNDP) ; jamais de partie prenante ou de risque fabriqué faute de base pour l'évaluer honnêtement.</div></div>
-    <div class="challenge"><div class="ctitle">PostgreSQL n'indexe pas une clé étrangère par défaut</div><div class="cbody">Contrairement à une idée reçue, une colonne <span class="ccode">projectId</span> n'est indexée automatiquement par aucun moteur PostgreSQL — or c'est le filtre le plus répété de toute l'application. Invisible avec 17 projets réels, mais un balayage séquentiel complet à chaque requête dès que le volume grossit. Audit exhaustif des 30 modèles du schéma, 13 index ajoutés sur les tables qui n'étaient pas déjà couvertes par une contrainte d'unicité existante.</div></div>
-    <div class="challenge"><div class="ctitle">Pas de débordement horizontal, mais illisible sur téléphone</div><div class="cbody">Un en-tête « phrase de contexte + bouton(s) » sans <span class="ccode">flex-wrap</span> ne débordait pas de l'écran (aucune alerte des vérifications automatiques classiques) — il comprimait le texte sur 4-5 lignes étroites à côté d'un bouton resté sur une seule ligne. Repéré en testant en vrai à 375px de large, pas en relisant le code.</div></div>
+    <div class="challenge"><div class="ctitle">Frontière serveur/client React franchie par erreur</div><div class="cbody">Une fonction passée en prop d'une page serveur à un composant client, ce que React Server Components interdit : plantage en production (erreur #441). Détecté via les logs serveur (pas la console minifiée du navigateur) et corrigé avant tout déploiement réel.</div></div>
+    <div class="challenge"><div class="ctitle">Un projet réel à cheval sur deux communes</div><div class="cbody">Une centrale solaire s'étendant sur deux communes limitrophes ne tenait pas dans un simple champ texte. Je l'ai migré en cours de route vers une vraie relation many-to-many (<span class="ccode">ProjectCommune</span>), avec migration Prisma en deux temps pour ne perdre aucune donnée déjà en base.</div></div>
+    <div class="challenge"><div class="ctitle">Date affichée en heure locale, valeur stockée en UTC</div><div class="cbody">Un libellé de date formaté avec le fuseau du navigateur pouvait afficher un jour différent de la valeur réellement stockée (UTC) : un décalage silencieux dans un fuseau négatif, corrigé par un formatage explicite en UTC.</div></div>
+    <div class="challenge"><div class="ctitle">Un score calculé qui ne doit pas mentir quand il manque des données</div><div class="cbody">Sans aucune partie prenante ni risque renseigné, le score d'acceptabilité retombait sur sa base neutre (70), un chiffre qui avait l'air d'une vraie évaluation. Ajout d'un indicateur explicite « pas encore de données » pour ne plus confondre un calcul vide avec un résultat favorable.</div></div>
+    <div class="challenge"><div class="ctitle">Le bon contact masqué par le mauvais champ</div><div class="cbody">Un contact nommé (ex. le maire d'une commune) pouvait être éclipsé dans l'affichage par un champ générique de la partie prenante laissé vide puis renseigné par erreur. Corrigé en donnant toujours la priorité au contact le plus spécifique.</div></div>
+    <div class="challenge"><div class="ctitle">Import de données réelles sans rien inventer</div><div class="cbody">17 projets réels importés avec leurs jalons réglementaires, intervenants et documents officiels : uniquement des faits sourcés publiquement (sites de concertation, décisions CNDP). Aucune partie prenante ni aucun risque fabriqué faute de base pour l'évaluer.</div></div>
+    <div class="challenge"><div class="ctitle">PostgreSQL n'indexe pas une clé étrangère par défaut</div><div class="cbody">Contrairement à une idée reçue, une colonne <span class="ccode">projectId</span> n'est indexée automatiquement par aucun moteur PostgreSQL, alors que c'est le filtre le plus répété de toute l'application. Invisible avec 17 projets réels, mais un balayage séquentiel complet à chaque requête dès que le volume grossit. Audit exhaustif des 30 modèles du schéma, 13 index ajoutés sur les tables qui n'étaient pas déjà couvertes par une contrainte d'unicité existante.</div></div>
+    <div class="challenge"><div class="ctitle">Pas de débordement horizontal, mais illisible sur téléphone</div><div class="cbody">Un en-tête « phrase de contexte + bouton(s) » sans <span class="ccode">flex-wrap</span> ne débordait pas de l'écran (aucune alerte des vérifications automatiques classiques), mais il comprimait le texte sur 4-5 lignes étroites à côté d'un bouton resté sur une seule ligne. Repéré en testant en vrai à 375px de large, pas en relisant le code.</div></div>
   </div>
 </div>
 
@@ -323,7 +323,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
       <tr><td>Interface</td><td class="mono-td">Tailwind CSS · Base UI</td></tr>
       <tr><td>Cartographie</td><td class="mono-td">Leaflet · OpenStreetMap</td></tr>
       <tr><td>Hébergement</td><td class="mono-td">Vercel</td></tr>
-      <tr><td>Tests</td><td class="mono-td">Vitest — 73 tests automatisés</td></tr>
+      <tr><td>Tests</td><td class="mono-td">Vitest, 73 tests automatisés</td></tr>
     </tbody>
   </table>
 </div>
@@ -333,22 +333,22 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
   <div class="results-grid">
     <div class="rcard"><span class="rcard__n">17</span><span class="rcard__l">projets réels importés, jalons réglementaires et documents officiels sourcés publiquement</span></div>
     <div class="rcard"><span class="rcard__n">73</span><span class="rcard__l">tests automatisés sur les permissions, calculs et validations</span></div>
-    <div class="rcard"><span class="rcard__n">5</span><span class="rcard__l">modules reliés — écoute, réponse, et un module transverse</span></div>
-    <div class="rcard"><span class="rcard__n">0</span><span class="rcard__l">note d'acceptabilité saisie à la main — toujours calculée</span></div>
+    <div class="rcard"><span class="rcard__n">5</span><span class="rcard__l">modules reliés : écoute, réponse et un module transverse</span></div>
+    <div class="rcard"><span class="rcard__n">0</span><span class="rcard__l">note d'acceptabilité saisie à la main : elle est toujours calculée</span></div>
     <div class="rcard"><span class="rcard__n">12</span><span class="rcard__l">types d'alertes proactives sur le portefeuille</span></div>
     <div class="rcard"><span class="rcard__n">4</span><span class="rcard__l">types d'entités éditables en ligne, sans formulaire</span></div>
     <div class="rcard"><span class="rcard__n">5</span><span class="rcard__l">rôles avec permissions par projet, pas seulement globales</span></div>
-    <div class="rcard"><span class="rcard__n">2</span><span class="rcard__l">rapports PDF générés à la demande — portefeuille et par projet</span></div>
+    <div class="rcard"><span class="rcard__n">2</span><span class="rcard__l">rapports PDF générés à la demande, pour le portefeuille et par projet</span></div>
   </div>
 </div>
 
 <div class="screen-section">
-  <div class="screen-label">Interface — fiche projet, données de démonstration</div>
+  <div class="screen-label">Interface : fiche projet, données de démonstration</div>
   <div class="demo-wrap">
     <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo" style="background:var(--nia-blue-dark);">Voir un échantillon de l'interface →</a>
     <span class="light-pill">Version light</span>
   </div>
-  <p class="screen-caption">Échantillon simplifié et stylisé (structure et couleurs fidèles, contenu allégé) — score d'acceptabilité, alertes, table des parties prenantes. <strong style="color:var(--ink);">L'application réelle est nettement plus complète.</strong> Données de démonstration, pas de portefeuille client.</p>
+  <p class="screen-caption">Échantillon simplifié et stylisé (structure et couleurs fidèles, contenu allégé) : score d'acceptabilité, alertes, table des parties prenantes. <strong style="color:var(--ink);">L'application réelle est nettement plus complète.</strong> Données de démonstration, pas de portefeuille client.</p>
 </div>
 
 <div class="nav-bottom">
