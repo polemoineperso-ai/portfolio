@@ -302,3 +302,4 @@ body.page--clair .scale-stat{border-top-color:var(--accent)}
 .page .module-chip--featured{border-color:var(--accent-ink);background:#fff}
 .page .mc-tofu,.page .mc-mofu,.page .mc-bofu{background:transparent;border-color:var(--line)}
 .page .pil-card__n{color:var(--accent-ink)}
+.page .essentiel__visuel figcaption a{color:var(--ink);font-weight:700}
