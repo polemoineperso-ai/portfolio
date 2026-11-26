@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Photothèque Rédaction IA — NorthIA · Pierre-Olivier Lemoine</title>
+<title>Photothèque Rédaction IA · Pierre-Olivier Lemoine</title>
 <meta name="description" content="Upload iOS natif ou PWA multi-device, légende LinkedIn générée par Claude vision, galerie collaborative avec validation éditoriale. Par Pierre-Olivier Lemoine · NorthIA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible+Next:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;--nia-black:#222222;
@@ -22,7 +22,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
 .northia-nav__logo{height:36px;width:auto;}
 .northia-nav__links{display:flex;align-items:center;gap:4px;}
-.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
+.northia-nav__link{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
 .northia-nav__link:hover{color:var(--nia-pink);background:rgba(255,255,255,.06);}
 .northia-nav__link--active{color:var(--nia-blue);}
 /* HERO */
@@ -30,29 +30,29 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(94,149,200,.3),transparent);pointer-events:none;}
 .hero__icon{width:80px;height:80px;margin:0 auto 16px;border-radius:18px;overflow:hidden;border:2px solid rgba(255,255,255,.1);box-shadow:0 8px 32px rgba(0,0,0,.4);}
 .hero__icon img{width:100%;height:100%;object-fit:cover;display:block;}
-.hero__tag{display:inline-block;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:16px;}
+.hero__tag{display:inline-block;font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:16px;}
 .hero__title{font-family:var(--display);font-size:clamp(26px,5vw,44px);font-weight:700;line-height:1.1;margin-bottom:14px;}
 .hero__title em{font-style:italic;color:var(--nia-pink);}
 .hero__sub{font-size:15px;color:rgba(255,255,255,.55);max-width:560px;margin:0 auto 22px;line-height:1.65;}
-.hero__demo{display:inline-flex;align-items:center;gap:8px;background:var(--nia-blue);color:#fff;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.06em;padding:12px 24px;border-radius:6px;text-decoration:none;transition:all .15s;margin-bottom:20px;}
+.hero__demo{display:inline-flex;align-items:center;gap:8px;background:var(--nia-blue);color:#fff;font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.06em;padding:12px 24px;border-radius:6px;text-decoration:none;transition:all .15s;margin-bottom:20px;}
 .hero__demo:hover{background:var(--nia-pink);}
 .hero__metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
 .metric{text-align:center;padding:11px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);}
 .metric__n{font-family:var(--ui);font-size:18px;font-weight:700;color:#fff;display:block;}
-.metric__l{font-size:11px;color:rgba(255,255,255,.4);display:block;margin-top:2px;}
-.hero__time{font-size:12px;color:rgba(255,255,255,.35);}
+.metric__l{font-size:14px;color:rgba(255,255,255,.4);display:block;margin-top:2px;}
+.hero__time{font-size:14px;color:rgba(255,255,255,.35);}
 .hero__time strong{color:var(--nia-blue);}
 /* WRAP */
 .wrap{max-width:700px;margin:0 auto;padding:0 24px;}
 .section{padding:44px 0 0;}
 .section:last-of-type{padding-bottom:72px;}
-.slabel{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
+.slabel{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
 .stitle{font-family:var(--display);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:12px;}
 .prose{font-size:14px;color:var(--ink-soft);line-height:1.75;max-width:580px;}
 .prose+.prose{margin-top:10px;}
 /* 80/20 */
 .rule8020{background:var(--nia-black);border-left:4px solid var(--nia-pink);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
-.rule8020__title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-pink);margin-bottom:8px;}
+.rule8020__title{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-pink);margin-bottom:8px;}
 .rule8020__text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;}
 .rule8020__text strong{color:#fff;font-weight:700;}
 /* GENESIS */
@@ -63,7 +63,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .genesis-card--think{border-top:3px solid var(--nia-pink);}
 .genesis-card--result{border-top:3px solid #1a9e6e;}
 .genesis-card__icon{font-size:22px;margin-bottom:8px;}
-.genesis-card__label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
+.genesis-card__label{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
 .genesis-card--diag .genesis-card__label{color:var(--nia-blue);}
 .genesis-card--think .genesis-card__label{color:var(--nia-pink);}
 .genesis-card--result .genesis-card__label{color:#1a9e6e;}
@@ -80,20 +80,20 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .fi-a{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);}
 .fname{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px;}
 .fdesc{font-size:13px;color:var(--ink-soft);line-height:1.6;}
-.fsub{font-size:11px;color:var(--ink-muted);margin-top:4px;font-family:var(--mono);}
+.fsub{font-size:14px;color:var(--ink-muted);margin-top:4px;font-family:var(--mono);}
 /* API CALLS */
 .api-calls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;}
 .api-card{background:var(--paper-card);border:1px solid var(--line);border-left:3px solid var(--nia-blue);border-radius:var(--r);padding:14px 16px;}
 .api-card--pink{border-left-color:var(--nia-pink);}
-.api-label{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:6px;}
+.api-label{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:6px;}
 .api-card--pink .api-label{color:var(--nia-pink);}
-.api-desc{font-size:12px;color:var(--ink-soft);line-height:1.6;}
-.api-mono{font-family:var(--mono);font-size:11px;color:var(--ink-muted);margin-top:4px;}
+.api-desc{font-size:14px;color:var(--ink-soft);line-height:1.6;}
+.api-mono{font-family:var(--mono);font-size:14px;color:var(--ink-muted);margin-top:4px;}
 /* SHEETS */
 .sheets-box{background:var(--paper-warm);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 18px;margin-top:16px;}
-.sheets-label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px;}
+.sheets-label{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px;}
 .sheets-cols{display:flex;flex-wrap:wrap;gap:5px;}
-.scol{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:4px;background:var(--paper-card);border:1px solid var(--line);color:var(--ink-soft);}
+.scol{font-family:var(--mono);font-size:14px;padding:3px 8px;border-radius:4px;background:var(--paper-card);border:1px solid var(--line);color:var(--ink-soft);}
 .scol--new{border-color:var(--nia-blue);color:var(--nia-blue);background:rgba(94,149,200,.06);}
 /* GALLERY FEATURES */
 .features-list{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
@@ -101,11 +101,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .feature-row__dot{width:6px;height:6px;border-radius:50%;background:var(--nia-blue);flex-shrink:0;margin-top:5px;}
 /* STACK TABLE */
 .stack-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;background:var(--paper-card);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);}
-.stack-table th{background:var(--nia-black);color:rgba(255,255,255,.6);font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;text-align:left;}
+.stack-table th{background:var(--nia-black);color:rgba(255,255,255,.6);font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;text-align:left;}
 .stack-table td{padding:10px 16px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
 .stack-table tr:last-child td{border-bottom:none;}
 .stack-table tr:nth-child(odd) td{background:var(--paper-warm);}
-.mono-td{font-family:var(--mono);font-size:12px;}
+.mono-td{font-family:var(--mono);font-size:14px;}
 /* RESULTS */
 .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
 .rcard{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);}
@@ -116,7 +116,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .deploy-note strong{color:var(--nia-pink);font-weight:700;}
 /* NAV BOTTOM */
 .nav-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;}
-.nav-btn{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.05em;padding:10px 18px;border-radius:var(--r);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
+.nav-btn{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.05em;padding:10px 18px;border-radius:var(--r);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
 .nav-btn--out{border:1px solid var(--line);color:var(--ink-muted);background:var(--paper-card);}
 .nav-btn--out:hover{border-color:var(--nia-blue);color:var(--nia-blue);}
 .nav-btn--pri{background:var(--nia-blue);color:#fff;border:none;}
@@ -124,21 +124,21 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 /* FOOTER */
 .northia-footer{background:#222;border-top:2px solid var(--nia-blue);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
 .northia-footer__logo{height:28px;width:auto;}
-.northia-footer__name{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
-.northia-footer__sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
+.northia-footer__name{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
+.northia-footer__sub{font-size:14px;color:rgba(255,255,255,.3);margin-top:3px;}
 .northia-footer__links{display:flex;gap:14px;}
-.northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
+.northia-footer__lnk{font-size:14px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
 .northia-footer__lnk:hover{color:var(--nia-pink);}
 @media(max-width:600px){.northia-nav__links{display:none;}.results-grid{grid-template-columns:1fr;}.api-calls{grid-template-columns:1fr;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
 
-.northia-nav__cta{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
+.northia-nav__cta{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
 .northia-nav__cta:hover{background:var(--nia-pink);}
 .northia-nav__cta--contact{background:var(--nia-pink);color:#fff;margin-left:2px;}
 .northia-nav__cta--contact:hover{background:var(--nia-blue);}
 .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
 .nav-burger span{width:22px;height:2px;background:rgba(255,255,255,.7);border-radius:2px;}
 .nav-mobile{display:none;position:fixed;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:999;}
-.nav-mobile a{display:block;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
+.nav-mobile a{display:block;font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
 .nav-mobile a:hover{color:var(--nia-pink);}
 .nav-mobile .nm-contact{color:var(--nia-pink)!important;}
 @media(max-width:640px){
@@ -151,9 +151,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 }
 
 .screen-section{margin:32px 0;padding:24px 0;border-top:1px solid var(--line);}
-.screen-label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:14px;}
+.screen-label{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:14px;}
 .screen-img{width:100%;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.15);border:1px solid var(--line);display:block;}
-.screen-caption{font-size:12px;color:#8892a4;margin-top:10px;text-align:center;font-style:italic;}
+.screen-caption{font-size:14px;color:#8892a4;margin-top:10px;text-align:center;font-style:italic;}
 .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.15);}
 .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;}
 /* menu : jamais sur deux lignes */
@@ -195,50 +195,32 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
   gtag('js', new Date());
   gtag('config', 'G-JF396K2Y0E');
 </script>
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/projet.css">
 </head>
-<body>
+<body class="page page--photo-collector page--clair" style="--accent:#F2B33D;--accent-ink:#8A5A00;--accent-deep:#6B4500;--accent-light:#0E0E10">
 
-<nav class="northia-nav">
-  <a href="/portfolio/index.html" class="northia-nav__brand">
-    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
-  </a>
-  <div class="northia-nav__links">
-    <a href="/portfolio/concertation-territoriale.html" class="northia-nav__link">Concertation</a>
-    <a href="/portfolio/edlm-linkedin.html" class="northia-nav__link">EDLM LinkedIn</a>
-    <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
-    <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
-    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
-    <a href="/portfolio/photo-collector.html" class="northia-nav__link northia-nav__link--active" aria-current="page">Photothèque</a>
-    <a href="/portfolio/vocalink.html" class="northia-nav__link">Vocalink</a>
-    <a href="/portfolio/eleven-academy.html" class="northia-nav__link">Eleven Academy</a>
-    <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta">⬇ Plaquette</a>
-    <a href="mailto:p-o.lemoine@northia.fr" class="northia-nav__cta northia-nav__cta--contact">✉ Me contacter</a>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="bar__name" href="./">Pierre-Olivier Lemoine</a>
+    <nav aria-label="Navigation principale">
+      <a href="./#applications">Les applications</a>
+      <a href="./#ia-humain">L'IA et moi</a>
+      <a class="btn btn--lime" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+    </nav>
   </div>
-  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="nav-mobile" id="navMobile">
-  <a href="/portfolio/concertation-territoriale.html">Concertation</a>
-  <a href="/portfolio/edlm-linkedin.html">EDLM LinkedIn</a>
-  <a href="/portfolio/generateur-projet.html">Générateur</a>
-  <a href="/portfolio/agent-veille.html">Agent de veille</a>
-  <a href="/portfolio/newsletter.html">Newsletter IA</a>
-  <a href="/portfolio/photo-collector.html">Photothèque</a>
-  <a href="/portfolio/vocalink.html">Vocalink</a>
-  <a href="/portfolio/eleven-academy.html">Eleven Academy</a>
-  <a href="/portfolio/plaquette-northia.pdf" download>⬇ Plaquette PDF</a>
-  <a href="mailto:p-o.lemoine@northia.fr" class="nm-contact">✉ Me contacter</a>
-</div>
+</header>
+<main id="contenu">
 
 <div class="hero">
   <div class="hero__icon">
     <img src="/portfolio/icon-photocollector.png" alt="Photothèque Rédaction IA">
   </div>
-  <div class="hero__tag">Projet 04 / 04 · FastAPI · Claude Vision · iOS · PWA</div>
+  <div class="hero__tag">FastAPI · Claude Vision · iOS · PWA</div>
   <h1 class="hero__title">Photothèque <em>Rédaction IA</em></h1>
   <p class="hero__sub">De l'iPhone à la galerie éditoriale organisée en 5 secondes. Upload iOS natif ou PWA multi-device, légende LinkedIn générée par Claude vision, validation éditoriale intégrée.</p>
-  <a href="https://photo-collector.onrender.com/gallery" target="_blank" class="hero__demo">🖼 Découvrir la photothèque →</a>
+  <a href="https://photo-collector.onrender.com/gallery" target="_blank" class="hero__demo">Découvrir la photothèque →</a>
   <div class="hero__metrics">
     <div class="metric"><span class="metric__n">5 sec</span><span class="metric__l">depuis l'app Photos iOS</span></div>
     <div class="metric"><span class="metric__n">iOS + PWA</span><span class="metric__l">multi-device</span></div>
@@ -269,7 +251,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 <div class="wrap">
 
 <div class="section">
-  <div class="slabel">Genèse du projet</div>
   <h2 class="stitle">Diagnostic, réflexion, décision</h2>
   <div class="genesis-grid">
     <div class="genesis-card genesis-card--diag">
@@ -291,7 +272,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 </div>
 
 <div class="section">
-  <div class="slabel">Problème résolu</div>
   <h2 class="stitle">La friction invisible des équipes terrain</h2>
   <p class="prose">Après chaque salon, conférence ou événement, les équipes perdent du temps à transférer leurs photos : email, AirDrop, WhatsApp, renommage manuel, légende à écrire. Un process répétitif qui décourage les contributeurs et retarde la publication.</p>
   <p class="prose">L'objectif : supprimer toute friction entre la prise de vue et la galerie éditoriale — sans changer les habitudes des équipes. Tout le monde a l'app Photos sur son iPhone ou un navigateur sur son téléphone.</p>
@@ -303,7 +283,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 </div>
 
 <div class="section">
-  <div class="slabel">Architecture</div>
   <h2 class="stitle">Comment ça fonctionne</h2>
   <div class="flow">
     <div class="flow-step">
@@ -366,7 +345,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 </div>
 
 <div class="section">
-  <div class="slabel">Galerie — Fonctionnalités</div>
   <h2 class="stitle">Une galerie éditoriale complète</h2>
   <div class="features-list">
     <div class="feature-row"><div class="feature-row__dot"></div>Recherche plein texte multi-mots sur tous les champs</div>
@@ -380,7 +358,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 </div>
 
 <div class="section">
-  <div class="slabel">Spécifications techniques</div>
   <h2 class="stitle">2 appels API par photo</h2>
   <div class="api-calls">
     <div class="api-card">
@@ -413,7 +390,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 </div>
 
 <div class="section">
-  <div class="slabel">Stack technique</div>
   <h2 class="stitle">Technologies utilisées</h2>
   <table class="stack-table">
     <thead><tr><th>Catégorie</th><th>Outil</th></tr></thead>
@@ -431,7 +407,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 </div>
 
 <div class="section">
-  <div class="slabel">Résultats</div>
   <h2 class="stitle">Ce que ça change concrètement</h2>
   <div class="results-grid">
     <div class="rcard"><span class="rcard__n">5 sec</span><span class="rcard__l">de l'app Photos iOS au stock organisé, légendé, référencé</span></div>
@@ -447,31 +422,24 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 
 <div class="nav-bottom">
   <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
-  <a href="https://photo-collector.onrender.com/gallery" target="_blank" class="nav-btn nav-btn--pri">🖼 Voir la galerie →</a>
+  <a href="https://photo-collector.onrender.com/gallery" target="_blank" class="nav-btn nav-btn--pri">Voir la galerie →</a>
   <a href="https://github.com/polemoineperso-ai/photo-collector" target="_blank" class="nav-btn nav-btn--out">Code source ↗</a>
   <a href="/portfolio/vocalink.html" class="nav-btn nav-btn--out">Projet suivant : Vocalink →</a>
 </div>
 
 </div>
 
-<footer class="northia-footer">
-  <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
-  <div><div class="northia-footer__name">Pierre-Olivier Lemoine · NorthIA · 2026</div><div class="northia-footer__sub">Claude Vision (Anthropic) · FastAPI · Cloudinary · iOS · PWA</div></div>
-  <div class="northia-footer__links">
-    <a href="https://northia.fr" target="_blank" class="northia-footer__lnk">northia.fr</a>
-    <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p>Pierre-Olivier Lemoine · Marketing · Communication · Digital · IA</p>
+    <nav aria-label="Liens annexes">
+      <a href="./">Toutes les applications</a>
+      <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/">LinkedIn</a>
+      <a href="carte-visite.html">Carte de visite</a>
+      <a href="plaquette-northia.pdf">Plaquette NorthIA (PDF)</a>
+    </nav>
   </div>
 </footer>
-<script>
-function toggleMenu(){var m=document.getElementById('navMobile');m.classList.toggle('open');}
-document.addEventListener('click',function(e){var m=document.getElementById('navMobile');if(m&&!e.target.closest('.nav-burger')&&!e.target.closest('#navMobile'))m.classList.remove('open');});
-</script>
-<script>
-(function(){var b=document.querySelector('.nav-burger'),m=document.getElementById('navMobile');if(!b||!m)return;
-b.setAttribute('aria-controls','navMobile');
-function s(){b.setAttribute('aria-expanded',m.classList.contains('open')?'true':'false');}
-s();new MutationObserver(s).observe(m,{attributes:true,attributeFilter:['class']});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open')){m.classList.remove('open');b.focus();}});})();
-</script>
 </body>
 </html>

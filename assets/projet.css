@@ -1,0 +1,159 @@
+/* Pages projet : réhabillage dans le style du nouvel accueil.
+   Chargé après le style propre à chaque page : il remplace l'identité NorthIA
+   (couleurs, polices, bordures latérales) sans toucher à la mise en page des blocs. */
+
+:root{
+  /* les anciennes variables pointent vers la couleur de l'application */
+  --nia-blue:var(--accent-ink);
+  --nia-blue-dark:var(--accent-deep);
+  --nia-pink:var(--accent-ink);
+  --nia-pink-dark:var(--accent-deep);
+  --nia-black:#0D0D0D;
+  --ink:#0E0E10; --ink-soft:#3B3D44; --ink-muted:#5A5E68; --ink-faint:#B9BDC6;
+  --paper:#FFFFFF; --paper-warm:#F1F2F4; --paper-card:#FFFFFF; --line:#D8DAE0;
+  --font:"Atkinson Hyperlegible Next",system-ui,sans-serif;
+  --display:"Archivo",system-ui,sans-serif;
+  --ui:"Archivo",system-ui,sans-serif;
+  --r:2px; --r-lg:4px;
+  --shadow:none; --shadow-md:0 12px 32px -18px rgba(0,0,0,.35); --shadow-lg:0 20px 48px -20px rgba(0,0,0,.4);
+  /* valeurs par défaut, redéfinies sur <body> par page */
+  --accent:#0D0D0D; --accent-ink:#0D0D0D; --accent-deep:#000; --accent-light:#A9E023;
+  --hero-fg:#fff; --hero-fg-2:rgba(255,255,255,.94); --hero-veil:rgba(255,255,255,.1); --hero-line:rgba(255,255,255,.28);
+  --hero-btn-bg:#fff; --hero-btn-fg:#0D0D0D;
+}
+body.page{background:#fff;color:var(--ink);font-family:var(--font);font-size:18px;line-height:1.6;padding-top:0}
+body.page--clair{--hero-fg:#0E0E10;--hero-fg-2:rgba(14,14,16,.82);--hero-veil:rgba(0,0,0,.08);--hero-line:rgba(0,0,0,.25);--hero-btn-bg:#0E0E10;--hero-btn-fg:#fff;--accent-light:#0E0E10}
+
+/* Ouverture de la page, dans la couleur de l'application */
+.page .hero{background:var(--accent);color:var(--hero-fg);text-align:left;padding:clamp(48px,7vw,96px) var(--gut) clamp(48px,6vw,80px)}
+.page .hero::before,.page .hero::after{display:none}
+.page .hero > *{max-width:1100px;margin-left:auto;margin-right:auto}
+.page .hero__tag,.page .hero__client{display:block;background:none;border:0;padding:0;margin-bottom:18px;font:700 16px/1.3 var(--font);letter-spacing:0;text-transform:none;color:var(--hero-fg-2);border-radius:0}
+.page .hero__client-dot{display:none}
+.page .hero__title{font:900 clamp(44px,6.4vw,92px)/.95 var(--display);font-stretch:72%;letter-spacing:-.01em;text-transform:uppercase;color:var(--hero-fg);margin-bottom:20px}
+.page .hero__title em{font-style:normal;color:var(--accent-light);display:block}
+.page .hero__sub{font-size:clamp(18px,1.6vw,22px);color:var(--hero-fg-2);max-width:60ch;margin:0 auto 28px 0;margin-left:auto;margin-right:auto}
+.page .hero__icon{margin-bottom:20px}
+.page .hero__icon img{width:72px;height:72px;border-radius:16px}
+.page .demo-wrap,.page .hero__btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-start;margin-bottom:28px}
+.page .hero__demo,.page .hero__btn,.page .hero__cta{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;background:var(--hero-btn-bg);color:var(--hero-btn-fg);font:700 16px/1 var(--font);letter-spacing:0;text-transform:none;border-radius:2px;border:2px solid var(--hero-btn-bg);text-decoration:none;margin-bottom:28px}
+.page .hero__btn--sec{background:transparent;color:var(--hero-fg);border-color:var(--hero-fg)}
+.page .hero__demo:hover,.page .hero__btn:hover{filter:brightness(.92)}
+.page .light-pill{background:var(--hero-veil);color:var(--hero-fg);border:1px solid var(--hero-line);font:700 15px/1 var(--font);letter-spacing:0;padding:8px 12px;border-radius:2px}
+.page .hero__metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;justify-content:start;margin-bottom:24px;border-top:2px solid var(--hero-fg)}
+.page .metric{background:none;border:0;border-radius:0;text-align:left;padding:16px 20px 4px 0}
+.page .metric + .metric{padding-left:20px;border-left:1px solid var(--hero-line)}
+.page .metric__n{font:900 clamp(30px,3.2vw,44px)/1 var(--display);font-stretch:78%;color:var(--hero-fg)}
+.page .metric__l{font-size:16px;color:var(--hero-fg-2);margin-top:6px}
+.page .hero__time{font-size:17px;color:var(--hero-fg-2);text-align:left}
+.page .hero__time strong{color:var(--hero-fg)}
+@media (max-width:760px){.page .hero__metrics{grid-template-columns:1fr 1fr}.page .metric:nth-child(3){padding-left:0;border-left:0}}
+
+/* Bandeau d'ampleur du chantier */
+.page .scale-band{background:#0D0D0D;border:0;text-align:left;padding:28px var(--gut)}
+.page .scale-band__label{max-width:1100px;margin:0 auto 16px;font:700 16px/1.4 var(--font);letter-spacing:0;text-transform:none;color:#CFCFCF}
+.page .scale-band__grid{max-width:1100px;margin:0 auto;justify-content:flex-start;gap:0}
+.page .scale-stat{background:none;border:0;border-left:3px solid var(--accent-light);border-radius:0;padding:4px 24px;min-width:0}
+.page .scale-stat__n{font:900 clamp(28px,3vw,40px)/1 var(--display);font-stretch:78%}
+.page .scale-stat__l{font-size:15px;color:#CFCFCF}
+body.page--clair .scale-stat{border-left-color:var(--accent)}
+
+/* Corps de page */
+.page .wrap{max-width:1100px;padding:0 var(--gut)}
+.page .section{padding:clamp(48px,6vw,80px) 0 0}
+.page .section:last-of-type{padding-bottom:clamp(48px,6vw,80px)}
+.page .slabel{display:none}
+.page .stitle{font:900 clamp(32px,3.6vw,52px)/1 var(--display);font-stretch:78%;letter-spacing:-.01em;color:var(--ink);margin-bottom:18px}
+.page .prose,.page p{font-size:18px;color:var(--ink-soft);line-height:1.65}
+.page .prose{max-width:68ch}
+
+/* Icônes émoji décoratives : retirées, le texte porte le sens */
+.page .genesis-card__icon,.page .feat-card__icon,.page .ficon,.page .picon,.page .rrow__icon,.page .module-chip__icon,.page .confidential__icon{display:none}
+.page .flow-step{grid-template-columns:1fr}
+
+/* Cartes : coins nets, plus de bordure colorée sur le côté */
+.page .genesis-card,.page .feat-card,.page .rcard,.page .flow-step,.page .challenge,.page .pil-card,.page .module-chip,.page .rule-card,.page .api-card,.page .cat-item,.page .pass{border-radius:2px;box-shadow:none}
+.page .genesis-card{border:1px solid var(--line);border-top:4px solid var(--ink)}
+.page .genesis-card--think{border-top-color:var(--accent-ink)}
+.page .genesis-card--result{border-top-color:#13774F}
+.page .genesis-card__label{font:800 18px/1.2 var(--display);letter-spacing:0;text-transform:none}
+.page .genesis-card--diag .genesis-card__label{color:var(--ink)}
+.page .genesis-card--think .genesis-card__label{color:var(--accent-ink)}
+.page .genesis-card--result .genesis-card__label{color:#13774F}
+.page .genesis-card__text,.page .feat-card__text,.page .fdesc,.page .cbody{font-size:16px;line-height:1.6;color:var(--ink-soft)}
+.page .challenge{border:1px solid var(--line);border-left:1px solid var(--line);padding:20px}
+.page .ctitle,.page .fname,.page .feat-card__title{font:800 19px/1.25 var(--display);color:var(--ink)}
+.page .fsub{font-size:14px;color:var(--ink-muted)}
+.page .flow-step:hover,.page .feat-card:hover,.page .genesis-card:hover{border-color:var(--ink)}
+
+/* « L'humain reste le décideur » : bloc pleine largeur, sans bordure latérale */
+.page .rule8020,.page .pcard__rule{background:#0D0D0D;border:0;border-top:6px solid var(--accent-light);border-radius:0;padding:24px 28px;margin:28px 0}
+body.page--clair .rule8020{border-top-color:var(--accent)}
+.page .rule8020__title{font:800 20px/1.2 var(--display);letter-spacing:0;text-transform:none;color:#fff;margin-bottom:10px}
+.page .rule8020__title strong{color:var(--accent-light)}
+body.page--clair .rule8020__title strong{color:var(--accent)}
+.page .rule8020__text{font-size:17px;line-height:1.65;color:rgba(255,255,255,.86)}
+.page .rule8020__text strong{color:#fff}
+
+/* Tableau des technologies */
+.page .stack-table{border-radius:0;box-shadow:none;border:1px solid var(--line);font-size:16px}
+.page .stack-table th{background:#0D0D0D;color:#fff;font:700 15px var(--font);letter-spacing:0;text-transform:none}
+.page .stack-table td{color:var(--ink-soft)}
+.page .stack-table{width:100%;table-layout:fixed}
+.page .stack-table th,.page .stack-table td{overflow-wrap:anywhere}
+@media (max-width:600px){.page .stack-table th,.page .stack-table td{padding:10px 8px;font-size:14px}}
+.page .ccode,.page .mono-td{font-size:14px}
+
+/* Résultats */
+.page .rcard{border:0;border-top:3px solid var(--ink);padding:16px 0 0;background:none}
+.page .rcard__n{font:900 clamp(30px,3vw,42px)/1 var(--display);font-stretch:78%;color:var(--accent-ink)}
+.page .rcard__l{font-size:16px}
+
+/* Encart démonstration et liens de bas de page */
+.page .screen-section{text-align:left;border-top:1px solid var(--line);margin:48px 0 0;padding:32px 0 0}
+.page .screen-label{font:800 20px/1.2 var(--display);letter-spacing:0;text-transform:none;color:var(--ink);margin-bottom:12px}
+.page .screen-caption{font-style:normal;font-size:16px;color:var(--ink-muted)!important}
+.page .screen-section .hero__demo,.page .screen-section a{background:var(--accent-ink);color:#fff;border-color:var(--accent-ink)}
+.page .nav-bottom{margin-top:56px;padding:24px 0 56px;border-top:3px solid var(--ink)}
+.page .nav-btn{min-height:48px;display:inline-flex;align-items:center;font:700 16px/1 var(--font);letter-spacing:0;text-transform:none;border-radius:2px;padding:0 20px}
+.page .nav-btn--out{border:2px solid var(--ink);color:var(--ink);background:#fff}
+.page .nav-btn--out:hover{background:var(--ink);color:#fff}
+.page .nav-btn--pri{background:var(--accent-ink);color:#fff}
+.page .nav-btn--pri:hover{background:var(--accent-deep)}
+
+/* Petits libellés en capitales hérités : ramenés à une taille lisible */
+.page [class*="__tag"],.page [class*="-label"],.page [class*="__label"],.page .pbadge,.page .human-badge{letter-spacing:.02em;font-size:14px}
+
+/* Page projet : vidéos intégrées existantes */
+.page iframe{max-width:100%}
+
+/* Corrections de l'audit */
+.page .genesis-card{border-radius:0}
+.page .method,.page .pipe-step--human,.page .example-box{border-left-width:1px;border-left-color:var(--line);border-top:4px solid var(--accent-ink);border-radius:0}
+.page .rule8020 strong,.page .pcard__rule strong{color:#fff}
+.page .rule8020__title strong{color:var(--accent-light)}
+body.page--clair .rule8020__title strong{color:#F2B33D}
+.page .method__title{color:#13774F}
+.page .pipe-step,.page .flow-step{grid-template-columns:1fr}
+/* Pas de surtitre au-dessus du titre : la ligne technique est déjà dans le tableau des technologies */
+.page .hero__tag,.page .hero__client{display:none}
+
+/* Corrections de la revue finale : un seul bord gauche pour toute l'ouverture */
+.page .hero{padding-left:max(var(--gut),calc((100% - 1100px)/2));padding-right:max(var(--gut),calc((100% - 1100px)/2))}
+.page .hero > *{max-width:none;margin-left:0;margin-right:0}
+.page .hero__sub{max-width:60ch;margin:0 0 28px}
+.page .hero__icon,.page .hero__icon img{margin-left:0}
+.page .demo-wrap,.page .hero__btns{justify-content:flex-start}
+.page .bar .wrap,.page .foot .wrap{max-width:1100px;padding:0 var(--gut)}
+/* Avant → après mis en avant, comme sur l'accueil */
+.page .hero__time{font:800 clamp(22px,2.4vw,32px)/1.25 var(--display);font-stretch:85%;color:var(--hero-fg-2);border-top:2px solid var(--hero-fg);padding-top:16px;max-width:none}
+.page .hero__time strong{color:var(--accent-light);font-weight:900}
+body.page--clair .hero__time strong{color:var(--hero-fg)}
+/* Chiffres du chantier : filet en haut, sur une grille */
+.page .scale-band__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px}
+.page .scale-stat{border-left:0;border-top:3px solid var(--accent-light);padding:14px 0 0}
+body.page--clair .scale-stat{border-top-color:var(--accent)}
+/* Pastilles « action humaine » : coins nets, sans rose */
+.page .human-badge{border-radius:2px;background:#0D0D0D;color:#fff;border:0}
+/* Une seule colonne de la barre au pied de page */
+.page .hero{padding-left:calc(max(0px,(100% - 1100px)/2) + var(--gut));padding-right:calc(max(0px,(100% - 1100px)/2) + var(--gut))}

@@ -3,159 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pierre-Olivier Lemoine — Projets IA × Communication · NorthIA</title>
-<meta name="description" content="8 projets IA appliqués à la communication : générateur de candidature, agent de veille emploi, newsletter automatisée, photothèque rédaction, pilotage de concertation territoriale, capture vocale d'idées, application de révision juridique. Par Pierre-Olivier Lemoine · NorthIA.">
+<title>Pierre-Olivier Lemoine · Huit applications IA en service</title>
+<meta name="description" content="Responsable communication stratégique, 20 ans d'expérience : huit applications IA conçues et pilotées, d'Eleven Academy à la concertation territoriale. L'IA produit, l'humain décide.">
+<meta name="theme-color" content="#0D0D0D">
+<meta property="og:title" content="Pierre-Olivier Lemoine · Huit applications IA en service">
+<meta property="og:description" content="L'IA produit. Je décide. Huit applications IA conçues et pilotées par un communicant.">
+<meta property="og:image" content="https://polemoineperso-ai.github.io/portfolio/assets/img/eleven-video-secours.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;--nia-pink-dark:#C179A0;--nia-black:#222222;
-  --ink:#1a1d23;--ink-soft:#3d4251;--ink-muted:#8892a4;--ink-faint:#c8cedb;
-  --paper:#fafbfc;--paper-warm:#f4f2ee;--paper-card:#fff;--line:#e8eaef;
-  --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
-  --display:'Cinzel',Georgia,serif;--ui:'Orbitron',sans-serif;
-  --r:8px;--r-lg:12px;
-  --shadow:0 1px 4px rgba(0,0,0,.06),0 2px 12px rgba(0,0,0,.04);
-  --shadow-md:0 4px 20px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 40px rgba(0,0,0,.12);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
-/* NAV */
-.northia-nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
-.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
-.northia-nav__logo{height:36px;width:auto;}
-.northia-nav__links{display:flex;align-items:center;gap:4px;}
-.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
-.northia-nav__link:hover{color:var(--nia-pink);background:rgba(255,255,255,.06);}
-.northia-nav__cta{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
-.northia-nav__cta:hover{background:var(--nia-pink);}
-/* HERO */
-.hero{background:var(--nia-black);color:#fff;padding:80px 24px 72px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 50% -10%,rgba(94,149,200,.4),transparent);pointer-events:none;}
-.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:60px;background:linear-gradient(to bottom,transparent,var(--paper));pointer-events:none;}
-.hero__tag{display:inline-block;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:24px;}
-.hero__title{font-family:var(--display);font-size:clamp(32px,6vw,52px);font-weight:700;line-height:1.1;margin-bottom:8px;letter-spacing:-.01em;}
-.hero__title em{font-style:italic;color:var(--nia-pink);}
-.hero__author{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:18px;font-family:var(--ui);font-size:11px;letter-spacing:.04em;}
-.hero__sub{font-size:16px;color:rgba(255,255,255,.55);max-width:520px;margin:0 auto 32px;line-height:1.65;}
-.hero__video{margin-bottom:32px;}
-.hero__video-link{position:relative;display:inline-block;width:560px;max-width:100%;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.15);}
-.hero__video-thumb{display:block;width:100%;height:auto;}
-.hero__video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:rgba(228,158,198,.92);color:#222;display:flex;align-items:center;justify-content:center;font-size:24px;transition:all .15s;}
-.hero__video-link:hover .hero__video-play{background:var(--nia-pink);transform:translate(-50%,-50%) scale(1.08);}
-.hero__video-label{position:absolute;bottom:10px;right:12px;font-family:var(--ui);font-size:12px;font-weight:700;letter-spacing:.05em;color:#fff;background:rgba(0,0,0,.6);padding:4px 10px;border-radius:4px;}
-.hero__principle{display:inline-block;background:rgba(228,158,198,.12);border:1px solid rgba(228,158,198,.25);border-radius:8px;padding:12px 20px;margin-bottom:28px;font-size:13px;color:rgba(255,255,255,.7);max-width:520px;}
-.hero__principle strong{color:var(--nia-pink);}
-.hero__stats{display:flex;justify-content:center;gap:32px;margin-top:0;}
-.hero__stat{text-align:center;}
-.hero__stat-n{font-family:var(--ui);font-size:20px;font-weight:700;color:#fff;display:block;}
-.hero__stat-l{font-size:11px;color:rgba(255,255,255,.35);display:block;margin-top:2px;}
-/* WRAP */
-.wrap{max-width:960px;margin:0 auto;padding:0 24px;}
-.section{padding:52px 0 0;}
-.section:last-of-type{padding-bottom:72px;}
-.slabel{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
-.stitle{font-family:var(--display);font-size:26px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em;}
-.sintro{font-size:15px;color:var(--ink-soft);max-width:560px;margin-bottom:28px;line-height:1.65;}
-/* FEATURED CARD */
-.pcard--featured{border-color:var(--nia-pink);box-shadow:0 0 0 1px var(--nia-pink),var(--shadow-md);grid-column:1/-1;}
-.pcard--featured:hover{border-color:var(--nia-pink);box-shadow:0 0 0 2px var(--nia-pink),var(--shadow-lg);}
-.pcard__featured-label{background:linear-gradient(90deg,var(--nia-black),#2a1a2e);color:var(--nia-pink);font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:7px 24px;}
-.pcard--featured .pcard__top{background:linear-gradient(90deg,rgba(228,158,198,.06),transparent);}
-/* PROJECT CARDS */
-.projects{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-@media(max-width:780px){.projects{grid-template-columns:1fr;}}
-.pcard{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);transition:box-shadow .2s,border-color .2s,transform .2s;}
-.pcard:hover{box-shadow:var(--shadow-lg);border-color:var(--nia-blue);transform:translateY(-2px);}
-.pcard__top{display:flex;align-items:center;gap:16px;padding:20px 24px 16px;border-bottom:1px solid var(--line);}
-.pcard__num{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:500;flex-shrink:0;}
-.pn-b{background:rgba(94,149,200,.12);color:var(--nia-blue);}
-.pn-p{background:rgba(228,158,198,.12);color:var(--nia-pink);}
-.pcard__meta{flex:1;}
-.pcard__title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:2px;}
-.pcard__sub{font-size:12px;color:var(--ink-muted);}
-.pbadge{font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
-.pb-ok{background:rgba(26,158,110,.1);color:#1a9e6e;}
-.pcard__body{padding:18px 24px;}
-.pcard__desc{font-size:14px;color:var(--ink-soft);line-height:1.7;margin-bottom:14px;}
-.pcard__rule{background:var(--nia-black);border-left:3px solid var(--nia-pink);border-radius:0 6px 6px 0;padding:10px 14px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.65);line-height:1.6;}
-.pcard__rule strong{color:var(--nia-pink);}
-.pcard__results{list-style:none;display:flex;flex-direction:column;gap:4px;margin-bottom:14px;}
-.pcard__results li{font-size:13px;color:var(--ink-soft);padding-left:16px;position:relative;}
-.pcard__results li::before{content:'→';position:absolute;left:0;color:var(--nia-blue);font-size:11px;top:2px;}
-.pcard__stack{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px;}
-.schip{font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 7px;border-radius:4px;background:var(--paper-warm);color:var(--ink-soft);border:1px solid var(--line);}
-.pcard__links{display:flex;gap:8px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line);}
-.plink{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.05em;padding:8px 16px;border-radius:var(--r);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
-.pl-pri{background:var(--nia-blue);color:#fff;}
-.pl-pri:hover{background:var(--nia-blue-dark);}
-.pl-sec{background:var(--paper-warm);color:var(--ink-soft);border:1px solid var(--line);}
-.pl-sec:hover{background:var(--line);color:var(--ink);}
-/* ABOUT */
-.divider{width:100%;height:1px;background:var(--line);margin:48px 0 0;}
-.about-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;display:flex;gap:24px;align-items:flex-start;box-shadow:var(--shadow);}
-.about-avatar{width:52px;height:52px;border-radius:10px;background:var(--nia-black);border:2px solid var(--nia-blue);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-style:italic;font-size:20px;color:var(--nia-blue);flex-shrink:0;}
-.about-name{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:2px;}
-.about-role{font-size:13px;color:var(--ink-muted);margin-bottom:12px;}
-.about-bio{font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:14px;}
-.about-links{display:flex;gap:12px;flex-wrap:wrap;}
-.about-link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--nia-blue);text-decoration:none;padding:6px 14px;border:1px solid rgba(94,149,200,.3);border-radius:4px;transition:all .15s;}
-.about-link:hover{background:var(--nia-blue);color:#fff;}
-/* FOOTER */
-.northia-footer{background:#222;border-top:2px solid var(--nia-blue);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
-.northia-footer__logo{height:28px;width:auto;}
-.northia-footer__name{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
-.northia-footer__sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
-.northia-footer__links{display:flex;gap:14px;}
-.northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
-.northia-footer__lnk:hover{color:var(--nia-pink);}
-/* HAMBURGER */
-.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
-.nav-burger span{width:22px;height:2px;background:rgba(255,255,255,.7);border-radius:2px;transition:all .2s;}
-.nav-mobile{display:none;position:absolute;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:99;}
-.nav-mobile a{display:block;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
-.nav-mobile a:hover{color:var(--nia-pink);background:rgba(255,255,255,.04);}
-.nav-mobile.open{display:block;}
-@media(max-width:600px){
-  .hero{padding:56px 20px 52px;}.hero__stats{gap:20px;}
-  .pcard__top{flex-wrap:wrap;}.about-card{flex-direction:column;gap:16px;}
-  .northia-nav__links{display:none;}
-  .nav-burger{display:flex;}
-  .northia-footer{flex-direction:column;align-items:center;text-align:center;}
-  .northia-nav{position:relative;}
-}
-/* menu : jamais sur deux lignes */
-.northia-nav__link,.northia-nav__cta{white-space:nowrap;}
-.northia-nav__link{padding:6px 8px;}
-@media(max-width:1445px){
-  .northia-nav__links{display:none!important;}
-  .nav-burger{display:flex;}
-  .nav-mobile{position:fixed;top:58px;z-index:999;max-height:calc(100vh - 58px);overflow-y:auto;}
-  .nav-mobile.open{display:block;}
-}
-/* lisibilité (audit du 26 nov. 2026) : mêmes styles, contrastes AA */
-:root{--ink-muted:#5f6878;}
-.northia-nav__link{color:rgba(255,255,255,.78);}
-.northia-nav__link--active{color:#8fb8de;}
-.northia-nav__cta--contact,.northia-nav__cta[style*="nia-pink"]{color:#222!important;}
-.hero__tag,.hero__author,.hero__sub,.hero__time,.metric__l,.hero__stat-l,.scale-stat__l,.scale-band__label{color:rgba(255,255,255,.72);}
-.northia-footer__sub,.northia-footer__lnk{color:rgba(255,255,255,.7);}
-.pl-pri,.nav-btn--pri,.hero__demo{background:var(--nia-blue-dark);}
-.pl-pri:hover,.nav-btn--pri:hover,.hero__demo:hover{background:#1d4b6d;}
-.screen-label,.genesis-card--diag .genesis-card__label{color:var(--nia-blue-dark);}
-.genesis-card--think .genesis-card__label{color:#9a4a77;}
-.genesis-card--result .genesis-card__label,.pb-ok{color:#13774f;}
-.pcard__rule,.rule8020__text{color:rgba(255,255,255,.8);}.rule8020__text .ccode,.pcard__rule .ccode{color:var(--ink);}
-a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-offset:2px;}
-.nav-burger{min-width:44px;min-height:44px;align-items:center;justify-content:center;}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;}.pcard:hover{transform:none;}}
-.screen-caption{color:var(--ink-muted)!important;}
-.nav-btn--out:hover{color:var(--nia-blue-dark);border-color:var(--nia-blue-dark);}
-.northia-nav__cta[style*="nia-blue-dark"]{color:#fff!important;}
-.pn-b{color:var(--nia-blue-dark);}.pn-p{color:#9a4a77;}
-.about-link{color:var(--nia-blue-dark);}.about-link:hover{background:var(--nia-blue-dark);color:#fff;}
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF396K2Y0E"></script>
 <script>
@@ -166,352 +23,186 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 </script>
 </head>
 <body>
+<a class="skip" href="#contenu">Aller au contenu</a>
 
-<nav class="northia-nav">
-  <a href="/portfolio/index.html" class="northia-nav__brand">
-    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
-  </a>
-  <div class="northia-nav__links">
-    <a href="/portfolio/concertation-territoriale.html" class="northia-nav__link">Concertation</a>
-    <a href="/portfolio/edlm-linkedin.html" class="northia-nav__link">EDLM LinkedIn</a>
-    <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
-    <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
-    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
-    <a href="/portfolio/photo-collector.html" class="northia-nav__link">Photothèque</a>
-    <a href="/portfolio/vocalink.html" class="northia-nav__link">Vocalink</a>
-    <a href="/portfolio/eleven-academy.html" class="northia-nav__link">Eleven Academy</a>
-    <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta">⬇ Plaquette</a>
-    <a href="/portfolio/plaquette-flipbook.html" class="northia-nav__cta" style="background:var(--nia-blue-dark);">📖 Feuilleter</a>
-    <a href="https://polemoineperso-ai.github.io/portfolio/carte-visite.html" class="northia-nav__cta" style="background:var(--nia-pink);margin-left:2px;">✉ Me contacter</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="bar__name" href="./">Pierre-Olivier Lemoine</a>
+    <nav aria-label="Navigation principale">
+      <a href="#applications">Les applications</a>
+      <a href="#ia-humain">L'IA et moi</a>
+      <a class="btn btn--lime" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+    </nav>
   </div>
-  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="nav-mobile" id="navMobile">
-  <a href="/portfolio/concertation-territoriale.html">Concertation</a>
-  <a href="/portfolio/edlm-linkedin.html">EDLM LinkedIn</a>
-  <a href="/portfolio/generateur-projet.html">Générateur</a>
-  <a href="/portfolio/agent-veille.html">Agent de veille</a>
-  <a href="/portfolio/newsletter.html">Newsletter IA</a>
-  <a href="/portfolio/photo-collector.html">Photothèque</a>
-  <a href="/portfolio/vocalink.html">Vocalink</a>
-  <a href="/portfolio/eleven-academy.html">Eleven Academy</a>
-  <a href="/portfolio/plaquette-northia.pdf" download style="color:var(--nia-pink)!important">⬇ Plaquette PDF</a>
-  <a href="/portfolio/plaquette-flipbook.html" style="color:var(--nia-blue)!important">📖 Feuilleter la plaquette</a>
-  <a href="https://polemoineperso-ai.github.io/portfolio/carte-visite.html" style="color:var(--nia-pink)!important">✉ Me contacter</a>
-</div>
+</header>
 
-<div class="hero">
-  <div class="hero__tag">Portfolio IA × Communication · Pierre-Olivier Lemoine</div>
-  <h1 class="hero__title">L'IA au service<br><em>de la communication</em></h1>
-  <p class="hero__author">Pierre-Olivier Lemoine · NorthIA · 2025–2026</p>
-  <p class="hero__sub">Huit agents, pipelines et applications construits de A à Z — pour automatiser, qualifier et produire là où les communicants perdent le plus de temps.</p>
-  <div class="hero__video">
-    <a href="https://youtu.be/MJ5KL21HpmE" target="_blank" rel="noopener" class="hero__video-link">
-      <img src="https://img.youtube.com/vi/MJ5KL21HpmE/hqdefault.jpg" alt="Vidéo de présentation : L'IA au service de la communication, par Pierre-Olivier Lemoine" class="hero__video-thumb" loading="lazy">
-      <span class="hero__video-play">▶</span>
-      <span class="hero__video-label">1:27</span>
-    </a>
-  </div>
-  <div class="hero__principle"><strong>L'IA est un facilitateur. L'humain reste le décideur.</strong><br>Chaque projet applique la règle 80/20 : l'IA prend en charge le volume, l'humain conserve le jugement et la validation.</div>
-  <div style="margin-bottom:24px;">
-    <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta" style="display:inline-flex;align-items:center;gap:8px;font-size:11px;">
-      ⬇ Télécharger la plaquette PDF
-    </a>
-    <a href="/portfolio/plaquette-flipbook.html" class="northia-nav__cta" style="display:inline-flex;align-items:center;gap:8px;font-size:11px;background:var(--nia-blue-dark);margin-left:8px;">
-      📖 Feuilleter la plaquette
-    </a>
-  </div>
-  <div class="hero__stats">
-    <div class="hero__stat"><span class="hero__stat-n">8</span><span class="hero__stat-l">outils construits</span></div>
-    <div class="hero__stat"><span class="hero__stat-n">80/20</span><span class="hero__stat-l">règle appliquée à chaque outil</span></div>
-    <div class="hero__stat"><span class="hero__stat-n">20 ans</span><span class="hero__stat-l">expérience communication</span></div>
-  </div>
-</div>
-
-<div class="wrap">
-<div class="section">
-  <div class="slabel">Réalisations</div>
-  <h2 class="stitle">Huit projets, huit problèmes résolus</h2>
-  <p class="sintro">Chaque outil répond à une perte de temps réelle ou à un besoin de pilotage réel. Conçus pour être utilisés — pas en démo.</p>
-
-  <div class="projects">
-
-    <div class="pcard pcard--featured">
-      <div class="pcard__featured-label">✦ Dernière réalisation · Septembre 2026</div>
-      <div class="pcard__top">
-        <div class="pcard__num pn-p">01</div>
-        <div class="pcard__meta">
-          <div class="pcard__title">Pilotage de concertation territoriale</div>
-          <div class="pcard__sub">Next.js · Prisma · Claude API · Auth.js</div>
-        </div>
-        <span class="pbadge pb-ok">✓ Fonctionnel</span>
-      </div>
-      <div class="pcard__body">
-        <p class="pcard__desc">Application de pilotage sur-mesure pour la concertation territoriale de projets d'infrastructure énergétique : parties prenantes, risques, communication éditoriale, engagements et actions dans un seul outil, avec un score d'acceptabilité calculé — pas déclaratif.</p>
-        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> l'IA suggère un sentiment et des sujets sur les échanges et contributions du public — jamais enregistrée sans relecture et validation humaine.</div>
-        <ul class="pcard__results">
-          <li>17 projets réels importés, avec dates clés réglementaires, intervenants et documents officiels sourcés publiquement</li>
-          <li>Score d'acceptabilité calculé à partir de la position/influence/mobilisation des parties prenantes et de la criticité des risques</li>
-          <li>Permissions par rôle et par projet, journal d'audit complet, 73 tests automatisés</li>
-          <li>Alertes proactives : risque critique, échéance dépassée, partie prenante jamais recontactée</li>
-        </ul>
-        <div class="pcard__stack">
-          <span class="schip">Next.js 16</span><span class="schip">TypeScript</span><span class="schip">Prisma</span><span class="schip">PostgreSQL</span><span class="schip">Auth.js</span><span class="schip">Claude API</span><span class="schip">Tailwind CSS</span>
-        </div>
-        <div class="pcard__links">
-          <a href="/portfolio/concertation-territoriale.html" class="plink pl-pri">Voir le projet →</a>
-          <a href="/portfolio/mock-concertation.html" target="_blank" class="plink pl-sec">🖥 Voir l'interface ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="pcard__top">
-        <div class="pcard__num pn-b">02</div>
-        <div class="pcard__meta">
-          <div class="pcard__title">Article → LinkedIn EDLM</div>
-          <div class="pcard__sub">Node.js · Claude API · Geckosocial · Vercel</div>
-        </div>
-        <span class="pbadge pb-ok">✓ En production</span>
-      </div>
-      <div class="pcard__body">
-        <p class="pcard__desc">Application web sur-mesure pour Énergies de la Mer (client NorthIA) : transforme un article WordPress en post LinkedIn calibré au format EDLM en moins de 30 secondes, puis publie directement dans Geckosocial. 9 modules couvrant toute la stratégie TOFU / MOFU / BOFU.</p>
-        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> l'IA génère le post, le rédacteur relit, ajuste dans l'éditeur et choisit quand publier. La publication dans Geckosocial reste un acte volontaire — jamais automatique.</div>
-        <ul class="pcard__results">
-          <li>Article WordPress → post LinkedIn structuré en &lt; 30 secondes</li>
-          <li>9 modules : Article, Nominations, AO, Rapport, Agenda, Flash, Sondage, Terrain, Conversion BOFU</li>
-          <li>Pilotage éditorial intégré : KPIs semaine, historique 12 semaines, suivi abonnés</li>
-          <li>Publication directe via API Geckosocial — zéro copier-coller</li>
-        </ul>
-        <div class="pcard__stack">
-          <span class="schip">Node.js</span><span class="schip">Express</span><span class="schip">Claude API</span><span class="schip">Geckosocial API</span><span class="schip">WordPress REST API</span><span class="schip">Upstash Redis</span><span class="schip">Vercel</span>
-        </div>
-        <div class="pcard__links">
-          <a href="/portfolio/edlm-linkedin.html" class="plink pl-pri">Voir le projet →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="pcard__top">
-        <div class="pcard__num pn-b">03</div>
-        <div class="pcard__meta">
-          <div class="pcard__title">Générateur de candidature IA</div>
-          <div class="pcard__sub">Lettre · Mail d'accompagnement · Profil ATS</div>
-        </div>
-        <span class="pbadge pb-ok">✓ En ligne</span>
-      </div>
-      <div class="pcard__body">
-        <p class="pcard__desc">Un fichier HTML autonome qui génère en 20 secondes une lettre de motivation structurée, deux versions de mail et un profil CV optimisé ATS. Quatre passes API, audit qualité automatique, règles éditoriales intégrées.</p>
-        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> l'IA génère la structure, l'humain valide, ajuste et choisit ce qu'il envoie. Les chiffres ne viennent que de votre profil — l'IA ne peut pas inventer votre valeur.</div>
-        <ul class="pcard__results">
-          <li>2 à 3h de rédaction → 20 minutes de relecture et d'envoi</li>
-          <li>4 passes API : rédaction → correction → mail → analyse ATS</li>
-          <li>Audit automatique : mots interdits, tirets longs, score /10</li>
-          <li>Zéro serveur, zéro installation — fichier HTML autonome</li>
-        </ul>
-        <div class="pcard__stack">
-          <span class="schip">HTML vanilla</span><span class="schip">JavaScript</span><span class="schip">Claude API</span><span class="schip">localStorage</span>
-        </div>
-        <div class="pcard__links">
-          <a href="/portfolio/generateur-projet.html" class="plink pl-pri">Voir le projet →</a>
-          <a href="/portfolio/generateur.html" class="plink pl-sec">Tester l'outil ↗</a>
-          <a href="/portfolio/guide-utilisation.html" class="plink pl-sec">Guide d'utilisation</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="pcard__top">
-        <div class="pcard__num pn-b">04</div>
-        <div class="pcard__meta">
-          <div class="pcard__title">Agent de veille emploi automatisé</div>
-          <div class="pcard__sub">Python · Windows Scheduler · Gmail OAuth</div>
-        </div>
-        <span class="pbadge pb-ok">✓ En production</span>
-      </div>
-      <div class="pcard__body">
-        <p class="pcard__desc">Agent Python qui tourne chaque matin à 7h00 : scraping multi-sources, scoring Claude, email digest HTML actionnable. 180 offres agrégées, 2 à 5 livrées avec justification IA.</p>
-        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> le tri est automatisé, la décision de candidater reste humaine. L'agent ne postule pas — il sélectionne pour que vous puissiez choisir.</div>
-        <ul class="pcard__results">
-          <li>45 min de veille manuelle → 5 min de lecture du digest</li>
-          <li>3 sources : France Travail API (8 dép. IDF), Adzuna, Cadremploi RSS</li>
-          <li>Score /10 + tag + justification Claude par offre</li>
-          <li>Actions en un clic depuis l'email — dont ouverture dans le générateur</li>
-        </ul>
-        <div class="pcard__stack">
-          <span class="schip">Python 3.13</span><span class="schip">Claude API</span><span class="schip">Gmail OAuth</span><span class="schip">Windows Scheduler</span>
-        </div>
-        <div class="pcard__links">
-          <a href="/portfolio/agent-veille.html" class="plink pl-pri">Voir le projet →</a>
-          <a href="/portfolio/mock-email-digest.html" target="_blank" class="plink pl-sec">📧 Voir l'email digest</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="pcard__top">
-        <div class="pcard__num pn-p">05</div>
-        <div class="pcard__meta">
-          <div class="pcard__title">Newsletter IA automatisée — NorthIA</div>
-          <div class="pcard__sub">Make · Claude · DALL-E 3 · Brevo</div>
-        </div>
-        <span class="pbadge pb-ok">✓ En production</span>
-      </div>
-      <div class="pcard__body">
-        <p class="pcard__desc">Pipeline complet de production éditoriale : collecte RSS, enrichissement Claude, images DALL-E 3, mise en page, distribution Brevo. L'IA produit, l'humain sélectionne et valide.</p>
-        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> 3 points de contrôle intentionnels — sélection des articles, ajout de sources stratégiques, validation avant envoi. Un éditorial sans regard humain n'est pas un éditorial.</div>
-        <ul class="pcard__results">
-          <li>4 à 6h de production éditoriale → 30 minutes de décision humaine</li>
-          <li>Images 100% générées par IA, liées au contenu de chaque article</li>
-          <li>Édito original Claude à chaque édition, règles embarquées dans le prompt</li>
-          <li>8 catégories avec palette couleur dédiée pour la cohérence visuelle</li>
-        </ul>
-        <div class="pcard__stack">
-          <span class="schip">Make</span><span class="schip">Claude API</span><span class="schip">DALL-E 3</span><span class="schip">Airtable</span><span class="schip">Brevo</span>
-        </div>
-        <div class="pcard__links">
-          <a href="/portfolio/newsletter.html" class="plink pl-pri">Voir le projet →</a>
-          <a href="/portfolio/mock-newsletter.html" target="_blank" class="plink pl-sec">🔄 Voir le pipeline</a>
-          <a href="https://northia.fr" target="_blank" class="plink pl-sec">northia.fr ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="pcard__top">
-        <div class="pcard__num pn-b">06</div>
-        <div class="pcard__meta">
-          <div class="pcard__title">Photothèque Rédaction IA</div>
-          <div class="pcard__sub">Upload iOS · Galerie éditoriale · Légende IA automatique</div>
-        </div>
-        <span class="pbadge pb-ok">✓ En production</span>
-      </div>
-      <div class="pcard__body">
-        <p class="pcard__desc">De l'iPhone au stock photo organisé en 5 secondes : un Shortcut iOS upload la photo, Claude vision génère la légende, Cloudinary stocke, Google Sheets référence. La galerie collaborative est instantanément à jour depuis n'importe quel appareil.</p>
-        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> Claude propose une légende — l'auteur la valide, la corrige ou l'ignore. Les photos sont approuvées et publiées par l'équipe éditoriale, jamais automatiquement.</div>
-        <ul class="pcard__results">
-          <li>15 à 30 min par événement → 5 secondes depuis l'app Photos iOS</li>
-          <li>Légende LinkedIn professionnelle générée par Claude vision à l'upload</li>
-          <li>Galerie filtrée par auteur / événement, dimensions et poids affichés</li>
-          <li>Suppression synchronisée Cloudinary + Sheets en un seul clic</li>
-        </ul>
-        <div class="pcard__stack">
-          <span class="schip">Python</span><span class="schip">FastAPI</span><span class="schip">Claude API</span><span class="schip">Cloudinary</span><span class="schip">Google Sheets API</span><span class="schip">Apple Shortcuts</span><span class="schip">Render</span>
-        </div>
-        <div class="pcard__links">
-          <a href="/portfolio/photo-collector.html" class="plink pl-pri">Voir le projet →</a>
-          <a href="https://photo-collector.onrender.com/gallery" target="_blank" class="plink pl-sec">🖼 Voir la galerie ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="pcard__top">
-        <div class="pcard__num pn-p">07</div>
-        <div class="pcard__meta">
-          <div class="pcard__title">Vocalink — capture vocale d'idées</div>
-          <div class="pcard__sub">Next.js · Prisma · Whisper · Claude API · Google Tasks</div>
-        </div>
-        <span class="pbadge pb-ok">✓ En production</span>
-      </div>
-      <div class="pcard__body">
-        <p class="pcard__desc">Dire une idée à voix haute sur son téléphone, et la retrouver déjà transcrite, classée et prête à devenir une action : un projet à regrouper, un e-mail préparé, un appel ou un rappel avec échéance. Synchronisée avec Notion et Google Tasks, avec un digest quotidien des idées oubliées.</p>
-        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> l'IA transcrit et classe, mais n'envoie jamais rien elle-même — l'e-mail reste un brouillon à valider, l'appel un lien à ouvrir, la tâche une synchronisation à confirmer d'un coup d'œil.</div>
-        <ul class="pcard__results">
-          <li>Transcription Whisper + classification Claude Haiku en un seul enregistrement vocal, sans PWA à installer</li>
-          <li>Routage préparé par catégorie : projet regroupable, e-mail pré-rempli, lien d'appel, rappel avec échéance</li>
-          <li>Synchronisation Notion (idées projet) et Google Tasks (toutes catégories), digest e-mail quotidien des idées en attente</li>
-          <li>Authentification par formulaire avec Face ID — pas de popup natif, 25 tests automatisés</li>
-        </ul>
-        <div class="pcard__stack">
-          <span class="schip">Next.js 16</span><span class="schip">TypeScript</span><span class="schip">Prisma</span><span class="schip">PostgreSQL</span><span class="schip">Whisper API</span><span class="schip">Claude API</span><span class="schip">Notion API</span><span class="schip">Google Tasks</span>
-        </div>
-        <div class="pcard__links">
-          <a href="/portfolio/vocalink.html" class="plink pl-pri">Voir le projet →</a>
-          <a href="/portfolio/mock-vocalink.html" target="_blank" class="plink pl-sec">🖥 Voir l'interface ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard" style="grid-column:1/-1;">
-      <div class="pcard__top">
-        <div class="pcard__num pn-b">08</div>
-        <div class="pcard__meta">
-          <div class="pcard__title">Eleven Academy — préparer l'examen d'agent sportif</div>
-          <div class="pcard__sub">Supabase · Claude API · Légifrance · GitHub Pages</div>
-        </div>
-        <span class="pbadge pb-ok">✓ En production</span>
-      </div>
-      <div class="pcard__body">
-        <p class="pcard__desc">Application de révision pour l'examen d'agent sportif (CNOSF puis FFF) : micro-leçons de 5 minutes, QCM au format de l'épreuve, révision espacée, gamification football. Chaque réponse est rattachée à l'article de loi en vigueur, et une veille hebdomadaire signale les textes qui changent.</p>
-        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> l'IA rédige, une seconde IA vérifie contre le texte officiel, la veille trie le Journal officiel — mais aucune correction n'entre dans l'application sans validation humaine.</div>
-        <ul class="pcard__results">
-          <li>10 modules du programme en 133 micro-leçons et 421 questions sourcées</li>
-          <li>Rédaction en circuit croisé : un modèle rédige, un autre vérifie chaque affirmation contre le texte officiel</li>
-          <li>Veille du lundi : 525 articles comparés à leur version Légifrance, tri par Claude, e-mail aux éditeurs</li>
-          <li>L'Arbitre : un assistant qui répond uniquement à partir des leçons et cite ses sources</li>
-        </ul>
-        <div class="pcard__stack">
-          <span class="schip">JavaScript</span><span class="schip">Supabase</span><span class="schip">PostgreSQL</span><span class="schip">Edge Functions</span><span class="schip">Claude API</span><span class="schip">API Légifrance</span><span class="schip">Brevo</span><span class="schip">Playwright</span>
-        </div>
-        <div class="pcard__links">
-          <a href="/portfolio/eleven-academy.html" class="plink pl-pri">Voir le projet →</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div class="divider"></div>
-<div class="section">
-  <div class="slabel">À propos</div>
-  <h2 class="stitle">Pierre-Olivier Lemoine</h2>
-  <div class="about-card">
-    <div class="about-avatar">P</div>
+<main id="contenu">
+<section class="open" aria-labelledby="titre">
+  <div class="wrap">
     <div>
-      <div class="about-name">Pierre-Olivier Lemoine</div>
-      <div class="about-role">Responsable Communication Stratégique & Transformation · Vincennes · NorthIA</div>
-      <p class="about-bio">20 ans d'expérience en communication et marketing BtoB dans l'énergie, la santé, l'automobile et le secteur associatif. Depuis 2025, je développe NorthIA, une activité de conseil en communication digitale et IA — dont ces huit projets sont des réalisations concrètes, déployées et documentées.</p>
-      <div class="about-links">
-        <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="about-link">LinkedIn</a>
-        <a href="https://northia.fr" target="_blank" class="about-link">northia.fr</a>
+      <h1 id="titre">Huit applications IA en service. <span>L'IA produit.<br>Je décide.</span></h1>
+      <p class="lede">Responsable communication stratégique, 20 ans d'expérience. Je conçois et pilote des outils IA qui font gagner des heures aux équipes, en gardant la main sur chaque décision.</p>
+      <div class="actions">
+        <a class="btn btn--lime" href="#applications">Voir les applications</a>
+        <a class="btn btn--ghost" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
       </div>
     </div>
+    <button class="player" type="button" data-video="ogjPTumIOX0" data-title="Eleven Academy en vidéo" aria-label="Lire la vidéo de présentation d'Eleven Academy">
+      <img src="https://img.youtube.com/vi/ogjPTumIOX0/maxresdefault.jpg" alt="" width="1280" height="720" onerror="this.onerror=null;this.src='assets/img/eleven-video-secours.jpg'">
+      <span class="player__tag">Dernière application · novembre 2026</span>
+      <span class="player__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Eleven Academy en vidéo</span>
+    </button>
   </div>
-</div>
+</section>
 
-</div>
+<section class="gains" aria-label="Ce que l'IA change, mesuré sur les applications">
+  <div class="wrap">
+    <div class="gain"><b>5 s</b><span>pour ranger et légender une photo (avant : 15 à 30 min par événement)</span></div>
+    <div class="gain"><b>5 min</b><span>de veille emploi chaque matin, au lieu de 45 min</span></div>
+    <div class="gain"><b>525</b><span>articles de loi comparés chaque lundi à leur version en vigueur</span></div>
+    <div class="gain"><b>8 sur 8</b><span>applications où l'humain valide avant toute publication</span></div>
+  </div>
+</section>
 
-<footer class="northia-footer">
-  <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
-  <div><div class="northia-footer__name">Pierre-Olivier Lemoine · NorthIA · 2026</div><div class="northia-footer__sub">Propulsé par Claude (Anthropic) · Aucun tracking · Données locales</div></div>
-  <div class="northia-footer__links">
-    <a href="https://northia.fr" target="_blank" class="northia-footer__lnk">northia.fr</a>
-    <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
+<section class="section" id="applications" aria-labelledby="t-apps">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="t-apps">Les applications, la plus récente en tête</h2>
+      <p>Pour chacune : le problème réglé, et ce que l'IA a changé. Un clic ouvre la fiche détaillée.</p>
+    </div>
+    <ul class="apps" role="list">
+      <li class="app app--wide app--eleven" style="--c:var(--c-eleven)">
+        <div class="txt">
+          <small>Novembre 2026 · application privée</small>
+          <h3><a href="eleven-academy.html">Eleven Academy</a></h3>
+          <p>Préparer l'examen d'agent sportif, chaque réponse rattachée à l'article de loi en vigueur.</p>
+          <div class="ba"><div>Après<b>Une leçon de 5 min par notion</b>133 leçons · 421 questions · veille juridique chaque lundi</div></div>
+        </div>
+        <img class="shot" src="assets/img/eleven-iphone.jpg" width="760" height="1140" alt="Eleven Academy sur iPhone : le match du jour et la progression par module" loading="lazy">
+        <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="app" style="--c:var(--c-conc)">
+        <small>Septembre 2026 · en production</small>
+        <h3><a href="concertation-territoriale.html">Concertation territoriale</a></h3>
+        <p>Piloter la concertation d'un projet d'énergie : parties prenantes, risques, actions.</p>
+        <div class="ba"><div class="before">Avant, par semaine<b>≈ 2 h</b></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div>Après<b>≈ 15 min</b></div></div>
+        <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="app" style="--c:var(--c-voca)">
+        <small>2026 · en production</small>
+        <h3><a href="vocalink.html">Vocalink</a></h3>
+        <p>Dire une idée à voix haute : elle revient classée, prête à devenir une action.</p>
+        <div class="ba"><div class="before">Avant<b>≈ 2 min</b></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div>Après<b>≈ 10 s</b></div></div>
+        <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="app app--wide app--edlm" style="--c:var(--c-edlm)">
+        <div class="txt">
+          <small>2026 · client Énergies de la Mer</small>
+          <h3><a href="edlm-linkedin.html">Article → LinkedIn</a></h3>
+          <p>Un article du site devient un post LinkedIn prêt à relire, puis publié sans copier-coller.</p>
+          <div class="ba"><div class="before">Avant<b>≈ 1 h</b></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div>Après<b>5 min</b></div></div>
+        </div>
+        <img class="shot" src="assets/img/edlm-tableau.jpg" width="1200" height="651" alt="Tableau de bord de l'outil Article vers LinkedIn : programme de la semaine" loading="lazy">
+        <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="app app--half app--light" style="--c:var(--c-photo)">
+        <small>2026 · en production</small>
+        <h3><a href="photo-collector.html">Photothèque rédaction</a></h3>
+        <p>De l'iPhone à la galerie : photos rangées, légendes proposées par l'IA, validées par l'équipe.</p>
+        <div class="ba"><div class="before">Avant, par événement<b>15–30 min</b></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div>Après, par photo<b>5 s</b></div></div>
+        <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="app app--half" style="--c:var(--c-news)">
+        <small>En production</small>
+        <h3><a href="newsletter.html">Newsletter IA</a></h3>
+        <p>Collecte, rédaction, images et envoi : l'humain choisit les sujets et valide avant l'envoi.</p>
+        <div class="ba"><div class="before">Avant<b>≈ 4–6 h</b></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div>Après<b>30 min</b></div></div>
+        <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="app app--half" style="--c:var(--c-veille)">
+        <small>En production</small>
+        <h3><a href="agent-veille.html">Agent de veille emploi</a></h3>
+        <p>Chaque matin, environ 180 offres triées ; 2 à 5 retenues, avec la raison.</p>
+        <div class="ba"><div class="before">Avant<b>45 min</b></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div>Après<b>5 min</b></div></div>
+        <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="app app--half" style="--c:var(--c-gen)">
+        <small>En ligne</small>
+        <h3><a href="generateur-projet.html">Générateur de candidature</a></h3>
+        <p>Lettre, mails et profil adapté aux logiciels de recrutement, à partir des seuls faits du candidat.</p>
+        <div class="ba"><div class="before">Avant<b>2–3 h</b></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div>Après<b>20 min</b></div></div>
+        <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
+      </li>
+    </ul>
+    <p class="legend">≈ : estimation. Les autres chiffres sont mesurés sur les applications en service.</p>
+  </div>
+</section>
+
+<section class="section focus" id="ia-humain" aria-labelledby="t-focus">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="t-focus">Sur chaque application : <span>la part de l'IA, la part de l'humain.</span></h2>
+      <p>Ce que l'IA fait vite, ce que je garde pour moi, et ce que ça change. Choisissez une application.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Choisir une application">
+      <button role="tab" id="tab-eleven" data-app="eleven" aria-controls="focus-panel">Eleven Academy</button>
+      <button role="tab" id="tab-conc" data-app="conc" aria-controls="focus-panel">Concertation</button>
+      <button role="tab" id="tab-voca" data-app="voca" aria-controls="focus-panel">Vocalink</button>
+      <button role="tab" id="tab-edlm" data-app="edlm" aria-controls="focus-panel">Article → LinkedIn</button>
+      <button role="tab" id="tab-photo" data-app="photo" aria-controls="focus-panel">Photothèque</button>
+    </div>
+    <div class="split" role="tabpanel" id="focus-panel" tabindex="0">
+      <div class="col" style="--dot:#8A8A8A"><h3><i aria-hidden="true"></i>L'IA fait</h3><ul></ul></div>
+      <div class="col" style="--dot:var(--lime)"><h3><i aria-hidden="true"></i>Je décide</h3><ul></ul></div>
+      <div class="col" style="--dot:#fff"><h3><i aria-hidden="true"></i>Ce que ça change</h3><ul></ul></div>
+    </div>
+    <div class="focus__cta"><a class="btn btn--lime" id="focus-cta" href="eleven-academy.html">Voir la fiche complète : Eleven Academy</a></div>
+    <script type="application/json" id="focus-data">
+{
+ "eleven":{"name":"Eleven Academy","href":"eleven-academy.html","cols":[
+  ["Rédige les <b>133 leçons</b> selon des consignes fixes","Vérifie chaque affirmation <b>contre le texte officiel</b>","Compare chaque lundi <b>525 articles</b> à leur version en vigueur","Répond aux questions de l'apprenante, à partir du cours seulement"],
+  ["Le programme, l'ordre des modules et la méthode","<b>Chaque correction</b> avant qu'elle soit publiée","Les tests réels sur iPhone et tablette","Les limites assumées : pas encore de relecture par un juriste"],
+  ["<b>10 modules</b> du programme couverts en 3 semaines","Une révision courte, chaque jour, sur téléphone","Un contenu qui suit la loi, prévenu dès qu'elle change","<b>0</b> correction publiée sans validation humaine"]]},
+ "conc":{"name":"Concertation territoriale","href":"concertation-territoriale.html","cols":[
+  ["Suggère le <b>sentiment et les sujets</b> des contributions du public","Calcule un <b>score d'acceptabilité</b> à partir des parties prenantes et des risques","Déclenche des alertes : risque critique, échéance dépassée, contact oublié"],
+  ["Relit et valide <b>chaque suggestion</b> avant enregistrement","Les règles du score et les droits de chacun","Les actions à mener auprès des parties prenantes"],
+  ["<b>17 projets</b> réels suivis","<b>12 types</b> d'alertes","<b>73 tests</b> automatisés, journal d'audit complet"]]},
+ "voca":{"name":"Vocalink","href":"vocalink.html","cols":[
+  ["Transcrit la voix","Classe l'idée : catégorie, titre, priorité, échéance","Prépare l'action : brouillon d'e-mail, lien d'appel, rappel"],
+  ["<b>Rien n'est envoyé seul</b> : l'e-mail reste un brouillon à valider","Le regroupement des idées par projet","Ce qui part dans Notion et Google Tasks"],
+  ["Une idée classée en <b>quelques secondes</b>","<b>4 catégories</b> d'action","<b>25 tests</b> automatisés"]]},
+ "edlm":{"name":"Article → LinkedIn","href":"edlm-linkedin.html","cols":[
+  ["Transforme un article en <b>post LinkedIn</b> au format du client","Propose <b>9 formats</b> : article, nominations, appels d'offres, agenda…"],
+  ["Le rédacteur <b>relit et ajuste</b> dans l'éditeur","Il choisit <b>quand publier</b> : jamais automatique"],
+  ["Post prêt en <b>moins de 30 s</b>","Relecture et publication en <b>5 min</b>","<b>0</b> copier-coller"]]},
+ "photo":{"name":"Photothèque rédaction","href":"photo-collector.html","cols":[
+  ["Range la photo envoyée depuis l'iPhone","Propose une <b>légende LinkedIn</b> en analysant l'image"],
+  ["L'auteur <b>valide, corrige ou ignore</b> la légende","L'équipe éditoriale approuve chaque photo publiée"],
+  ["<b>5 s</b> par photo, au lieu de 15 à 30 min par événement","Une galerie à jour depuis n'importe quel appareil"]]}
+}
+    </script>
+  </div>
+</section>
+
+<section class="section close" aria-labelledby="t-close">
+  <div class="wrap">
+    <h2 id="t-close">Un poste où l'IA doit servir la communication ? Parlons-en.</h2>
+    <a class="btn btn--night" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Pierre-Olivier Lemoine · Marketing · Communication · Digital · IA</p>
+    <nav aria-label="Liens annexes">
+      <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/">LinkedIn</a>
+      <a href="carte-visite.html">Carte de visite</a>
+      <a href="plaquette-northia.pdf">Plaquette NorthIA (PDF)</a>
+      <a href="https://youtu.be/MJ5KL21HpmE">Présentation en vidéo</a>
+    </nav>
   </div>
 </footer>
-<script>
-function toggleMenu(){
-  var m = document.getElementById('navMobile');
-  m.classList.toggle('open');
-}
-document.addEventListener('click', function(e){
-  var m = document.getElementById('navMobile');
-  if(!e.target.closest('.nav-burger') && !e.target.closest('#navMobile')){
-    m.classList.remove('open');
-  }
-});
-</script>
-<script>
-(function(){var b=document.querySelector('.nav-burger'),m=document.getElementById('navMobile');if(!b||!m)return;
-b.setAttribute('aria-controls','navMobile');
-function s(){b.setAttribute('aria-expanded',m.classList.contains('open')?'true':'false');}
-s();new MutationObserver(s).observe(m,{attributes:true,attributeFilter:['class']});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open')){m.classList.remove('open');b.focus();}});})();
-</script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>
