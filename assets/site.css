@@ -271,3 +271,8 @@ a.gain:hover{border-top-color:var(--ink)}
 .app--edlm{perspective:1300px}
 .appareil--carte{position:absolute;right:34px;top:50%;width:52%;max-width:none;margin:0;transform:translateY(-50%) rotateX(8deg) rotateY(-16deg)}
 @media (max-width:1080px){.appareil--carte{position:relative;right:auto;top:auto;width:auto;margin:26px 8% 30px;transform:rotateX(8deg) rotateY(-12deg)}}
+/* Photothèque sur mobile : texte puis vidéo, sur une seule colonne (doit rester après la règle des deux colonnes) */
+@media (max-width:760px){
+  .app--photo{grid-template-columns:1fr}
+  .app--photo .player--carte{grid-column:1;grid-row:auto;margin:20px 0 0}
+}
