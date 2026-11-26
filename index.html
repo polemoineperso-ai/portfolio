@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v=202611261641">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF396K2Y0E"></script>
 <script>
@@ -31,7 +31,7 @@
     <nav aria-label="Navigation principale">
       <a href="#applications">Les applications</a>
       <a href="#ia-humain">L'IA et moi</a>
-      <a class="btn btn--lime" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+      <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
     </nav>
   </div>
 </header>
@@ -44,23 +44,24 @@
       <p class="lede">Responsable communication stratégique, 20 ans d'expérience. Je conçois et pilote des outils IA qui font gagner des heures aux équipes, en gardant la main sur chaque décision.</p>
       <div class="actions">
         <a class="btn btn--lime" href="#applications">Voir les applications</a>
-        <a class="btn btn--ghost" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+        <a class="btn btn--ghost" href="carte-visite.html">Me contacter</a>
       </div>
     </div>
-    <button class="player" type="button" data-video="ogjPTumIOX0" data-title="Eleven Academy en vidéo" aria-label="Lire la vidéo de présentation d'Eleven Academy">
+    <div class="player" data-video="ogjPTumIOX0" data-autoplay data-title="Eleven Academy en vidéo">
       <img src="https://img.youtube.com/vi/ogjPTumIOX0/maxresdefault.jpg" alt="" width="1280" height="720" onerror="this.onerror=null;this.src='assets/img/eleven-video-secours.jpg'">
       <span class="player__tag">Dernière application · novembre 2026</span>
-      <span class="player__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Eleven Academy en vidéo</span>
-    </button>
+      <button class="player__play" type="button" data-play><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Eleven Academy en vidéo</span></button>
+    </div>
   </div>
 </section>
 
-<section class="gains" aria-label="Ce que l'IA change, mesuré sur les applications">
+<section class="gains" aria-labelledby="t-gains">
   <div class="wrap">
-    <div class="gain"><b>5 s</b><span>pour ranger et légender une photo (avant : 15 à 30 min par événement)</span></div>
-    <div class="gain"><b>5 min</b><span>de veille emploi chaque matin, au lieu de 45 min</span></div>
-    <div class="gain"><b>525</b><span>articles de loi comparés chaque lundi à leur version en vigueur</span></div>
-    <div class="gain"><b>8 sur 8</b><span>applications où l'humain valide avant toute publication</span></div>
+    <h2 class="gains__titre" id="t-gains">Ce que l'IA change</h2>
+    <div class="gain gain--tous"><b>8 sur 8</b><span>applications où un humain valide avant toute publication ou tout envoi</span></div>
+    <a class="gain" href="photo-collector.html"><small>Photothèque rédaction</small><b>5 s</b><span>pour ranger et légender une photo d'événement, au lieu de 15 à 30 min par événement</span></a>
+    <a class="gain" href="agent-veille.html"><small>Agent de veille emploi</small><b>5 min</b><span>de lecture chaque matin, au lieu de 45 min de tri des offres</span></a>
+    <a class="gain" href="eleven-academy.html"><small>Eleven Academy</small><b>525</b><span>articles de loi comparés chaque lundi à leur version en vigueur, sans intervention</span></a>
   </div>
 </section>
 
@@ -102,17 +103,33 @@
           <p>Un article du site devient un post LinkedIn prêt à relire, puis publié sans copier-coller.</p>
           <div class="ba"><div class="before">Avant<b>≈ 1 h</b></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div>Après<b>5 min</b></div></div>
         </div>
-        <img class="shot" src="assets/img/edlm-tableau.jpg" width="1200" height="651" alt="Tableau de bord de l'outil Article vers LinkedIn : programme de la semaine" loading="lazy">
+        <div class="appareil appareil--ordi appareil--carte">
+          <div class="appareil__ecran"><div class="appareil__vue"><div class="scene" aria-label="Les trois écrans de l'outil Article vers LinkedIn, en boucle : programme de la semaine, post généré, pilotage éditorial" role="img">
+            <div class="scene__ecran">
+              <img class="scene__img scene__img--1" src="assets/img/edlm-tableau.jpg" width="1200" height="651" alt="" loading="lazy">
+              <img class="scene__img scene__img--2" src="assets/img/edlm-article.jpg" width="600" height="1049" alt="" loading="lazy">
+              <img class="scene__img scene__img--3" src="assets/img/edlm-pilotage.jpg" width="600" height="1060" alt="" loading="lazy">
+            </div>
+            <span class="scene__etape scene__etape--1" aria-hidden="true">1 · Le programme de la semaine</span>
+            <span class="scene__etape scene__etape--2" aria-hidden="true">2 · L'article devient un post</span>
+            <span class="scene__etape scene__etape--3" aria-hidden="true">3 · Le pilotage éditorial</span>
+          </div></div></div>
+          <div class="appareil__socle" aria-hidden="true"></div>
+        </div>
         <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
       </li>
-      <li class="app app--half app--light" style="--c:var(--c-photo)">
+      <li class="app app--wide app--light app--photo" style="--c:var(--c-photo)">
         <small>2026 · en production</small>
         <h3><a href="photo-collector.html">Photothèque rédaction</a></h3>
         <p>De l'iPhone à la galerie : photos rangées, légendes proposées par l'IA, validées par l'équipe.</p>
+        <div class="player player--carte" data-video="xb8tkMyBZrU" data-title="La Photothèque rédaction en vidéo">
+          <img src="https://img.youtube.com/vi/xb8tkMyBZrU/hqdefault.jpg" alt="" width="480" height="360" loading="lazy">
+          <button class="player__play" type="button" data-play><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>La Photothèque en vidéo</span></button>
+        </div>
         <div class="ba"><div class="before">Avant, par événement<b>15–30 min</b></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg><div>Après, par photo<b>5 s</b></div></div>
         <span class="app__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>
       </li>
-      <li class="app app--half" style="--c:var(--c-news)">
+      <li class="app" style="--c:var(--c-news)">
         <small>En production</small>
         <h3><a href="newsletter.html">Newsletter IA</a></h3>
         <p>Collecte, rédaction, images et envoi : l'humain choisit les sujets et valide avant l'envoi.</p>
@@ -153,8 +170,8 @@
     </div>
     <div class="split" role="tabpanel" id="focus-panel" tabindex="0">
       <div class="col" style="--dot:#8A8A8A"><h3><i aria-hidden="true"></i>L'IA fait</h3><ul></ul></div>
-      <div class="col" style="--dot:var(--lime)"><h3><i aria-hidden="true"></i>Je décide</h3><ul></ul></div>
-      <div class="col" style="--dot:#fff"><h3><i aria-hidden="true"></i>Ce que ça change</h3><ul></ul></div>
+      <div class="col" style="--dot:#fff"><h3><i aria-hidden="true"></i>Je décide</h3><ul></ul></div>
+      <div class="col" style="--dot:#8A8A8A"><h3><i aria-hidden="true"></i>Ce que ça change</h3><ul></ul></div>
     </div>
     <div class="focus__cta"><a class="btn btn--lime" id="focus-cta" href="eleven-academy.html">Voir la fiche complète : Eleven Academy</a></div>
     <script type="application/json" id="focus-data">
@@ -187,7 +204,7 @@
 <section class="section close" aria-labelledby="t-close">
   <div class="wrap">
     <h2 id="t-close">Un poste où l'IA doit servir la communication ? Parlons-en.</h2>
-    <a class="btn btn--night" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+    <a class="btn btn--night" href="carte-visite.html">Me contacter</a>
   </div>
 </section>
 </main>
@@ -203,6 +220,6 @@
     </nav>
   </div>
 </footer>
-<script src="assets/site.js" defer></script>
+<script src="assets/site.js?v=202611261641" defer></script>
 </body>
 </html>

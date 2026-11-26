@@ -197,8 +197,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
   gtag('js', new Date());
   gtag('config', 'G-JF396K2Y0E');
 </script>
-<link rel="stylesheet" href="assets/site.css">
-<link rel="stylesheet" href="assets/projet.css">
+<link rel="stylesheet" href="assets/site.css?v=202611261641">
+<link rel="stylesheet" href="assets/projet.css?v=202611261641">
 </head>
 <body class="page page--generateur-projet" style="--accent:#1D4ED8;--accent-ink:#1D4ED8;--accent-deep:#1739A6;--accent-light:#C7D6FF">
 
@@ -209,7 +209,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <nav aria-label="Navigation principale">
       <a href="./#applications">Les applications</a>
       <a href="./#ia-humain">L'IA et moi</a>
-      <a class="btn btn--lime" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+      <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
     </nav>
   </div>
 </header>
@@ -217,7 +217,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 
 <div class="hero">
   <div class="hero__tag">HTML · API Claude</div>
-  <h1 class="hero__title">Générateur de <em>candidature IA</em></h1>
+  <h1 class="hero__title">Générateur de candidature : lettre, mails et profil <em>en 20 secondes</em></h1>
   <p class="hero__sub">Une lettre de motivation structurée, un mail d'accompagnement et un profil CV optimisé pour les logiciels de recrutement (ATS), générés en 20 secondes à partir d'une annonce et d'un profil.</p>
   <div class="hero__btns">
     <a href="/portfolio/generateur.html" target="_blank" class="hero__btn hero__btn--pri">Tester le générateur →</a>
@@ -229,13 +229,32 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="metric"><span class="metric__n">0</span><span class="metric__l">serveur · installation</span></div>
     <div class="metric"><span class="metric__n">ATS</span><span class="metric__l">optimisation intégrée</span></div>
   </div>
-  <div class="hero__time">Lettre de motivation : <strong>2 à 3 h à la main → 20 minutes de relecture</strong>, dont 20 secondes de génération</div>
+  <div class="hero__time">Avant : 2 à 3 heures par lettre. <strong>Après : 20 minutes de relecture.</strong></div>
 </div>
 
 <div class="wrap">
+<section class="essentiel essentiel--media" aria-labelledby="t-essentiel">
+  <div class="essentiel__haut">
+    <div>
+      <h2 class="stitle" id="t-essentiel">L'essentiel</h2>
+      <p class="essentiel__probleme">Une lettre de motivation prend 2 à 3 heures, et finit souvent par ressembler à toutes les autres.</p>
+    </div>
+    <div class="player player--carte" data-video="-Eq8sI2zPg0" data-title="Le générateur en vidéo">
+      <img src="https://img.youtube.com/vi/-Eq8sI2zPg0/hqdefault.jpg" alt="" width="480" height="360" loading="lazy">
+      <button class="player__play" type="button" data-play><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Le générateur en vidéo</span></button>
+    </div>
+  </div>
+  <div class="essentiel__grille">
+    <div class="essentiel__col essentiel__col--ia"><h3>Ce que fait l'IA</h3><ul><li>Rédige la lettre, deux versions de mail et un profil adapté aux logiciels de recrutement</li><li>Travaille en 4 passes : rédaction, correction, mail, analyse</li><li>Contrôle la qualité : mots interdits, tirets, score sur 10</li></ul></div>
+    <div class="essentiel__col essentiel__col--moi"><h3>Ce qui reste humain</h3><ul><li>Les règles d'écriture données à l'IA</li><li>Que tout reste sur l'ordinateur du candidat</li><li>Le candidat relit, ajuste et choisit ce qu'il envoie</li></ul></div>
+    <div class="essentiel__col essentiel__col--change"><h3>Ce que ça change</h3><ul><li>20 minutes de relecture au lieu de 2 à 3 heures</li><li>Aucun chiffre inventé : seuls ceux du profil</li><li>Rien à installer : un seul fichier HTML</li></ul></div>
+  </div>
+  <p class="essentiel__suite">Le détail, à ouvrir selon ce qui vous intéresse :</p>
+</section>
 
-<div class="section">
-  <h2 class="stitle">Diagnostic, réflexion, décision</h2>
+<details class="section volet" open>
+  <summary><h2 class="stitle">Pourquoi ce projet</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="genesis-grid">
     <div class="genesis-card genesis-card--diag">
       <div class="genesis-card__icon">🔍</div>
@@ -253,10 +272,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
       <div class="genesis-card__text">20 secondes pour une lettre structurée, deux versions de mail et un profil ATS. Audit qualité automatique côté client. Règles éditoriales intégrées dans le prompt. Le candidat relit, ajuste et envoie. L'IA s'est chargée de la mise en forme, le jugement reste au candidat.</div>
     </div>
   </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">2 à 3h pour une lettre que personne ne lit</h2>
+<h3 class="volet__sous-titre">Le problème</h3>
   <p class="prose">La plupart des candidats passent 2 à 3 heures sur une lettre qui finit par ressembler à toutes les autres : formules convenues, structure prévisible, ton générique. Ce qui manque, c'est une méthode et du temps.</p>
   <p class="prose">Le but est de lui rendre ce temps pour le reste de sa recherche : choisir les bonnes offres, préparer les entretiens, construire son réseau.</p>
 
@@ -265,19 +281,30 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="rule8020__text">L'IA génère la structure, les formulations et l'optimisation ATS. <strong>L'humain relit, ajuste le ton, choisit ce qu'il envoie.</strong> La lettre finale reflète votre parcours réel : les chiffres et les faits viennent uniquement de votre profil. L'IA ne peut pas inventer votre valeur : elle la met en forme.</div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Génération en 4 passes API</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Comment ça marche</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="passes">
     <div class="pass"><div class="pass__n pn-b"><span class="pass__n-label">Passe</span><span class="pass__n-num">1</span></div><div><div class="pass__title">Rédaction <span class="pass__tag">Série</span></div><div class="pass__desc">Le prompt système transmet le profil complet, les règles d'écriture actives, le ton sélectionné (associatif / privé / public) et la structure attendue en 8 blocs. Claude rédige une première version.</div></div></div>
     <div class="pass"><div class="pass__n pn-b"><span class="pass__n-label">Passe</span><span class="pass__n-num">2</span></div><div><div class="pass__title">Correction automatique <span class="pass__tag">Série</span></div><div class="pass__desc">Un second appel relit et corrige : tirets longs, mots interdits, chiffres absents du profil, phrases de synthèse creuses en fin de paragraphe. La lettre corrigée est la version affichée.</div></div></div>
     <div class="pass"><div class="pass__n pn-p"><span class="pass__n-label">Passe</span><span class="pass__n-num">3</span></div><div><div class="pass__title">Mail d'accompagnement <span class="pass__tag" style="background:rgba(228,158,198,.1);color:var(--nia-pink)">Parallèle</span></div><div class="pass__desc">Pendant que la lettre s'affiche, Claude génère en arrière-plan deux versions de mail (sobre et personnalisée) avec objet, et retourne un JSON structuré.</div></div></div>
     <div class="pass"><div class="pass__n pn-p"><span class="pass__n-label">Passe</span><span class="pass__n-num">4</span></div><div><div class="pass__title">Analyse ATS <span class="pass__tag" style="background:rgba(228,158,198,.1);color:var(--nia-pink)">Parallèle</span></div><div class="pass__desc">Extraction de 5 mots-clés de l'annonce, génération d'un profil CV court et long intégrant ces mots-clés, score d'adéquation profil/offre. Checklist de conformité affichée.</div></div></div>
   </div>
+<h3 class="volet__sous-titre">Les règles données à l'IA</h3>
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rc-label">Mots interdits</div><div class="rc-text">notamment · ainsi · par ailleurs · levier · synergie · écosystème · constitue · représente · déployer · valoriser · permettre de · dynamique · motivé(e)</div></div>
+    <div class="rule-card"><div class="rc-label">Interdits structurels</div><div class="rc-text">Tirets longs (— ou –) · Phrases de synthèse creuses en fin de paragraphe · Bullets dans le corps de la lettre</div></div>
+    <div class="rule-card"><div class="rc-label">Règle chiffres</div><div class="rc-text">Seuls les chiffres présents dans le profil fourni sont autorisés. L'IA ne doit jamais inventer de résultats, volumes, taux ou effectifs.</div></div>
+    <div class="rule-card"><div class="rc-label">Structure</div><div class="rc-text">Ville + date · Objet · Formule · Accroche (pas de "Je") · Expérience + preuve · Compétence + preuve · Motivation · Conclusion + signature</div></div>
+  </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Ce que l'outil génère : une lettre réelle</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Exemple de lettre</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="letter-sample">
     <div class="letter-sample__header">
       <span class="letter-sample__title">Lettre générée · Passe 2 corrigée · Ton Associatif</span>
@@ -307,19 +334,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Ce qui guide l'IA à chaque génération</h2>
-  <div class="rules-grid">
-    <div class="rule-card"><div class="rc-label">Mots interdits</div><div class="rc-text">notamment · ainsi · par ailleurs · levier · synergie · écosystème · constitue · représente · déployer · valoriser · permettre de · dynamique · motivé(e)</div></div>
-    <div class="rule-card"><div class="rc-label">Interdits structurels</div><div class="rc-text">Tirets longs (— ou –) · Phrases de synthèse creuses en fin de paragraphe · Bullets dans le corps de la lettre</div></div>
-    <div class="rule-card"><div class="rc-label">Règle chiffres</div><div class="rc-text">Seuls les chiffres présents dans le profil fourni sont autorisés. L'IA ne doit jamais inventer de résultats, volumes, taux ou effectifs.</div></div>
-    <div class="rule-card"><div class="rc-label">Structure</div><div class="rc-text">Ville + date · Objet · Formule · Accroche (pas de "Je") · Expérience + preuve · Compétence + preuve · Motivation · Conclusion + signature</div></div>
-  </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">Pourquoi un fichier HTML autonome</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Choix techniques</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <table class="stack-table">
     <thead><tr><th>Décision</th><th>Raison</th></tr></thead>
     <tbody>
@@ -332,19 +351,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </tbody>
   </table>
 </div>
+</details>
 
 
-<div class="screen-section">
-  <div class="screen-label">Démo : génération en temps réel</div>
-  <div class="video-wrap">
-    <iframe src="https://www.youtube.com/embed/-Eq8sI2zPg0" title="Générateur de candidature IA, démo" allowfullscreen></iframe>
+
+<section class="suite-projet" aria-labelledby="t-suite">
+  <h2 class="suite-projet__titre" id="t-suite">Un projet de ce type dans votre équipe ?</h2>
+  <div class="suite-projet__actions">
+    <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
+    <a class="btn btn--contour" href="eleven-academy.html">Application suivante : Eleven Academy →</a>
   </div>
-  <p class="screen-caption">Lettre structurée, mail d'accompagnement, profil ATS et score qualité, en 20 secondes</p>
-</div>
-<div class="nav-bottom">
-  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
-  <a href="/portfolio/agent-veille.html" class="nav-btn nav-btn--pri">Projet suivant : Agent de veille →</a>
-</div>
+  <a class="suite-projet__retour" href="./#applications">← Toutes les applications</a>
+</section>
 
 </div>
 
@@ -360,5 +378,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </nav>
   </div>
 </footer>
+<script src="assets/site.js?v=202611261641" defer></script>
 </body>
 </html>

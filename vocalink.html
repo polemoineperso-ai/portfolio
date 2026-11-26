@@ -169,8 +169,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 .pn-b{color:var(--nia-blue-dark);}.pn-p{color:#9a4a77;}
 .about-link{color:var(--nia-blue-dark);}.about-link:hover{background:var(--nia-blue-dark);color:#fff;}
 </style>
-<link rel="stylesheet" href="assets/site.css">
-<link rel="stylesheet" href="assets/projet.css">
+<link rel="stylesheet" href="assets/site.css?v=202611261641">
+<link rel="stylesheet" href="assets/projet.css?v=202611261641">
 </head>
 <body class="page page--vocalink" style="--accent:#4B32C3;--accent-ink:#4B32C3;--accent-deep:#36228F;--accent-light:#C9BDFF">
 
@@ -181,7 +181,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <nav aria-label="Navigation principale">
       <a href="./#applications">Les applications</a>
       <a href="./#ia-humain">L'IA et moi</a>
-      <a class="btn btn--lime" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+      <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
     </nav>
   </div>
 </header>
@@ -189,11 +189,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 
 <div class="hero">
   <div class="hero__tag">Next.js · Capture vocale d'idées</div>
-  <h1 class="hero__title">Vocalink : dire une idée, <em>déclencher une action</em></h1>
+  <h1 class="hero__title">Vocalink : dire une idée, <em>la retrouver prête à agir</em></h1>
   <p class="hero__sub">Un enregistrement vocal sur téléphone, transcrit et classé automatiquement, prêt à devenir un projet, un e-mail, un appel ou un rappel. Le tout se synchronise avec Notion et Google Tasks, et un e-mail quotidien rappelle ce qui traîne.</p>
   <div class="demo-wrap">
-    <a href="/portfolio/mock-vocalink.html" target="_blank" class="hero__demo">Voir un échantillon de l'interface →</a>
-    <span class="light-pill">Version light</span>
+    <a href="/portfolio/mock-vocalink.html" target="_blank" class="hero__demo">Voir une maquette de l'interface →</a>
   </div>
   <div class="hero__metrics">
     <div class="metric"><span class="metric__n">4</span><span class="metric__l">catégories d'action routées</span></div>
@@ -201,24 +200,36 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="metric"><span class="metric__n">1</span><span class="metric__l">digest quotidien automatique</span></div>
     <div class="metric"><span class="metric__n">25</span><span class="metric__l">tests automatisés</span></div>
   </div>
-  <div class="hero__time">Avant : une idée dite à voix haute, puis oubliée avant d'être notée. <strong>Après : transcrite, classée et prête à agir en quelques secondes.</strong></div>
+  <div class="hero__time">Avant : une idée dite, puis oubliée. <strong>Après : classée et prête à agir en quelques secondes.</strong></div>
 </div>
 
-<div class="scale-band">
-  <div class="scale-band__label">L'ampleur du chantier, mesurée sur l'historique réel du dépôt</div>
-  <div class="scale-band__grid">
-    <div class="scale-stat"><span class="scale-stat__n">23</span><span class="scale-stat__l">commits</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">2 085</span><span class="scale-stat__l">lignes de TypeScript</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">59</span><span class="scale-stat__l">fichiers</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">5</span><span class="scale-stat__l">fichiers de tests</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">2</span><span class="scale-stat__l">jours de développement intensif</span></div>
-  </div>
-</div>
+
 
 <div class="wrap">
+<section class="essentiel essentiel--media" aria-labelledby="t-essentiel">
+  <div class="essentiel__haut">
+    <div>
+      <h2 class="stitle" id="t-essentiel">L'essentiel</h2>
+      <p class="essentiel__probleme">Une idée surgit au pire moment pour l'écrire. Le temps de la noter, elle est à moitié perdue, et une idée notée mais pas classée finit oubliée.</p>
+    </div>
+    <figure class="essentiel__visuel essentiel__visuel--scene-app">
+      <div class="appareil appareil--tel">
+        <div class="appareil__ecran"><img src="assets/img/vocalink.jpg" width="358" height="743" alt="Vocalink sur téléphone : idées classées en rappel, projet et e-mail" loading="lazy"></div>
+      </div>
+      <figcaption>Maquette de l'interface, données fictives</figcaption>
+    </figure>
+  </div>
+  <div class="essentiel__grille">
+    <div class="essentiel__col essentiel__col--ia"><h3>Ce que fait l'IA</h3><ul><li>Transcrit la voix</li><li>Classe l'idée : catégorie, titre, priorité, échéance</li><li>Prépare l'action : brouillon d'e-mail, lien d'appel, rappel</li></ul></div>
+    <div class="essentiel__col essentiel__col--moi"><h3>Ce qui reste humain</h3><ul><li>Rien n'est envoyé seul : l'e-mail reste un brouillon à valider</li><li>Le regroupement des idées par projet</li><li>Ce qui part dans Notion et Google Tasks</li></ul></div>
+    <div class="essentiel__col essentiel__col--change"><h3>Ce que ça change</h3><ul><li>Une idée classée en quelques secondes</li><li>Plus d'idées perdues entre deux réunions</li><li>Un e-mail quotidien rappelle ce qui traîne</li></ul></div>
+  </div>
+  <p class="essentiel__suite">Le détail, à ouvrir selon ce qui vous intéresse :</p>
+</section>
 
-<div class="section">
-  <h2 class="stitle">Diagnostic, réflexion, décision</h2>
+<details class="section volet" open>
+  <summary><h2 class="stitle">Pourquoi ce projet</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="genesis-grid">
     <div class="genesis-card genesis-card--diag">
       <div class="genesis-card__icon">🔍</div>
@@ -236,19 +247,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
       <div class="genesis-card__text">Une application déployée et utilisée au quotidien depuis un iPhone : transcription, classification, regroupement de projets, priorité et échéance, synchronisation Notion et Google Tasks, digest e-mail quotidien, authentification compatible Face ID.</div>
     </div>
   </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">De l'idée dite à l'action préparée</h2>
+<h3 class="volet__sous-titre">Le problème</h3>
   <p class="prose">Noter une idée à la main, c'est déjà un effort ; la retrouver ensuite dans les bonnes notes, au bon endroit, avec le bon contexte, en est une seconde. La plupart des idées perdues le sont non pas faute d'avoir été capturées, mais faute d'avoir été classées et reliées à une action concrète.</p>
   <div class="rule8020">
     <div class="rule8020__title">Règle 80/20 : <strong>l'humain reste le décideur</strong></div>
     <div class="rule8020__text">L'IA transcrit la voix et propose une classification (catégorie, titre, résumé, priorité, échéance). <strong>Rien n'est envoyé, appelé ou publié automatiquement.</strong> Un e-mail reste un brouillon <span class="ccode">mailto:</span> à valider, un appel un lien à ouvrir, un rappel un lien calendrier à confirmer. Seules les synchronisations Notion et Google Tasks sont automatiques, et elles ne font que refléter une idée déjà relue, sans agir à la place de l'utilisateur.</div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Comment ça fonctionne</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Comment ça marche</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="flow">
     <div class="flow-step"><div class="ficon fi-b">🎙️</div><div><div class="fname">Capture vocale, sans installation</div><div class="fdesc">Une page web ouverte depuis l'écran d'accueil de l'iPhone. Volontairement pas une PWA : c'était la solution la plus simple qui marchait vraiment.</div></div></div>
     <div class="flow-step"><div class="ficon fi-b">📝</div><div><div class="fname">Transcription</div><div class="fdesc">L'enregistrement est envoyé à l'API Whisper, qui renvoie le texte intégral, affiché en clair et non résumé, pour ne pas avoir à réécouter un long enregistrement.</div><div class="fsub">OpenAI Whisper</div></div></div>
@@ -256,10 +266,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="flow-step"><div class="ficon fi-a">🔀</div><div><div class="fname">Routage préparé, pas automatisé</div><div class="fdesc">Selon la catégorie : un brouillon d'e-mail (mailto:), un lien d'appel, un lien calendrier avec échéance, ou un rattachement à un projet existant. Il reste toujours une action à valider, rien ne part en silence.</div></div></div>
     <div class="flow-step"><div class="ficon fi-b">🔄</div><div><div class="fname">Synchronisation externe</div><div class="fdesc">Les idées de catégorie Projet se créent dans Notion ; toutes les idées se synchronisent dans Google Tasks (coché/décoché selon le statut) ; un digest e-mail quotidien signale les idées en attente depuis plus de 3 jours.</div><div class="fsub">Notion API · Google Tasks API · Resend</div></div></div>
   </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">Ce que couvre l'outil</h2>
+<h3 class="volet__sous-titre">Fonctionnalités</h3>
   <div class="feat-grid">
     <div class="feat-card"><div class="feat-card__icon">🗂️</div><div class="feat-card__title">Regroupement de projets</div><div class="feat-card__text">Une idée peut être rattachée manuellement à une autre comme sous-idée d'un même projet, avec garde-fou anti-cycle.</div></div>
     <div class="feat-card"><div class="feat-card__icon">⏱️</div><div class="feat-card__title">Priorité et échéance</div><div class="feat-card__text">Un champ de date/heure universel, résolu explicitement en fuseau Europe/Paris quelle que soit la localisation du serveur.</div></div>
@@ -269,9 +276,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="feat-card"><div class="feat-card__icon">🔐</div><div class="feat-card__title">Authentification Face ID</div><div class="feat-card__text">Formulaire de connexion avec cookie de session, compatible avec l'autoremplissage et Face ID, à la place du popup Basic Auth natif.</div></div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Les vrais problèmes à résoudre</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Difficultés et solutions</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="challenges">
     <div class="challenge"><div class="ctitle">Prisma introuvable en production, alors que le fichier existait</div><div class="cbody">Après déploiement sur Vercel, <span class="ccode">PrismaClientInitializationError</span> persistant malgré un moteur bien présent dans le bundle. Cause réelle trouvée après plusieurs fausses pistes : le nouveau générateur ESM <span class="ccode">prisma-client</span> avec un chemin de sortie personnalisé cherchait le fichier à un chemin légèrement décalé sous Turbopack. Résolu en repassant au générateur classique <span class="ccode">prisma-client-js</span>, chemin par défaut.</div></div>
     <div class="challenge"><div class="ctitle">Une échéance décalée de deux heures en production</div><div class="cbody">Une échéance saisie « 11h » s'enregistrait comme 11h UTC au lieu de 11h Europe/Paris, car <span class="ccode">new Date()</span> interprète une chaîne naïve dans le fuseau du serveur, UTC sur Vercel. Corrigé avec <span class="ccode">date-fns-tz</span> et deux tests de non-régression reproduisant explicitement le scénario CET/CEST.</div></div>
@@ -279,9 +288,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="challenge"><div class="ctitle">Autoriser Google Tasks sans exposer de connexion interactive</div><div class="cbody">Contrairement à Notion ou Resend (clé API simple), Google Tasks impose un vrai flux OAuth. Pour une app mono-utilisateur, un script d'autorisation lancé une seule fois, en local, produit un refresh token stocké comme n'importe quel autre secret. L'application déployée ne fait ensuite que des échanges silencieux, sans jamais rouvrir de connexion interactive.</div></div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Technologies utilisées</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Outils utilisés</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <table class="stack-table">
     <thead><tr><th>Catégorie</th><th>Outil</th></tr></thead>
     <tbody>
@@ -297,9 +308,22 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </tbody>
   </table>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Ce que ça produit concrètement</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Résultats</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
+<div class="scale-band">
+  <div class="scale-band__label">L'ampleur du chantier, mesurée sur l'historique réel du dépôt</div>
+  <div class="scale-band__grid">
+    <div class="scale-stat"><span class="scale-stat__n">23</span><span class="scale-stat__l">commits</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">2 085</span><span class="scale-stat__l">lignes de TypeScript</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">59</span><span class="scale-stat__l">fichiers</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">5</span><span class="scale-stat__l">fichiers de tests</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">2</span><span class="scale-stat__l">jours de développement intensif</span></div>
+  </div>
+</div>
+
   <div class="results-grid">
     <div class="rcard"><span class="rcard__n">4</span><span class="rcard__l">catégories d'action routées : projet, e-mail, appel, rappel</span></div>
     <div class="rcard"><span class="rcard__n">2</span><span class="rcard__l">synchronisations externes automatiques : Notion et Google Tasks</span></div>
@@ -309,21 +333,24 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="rcard"><span class="rcard__n">180j</span><span class="rcard__l">de session avant de devoir se reconnecter (usage personnel quotidien)</span></div>
   </div>
 </div>
+</details>
 
 <div class="screen-section">
   <div class="screen-label">Interface : accueil et liste des idées, données de démonstration</div>
   <div class="demo-wrap">
-    <a href="/portfolio/mock-vocalink.html" target="_blank" class="hero__demo" style="background:var(--nia-blue-dark);">Voir un échantillon de l'interface →</a>
-    <span class="light-pill">Version light</span>
+    <a href="/portfolio/mock-vocalink.html" target="_blank" class="hero__demo" style="background:var(--nia-blue-dark);">Voir une maquette de l'interface →</a>
   </div>
   <p class="screen-caption">Échantillon simplifié et stylisé (structure et couleurs fidèles, contenu allégé) : capture, liste filtrable, fiche d'idée. <strong style="color:var(--ink);">L'application réelle est protégée par un accès personnel.</strong> Données de démonstration, pas d'idées réelles.</p>
 </div>
 
-<div class="nav-bottom">
-  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
-  <a href="/portfolio/photo-collector.html" class="nav-btn nav-btn--out">← Projet précédent : Photothèque Rédaction IA</a>
-  <a href="/portfolio/eleven-academy.html" class="nav-btn nav-btn--pri">Projet suivant : Eleven Academy →</a>
-</div>
+<section class="suite-projet" aria-labelledby="t-suite">
+  <h2 class="suite-projet__titre" id="t-suite">Un projet de ce type dans votre équipe ?</h2>
+  <div class="suite-projet__actions">
+    <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
+    <a class="btn btn--contour" href="edlm-linkedin.html">Application suivante : Article → LinkedIn →</a>
+  </div>
+  <a class="suite-projet__retour" href="./#applications">← Toutes les applications</a>
+</section>
 
 </div>
 
@@ -339,5 +366,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </nav>
   </div>
 </footer>
+<script src="assets/site.js?v=202611261641" defer></script>
 </body>
 </html>

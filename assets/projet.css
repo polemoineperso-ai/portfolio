@@ -157,3 +157,128 @@ body.page--clair .scale-stat{border-top-color:var(--accent)}
 .page .human-badge{border-radius:2px;background:#0D0D0D;color:#fff;border:0}
 /* Une seule colonne de la barre au pied de page */
 .page .hero{padding-left:calc(max(0px,(100% - 1100px)/2) + var(--gut));padding-right:calc(max(0px,(100% - 1100px)/2) + var(--gut))}
+
+/* L'essentiel : ce qu'un recruteur lit en 30 secondes */
+.page .essentiel{padding:clamp(40px,5vw,64px) 0 8px}
+.page .essentiel__probleme{font:700 clamp(20px,1.9vw,24px)/1.4 var(--font);color:var(--ink);max-width:62ch;margin-bottom:28px}
+.page .essentiel__grille{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:3px solid var(--ink)}
+.page .essentiel__col{padding:22px 24px 8px 0}
+.page .essentiel__col + .essentiel__col{padding-left:24px;border-left:1px solid var(--line)}
+.page .essentiel__col h3{font:800 22px/1.15 var(--display);font-stretch:85%;color:var(--ink);display:flex;align-items:center;gap:10px}
+.page .essentiel__col h3::before{content:"";width:14px;height:14px;flex:none;background:#8A8A8A}
+.page .essentiel__col--moi h3::before{background:var(--accent-ink)}
+.page .essentiel__col--change h3::before{background:transparent;box-shadow:inset 0 0 0 2px var(--ink)}
+.page .essentiel__col ul{list-style:none;margin-top:12px}
+.page .essentiel__col li{padding:9px 0;border-bottom:1px solid var(--line);font-size:17px;color:var(--ink-soft);line-height:1.45}
+.page .essentiel__suite{margin-top:40px;font-size:16px;color:var(--ink-muted)}
+@media (max-width:860px){.page .essentiel__grille{grid-template-columns:1fr}.page .essentiel__col,.page .essentiel__col+.essentiel__col{padding:20px 0 4px;border-left:0;border-top:1px solid var(--line)}}
+
+/* Sections détaillées repliées en accordéon */
+.page details.volet{padding:0;border-top:1px solid var(--line)}
+.page details.volet:last-of-type{border-bottom:1px solid var(--line)}
+.page .volet > summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:24px;cursor:pointer;padding:22px 0;min-height:44px}
+.page .volet > summary::-webkit-details-marker{display:none}
+.page .volet > summary .stitle{margin:0;font-size:clamp(24px,2.4vw,34px)}
+.page .volet > summary:hover .stitle{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.page .volet__signe{position:relative;flex:none;width:40px;height:40px;border:2px solid var(--ink);border-radius:50%}
+.page .volet__signe::before,.page .volet__signe::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:2px;margin:-1px 0 0 -8px;background:var(--ink);transition:transform .2s ease}
+.page .volet__signe::after{transform:rotate(90deg)}
+.page details[open] > summary .volet__signe::after{transform:rotate(0)}
+.page details[open] > summary .volet__signe{background:var(--ink)}
+.page details[open] > summary .volet__signe::before,.page details[open] > summary .volet__signe::after{background:#fff}
+.page .volet__corps{padding:0 0 40px}
+.page .volet .section:last-of-type{padding-bottom:0}
+.page .scale-band{padding-left:calc(max(0px,(100% - 1100px)/2) + var(--gut));padding-right:calc(max(0px,(100% - 1100px)/2) + var(--gut))}
+.page .scale-band__label,.page .scale-band__grid{max-width:none;margin-left:0;margin-right:0}
+.page details.volet + .screen-section,.page details.volet + .nav-bottom{border-top:0}
+
+/* L'essentiel avec la vidéo de l'application */
+.page .essentiel__haut{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;margin-bottom:32px}
+.page .essentiel--media .essentiel__haut{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.page .essentiel__haut .essentiel__probleme{margin-bottom:0}
+.page .essentiel .player--carte{margin:0;border-color:#0E0E10}
+@media (max-width:860px){.page .essentiel--media .essentiel__haut{grid-template-columns:1fr}}
+/* Ampleur du chantier, dans « Résultats » */
+.page .volet__corps .scale-band{margin:0 0 28px;padding:24px 28px}
+/* Fin de page : contacter, ou passer à l'application suivante */
+.page .suite-projet{margin-top:56px;padding:40px 0 72px;border-top:3px solid var(--ink)}
+.page .suite-projet__titre{font:900 clamp(30px,3.4vw,48px)/1 var(--display);font-stretch:78%;color:var(--ink);margin-bottom:24px}
+.page .suite-projet__actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.page .btn--contour{border:2px solid var(--ink);color:var(--ink);background:#fff}
+.page .btn--contour:hover{background:var(--ink);color:#fff}
+.page .suite-projet__retour{font-weight:700;color:var(--ink-soft)}
+
+/* Pilote v3 : ouverture allégée, accordéons fusionnés, une seule couleur d'accent par écran */
+.page .hero__sub{font-size:18px;line-height:1.6}
+.page .hero__time{font-size:clamp(19px,1.7vw,22px)}
+.page .volet__sous-titre{font:800 clamp(22px,2vw,28px)/1.15 var(--display);font-stretch:85%;color:var(--ink);margin:40px 0 4px;padding-top:28px;border-top:1px solid var(--line)}
+.page .volet__sous-titre + .section,.page .volet__sous-titre + *{padding-top:12px}
+.page .bar .btn--lime{background:#fff;border-color:#fff;color:#0E0E10!important}
+.page .bar .btn--lime:hover{background:#E4E4E7;border-color:#E4E4E7}
+
+/* Pas d'orange sur les pages projet : vidéo dans la couleur de l'application, contact en noir */
+.page .player__play,.page .player--lecture .player__play{background:#fff;color:#0E0E10}
+.page--eleven-academy .player__play,.page--eleven-academy .player--lecture .player__play{background:#A9E023;color:#0D0D0D}
+.page .suite-projet .btn--lime{background:#0E0E10;border-color:#0E0E10;color:#fff!important}
+.page .suite-projet .btn--lime:hover{background:#2A2A2E;border-color:#2A2A2E}
+.page .btn--contour{white-space:normal;text-align:left;line-height:1.25;padding-top:12px;padding-bottom:12px}
+
+/* Visuel de chaque fiche, à côté de « L'essentiel » */
+.page .essentiel__visuel{margin:0}
+.page .essentiel__visuel img{display:block;width:100%;height:300px;object-fit:cover;object-position:top center;border:3px solid #0E0E10;box-shadow:0 18px 36px -18px rgba(0,0,0,.45);background:#F1F2F4}
+.page .essentiel__visuel--portrait img{object-fit:contain;object-position:center;background:#E4E6EB;padding:12px 0}
+.page .essentiel__visuel figcaption{margin-top:10px;font-size:15px;color:var(--ink-muted)}
+.page .essentiel__visuel--scene .scene{position:relative;right:auto;top:auto;bottom:auto;width:auto;height:326px;margin:0}
+
+/* Captures mises en situation dans un appareil dessiné en CSS, sur un fond à la couleur de l'application */
+.page .essentiel__visuel--scene-app{background:var(--accent);padding:28px 20px 0;overflow:hidden;display:flex;flex-direction:column;align-items:center;min-height:340px}
+.page .essentiel__visuel--scene-app figcaption{align-self:stretch;margin:16px -20px 0;padding:10px 16px;background:#fff;color:var(--ink-muted)}
+.page .appareil img{border:0;box-shadow:none;height:auto;object-fit:initial;background:none;padding:0}
+/* Téléphone */
+.page .appareil--tel{position:relative;width:236px;aspect-ratio:9/18.6;background:#0E0E10;border-radius:38px;padding:10px;box-shadow:0 30px 50px -20px rgba(0,0,0,.55),inset 0 0 0 2px #2A2A2E;margin-bottom:-60px}
+.page .appareil--tel::before{content:"";position:absolute;top:16px;left:50%;width:74px;height:20px;margin-left:-37px;background:#0E0E10;border-radius:12px;z-index:2}
+.page .appareil--tel .appareil__ecran{position:relative;width:100%;height:100%;border-radius:29px;overflow:hidden;background:#fff}
+.page .appareil--tel .appareil__ecran img{width:100%;display:block}
+.page .appareil--tel{width:200px;margin-bottom:0}
+.page .essentiel__visuel--scene-app{padding:26px 20px 0;min-height:0}
+.page .essentiel__visuel--scene-app figcaption{margin-top:26px}
+/* Écran d'ordinateur portable */
+.page .appareil--ordi{width:100%;max-width:470px}
+.page .appareil--ordi .appareil__ecran{background:#0E0E10;border-radius:14px 14px 0 0;padding:12px 12px 14px;box-shadow:0 26px 44px -22px rgba(0,0,0,.6),inset 0 0 0 2px #2A2A2E}
+.page .appareil--ordi .appareil__ecran img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:left top;border-radius:3px}
+.page .appareil--ordi .appareil__socle{height:14px;margin:0 -7%;background:linear-gradient(#D4D6DB,#9EA2AA);border-radius:0 0 12px 12px;position:relative}
+.page .appareil--ordi .appareil__socle::before{content:"";position:absolute;left:50%;top:0;width:18%;height:5px;margin-left:-9%;background:#7E828B;border-radius:0 0 6px 6px}
+/* Boutons groupés de l'ouverture : alignés, sans marge propre */
+.page .demo-wrap,.page .hero__btns{align-items:center}
+.page .demo-wrap > *,.page .hero__btns > *{margin-bottom:0}
+
+/* Appareils en relief : perspective, châssis métallique, reflet, épaisseur, ombre au sol */
+.page .essentiel__visuel--scene-app{perspective:1300px;padding-top:34px;
+  background:radial-gradient(120% 95% at 28% 18%,color-mix(in srgb,var(--accent) 62%,#fff) 0%,var(--accent) 55%,color-mix(in srgb,var(--accent) 78%,#000) 100%)}
+.page .appareil{position:relative;transform-style:preserve-3d}
+.page .appareil__ecran{position:relative}
+.page .appareil__ecran::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(118deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,.06) 32%,rgba(255,255,255,0) 46%)}
+/* Ordinateur portable, tourné de trois quarts */
+.page .appareil--ordi{max-width:430px;transform:rotateX(9deg) rotateY(-17deg) rotateZ(.6deg);margin:6px 0 30px}
+.page .appareil--ordi .appareil__ecran{background:linear-gradient(160deg,#2A2B30 0%,#0B0B0D 55%,#18191C 100%);border-radius:16px 16px 4px 4px;padding:13px 13px 15px;
+  box-shadow:0 0 0 2px #9A9DA5,0 0 0 3px #5E6168,inset 0 0 0 1px #3A3B41}
+.page .appareil--ordi .appareil__ecran::after{inset:13px 13px 15px;border-radius:3px}
+.page .appareil--ordi .appareil__socle{height:20px;margin:0 -10%;border-radius:0 0 14px 14px;
+  background:linear-gradient(180deg,#F1F2F4 0%,#C9CCD2 38%,#9A9EA6 100%);clip-path:polygon(4% 0,96% 0,100% 100%,0 100%);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.7)}
+.page .appareil--ordi .appareil__socle::before{width:16%;margin-left:-8%;height:6px;background:linear-gradient(#8C9098,#B7BAC1)}
+.page .appareil--ordi::after{content:"";position:absolute;left:-4%;right:-4%;bottom:-30px;height:30px;transform:translateZ(-40px);
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 70%);filter:blur(6px)}
+/* Téléphone, légèrement pivoté, avec sa tranche */
+.page .appareil--tel{transform:rotateY(-20deg) rotateX(7deg) rotateZ(-2.5deg);margin:4px 0 26px;
+  background:linear-gradient(140deg,#4A4B52 0%,#1A1A1E 30%,#0E0E10 60%,#2E2F34 100%);
+  box-shadow:inset 0 0 0 2px #6C6E75,inset 0 0 0 4px #1A1A1E,9px 7px 0 -1px #2A2B30,10px 9px 0 0 #121214,34px 38px 46px -18px rgba(0,0,0,.6)}
+.page .appareil--tel::after{content:"";position:absolute;right:-4px;top:22%;width:4px;height:58px;border-radius:0 3px 3px 0;background:linear-gradient(#6C6E75,#2A2B30)}
+.page .appareil--tel .appareil__ecran::after{border-radius:29px}
+@media (prefers-reduced-motion:reduce){.page .appareil{transform:none}}
+/* Images à l'intérieur des écrans : les règles des appareils communs l'emportent */
+.page .appareil--ordi .appareil__vue > img{aspect-ratio:auto;height:100%;object-fit:cover;border-radius:0}
+.page .appareil--ordi .appareil__vue--defile > img{object-position:center 0%}
+.page .appareil__vue .scene__img{aspect-ratio:auto;height:auto;object-fit:initial;border-radius:0}
+.page .appareil__vue .scene__img--1{height:100%;object-fit:cover;object-position:left top}

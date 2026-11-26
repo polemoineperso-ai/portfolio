@@ -169,8 +169,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 .pn-b{color:var(--nia-blue-dark);}.pn-p{color:#9a4a77;}
 .about-link{color:var(--nia-blue-dark);}.about-link:hover{background:var(--nia-blue-dark);color:#fff;}
 </style>
-<link rel="stylesheet" href="assets/site.css">
-<link rel="stylesheet" href="assets/projet.css">
+<link rel="stylesheet" href="assets/site.css?v=202611261641">
+<link rel="stylesheet" href="assets/projet.css?v=202611261641">
 </head>
 <body class="page page--eleven-academy" style="--accent:#0D0D0D;--accent-ink:#0D0D0D;--accent-deep:#000000;--accent-light:#A9E023">
 
@@ -181,7 +181,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <nav aria-label="Navigation principale">
       <a href="./#applications">Les applications</a>
       <a href="./#ia-humain">L'IA et moi</a>
-      <a class="btn btn--lime" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+      <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
     </nav>
   </div>
 </header>
@@ -189,32 +189,41 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 
 <div class="hero">
   <div class="hero__tag">Supabase · Claude API · Légifrance</div>
-  <h1 class="hero__title">Eleven Academy : réviser le droit, <em>texte officiel à l'appui</em></h1>
-  <p class="hero__sub">Une application de préparation à l'examen d'agent sportif (CNOSF puis FFF) : micro-leçons de 5 minutes, QCM au format de l'épreuve, révision espacée. Et chaque lundi, une veille juridique signale les textes qui ont changé.</p>
+  <h1 class="hero__title">Eleven Academy : préparer l'examen d'agent sportif <em>5 minutes par jour</em></h1>
+  <p class="hero__sub">L'application de révision que j'ai conçue pour des candidats à la licence d'agent sportif (examen du CNOSF, puis de la FFF). Des leçons de 5 minutes, des QCM au format de l'épreuve, un programme de la semaine et un assistant qui répond à partir du cours. Chaque lundi, une veille vérifie que ce qui est enseigné correspond toujours à la loi.</p>
   <div class="hero__metrics">
     <div class="metric"><span class="metric__n">10</span><span class="metric__l">modules du programme</span></div>
     <div class="metric"><span class="metric__n">133</span><span class="metric__l">micro-leçons</span></div>
     <div class="metric"><span class="metric__n">421</span><span class="metric__l">questions sourcées</span></div>
     <div class="metric"><span class="metric__n">525</span><span class="metric__l">articles de loi suivis</span></div>
   </div>
-  <div class="hero__time">Avant : des cours PDF denses et des annales sans corrigé à jour. <strong>Après : une leçon de 5 minutes par notion, chaque réponse rattachée à l'article en vigueur.</strong></div>
+  <div class="hero__time">Avant : des cours PDF denses. <strong>Après : une leçon de 5 minutes par notion.</strong></div>
 </div>
 
-<div class="scale-band">
-  <div class="scale-band__label">L'ampleur du chantier, mesurée sur l'historique réel du dépôt</div>
-  <div class="scale-band__grid">
-    <div class="scale-stat"><span class="scale-stat__n">88</span><span class="scale-stat__l">commits</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">266</span><span class="scale-stat__l">documents sources (codes, annales, règlements)</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">2</span><span class="scale-stat__l">fonctions serveur (Arbitre, veille)</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">9</span><span class="scale-stat__l">codes juridiques surveillés</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">3</span><span class="scale-stat__l">semaines de développement</span></div>
-  </div>
-</div>
+
 
 <div class="wrap">
-
-<div class="section">
-  <h2 class="stitle">Diagnostic, réflexion, décision</h2>
+<section class="essentiel essentiel--media" aria-labelledby="t-essentiel">
+  <div class="essentiel__haut">
+    <div>
+      <h2 class="stitle" id="t-essentiel">L'essentiel</h2>
+      <p class="essentiel__probleme">Réviser pendant un an, c'est risquer d'apprendre une règle qui aura changé le jour de l'épreuve. Il fallait des cours justes, à jour, et une candidate prévenue quand le droit bouge.</p>
+    </div>
+    <div class="player player--carte" data-video="ogjPTumIOX0" data-title="Eleven Academy en vidéo">
+      <img src="https://img.youtube.com/vi/ogjPTumIOX0/hqdefault.jpg" alt="" width="480" height="360" loading="lazy">
+      <button class="player__play" type="button" data-play><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Eleven Academy en vidéo</span></button>
+    </div>
+  </div>
+  <div class="essentiel__grille">
+    <div class="essentiel__col essentiel__col--ia"><h3>Ce que fait l'IA</h3><ul><li>Rédige les leçons selon des consignes fixes</li><li>Vérifie chaque affirmation contre le texte officiel</li><li>Compare chaque lundi les articles cités à leur version en vigueur</li><li>Répond aux questions à partir du cours seulement</li></ul></div>
+    <div class="essentiel__col essentiel__col--moi"><h3>Ce qui reste humain</h3><ul><li>Le programme, l'ordre des modules et la méthode</li><li>Chaque correction, avant qu'elle soit publiée</li><li>Les tests réels sur iPhone et tablette</li><li>Les limites assumées : pas encore de relecture par un juriste</li></ul></div>
+    <div class="essentiel__col essentiel__col--change"><h3>Ce que ça change</h3><ul><li>Tout le programme couvert en trois semaines</li><li>Une révision courte, chaque jour, sur téléphone</li><li>Un contenu prévenu dès que la loi change</li><li>Aucune correction publiée sans validation humaine</li></ul></div>
+  </div>
+  <p class="essentiel__suite">Le détail, à ouvrir selon ce qui vous intéresse :</p>
+</section>
+<details class="section volet" open>
+  <summary><h2 class="stitle">Pourquoi ce projet</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="genesis-grid">
     <div class="genesis-card genesis-card--diag">
       <div class="genesis-card__icon">🔍</div>
@@ -232,19 +241,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
       <div class="genesis-card__text">Une application utilisée au quotidien, sur téléphone et ordinateur : les 10 modules du programme sont en leçons, la progression se synchronise entre appareils, et une veille hebdomadaire compare les articles enseignés à leur version en vigueur sur Légifrance.</div>
     </div>
   </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">Apprendre un droit qui bouge</h2>
+<h3 class="volet__sous-titre">Le problème</h3>
   <p class="prose">Réviser pendant un an, c'est risquer d'apprendre une règle qui aura changé le jour de l'épreuve. Produire des questions, l'IA le fait vite. Le plus dur est qu'elles restent justes, et de prévenir la candidate quand une règle qu'elle a apprise a changé.</p>
   <div class="rule8020">
     <div class="rule8020__title">Règle 80/20 : <strong>l'humain reste le décideur</strong></div>
     <div class="rule8020__text">L'IA rédige les leçons, une seconde IA les vérifie contre le texte officiel, et la veille trie les nouveautés du Journal officiel. <strong>Mais rien ne change dans l'application sans validation humaine.</strong> La veille signale, elle ne corrige pas : un éditeur décide « Ignorer » ou « À traiter », puis valide chaque correction avant publication.</div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Comment ça fonctionne</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Comment ça marche</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="flow">
     <div class="flow-step"><div class="ficon fi-p">✍️</div><div><div class="fname">Rédaction en circuit croisé</div><div class="fdesc">Chaque module est rédigé par un modèle Claude selon des consignes fixes, vérifié par un second modèle contre le texte officiel, puis contrôlé sur les articles clés avant validation humaine. Les écarts trouvés sont corrigés avant publication.</div><div class="fsub">Claude API · Anthropic</div></div></div>
     <div class="flow-step"><div class="ficon fi-b">📚</div><div><div class="fname">Leçons et QCM sourcés</div><div class="fdesc">133 micro-leçons et 421 questions au format de l'examen (5 propositions, une seule bonne réponse). Après chaque réponse : l'explication, l'article exact, et l'encart « avant / après » quand la règle vient de changer.</div></div></div>
@@ -252,10 +260,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="flow-step"><div class="ficon fi-p">⚖️</div><div><div class="fname">L'Arbitre : questions libres, réponses tirées du cours</div><div class="fdesc">La candidate pose sa question avec ses mots ; l'Arbitre répond uniquement à partir des leçons et des articles de l'application, cite ses sources et dit clairement quand le cours ne couvre pas la question.</div><div class="fsub">Supabase Edge Function · Claude API</div></div></div>
     <div class="flow-step"><div class="ficon fi-a">📰</div><div><div class="fname">Veille juridique du lundi</div><div class="fdesc">Chaque semaine : comparaison des 525 articles cités avec leur version en vigueur, lecture du Journal officiel et de la convention collective du sport, tri « touche l'examen / peut-être / non » par Claude, puis e-mail récapitulatif aux éditeurs.</div><div class="fsub">API Légifrance (PISTE) · Claude API · Brevo</div></div></div>
   </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">Ce que couvre l'outil</h2>
+<h3 class="volet__sous-titre">Fonctionnalités</h3>
   <div class="feat-grid">
     <div class="feat-card"><div class="feat-card__icon">⚽</div><div class="feat-card__title">Gamification football</div><div class="feat-card__text">Points, divisions de District à Légende, trophées, séries de jours et classement de la semaine, dont on peut se retirer.</div></div>
     <div class="feat-card"><div class="feat-card__icon">🏟️</div><div class="feat-card__title">Matchs d'entraînement</div><div class="feat-card__text">QCM au format de l'épreuve, issus des annales officielles 2015-2025 revérifiées et des leçons, avec bilan par domaine.</div></div>
@@ -265,9 +270,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="feat-card"><div class="feat-card__icon">🔐</div><div class="feat-card__title">Connexion par code</div><div class="feat-card__text">Un code reçu par e-mail, sans mot de passe ; chaque progression est privée, protégée par des règles d'accès en base.</div></div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Les vrais problèmes à résoudre</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Difficultés et solutions</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="challenges">
     <div class="challenge"><div class="ctitle">Faire confiance à un contenu juridique écrit par des IA</div><div class="cbody">Une seule IA qui rédige et se relit elle-même ne voit pas ses propres erreurs. D'où un circuit croisé : un modèle rédige, un autre vérifie chaque affirmation contre le texte officiel téléchargé, et un troisième contrôle les articles clés. Résultat mesuré : moins d'une erreur de fond par module, toutes corrigées avant publication. Limite assumée : aucun juriste n'a encore relu le contenu.</div></div>
     <div class="challenge"><div class="ctitle">Une réforme en plein milieu de la préparation</div><div class="cbody">La loi du 3 août 2026 remplace la « licence » par une « carte professionnelle d'agent sportif », mais ses décrets ne paraîtront qu'en 2027. Les leçons concernées présentent donc la règle « avant / après », et la veille surveille les parutions pour mettre à jour au bon moment.</div></div>
@@ -275,9 +282,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="challenge"><div class="ctitle">Un fichier unique de 800 Ko modifié par scripts</div><div class="cbody">Deux incidents réels (une note de rédaction publiée par erreur, un texte coupé) ont conduit à des garde-fous à la construction : toute note entre crochets et tout guillemet <span class="ccode">« »</span> déséquilibré bloquent désormais la publication.</div></div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Technologies utilisées</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Outils utilisés</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <table class="stack-table">
     <thead><tr><th>Catégorie</th><th>Outil</th></tr></thead>
     <tbody>
@@ -292,9 +301,24 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </tbody>
   </table>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Ce que ça produit concrètement</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Résultats</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
+<div class="scale-band">
+  <div class="scale-band__label">L'ampleur du chantier, mesurée sur l'historique réel du dépôt</div>
+  <div class="scale-band__grid">
+    <div class="scale-stat"><span class="scale-stat__n">88</span><span class="scale-stat__l">commits</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">266</span><span class="scale-stat__l">documents sources (codes, annales, règlements)</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">2</span><span class="scale-stat__l">fonctions serveur (Arbitre, veille)</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">9</span><span class="scale-stat__l">codes juridiques surveillés</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">3</span><span class="scale-stat__l">semaines de développement</span></div>
+  </div>
+</div>
+
+
+
   <div class="results-grid">
     <div class="rcard"><span class="rcard__n">133</span><span class="rcard__l">micro-leçons de 5 minutes, couvrant les 10 modules du programme</span></div>
     <div class="rcard"><span class="rcard__n">421</span><span class="rcard__l">questions, chacune rattachée à l'article qui la fonde</span></div>
@@ -304,16 +328,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="rcard"><span class="rcard__n">2</span><span class="rcard__l">épreuves visées : CNOSF (novembre 2027), puis FFF (mars 2028)</span></div>
   </div>
 </div>
+</details>
 
 <div class="screen-section">
   <div class="screen-label">Application privée</div>
   <p class="screen-caption">L'application est réservée aux personnes inscrites (connexion par code envoyé par e-mail) et contient leur progression réelle. <strong style="color:var(--ink);">Démonstration possible sur demande.</strong></p>
 </div>
 
-<div class="nav-bottom">
-  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
-  <a href="/portfolio/vocalink.html" class="nav-btn nav-btn--out">← Projet précédent : Vocalink</a>
-</div>
+<section class="suite-projet" aria-labelledby="t-suite">
+  <h2 class="suite-projet__titre" id="t-suite">Un projet de ce type dans votre équipe ?</h2>
+  <div class="suite-projet__actions">
+    <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
+    <a class="btn btn--contour" href="concertation-territoriale.html">Application suivante : Concertation territoriale →</a>
+  </div>
+  <a class="suite-projet__retour" href="./#applications">← Toutes les applications</a>
+</section>
 
 </div>
 
@@ -329,5 +358,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </nav>
   </div>
 </footer>
+<script src="assets/site.js?v=202611261641" defer></script>
 </body>
 </html>

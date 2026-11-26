@@ -195,8 +195,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
   gtag('js', new Date());
   gtag('config', 'G-JF396K2Y0E');
 </script>
-<link rel="stylesheet" href="assets/site.css">
-<link rel="stylesheet" href="assets/projet.css">
+<link rel="stylesheet" href="assets/site.css?v=202611261641">
+<link rel="stylesheet" href="assets/projet.css?v=202611261641">
 </head>
 <body class="page page--photo-collector page--clair" style="--accent:#F2B33D;--accent-ink:#8A5A00;--accent-deep:#6B4500;--accent-light:#0E0E10">
 
@@ -207,7 +207,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <nav aria-label="Navigation principale">
       <a href="./#applications">Les applications</a>
       <a href="./#ia-humain">L'IA et moi</a>
-      <a class="btn btn--lime" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+      <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
     </nav>
   </div>
 </header>
@@ -218,8 +218,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <img src="/portfolio/icon-photocollector.png" alt="Photothèque Rédaction IA">
   </div>
   <div class="hero__tag">FastAPI · Claude Vision · iOS · PWA</div>
-  <h1 class="hero__title">Photothèque <em>Rédaction IA</em></h1>
-  <p class="hero__sub">De l'iPhone à la galerie éditoriale organisée en 5 secondes. Upload iOS natif ou PWA multi-device, légende LinkedIn générée par Claude vision, validation éditoriale intégrée.</p>
+  <h1 class="hero__title">Photothèque rédaction : de l'iPhone à la galerie <em>en 5 secondes</em></h1>
+  <p class="hero__sub">Les photos d'événement arrivent dans une galerie partagée, depuis l'iPhone ou n'importe quel téléphone. Claude propose une légende, l'équipe valide avant publication.</p>
   <a href="https://photo-collector.onrender.com/gallery" target="_blank" class="hero__demo">Découvrir la photothèque →</a>
   <div class="hero__metrics">
     <div class="metric"><span class="metric__n">5 sec</span><span class="metric__l">depuis l'app Photos iOS</span></div>
@@ -227,31 +227,33 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="metric"><span class="metric__n">Claude</span><span class="metric__l">vision par photo</span></div>
     <div class="metric"><span class="metric__n">0</span><span class="metric__l">renommage manuel</span></div>
   </div>
-  <div class="hero__time">Gestion photos événement : <strong>15 à 30 min manuelles → 5 secondes par photo</strong></div>
+  <div class="hero__time">Avant : 15 à 30 minutes par événement. <strong>Après : 5 secondes par photo.</strong></div>
 </div>
-  <!-- VIDEO DEMO -->
-  <div style="max-width:700px;margin:28px auto 0;padding:0 24px;">
-    <div style="background:var(--nia-black);border:1px solid rgba(94,149,200,.2);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.4);">
-      <div style="padding:12px 18px;border-bottom:1px solid rgba(94,149,200,.15);display:flex;align-items:center;gap:10px;">
-        <span style="font-family:var(--ui);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-pink);">Vidéo de présentation : Photothèque rédaction IA</span>
-      </div>
-      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-        <iframe 
-          src="https://www.youtube.com/embed/xb8tkMyBZrU" 
-          title="Photothèque rédaction IA : de l'iPhone au stock organisé en 5 secondes"
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen
-          style="position:absolute;top:0;left:0;width:100%;height:100%;">
-        </iframe>
-      </div>
-    </div>
-  </div>
+  
 
 <div class="wrap">
+<section class="essentiel essentiel--media" aria-labelledby="t-essentiel">
+  <div class="essentiel__haut">
+    <div>
+      <h2 class="stitle" id="t-essentiel">L'essentiel</h2>
+      <p class="essentiel__probleme">Après chaque salon ou événement, les équipes perdaient du temps à transférer leurs photos par e-mail, AirDrop ou WhatsApp, à les renommer et à écrire les légendes.</p>
+    </div>
+    <div class="player player--carte" data-video="xb8tkMyBZrU" data-title="La Photothèque en vidéo">
+      <img src="https://img.youtube.com/vi/xb8tkMyBZrU/hqdefault.jpg" alt="" width="480" height="360" loading="lazy">
+      <button class="player__play" type="button" data-play><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>La Photothèque en vidéo</span></button>
+    </div>
+  </div>
+  <div class="essentiel__grille">
+    <div class="essentiel__col essentiel__col--ia"><h3>Ce que fait l'IA</h3><ul><li>Range la photo envoyée depuis le téléphone</li><li>Propose une légende LinkedIn en analysant l'image</li><li>Prévient l'équipe par Telegram et e-mail</li></ul></div>
+    <div class="essentiel__col essentiel__col--moi"><h3>Ce qui reste humain</h3><ul><li>L'auteur valide, corrige ou ignore la légende</li><li>L'équipe éditoriale approuve chaque photo publiée</li><li>Aucun changement d'habitude imposé aux équipes</li></ul></div>
+    <div class="essentiel__col essentiel__col--change"><h3>Ce que ça change</h3><ul><li>5 secondes par photo, au lieu de 15 à 30 minutes par événement</li><li>Une galerie à jour depuis n'importe quel appareil</li><li>Des photos nommées, légendées et faciles à retrouver</li></ul></div>
+  </div>
+  <p class="essentiel__suite">Le détail, à ouvrir selon ce qui vous intéresse :</p>
+</section>
 
-<div class="section">
-  <h2 class="stitle">Diagnostic, réflexion, décision</h2>
+<details class="section volet" open>
+  <summary><h2 class="stitle">Pourquoi ce projet</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="genesis-grid">
     <div class="genesis-card genesis-card--diag">
       <div class="genesis-card__icon">🔍</div>
@@ -269,10 +271,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
       <div class="genesis-card__text">Upload en 1 tap, légende IA instantanée, galerie collaborative en temps réel avec validation éditoriale, édition inline, téléchargement ZIP et notifications automatiques, sans changer les réflexes des équipes.</div>
     </div>
   </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">Ce qui coince sur le terrain</h2>
+<h3 class="volet__sous-titre">Le problème</h3>
   <p class="prose">Après chaque salon, conférence ou événement, les équipes perdent du temps à transférer leurs photos : email, AirDrop, WhatsApp, renommage manuel, légende à écrire. Un process répétitif qui décourage les contributeurs et retarde la publication.</p>
   <p class="prose">L'objectif : que la photo arrive dans la galerie sans effort, et sans changer les habitudes des équipes. Tout le monde a l'app Photos sur son iPhone ou un navigateur sur son téléphone.</p>
 
@@ -281,9 +280,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="rule8020__text">Claude propose une légende professionnelle à partir de l'image. L'auteur la valide, la corrige ou l'ignore directement dans la galerie. <strong>Les photos sont approuvées par l'équipe éditoriale avant publication, jamais automatiquement.</strong> L'IA fait gagner du temps, l'humain garde la main sur ce qui est publié.</div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Comment ça fonctionne</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Comment ça marche</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="flow">
     <div class="flow-step">
       <div class="ficon fi-b">📱</div>
@@ -342,10 +343,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
       </div>
     </div>
   </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">Une galerie éditoriale complète</h2>
+<h3 class="volet__sous-titre">La galerie</h3>
   <div class="features-list">
     <div class="feature-row"><div class="feature-row__dot"></div>Recherche plein texte multi-mots sur tous les champs</div>
     <div class="feature-row"><div class="feature-row__dot"></div>Filtres : auteur, événement, statut (À valider / Approuvées), plage de dates</div>
@@ -356,9 +354,25 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="feature-row"><div class="feature-row__dot"></div>Suppression synchronisée Cloudinary + Sheets, aucune ligne orpheline</div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">2 appels API par photo</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Outils utilisés</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
+  <table class="stack-table">
+    <thead><tr><th>Catégorie</th><th>Outil</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td class="mono-td">Python · FastAPI</td></tr>
+      <tr><td>IA / Vision</td><td class="mono-td">Claude API (claude-opus-4-7) · vision</td></tr>
+      <tr><td>Stockage photos</td><td class="mono-td">Cloudinary · API v2</td></tr>
+      <tr><td>Journalisation</td><td class="mono-td">Google Sheets API v4</td></tr>
+      <tr><td>Upload iOS natif</td><td class="mono-td">Apple Shortcuts · iOS</td></tr>
+      <tr><td>Upload multi-device</td><td class="mono-td">PWA (Progressive Web App) · Android · Desktop</td></tr>
+      <tr><td>Notifications</td><td class="mono-td">Telegram Bot API · Resend (email)</td></tr>
+      <tr><td>Hébergement</td><td class="mono-td">Render</td></tr>
+    </tbody>
+  </table>
+<h3 class="volet__sous-titre">Deux appels d'API par photo</h3>
   <div class="api-calls">
     <div class="api-card">
       <div class="api-label">Appel 1 · Cloudinary</div>
@@ -388,26 +402,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Technologies utilisées</h2>
-  <table class="stack-table">
-    <thead><tr><th>Catégorie</th><th>Outil</th></tr></thead>
-    <tbody>
-      <tr><td>Backend</td><td class="mono-td">Python · FastAPI</td></tr>
-      <tr><td>IA / Vision</td><td class="mono-td">Claude API (claude-opus-4-7) · vision</td></tr>
-      <tr><td>Stockage photos</td><td class="mono-td">Cloudinary · API v2</td></tr>
-      <tr><td>Journalisation</td><td class="mono-td">Google Sheets API v4</td></tr>
-      <tr><td>Upload iOS natif</td><td class="mono-td">Apple Shortcuts · iOS</td></tr>
-      <tr><td>Upload multi-device</td><td class="mono-td">PWA (Progressive Web App) · Android · Desktop</td></tr>
-      <tr><td>Notifications</td><td class="mono-td">Telegram Bot API · Resend (email)</td></tr>
-      <tr><td>Hébergement</td><td class="mono-td">Render</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="section">
-  <h2 class="stitle">Ce que ça change concrètement</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Résultats</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="results-grid">
     <div class="rcard"><span class="rcard__n">5 sec</span><span class="rcard__l">de l'app Photos iOS au stock organisé, légendé, référencé</span></div>
     <div class="rcard"><span class="rcard__n">0</span><span class="rcard__l">renommage manuel, email, AirDrop ou WhatsApp après événement</span></div>
@@ -419,13 +418,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <strong>Conçu pour être reproduit.</strong> Les variables d'environnement suffisent pour déployer une nouvelle instance : architecture documentée, stack open source, configuration reproductible.
   </div>
 </div>
+</details>
 
-<div class="nav-bottom">
-  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
-  <a href="https://photo-collector.onrender.com/gallery" target="_blank" class="nav-btn nav-btn--pri">Voir la galerie →</a>
-  <a href="https://github.com/polemoineperso-ai/photo-collector" target="_blank" class="nav-btn nav-btn--out">Code source ↗</a>
-  <a href="/portfolio/vocalink.html" class="nav-btn nav-btn--out">Projet suivant : Vocalink →</a>
-</div>
+<section class="suite-projet" aria-labelledby="t-suite">
+  <h2 class="suite-projet__titre" id="t-suite">Un projet de ce type dans votre équipe ?</h2>
+  <div class="suite-projet__actions">
+    <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
+    <a class="btn btn--contour" href="newsletter.html">Application suivante : Newsletter IA →</a>
+  </div>
+  <a class="suite-projet__retour" href="./#applications">← Toutes les applications</a>
+</section>
 
 </div>
 
@@ -441,5 +443,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </nav>
   </div>
 </footer>
+<script src="assets/site.js?v=202611261641" defer></script>
 </body>
 </html>

@@ -174,8 +174,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 .pn-b{color:var(--nia-blue-dark);}.pn-p{color:#9a4a77;}
 .about-link{color:var(--nia-blue-dark);}.about-link:hover{background:var(--nia-blue-dark);color:#fff;}
 </style>
-<link rel="stylesheet" href="assets/site.css">
-<link rel="stylesheet" href="assets/projet.css">
+<link rel="stylesheet" href="assets/site.css?v=202611261641">
+<link rel="stylesheet" href="assets/projet.css?v=202611261641">
 </head>
 <body class="page page--concertation-territoriale" style="--accent:#0F6E66;--accent-ink:#0F6E66;--accent-deep:#0A4F49;--accent-light:#9FE3D9">
 
@@ -186,7 +186,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <nav aria-label="Navigation principale">
       <a href="./#applications">Les applications</a>
       <a href="./#ia-humain">L'IA et moi</a>
-      <a class="btn btn--lime" href="mailto:po.lemoine.perso@gmail.com">Me contacter</a>
+      <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
     </nav>
   </div>
 </header>
@@ -194,11 +194,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
 
 <div class="hero">
   <div class="hero__tag">Next.js · Concertation territoriale</div>
-  <h1 class="hero__title">Pilotage de concertation <em>territoriale</em></h1>
+  <h1 class="hero__title">Concertation territoriale : piloter l'acceptabilité d'un projet <em>dans un seul outil</em></h1>
   <p class="hero__sub">Parties prenantes, risques, communication, engagements et actions dans un seul outil, pour les projets d'infrastructure énergétique. Le score d'acceptabilité y est calculé, pas déclaré.</p>
   <div class="demo-wrap">
-    <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo">Voir un échantillon de l'interface →</a>
-    <span class="light-pill">Version light</span>
+    <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo">Voir une maquette de l'interface →</a>
   </div>
   <div class="hero__metrics">
     <div class="metric"><span class="metric__n">5</span><span class="metric__l">modules reliés</span></div>
@@ -206,25 +205,37 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="metric"><span class="metric__n">12</span><span class="metric__l">types d'alertes</span></div>
     <div class="metric"><span class="metric__n">73</span><span class="metric__l">tests automatisés</span></div>
   </div>
-  <div class="hero__time">Avant : suivi éparpillé entre tableurs, e-mails et mémoire. <strong>Après : un tableau de bord unique, à jour.</strong></div>
+  <div class="hero__time">Avant : un suivi éparpillé entre tableurs et e-mails. <strong>Après : un tableau de bord unique.</strong></div>
 </div>
 
-<div class="scale-band">
-  <div class="scale-band__label">L'ampleur du chantier, mesurée sur l'historique réel du dépôt</div>
-  <div class="scale-band__grid">
-    <div class="scale-stat"><span class="scale-stat__n">208</span><span class="scale-stat__l">commits</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">43 966</span><span class="scale-stat__l">lignes de TypeScript</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">76</span><span class="scale-stat__l">pages / écrans</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">7</span><span class="scale-stat__l">migrations de schéma</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">417</span><span class="scale-stat__l">fichiers</span></div>
-    <div class="scale-stat"><span class="scale-stat__n">11</span><span class="scale-stat__l">jours de développement intensif</span></div>
-  </div>
-</div>
+
 
 <div class="wrap">
+<section class="essentiel essentiel--media" aria-labelledby="t-essentiel">
+  <div class="essentiel__haut">
+    <div>
+      <h2 class="stitle" id="t-essentiel">L'essentiel</h2>
+      <p class="essentiel__probleme">Un chef de projet sait rarement dire si son projet gagne ou perd l'acceptation de son territoire. L'information existe, mais elle est éparpillée entre tableurs, e-mails et mémoire des équipes.</p>
+    </div>
+    <figure class="essentiel__visuel essentiel__visuel--scene-app">
+      <div class="appareil appareil--ordi">
+        <div class="appareil__ecran"><div class="appareil__vue"><img src="assets/img/concertation-direction.webp" width="2000" height="1138" alt="Concertation territoriale : tableau de bord Direction, santé du portefeuille de 17 projets et position des parties prenantes" loading="lazy"></div></div>
+        <div class="appareil__socle" aria-hidden="true"></div>
+      </div>
+      <figcaption>Tableau de bord Direction de l'application</figcaption>
+    </figure>
+  </div>
+  <div class="essentiel__grille">
+    <div class="essentiel__col essentiel__col--ia"><h3>Ce que fait l'IA</h3><ul><li>Suggère le sentiment et les sujets des contributions du public</li><li>Calcule un score d'acceptabilité à partir des parties prenantes et des risques</li><li>Déclenche des alertes : risque critique, échéance dépassée, contact oublié</li></ul></div>
+    <div class="essentiel__col essentiel__col--moi"><h3>Ce qui reste humain</h3><ul><li>Chaque suggestion est relue et validée avant enregistrement</li><li>Les règles du score et les droits de chacun</li><li>Les actions à mener auprès des parties prenantes</li></ul></div>
+    <div class="essentiel__col essentiel__col--change"><h3>Ce que ça change</h3><ul><li>Une vue d'ensemble du projet, à jour</li><li>Un score calculé plutôt qu'une impression</li><li>Un journal complet de chaque modification</li></ul></div>
+  </div>
+  <p class="essentiel__suite">Le détail, à ouvrir selon ce qui vous intéresse :</p>
+</section>
 
-<div class="section">
-  <h2 class="stitle">Diagnostic, réflexion, décision</h2>
+<details class="section volet" open>
+  <summary><h2 class="stitle">Pourquoi ce projet</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="genesis-grid">
     <div class="genesis-card genesis-card--diag">
       <div class="genesis-card__icon">🔍</div>
@@ -242,19 +253,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
       <div class="genesis-card__text">Une application fonctionnelle, 17 projets réels d'infrastructure importés avec leurs jalons réglementaires et documents officiels, un score d'acceptabilité recalculé à chaque consultation, des permissions par rôle et par projet, un journal d'audit complet, 60 tests automatisés.</div>
     </div>
   </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">L'acceptabilité au ressenti, pas au calcul</h2>
+<h3 class="volet__sous-titre">Le problème</h3>
   <p class="prose">Un chef de projet sait rarement dire, un matin donné, si son projet est en train de gagner ou de perdre l'acceptation de son territoire. L'information existe, mais elle est éparpillée : qui s'est exprimé, avec quelle influence, sur quel ton ; quels risques restent ouverts ; quelle tendance se dessine. Sans un endroit unique pour la croiser, la décision reste au feeling.</p>
   <div class="rule8020">
     <div class="rule8020__title">Règle 80/20 : <strong>l'humain reste le décideur</strong></div>
     <div class="rule8020__text">L'IA suggère un sentiment et des sujets sur les échanges et les contributions du public consignés. <strong>Rien n'est enregistré sans relecture et validation humaine.</strong> Le score d'acceptabilité, lui, n'est pas une note libre : il se recalcule à partir de données réelles (position, influence, mobilisation des parties prenantes, criticité des risques, tendance récente), pour ne pas confondre un chiffre calculé avec une impression.</div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Comment ça fonctionne</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Comment ça marche</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="flow">
     <div class="flow-step"><div class="ficon fi-b">🔐</div><div><div class="fname">Permissions par rôle et par projet</div><div class="fdesc">Auth.js (NextAuth v5). Admin et Direction voient tout le portefeuille, un Responsable de projet ne gère que les siens, un Contributeur consulte et contribue, un Lecteur ne fait que consulter.</div></div></div>
     <div class="flow-step"><div class="ficon fi-b">🗂️</div><div><div class="fname">5 modules reliés, pas 5 listes séparées</div><div class="fdesc">Concertation (échanges terrain), Risques &amp; Opportunités, Communication (calendrier éditorial à 7 statuts), Engagements (promesses formelles) et Actions, seul module transverse, toujours rattaché à sa source.</div></div></div>
@@ -262,10 +272,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="flow-step"><div class="ficon fi-a">📊</div><div><div class="fname">Score d'acceptabilité calculé</div><div class="fdesc">Combine la position/influence/mobilisation des parties prenantes, la criticité des risques ouverts et la tendance récente du projet. Il est recalculé à chaque consultation, personne ne le saisit à la main.</div></div></div>
     <div class="flow-step"><div class="ficon fi-b">🔔</div><div><div class="fname">Alertes proactives</div><div class="fdesc">Risque critique, échéance dépassée, partie prenante influente jamais recontactée, sujet récurrent sur plusieurs projets du portefeuille. Ces alertes remontent seules, au lieu d'être découvertes au hasard d'une relecture.</div></div></div>
   </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">Ce que couvre l'outil, au-delà des 5 modules</h2>
+<h3 class="volet__sous-titre">Fonctionnalités</h3>
   <p class="prose">Un pilotage réel ne s'arrête pas à la saisie. Il faut agir en masse, sortir un rapport, savoir qui porte quoi, et garder la trace de chaque changement.</p>
   <div class="feat-grid">
     <div class="feat-card"><div class="feat-card__icon">📅</div><div class="feat-card__title">Parcours réglementaire</div><div class="feat-card__text">Jalons CNDP typés (saisine, décision, concertation, enquête publique...). Chacun génère automatiquement sa propre checklist d'actions.</div></div>
@@ -282,22 +289,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="feat-card"><div class="feat-card__icon">📈</div><div class="feat-card__title">Reporting interactif</div><div class="feat-card__text">Chaque graphique de répartition (statuts, positions, canaux) renvoie vers la liste filtrée correspondante, en un clic.</div></div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Un vrai portefeuille, pas une démo vide</h2>
-  <p class="prose">Une application testée uniquement avec des données inventées ne prouve rien sur son utilisabilité réelle. Les 17 projets ont été importés à partir de sources publiques : sites de concertation officiels, décisions et avis de la CNDP, pages projet des porteurs.</p>
-  <div class="method">
-    <div class="method__title">✓ Discipline appliquée à l'import</div>
-    <div class="method__text">Dates clés réglementaires, intervenants et documents officiels : uniquement quand une source publique les confirmait. Aucune partie prenante, aucun risque, aucune position n'a été inventé faute de base pour l'évaluer honnêtement. Je préfère un champ vide à une donnée plausible mais fausse.</div>
-  </div>
-  <div class="method" style="border-left-color:var(--nia-blue);margin-top:12px;">
-    <div class="method__title" style="color:var(--nia-blue);">Un cas réel : retrouver un élu plutôt que l'inventer</div>
-    <div class="method__text">Une partie prenante affichait « Mairie » sans nom d'interlocuteur. Plutôt que de laisser un champ vide ou d'en inventer un, recherche du nom réel du maire, recoupé sur deux sources publiques indépendantes, avec sa date de mandat et sa réserve (élection municipale de mars 2026 non reconfirmée depuis), puis ajouté comme contact nommé de l'institution, pas comme une nouvelle partie prenante avec une position politique qu'il n'y avait aucune base réelle pour évaluer.</div>
-  </div>
-</div>
-
-<div class="section">
-  <h2 class="stitle">Les vrais problèmes à résoudre</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Difficultés et solutions</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <div class="challenges">
     <div class="challenge"><div class="ctitle">Frontière serveur/client React franchie par erreur</div><div class="cbody">Une fonction passée en prop d'une page serveur à un composant client, ce que React Server Components interdit : plantage en production (erreur #441). Détecté via les logs serveur (pas la console minifiée du navigateur) et corrigé avant tout déploiement réel.</div></div>
     <div class="challenge"><div class="ctitle">Un projet réel à cheval sur deux communes</div><div class="cbody">Une centrale solaire s'étendant sur deux communes limitrophes ne tenait pas dans un simple champ texte. Je l'ai migré en cours de route vers une vraie relation many-to-many (<span class="ccode">ProjectCommune</span>), avec migration Prisma en deux temps pour ne perdre aucune donnée déjà en base.</div></div>
@@ -309,9 +305,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="challenge"><div class="ctitle">Pas de débordement horizontal, mais illisible sur téléphone</div><div class="cbody">Un en-tête « phrase de contexte + bouton(s) » sans <span class="ccode">flex-wrap</span> ne débordait pas de l'écran (aucune alerte des vérifications automatiques classiques), mais il comprimait le texte sur 4-5 lignes étroites à côté d'un bouton resté sur une seule ligne. Repéré en testant en vrai à 375px de large, pas en relisant le code.</div></div>
   </div>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Technologies utilisées</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Outils utilisés</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
   <table class="stack-table">
     <thead><tr><th>Catégorie</th><th>Outil</th></tr></thead>
     <tbody>
@@ -327,9 +325,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </tbody>
   </table>
 </div>
+</details>
 
-<div class="section">
-  <h2 class="stitle">Ce que ça produit concrètement</h2>
+<details class="section volet">
+  <summary><h2 class="stitle">Résultats</h2><span class="volet__signe" aria-hidden="true"></span></summary>
+  <div class="volet__corps">
+<div class="scale-band">
+  <div class="scale-band__label">L'ampleur du chantier, mesurée sur l'historique réel du dépôt</div>
+  <div class="scale-band__grid">
+    <div class="scale-stat"><span class="scale-stat__n">208</span><span class="scale-stat__l">commits</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">43 966</span><span class="scale-stat__l">lignes de TypeScript</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">76</span><span class="scale-stat__l">pages / écrans</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">7</span><span class="scale-stat__l">migrations de schéma</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">417</span><span class="scale-stat__l">fichiers</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">11</span><span class="scale-stat__l">jours de développement intensif</span></div>
+  </div>
+</div>
+
   <div class="results-grid">
     <div class="rcard"><span class="rcard__n">17</span><span class="rcard__l">projets réels importés, jalons réglementaires et documents officiels sourcés publiquement</span></div>
     <div class="rcard"><span class="rcard__n">73</span><span class="rcard__l">tests automatisés sur les permissions, calculs et validations</span></div>
@@ -340,21 +352,35 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     <div class="rcard"><span class="rcard__n">5</span><span class="rcard__l">rôles avec permissions par projet, pas seulement globales</span></div>
     <div class="rcard"><span class="rcard__n">2</span><span class="rcard__l">rapports PDF générés à la demande, pour le portefeuille et par projet</span></div>
   </div>
+<h3 class="volet__sous-titre">Des données réelles</h3>
+  <p class="prose">Une application testée uniquement avec des données inventées ne prouve rien sur son utilisabilité réelle. Les 17 projets ont été importés à partir de sources publiques : sites de concertation officiels, décisions et avis de la CNDP, pages projet des porteurs.</p>
+  <div class="method">
+    <div class="method__title">✓ Discipline appliquée à l'import</div>
+    <div class="method__text">Dates clés réglementaires, intervenants et documents officiels : uniquement quand une source publique les confirmait. Aucune partie prenante, aucun risque, aucune position n'a été inventé faute de base pour l'évaluer honnêtement. Je préfère un champ vide à une donnée plausible mais fausse.</div>
+  </div>
+  <div class="method" style="border-left-color:var(--nia-blue);margin-top:12px;">
+    <div class="method__title" style="color:var(--nia-blue);">Un cas réel : retrouver un élu plutôt que l'inventer</div>
+    <div class="method__text">Une partie prenante affichait « Mairie » sans nom d'interlocuteur. Plutôt que de laisser un champ vide ou d'en inventer un, recherche du nom réel du maire, recoupé sur deux sources publiques indépendantes, avec sa date de mandat et sa réserve (élection municipale de mars 2026 non reconfirmée depuis), puis ajouté comme contact nommé de l'institution, pas comme une nouvelle partie prenante avec une position politique qu'il n'y avait aucune base réelle pour évaluer.</div>
+  </div>
 </div>
+</details>
 
 <div class="screen-section">
   <div class="screen-label">Interface : fiche projet, données de démonstration</div>
   <div class="demo-wrap">
-    <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo" style="background:var(--nia-blue-dark);">Voir un échantillon de l'interface →</a>
-    <span class="light-pill">Version light</span>
+    <a href="/portfolio/mock-concertation.html" target="_blank" class="hero__demo" style="background:var(--nia-blue-dark);">Voir une maquette de l'interface →</a>
   </div>
   <p class="screen-caption">Échantillon simplifié et stylisé (structure et couleurs fidèles, contenu allégé) : score d'acceptabilité, alertes, table des parties prenantes. <strong style="color:var(--ink);">L'application réelle est nettement plus complète.</strong> Données de démonstration, pas de portefeuille client.</p>
 </div>
 
-<div class="nav-bottom">
-  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
-  <a href="/portfolio/edlm-linkedin.html" class="nav-btn nav-btn--pri">Projet suivant : Article → LinkedIn EDLM →</a>
-</div>
+<section class="suite-projet" aria-labelledby="t-suite">
+  <h2 class="suite-projet__titre" id="t-suite">Un projet de ce type dans votre équipe ?</h2>
+  <div class="suite-projet__actions">
+    <a class="btn btn--lime" href="carte-visite.html">Me contacter</a>
+    <a class="btn btn--contour" href="vocalink.html">Application suivante : Vocalink →</a>
+  </div>
+  <a class="suite-projet__retour" href="./#applications">← Toutes les applications</a>
+</section>
 
 </div>
 
@@ -370,5 +396,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-o
     </nav>
   </div>
 </footer>
+<script src="assets/site.js?v=202611261641" defer></script>
 </body>
 </html>
