@@ -282,3 +282,23 @@ body.page--clair .scale-stat{border-top-color:var(--accent)}
 .page .appareil--ordi .appareil__vue--defile > img{object-position:center 0%}
 .page .appareil__vue .scene__img{aspect-ratio:auto;height:auto;object-fit:initial;border-radius:0}
 .page .appareil__vue .scene__img--1{height:100%;object-fit:cover;object-position:left top}
+
+/* Couleurs : sur une fiche, seulement des neutres et la couleur de l'application.
+   --marque = couleur de l'application pour les repères non textuels (citron pour Eleven, dont le fond est noir). */
+.page{--marque:var(--accent)}
+.page--eleven-academy{--marque:#A9E023}
+.page .essentiel__col--moi h3::before{background:var(--marque)}
+/* Diagnostic / Réflexion / Résultat : même code que « L'essentiel » (gris, application, noir) */
+.page .genesis-card--diag{border-top-color:#8A8A8A}
+.page .genesis-card--think{border-top-color:var(--marque)}
+.page .genesis-card--result{border-top-color:var(--ink)}
+.page .genesis-card--diag .genesis-card__label,.page .genesis-card--result .genesis-card__label{color:var(--ink)}
+.page .genesis-card--think .genesis-card__label{color:var(--accent-ink)}
+.page .method__title{color:var(--accent-ink)!important}
+/* Article → LinkedIn : étiquettes TOFU / MOFU / BOFU et chiffres dans la couleur de l'application, plus de rose */
+.page .module-chip__tag,.page .tag-tofu,.page .tag-mofu,.page .tag-bofu{background:transparent;color:var(--accent-ink);border:1px solid currentColor;border-radius:2px}
+.page .tag-mofu{background:color-mix(in srgb,var(--accent) 10%,#fff)}
+.page .tag-bofu{background:var(--accent-ink);color:#fff;border-color:var(--accent-ink)}
+.page .module-chip--featured{border-color:var(--accent-ink);background:#fff}
+.page .mc-tofu,.page .mc-mofu,.page .mc-bofu{background:transparent;border-color:var(--line)}
+.page .pil-card__n{color:var(--accent-ink)}
