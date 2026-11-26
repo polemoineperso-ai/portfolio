@@ -286,3 +286,4 @@ a.gain:hover{border-top-color:var(--ink)}
   .gain--tous b{font-size:40px}
 }
 @media (min-width:761px) and (max-width:860px){.gains .wrap{grid-template-columns:repeat(3,1fr)}.gain--tous{grid-column:1 / -1}}
+.app--eleven .ba b{white-space:normal}
