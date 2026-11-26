@@ -276,3 +276,13 @@ a.gain:hover{border-top-color:var(--ink)}
   .app--photo{grid-template-columns:1fr}
   .app--photo .player--carte{grid-column:1;grid-row:auto;margin:20px 0 0}
 }
+/* Bandeau des gains sur mobile : une mesure par ligne, chiffre à gauche, phrase à droite (plus de case vide) */
+@media (max-width:760px){
+  .gains .wrap{grid-template-columns:1fr;row-gap:0}
+  .gain{display:grid;grid-template-columns:minmax(88px,auto) 1fr;column-gap:16px;align-items:baseline;padding:14px 0}
+  .gain small{grid-column:1 / -1;margin-bottom:4px}
+  .gain b{font-size:34px}
+  .gain--tous{padding:16px 18px;margin-bottom:8px}
+  .gain--tous b{font-size:40px}
+}
+@media (min-width:761px) and (max-width:860px){.gains .wrap{grid-template-columns:repeat(3,1fr)}.gain--tous{grid-column:1 / -1}}
