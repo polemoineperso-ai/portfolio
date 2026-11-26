@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pierre-Olivier Lemoine — Projets IA × Communication · NorthIA</title>
-<meta name="description" content="7 projets IA appliqués à la communication : générateur de candidature, agent de veille emploi, newsletter automatisée, photothèque rédaction, pilotage de concertation territoriale, capture vocale d'idées. Par Pierre-Olivier Lemoine · NorthIA.">
+<meta name="description" content="8 projets IA appliqués à la communication : générateur de candidature, agent de veille emploi, newsletter automatisée, photothèque rédaction, pilotage de concertation territoriale, capture vocale d'idées, application de révision juridique. Par Pierre-Olivier Lemoine · NorthIA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -125,6 +125,36 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   .northia-footer{flex-direction:column;align-items:center;text-align:center;}
   .northia-nav{position:relative;}
 }
+/* menu : jamais sur deux lignes */
+.northia-nav__link,.northia-nav__cta{white-space:nowrap;}
+.northia-nav__link{padding:6px 8px;}
+@media(max-width:1445px){
+  .northia-nav__links{display:none!important;}
+  .nav-burger{display:flex;}
+  .nav-mobile{position:fixed;top:58px;z-index:999;max-height:calc(100vh - 58px);overflow-y:auto;}
+  .nav-mobile.open{display:block;}
+}
+/* lisibilité (audit du 26 nov. 2026) : mêmes styles, contrastes AA */
+:root{--ink-muted:#5f6878;}
+.northia-nav__link{color:rgba(255,255,255,.78);}
+.northia-nav__link--active{color:#8fb8de;}
+.northia-nav__cta--contact,.northia-nav__cta[style*="nia-pink"]{color:#222!important;}
+.hero__tag,.hero__author,.hero__sub,.hero__time,.metric__l,.hero__stat-l,.scale-stat__l,.scale-band__label{color:rgba(255,255,255,.72);}
+.northia-footer__sub,.northia-footer__lnk{color:rgba(255,255,255,.7);}
+.pl-pri,.nav-btn--pri,.hero__demo{background:var(--nia-blue-dark);}
+.pl-pri:hover,.nav-btn--pri:hover,.hero__demo:hover{background:#1d4b6d;}
+.screen-label,.genesis-card--diag .genesis-card__label{color:var(--nia-blue-dark);}
+.genesis-card--think .genesis-card__label{color:#9a4a77;}
+.genesis-card--result .genesis-card__label,.pb-ok{color:#13774f;}
+.pcard__rule,.rule8020__text{color:rgba(255,255,255,.8);}.rule8020__text .ccode,.pcard__rule .ccode{color:var(--ink);}
+a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-offset:2px;}
+.nav-burger{min-width:44px;min-height:44px;align-items:center;justify-content:center;}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}.pcard:hover{transform:none;}}
+.screen-caption{color:var(--ink-muted)!important;}
+.nav-btn--out:hover{color:var(--nia-blue-dark);border-color:var(--nia-blue-dark);}
+.northia-nav__cta[style*="nia-blue-dark"]{color:#fff!important;}
+.pn-b{color:var(--nia-blue-dark);}.pn-p{color:#9a4a77;}
+.about-link{color:var(--nia-blue-dark);}.about-link:hover{background:var(--nia-blue-dark);color:#fff;}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF396K2Y0E"></script>
@@ -143,12 +173,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   </a>
   <div class="northia-nav__links">
     <a href="/portfolio/concertation-territoriale.html" class="northia-nav__link">Concertation</a>
+    <a href="/portfolio/edlm-linkedin.html" class="northia-nav__link">EDLM LinkedIn</a>
     <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
     <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
     <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
     <a href="/portfolio/photo-collector.html" class="northia-nav__link">Photothèque</a>
     <a href="/portfolio/vocalink.html" class="northia-nav__link">Vocalink</a>
-    <a href="/portfolio/edlm-linkedin.html" class="northia-nav__link">EDLM LinkedIn</a>
+    <a href="/portfolio/eleven-academy.html" class="northia-nav__link">Eleven Academy</a>
     <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta">⬇ Plaquette</a>
     <a href="/portfolio/plaquette-flipbook.html" class="northia-nav__cta" style="background:var(--nia-blue-dark);">📖 Feuilleter</a>
     <a href="https://polemoineperso-ai.github.io/portfolio/carte-visite.html" class="northia-nav__cta" style="background:var(--nia-pink);margin-left:2px;">✉ Me contacter</a>
@@ -159,12 +190,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 </nav>
 <div class="nav-mobile" id="navMobile">
   <a href="/portfolio/concertation-territoriale.html">Concertation</a>
+  <a href="/portfolio/edlm-linkedin.html">EDLM LinkedIn</a>
   <a href="/portfolio/generateur-projet.html">Générateur</a>
   <a href="/portfolio/agent-veille.html">Agent de veille</a>
   <a href="/portfolio/newsletter.html">Newsletter IA</a>
   <a href="/portfolio/photo-collector.html">Photothèque</a>
   <a href="/portfolio/vocalink.html">Vocalink</a>
-  <a href="https://edlm-linkedin-v2.vercel.app" target="_blank" rel="noopener">EDLM LinkedIn</a>
+  <a href="/portfolio/eleven-academy.html">Eleven Academy</a>
   <a href="/portfolio/plaquette-northia.pdf" download style="color:var(--nia-pink)!important">⬇ Plaquette PDF</a>
   <a href="/portfolio/plaquette-flipbook.html" style="color:var(--nia-blue)!important">📖 Feuilleter la plaquette</a>
   <a href="https://polemoineperso-ai.github.io/portfolio/carte-visite.html" style="color:var(--nia-pink)!important">✉ Me contacter</a>
@@ -174,7 +206,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <div class="hero__tag">Portfolio IA × Communication · Pierre-Olivier Lemoine</div>
   <h1 class="hero__title">L'IA au service<br><em>de la communication</em></h1>
   <p class="hero__author">Pierre-Olivier Lemoine · NorthIA · 2025–2026</p>
-  <p class="hero__sub">Sept agents, pipelines et applications construits de A à Z — pour automatiser, qualifier et produire là où les communicants perdent le plus de temps.</p>
+  <p class="hero__sub">Huit agents, pipelines et applications construits de A à Z — pour automatiser, qualifier et produire là où les communicants perdent le plus de temps.</p>
   <div class="hero__video">
     <a href="https://youtu.be/MJ5KL21HpmE" target="_blank" rel="noopener" class="hero__video-link">
       <img src="https://img.youtube.com/vi/MJ5KL21HpmE/hqdefault.jpg" alt="Vidéo de présentation : L'IA au service de la communication, par Pierre-Olivier Lemoine" class="hero__video-thumb" loading="lazy">
@@ -192,7 +224,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     </a>
   </div>
   <div class="hero__stats">
-    <div class="hero__stat"><span class="hero__stat-n">7</span><span class="hero__stat-l">outils construits</span></div>
+    <div class="hero__stat"><span class="hero__stat-n">8</span><span class="hero__stat-l">outils construits</span></div>
     <div class="hero__stat"><span class="hero__stat-n">80/20</span><span class="hero__stat-l">règle appliquée à chaque outil</span></div>
     <div class="hero__stat"><span class="hero__stat-n">20 ans</span><span class="hero__stat-l">expérience communication</span></div>
   </div>
@@ -201,7 +233,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 <div class="wrap">
 <div class="section">
   <div class="slabel">Réalisations</div>
-  <h2 class="stitle">Sept projets, sept problèmes résolus</h2>
+  <h2 class="stitle">Huit projets, huit problèmes résolus</h2>
   <p class="sintro">Chaque outil répond à une perte de temps réelle ou à un besoin de pilotage réel. Conçus pour être utilisés — pas en démo.</p>
 
   <div class="projects">
@@ -404,6 +436,33 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
       </div>
     </div>
 
+    <div class="pcard" style="grid-column:1/-1;">
+      <div class="pcard__top">
+        <div class="pcard__num pn-b">08</div>
+        <div class="pcard__meta">
+          <div class="pcard__title">Eleven Academy — préparer l'examen d'agent sportif</div>
+          <div class="pcard__sub">Supabase · Claude API · Légifrance · GitHub Pages</div>
+        </div>
+        <span class="pbadge pb-ok">✓ En production</span>
+      </div>
+      <div class="pcard__body">
+        <p class="pcard__desc">Application de révision pour l'examen d'agent sportif (CNOSF puis FFF) : micro-leçons de 5 minutes, QCM au format de l'épreuve, révision espacée, gamification football. Chaque réponse est rattachée à l'article de loi en vigueur, et une veille hebdomadaire signale les textes qui changent.</p>
+        <div class="pcard__rule"><strong>L'humain reste le décideur :</strong> l'IA rédige, une seconde IA vérifie contre le texte officiel, la veille trie le Journal officiel — mais aucune correction n'entre dans l'application sans validation humaine.</div>
+        <ul class="pcard__results">
+          <li>10 modules du programme en 133 micro-leçons et 421 questions sourcées</li>
+          <li>Rédaction en circuit croisé : un modèle rédige, un autre vérifie chaque affirmation contre le texte officiel</li>
+          <li>Veille du lundi : 525 articles comparés à leur version Légifrance, tri par Claude, e-mail aux éditeurs</li>
+          <li>L'Arbitre : un assistant qui répond uniquement à partir des leçons et cite ses sources</li>
+        </ul>
+        <div class="pcard__stack">
+          <span class="schip">JavaScript</span><span class="schip">Supabase</span><span class="schip">PostgreSQL</span><span class="schip">Edge Functions</span><span class="schip">Claude API</span><span class="schip">API Légifrance</span><span class="schip">Brevo</span><span class="schip">Playwright</span>
+        </div>
+        <div class="pcard__links">
+          <a href="/portfolio/eleven-academy.html" class="plink pl-pri">Voir le projet →</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -416,7 +475,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
     <div>
       <div class="about-name">Pierre-Olivier Lemoine</div>
       <div class="about-role">Responsable Communication Stratégique & Transformation · Vincennes · NorthIA</div>
-      <p class="about-bio">20 ans d'expérience en communication et marketing BtoB dans l'énergie, la santé, l'automobile et le secteur associatif. Depuis 2025, je développe NorthIA, une activité de conseil en communication digitale et IA — dont ces sept projets sont des réalisations concrètes, déployées et documentées.</p>
+      <p class="about-bio">20 ans d'expérience en communication et marketing BtoB dans l'énergie, la santé, l'automobile et le secteur associatif. Depuis 2025, je développe NorthIA, une activité de conseil en communication digitale et IA — dont ces huit projets sont des réalisations concrètes, déployées et documentées.</p>
       <div class="about-links">
         <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="about-link">LinkedIn</a>
         <a href="https://northia.fr" target="_blank" class="about-link">northia.fr</a>
@@ -446,6 +505,13 @@ document.addEventListener('click', function(e){
     m.classList.remove('open');
   }
 });
+</script>
+<script>
+(function(){var b=document.querySelector('.nav-burger'),m=document.getElementById('navMobile');if(!b||!m)return;
+b.setAttribute('aria-controls','navMobile');
+function s(){b.setAttribute('aria-expanded',m.classList.contains('open')?'true':'false');}
+s();new MutationObserver(s).observe(m,{attributes:true,attributeFilter:['class']});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open')){m.classList.remove('open');b.focus();}});})();
 </script>
 </body>
 </html>

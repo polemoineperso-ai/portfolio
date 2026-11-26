@@ -158,6 +158,36 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 .screen-caption{font-size:12px;color:#8892a4;margin-top:10px;text-align:center;font-style:italic;}
 .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.15);}
 .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:12px;}
+/* menu : jamais sur deux lignes */
+.northia-nav__link,.northia-nav__cta{white-space:nowrap;}
+.northia-nav__link{padding:6px 8px;}
+@media(max-width:1331px){
+  .northia-nav__links{display:none!important;}
+  .nav-burger{display:flex;}
+  .nav-mobile{position:fixed;top:58px;z-index:999;max-height:calc(100vh - 58px);overflow-y:auto;}
+  .nav-mobile.open{display:block;}
+}
+/* lisibilité (audit du 26 nov. 2026) : mêmes styles, contrastes AA */
+:root{--ink-muted:#5f6878;}
+.northia-nav__link{color:rgba(255,255,255,.78);}
+.northia-nav__link--active{color:#8fb8de;}
+.northia-nav__cta--contact,.northia-nav__cta[style*="nia-pink"]{color:#222!important;}
+.hero__tag,.hero__author,.hero__sub,.hero__time,.metric__l,.hero__stat-l,.scale-stat__l,.scale-band__label{color:rgba(255,255,255,.72);}
+.northia-footer__sub,.northia-footer__lnk{color:rgba(255,255,255,.7);}
+.pl-pri,.nav-btn--pri,.hero__demo{background:var(--nia-blue-dark);}
+.pl-pri:hover,.nav-btn--pri:hover,.hero__demo:hover{background:#1d4b6d;}
+.screen-label,.genesis-card--diag .genesis-card__label{color:var(--nia-blue-dark);}
+.genesis-card--think .genesis-card__label{color:#9a4a77;}
+.genesis-card--result .genesis-card__label,.pb-ok{color:#13774f;}
+.pcard__rule,.rule8020__text{color:rgba(255,255,255,.8);}.rule8020__text .ccode,.pcard__rule .ccode{color:var(--ink);}
+a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-offset:2px;}
+.nav-burger{min-width:44px;min-height:44px;align-items:center;justify-content:center;}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}.pcard:hover{transform:none;}}
+.screen-caption{color:var(--ink-muted)!important;}
+.nav-btn--out:hover{color:var(--nia-blue-dark);border-color:var(--nia-blue-dark);}
+.northia-nav__cta[style*="nia-blue-dark"]{color:#fff!important;}
+.pn-b{color:var(--nia-blue-dark);}.pn-p{color:#9a4a77;}
+.about-link{color:var(--nia-blue-dark);}.about-link:hover{background:var(--nia-blue-dark);color:#fff;}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF396K2Y0E"></script>
@@ -177,11 +207,12 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <div class="northia-nav__links">
     <a href="/portfolio/concertation-territoriale.html" class="northia-nav__link">Concertation</a>
     <a href="/portfolio/edlm-linkedin.html" class="northia-nav__link">EDLM LinkedIn</a>
-    <a href="/portfolio/generateur-projet.html" class="northia-nav__link northia-nav__link--active">Générateur</a>
+    <a href="/portfolio/generateur-projet.html" class="northia-nav__link northia-nav__link--active" aria-current="page">Générateur</a>
     <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
     <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
     <a href="/portfolio/photo-collector.html" class="northia-nav__link">Photothèque</a>
     <a href="/portfolio/vocalink.html" class="northia-nav__link">Vocalink</a>
+    <a href="/portfolio/eleven-academy.html" class="northia-nav__link">Eleven Academy</a>
     <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta">⬇ Plaquette</a>
     <a href="mailto:p-o.lemoine@northia.fr" class="northia-nav__cta northia-nav__cta--contact">✉ Me contacter</a>
   </div>
@@ -197,6 +228,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
   <a href="/portfolio/newsletter.html">Newsletter IA</a>
   <a href="/portfolio/photo-collector.html">Photothèque</a>
   <a href="/portfolio/vocalink.html">Vocalink</a>
+  <a href="/portfolio/eleven-academy.html">Eleven Academy</a>
   <a href="/portfolio/plaquette-northia.pdf" download>⬇ Plaquette PDF</a>
   <a href="mailto:p-o.lemoine@northia.fr" class="nm-contact">✉ Me contacter</a>
 </div>
@@ -351,6 +383,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:
 <script>
 function toggleMenu(){var m=document.getElementById('navMobile');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('navMobile');if(m&&!e.target.closest('.nav-burger')&&!e.target.closest('#navMobile'))m.classList.remove('open');});
+</script>
+<script>
+(function(){var b=document.querySelector('.nav-burger'),m=document.getElementById('navMobile');if(!b||!m)return;
+b.setAttribute('aria-controls','navMobile');
+function s(){b.setAttribute('aria-expanded',m.classList.contains('open')?'true':'false');}
+s();new MutationObserver(s).observe(m,{attributes:true,attributeFilter:['class']});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open')){m.classList.remove('open');b.focus();}});})();
 </script>
 </body>
 </html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eleven Academy — Préparer l'examen d'agent sportif · NorthIA · Pierre-Olivier Lemoine</title>
+<meta name="description" content="Application de préparation à l'examen d'agent sportif : 133 micro-leçons, 421 questions rattachées à l'article de loi, révision espacée, assistant IA sourcé et veille juridique hebdomadaire sur Légifrance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nia-blue:#5E95C8;--nia-blue-dark:#27618C;--nia-pink:#E49EC6;--nia-pink-dark:#C179A0;--nia-black:#222222;
+  --ink:#1a1d23;--ink-soft:#3d4251;--ink-muted:#8892a4;
+  --paper:#fafbfc;--paper-warm:#f4f2ee;--paper-card:#fff;--line:#e8eaef;
+  --font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --display:'Cinzel',Georgia,serif;--ui:'Orbitron',sans-serif;
+  --r:8px;--r-lg:12px;--shadow:0 1px 4px rgba(0,0,0,.06),0 2px 12px rgba(0,0,0,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.northia-nav{position:sticky;top:0;z-index:100;background:#222;border-bottom:2px solid var(--nia-blue);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(0,0,0,.4);}
+.northia-nav__brand{display:flex;align-items:center;text-decoration:none;}
+.northia-nav__logo{height:36px;width:auto;}
+.northia-nav__links{display:flex;align-items:center;gap:4px;}
+.northia-nav__link{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:4px;transition:all .15s;}
+.northia-nav__link:hover{color:var(--nia-pink);background:rgba(255,255,255,.06);}
+.northia-nav__link--active{color:var(--nia-blue);}
+.northia-nav__cta{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.06em;color:#222;background:var(--nia-blue);text-decoration:none;padding:8px 14px;border-radius:4px;transition:all .15s;margin-left:4px;white-space:nowrap;}
+.northia-nav__cta:hover{background:var(--nia-pink);}
+.northia-nav__cta--contact{background:var(--nia-pink);color:#fff;margin-left:2px;}
+.northia-nav__cta--contact:hover{background:var(--nia-blue);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
+.nav-burger span{width:22px;height:2px;background:rgba(255,255,255,.7);border-radius:2px;}
+.nav-mobile{display:none;position:fixed;top:58px;left:0;right:0;background:#222;border-bottom:2px solid var(--nia-blue);padding:8px 0;z-index:999;}
+.nav-mobile a{display:block;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:12px 24px;}
+.nav-mobile a:hover{color:var(--nia-pink);}
+.nav-mobile .nm-contact{color:var(--nia-pink)!important;}
+@media(max-width:640px){
+  .northia-nav{position:fixed!important;top:0;left:0;right:0;z-index:1000;}
+  body{padding-top:58px;}
+  .northia-nav__links{display:none!important;}
+  .nav-burger{display:flex;}
+  .nav-mobile.open{display:block;}
+  .northia-nav{position:relative;}
+}
+.hero{background:var(--nia-black);color:#fff;padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(94,149,200,.35),transparent);pointer-events:none;}
+.hero__tag{display:inline-block;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:5px 14px;border-radius:20px;margin-bottom:20px;}
+.hero__title{font-family:var(--display);font-size:clamp(28px,5vw,46px);font-weight:700;line-height:1.1;margin-bottom:14px;}
+.hero__title em{font-style:italic;color:var(--nia-pink);}
+.hero__sub{font-size:15px;color:rgba(255,255,255,.55);max-width:560px;margin:0 auto 24px;line-height:1.65;}
+.hero__demo{display:inline-flex;align-items:center;gap:8px;background:var(--nia-blue);color:#fff;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.06em;padding:12px 24px;border-radius:6px;text-decoration:none;transition:all .15s;}
+.hero__demo:hover{background:var(--nia-pink);}
+.demo-wrap{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
+.light-pill{display:inline-flex;align-items:center;gap:4px;background:#f5a623;color:#3d2600;font-family:var(--ui);font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:5px 10px;border-radius:20px;white-space:nowrap;}
+.hero__metrics{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+.metric{text-align:center;padding:11px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);}
+.metric__n{font-family:var(--ui);font-size:18px;font-weight:700;color:#fff;display:block;}
+.metric__l{font-size:11px;color:rgba(255,255,255,.4);display:block;margin-top:2px;}
+.hero__time{font-size:12px;color:rgba(255,255,255,.35);}
+.hero__time strong{color:var(--nia-blue);}
+.wrap{max-width:700px;margin:0 auto;padding:0 24px;}
+.section{padding:44px 0 0;}
+.section:last-of-type{padding-bottom:72px;}
+.slabel{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
+.stitle{font-family:var(--display);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:12px;letter-spacing:-.01em;}
+.prose{font-size:14px;color:var(--ink-soft);line-height:1.75;max-width:580px;}
+.rule8020{background:var(--nia-black);border-left:4px solid var(--nia-pink);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.rule8020__title{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--nia-pink);margin-bottom:8px;}
+.rule8020__text{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;}
+.rule8020__text strong{color:#fff;font-weight:700;}
+.flow{display:flex;flex-direction:column;gap:3px;margin-top:20px;}
+.flow-step{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:flex-start;background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.flow-step:hover{border-color:var(--nia-blue);}
+.ficon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.fi-b{background:rgba(94,149,200,.12);border:1px solid rgba(94,149,200,.25);}
+.fi-p{background:rgba(228,158,198,.12);border:1px solid rgba(228,158,198,.25);}
+.fi-a{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);}
+.fname{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.fdesc{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+.fsub{font-size:11px;color:var(--ink-muted);margin-top:4px;font-family:var(--mono);}
+.challenges{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+.challenge{background:var(--paper-card);border:1px solid var(--line);border-left:3px solid var(--nia-blue);border-radius:var(--r);padding:14px 16px;}
+.ctitle{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.cbody{font-size:13px;color:var(--ink-soft);line-height:1.65;}
+.ccode{font-family:var(--mono);font-size:11px;background:var(--paper-warm);padding:2px 6px;border-radius:3px;}
+.stack-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;background:var(--paper-card);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);}
+.stack-table th{background:var(--nia-black);color:rgba(255,255,255,.6);font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;text-align:left;}
+.stack-table td{padding:10px 16px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+.stack-table tr:last-child td{border-bottom:none;}
+.stack-table tr:nth-child(odd) td{background:var(--paper-warm);}
+.mono-td{font-family:var(--mono);font-size:12px;}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.rcard{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);}
+.rcard__n{font-family:var(--ui);font-size:22px;font-weight:700;color:var(--nia-blue);display:block;margin-bottom:4px;}
+.rcard__l{font-size:13px;color:var(--ink-soft);line-height:1.5;}
+.nav-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;}
+.nav-btn{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.05em;padding:10px 18px;border-radius:var(--r);text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
+.nav-btn--out{border:1px solid var(--line);color:var(--ink-muted);background:var(--paper-card);}
+.nav-btn--out:hover{border-color:var(--nia-blue);color:var(--nia-blue);}
+.nav-btn--pri{background:var(--nia-blue);color:#fff;border:none;}
+.nav-btn--pri:hover{background:var(--nia-blue-dark);}
+.northia-footer{background:#222;border-top:2px solid var(--nia-blue);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.northia-footer__logo{height:28px;width:auto;}
+.northia-footer__name{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--nia-blue);text-transform:uppercase;}
+.northia-footer__sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
+.northia-footer__links{display:flex;gap:14px;}
+.northia-footer__lnk{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .15s;}
+.northia-footer__lnk:hover{color:var(--nia-pink);}
+.genesis-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;}
+.genesis-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow);transition:border-color .18s;}
+.genesis-card:hover{border-color:var(--nia-blue);}
+.genesis-card--diag{border-top:3px solid var(--nia-blue);}
+.genesis-card--think{border-top:3px solid var(--nia-pink);}
+.genesis-card--result{border-top:3px solid #1a9e6e;}
+.genesis-card__icon{font-size:22px;margin-bottom:8px;}
+.genesis-card__label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
+.genesis-card--diag .genesis-card__label{color:var(--nia-blue);}
+.genesis-card--think .genesis-card__label{color:var(--nia-pink);}
+.genesis-card--result .genesis-card__label{color:#1a9e6e;}
+.genesis-card__text{font-size:13px;color:var(--ink-soft);line-height:1.7;}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:20px;}
+.feat-card{background:var(--paper-card);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;box-shadow:var(--shadow);transition:border-color .18s;}
+.feat-card:hover{border-color:var(--nia-blue);}
+.feat-card__icon{font-size:18px;margin-bottom:8px;}
+.feat-card__title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.feat-card__text{font-size:12px;color:var(--ink-soft);line-height:1.6;}
+@media(max-width:700px){.feat-grid{grid-template-columns:1fr 1fr;}.genesis-grid{grid-template-columns:1fr;}}
+@media(max-width:480px){.feat-grid{grid-template-columns:1fr;}}
+.scale-band{background:linear-gradient(135deg,#16295c,#0d1a3d);padding:32px 24px;text-align:center;border-bottom:2px solid var(--nia-blue);}
+.scale-band__label{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px;}
+.scale-band__grid{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;max-width:900px;margin:0 auto;}
+.scale-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:14px 20px;min-width:110px;}
+.scale-stat__n{font-family:var(--ui);font-size:22px;font-weight:700;color:#fff;display:block;}
+.scale-stat__l{font-size:11px;color:rgba(255,255,255,.5);display:block;margin-top:3px;}
+@media(max-width:640px){.scale-band__grid{gap:8px;}.scale-stat{min-width:90px;padding:10px 12px;}}
+.screen-section{margin:32px 0;padding:24px 0;border-top:1px solid var(--line);text-align:center;}
+.screen-label{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nia-blue);margin-bottom:14px;}
+.screen-caption{font-size:12px;color:#8892a4;margin-top:10px;font-style:italic;}
+@media(max-width:600px){.northia-nav__links{display:none;}.results-grid{grid-template-columns:1fr;}.northia-footer{flex-direction:column;align-items:center;text-align:center;}}
+/* menu : jamais sur deux lignes */
+.northia-nav__link,.northia-nav__cta{white-space:nowrap;}
+.northia-nav__link{padding:6px 8px;}
+@media(max-width:1331px){
+  .northia-nav__links{display:none!important;}
+  .nav-burger{display:flex;}
+  .nav-mobile{position:fixed;top:58px;z-index:999;max-height:calc(100vh - 58px);overflow-y:auto;}
+  .nav-mobile.open{display:block;}
+}
+/* lisibilité (audit du 26 nov. 2026) : mêmes styles, contrastes AA */
+:root{--ink-muted:#5f6878;}
+.northia-nav__link{color:rgba(255,255,255,.78);}
+.northia-nav__link--active{color:#8fb8de;}
+.northia-nav__cta--contact,.northia-nav__cta[style*="nia-pink"]{color:#222!important;}
+.hero__tag,.hero__author,.hero__sub,.hero__time,.metric__l,.hero__stat-l,.scale-stat__l,.scale-band__label{color:rgba(255,255,255,.72);}
+.northia-footer__sub,.northia-footer__lnk{color:rgba(255,255,255,.7);}
+.pl-pri,.nav-btn--pri,.hero__demo{background:var(--nia-blue-dark);}
+.pl-pri:hover,.nav-btn--pri:hover,.hero__demo:hover{background:#1d4b6d;}
+.screen-label,.genesis-card--diag .genesis-card__label{color:var(--nia-blue-dark);}
+.genesis-card--think .genesis-card__label{color:#9a4a77;}
+.genesis-card--result .genesis-card__label,.pb-ok{color:#13774f;}
+.pcard__rule,.rule8020__text{color:rgba(255,255,255,.8);}.rule8020__text .ccode,.pcard__rule .ccode{color:var(--ink);}
+a:focus-visible,button:focus-visible{outline:2px solid var(--nia-blue);outline-offset:2px;}
+.nav-burger{min-width:44px;min-height:44px;align-items:center;justify-content:center;}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}.pcard:hover{transform:none;}}
+.screen-caption{color:var(--ink-muted)!important;}
+.nav-btn--out:hover{color:var(--nia-blue-dark);border-color:var(--nia-blue-dark);}
+.northia-nav__cta[style*="nia-blue-dark"]{color:#fff!important;}
+.pn-b{color:var(--nia-blue-dark);}.pn-p{color:#9a4a77;}
+.about-link{color:var(--nia-blue-dark);}.about-link:hover{background:var(--nia-blue-dark);color:#fff;}
+</style>
+</head>
+<body>
+
+<nav class="northia-nav">
+  <a href="/portfolio/index.html" class="northia-nav__brand">
+    <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-nav__logo">
+  </a>
+  <div class="northia-nav__links">
+    <a href="/portfolio/concertation-territoriale.html" class="northia-nav__link">Concertation</a>
+    <a href="/portfolio/edlm-linkedin.html" class="northia-nav__link">EDLM LinkedIn</a>
+    <a href="/portfolio/generateur-projet.html" class="northia-nav__link">Générateur</a>
+    <a href="/portfolio/agent-veille.html" class="northia-nav__link">Agent de veille</a>
+    <a href="/portfolio/newsletter.html" class="northia-nav__link">Newsletter IA</a>
+    <a href="/portfolio/photo-collector.html" class="northia-nav__link">Photothèque</a>
+    <a href="/portfolio/vocalink.html" class="northia-nav__link">Vocalink</a>
+    <a href="/portfolio/eleven-academy.html" class="northia-nav__link northia-nav__link--active" aria-current="page">Eleven Academy</a>
+    <a href="/portfolio/plaquette-northia.pdf" download class="northia-nav__cta">⬇ Plaquette</a>
+    <a href="mailto:p-o.lemoine@northia.fr" class="northia-nav__cta northia-nav__cta--contact">✉ Me contacter</a>
+  </div>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/portfolio/concertation-territoriale.html">Concertation</a>
+  <a href="/portfolio/edlm-linkedin.html">EDLM LinkedIn</a>
+  <a href="/portfolio/generateur-projet.html">Générateur</a>
+  <a href="/portfolio/agent-veille.html">Agent de veille</a>
+  <a href="/portfolio/newsletter.html">Newsletter IA</a>
+  <a href="/portfolio/photo-collector.html">Photothèque</a>
+  <a href="/portfolio/vocalink.html">Vocalink</a>
+  <a href="/portfolio/eleven-academy.html">Eleven Academy</a>
+  <a href="/portfolio/plaquette-northia.pdf" download>⬇ Plaquette PDF</a>
+  <a href="mailto:p-o.lemoine@northia.fr" class="nm-contact">✉ Me contacter</a>
+</div>
+
+<div class="hero">
+  <div class="hero__tag">Projet 08 / 08 · Supabase · Claude API · Légifrance</div>
+  <h1 class="hero__title">Eleven Academy — réviser le droit, <em>texte officiel à l'appui</em></h1>
+  <p class="hero__sub">Une application de préparation à l'examen d'agent sportif (CNOSF puis FFF) : micro-leçons de 5 minutes, QCM au format de l'épreuve, révision espacée — et une veille juridique automatique qui signale chaque semaine les textes qui changent.</p>
+  <div class="hero__metrics">
+    <div class="metric"><span class="metric__n">10</span><span class="metric__l">modules du programme</span></div>
+    <div class="metric"><span class="metric__n">133</span><span class="metric__l">micro-leçons</span></div>
+    <div class="metric"><span class="metric__n">421</span><span class="metric__l">questions sourcées</span></div>
+    <div class="metric"><span class="metric__n">525</span><span class="metric__l">articles de loi suivis</span></div>
+  </div>
+  <div class="hero__time">Avant : des cours PDF denses et des annales sans corrigé à jour. <strong>Après : une leçon de 5 minutes par notion, chaque réponse rattachée à l'article en vigueur.</strong></div>
+</div>
+
+<div class="scale-band">
+  <div class="scale-band__label">L'ampleur du chantier — mesurée sur l'historique réel du dépôt, pas une estimation</div>
+  <div class="scale-band__grid">
+    <div class="scale-stat"><span class="scale-stat__n">88</span><span class="scale-stat__l">commits</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">266</span><span class="scale-stat__l">documents sources (codes, annales, règlements)</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">2</span><span class="scale-stat__l">fonctions serveur (Arbitre, veille)</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">9</span><span class="scale-stat__l">codes juridiques surveillés</span></div>
+    <div class="scale-stat"><span class="scale-stat__n">3</span><span class="scale-stat__l">semaines de développement</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="section">
+  <div class="slabel">Genèse du projet</div>
+  <h2 class="stitle">Diagnostic, réflexion, décision</h2>
+  <div class="genesis-grid">
+    <div class="genesis-card genesis-card--diag">
+      <div class="genesis-card__icon">🔍</div>
+      <div class="genesis-card__label">Diagnostic</div>
+      <div class="genesis-card__text">L'examen d'agent sportif couvre huit branches du droit (sport, travail, contrats, sociétés, fiscalité…) et la loi du 3 août 2026 vient de réformer la profession. Pour une candidate débutante en droit, les supports existants sont des cours PDF denses et des annales dont une partie des réponses n'est plus à jour.</div>
+    </div>
+    <div class="genesis-card genesis-card--think">
+      <div class="genesis-card__icon">💡</div>
+      <div class="genesis-card__label">Réflexion</div>
+      <div class="genesis-card__text">Enseigner avant d'interroger : une notion = une leçon de 5 minutes (situation, règle, piège d'examen, sources, 3 questions). Et surtout, aucune question sans l'article de loi qui la fonde, avec sa date — car le droit change pendant l'année de préparation.</div>
+    </div>
+    <div class="genesis-card genesis-card--result">
+      <div class="genesis-card__icon">✓</div>
+      <div class="genesis-card__label">Résultat</div>
+      <div class="genesis-card__text">Une application utilisée au quotidien, sur téléphone et ordinateur : les 10 modules du programme sont en leçons, la progression se synchronise entre appareils, et une veille hebdomadaire compare les articles enseignés à leur version en vigueur sur Légifrance.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Problème résolu</div>
+  <h2 class="stitle">Apprendre un droit qui bouge</h2>
+  <p class="prose">Réviser pendant un an, c'est risquer d'apprendre une règle qui aura changé le jour de l'épreuve. Le vrai problème n'est pas de produire des questions — l'IA le fait vite — mais de garantir que chacune reste juste, et de prévenir la candidate quand ce qu'elle a appris doit être revu.</p>
+  <div class="rule8020">
+    <div class="rule8020__title">Règle 80/20 — <strong>L'humain reste le décideur</strong></div>
+    <div class="rule8020__text">L'IA rédige les leçons, une seconde IA les vérifie contre le texte officiel, et la veille trie les nouveautés du Journal officiel — <strong>mais rien ne change dans l'application sans validation humaine.</strong> La veille signale, elle ne corrige jamais : un éditeur décide « Ignorer » ou « À traiter », puis valide chaque correction avant publication.</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Architecture</div>
+  <h2 class="stitle">Comment ça fonctionne</h2>
+  <div class="flow">
+    <div class="flow-step"><div class="ficon fi-p">✍️</div><div><div class="fname">Rédaction en circuit croisé</div><div class="fdesc">Chaque module est rédigé par un modèle Claude selon des consignes fixes, vérifié par un second modèle contre le texte officiel, puis contrôlé sur les articles clés avant validation humaine. Les écarts trouvés sont corrigés avant publication.</div><div class="fsub">Claude API · Anthropic</div></div></div>
+    <div class="flow-step"><div class="ficon fi-b">📚</div><div><div class="fname">Leçons et QCM sourcés</div><div class="fdesc">133 micro-leçons et 421 questions au format de l'examen (5 propositions, une seule bonne réponse). Après chaque réponse : l'explication, l'article exact, et l'encart « avant / après » quand la règle vient de changer.</div></div></div>
+    <div class="flow-step"><div class="ficon fi-b">🔁</div><div><div class="fname">Révision espacée et programme de la semaine</div><div class="fdesc">Les questions ratées reviennent à 1, 3, 7, 14 et 30 jours ; chaque leçon est notée « Réussie » ou « À revoir ». Un programme hebdomadaire cale le rythme pour finir les leçons avant les révisions finales.</div></div></div>
+    <div class="flow-step"><div class="ficon fi-p">⚖️</div><div><div class="fname">L'Arbitre : questions libres, réponses tirées du cours</div><div class="fdesc">La candidate pose sa question avec ses mots ; l'Arbitre répond uniquement à partir des leçons et des articles de l'application, cite ses sources et dit clairement quand le cours ne couvre pas la question.</div><div class="fsub">Supabase Edge Function · Claude API</div></div></div>
+    <div class="flow-step"><div class="ficon fi-a">📰</div><div><div class="fname">Veille juridique du lundi</div><div class="fdesc">Chaque semaine : comparaison des 525 articles cités avec leur version en vigueur, lecture du Journal officiel et de la convention collective du sport, tri « touche l'examen / peut-être / non » par Claude, puis e-mail récapitulatif aux éditeurs.</div><div class="fsub">API Légifrance (PISTE) · Claude API · Brevo</div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Fonctionnalités</div>
+  <h2 class="stitle">Ce que couvre l'outil</h2>
+  <div class="feat-grid">
+    <div class="feat-card"><div class="feat-card__icon">⚽</div><div class="feat-card__title">Gamification football</div><div class="feat-card__text">Points, divisions de District à Légende, trophées, séries de jours et classement de la semaine — avec réglage pour s'en retirer.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🏟️</div><div class="feat-card__title">Matchs d'entraînement</div><div class="feat-card__text">QCM au format de l'épreuve, issus des annales officielles 2015-2025 revérifiées et des leçons, avec bilan par domaine.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🏷️</div><div class="feat-card__title">Corrections traçables</div><div class="feat-card__text">Une règle corrigée revient en révision avec la mention « Corrigé le … » ; chaque changement visible a sa ligne dans « Ce qui a changé ».</div></div>
+    <div class="feat-card"><div class="feat-card__icon">📧</div><div class="feat-card__title">Bilan du dimanche</div><div class="feat-card__text">Un e-mail de bilan chaque dimanche et une relance après 4 jours sans séance, désactivables dans les réglages.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">👀</div><div class="feat-card__title">Suivi du tuteur</div><div class="feat-card__text">Une page réservée aux éditeurs pour suivre la progression, avec un « Point de la semaine » envoyé par e-mail.</div></div>
+    <div class="feat-card"><div class="feat-card__icon">🔐</div><div class="feat-card__title">Connexion par code</div><div class="feat-card__text">Un code reçu par e-mail, sans mot de passe ; chaque progression est privée, protégée par des règles d'accès en base.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Défis techniques</div>
+  <h2 class="stitle">Les vrais problèmes à résoudre</h2>
+  <div class="challenges">
+    <div class="challenge"><div class="ctitle">Faire confiance à un contenu juridique écrit par des IA</div><div class="cbody">Une seule IA qui rédige et se relit elle-même ne voit pas ses propres erreurs. D'où un circuit croisé : un modèle rédige, un autre vérifie chaque affirmation contre le texte officiel téléchargé, et un troisième contrôle les articles clés. Résultat mesuré : moins d'une erreur de fond par module, toutes corrigées avant publication. Limite assumée : aucun juriste n'a encore relu le contenu.</div></div>
+    <div class="challenge"><div class="ctitle">Une réforme en plein milieu de la préparation</div><div class="cbody">La loi du 3 août 2026 remplace la « licence » par une « carte professionnelle d'agent sportif », mais ses décrets ne paraîtront qu'en 2027. Les leçons concernées présentent donc la règle « avant / après », et la veille surveille les parutions pour mettre à jour au bon moment.</div></div>
+    <div class="challenge"><div class="ctitle">Corriger sans perturber l'apprentissage</div><div class="cbody">Une correction ne doit jamais remettre une progression à zéro. Les formats de données restent compatibles d'une version à l'autre (une leçon « Faite » d'avant la notation reste reconnue), et seule la notion corrigée revient en révision — pas tout le module.</div></div>
+    <div class="challenge"><div class="ctitle">Un fichier unique de 800 Ko modifié par scripts</div><div class="cbody">Deux incidents réels — une note de rédaction publiée par erreur, un texte coupé — ont conduit à des garde-fous à la construction : toute note entre crochets et tout guillemet <span class="ccode">« »</span> déséquilibré bloquent désormais la publication.</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="slabel">Stack technique</div>
+  <h2 class="stitle">Technologies utilisées</h2>
+  <table class="stack-table">
+    <thead><tr><th>Catégorie</th><th>Outil</th></tr></thead>
+    <tbody>
+      <tr><td>Interface</td><td class="mono-td">HTML · CSS · JavaScript, page unique, sans framework</td></tr>
+      <tr><td>Hébergement</td><td class="mono-td">GitHub Pages</td></tr>
+      <tr><td>Données et connexion</td><td class="mono-td">Supabase · PostgreSQL · règles d'accès par ligne · code par e-mail</td></tr>
+      <tr><td>Fonctions serveur</td><td class="mono-td">Supabase Edge Functions (Deno · TypeScript) · tâches planifiées</td></tr>
+      <tr><td>IA</td><td class="mono-td">Claude API · Anthropic (rédaction, vérification, Arbitre, tri de veille)</td></tr>
+      <tr><td>Textes officiels</td><td class="mono-td">API Légifrance via PISTE (codes, Journal officiel, convention collective)</td></tr>
+      <tr><td>E-mails</td><td class="mono-td">Brevo</td></tr>
+      <tr><td>Construction et tests</td><td class="mono-td">Python · Playwright</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="slabel">Résultats</div>
+  <h2 class="stitle">Ce que ça produit concrètement</h2>
+  <div class="results-grid">
+    <div class="rcard"><span class="rcard__n">133</span><span class="rcard__l">micro-leçons de 5 minutes, couvrant les 10 modules du programme</span></div>
+    <div class="rcard"><span class="rcard__n">421</span><span class="rcard__l">questions, chacune rattachée à l'article qui la fonde</span></div>
+    <div class="rcard"><span class="rcard__n">525</span><span class="rcard__l">articles de loi comparés chaque semaine à leur version en vigueur</span></div>
+    <div class="rcard"><span class="rcard__n">0</span><span class="rcard__l">correction publiée sans validation humaine — la veille signale, l'éditeur décide</span></div>
+    <div class="rcard"><span class="rcard__n">5</span><span class="rcard__l">intervalles de révision espacée : 1, 3, 7, 14 et 30 jours</span></div>
+    <div class="rcard"><span class="rcard__n">2</span><span class="rcard__l">épreuves visées : CNOSF (novembre 2027), puis FFF (mars 2028)</span></div>
+  </div>
+</div>
+
+<div class="screen-section">
+  <div class="screen-label">🔒 Application privée</div>
+  <p class="screen-caption">L'application est réservée aux personnes inscrites (connexion par code envoyé par e-mail) et contient leur progression réelle. <strong style="color:var(--ink);">Démonstration possible sur demande.</strong></p>
+</div>
+
+<div class="nav-bottom">
+  <a href="/portfolio/index.html" class="nav-btn nav-btn--out">← Tous les projets</a>
+  <a href="/portfolio/vocalink.html" class="nav-btn nav-btn--out">← Projet précédent : Vocalink</a>
+</div>
+
+</div>
+
+<footer class="northia-footer">
+  <img src="/portfolio/Logo_NorthIA_sans_baseline.png" alt="NorthIA" class="northia-footer__logo">
+  <div><div class="northia-footer__name">Pierre-Olivier Lemoine · NorthIA · 2026</div><div class="northia-footer__sub">Claude (Anthropic) · Supabase · Légifrance</div></div>
+  <div class="northia-footer__links">
+    <a href="https://northia.fr" target="_blank" class="northia-footer__lnk">northia.fr</a>
+    <a href="https://www.linkedin.com/in/pierre-olivier-lemoine-b6527a1b/" target="_blank" class="northia-footer__lnk">LinkedIn</a>
+  </div>
+</footer>
+<script>
+function toggleMenu(){var m=document.getElementById('navMobile');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('navMobile');if(m&&!e.target.closest('.nav-burger')&&!e.target.closest('#navMobile'))m.classList.remove('open');});
+</script>
+<script>
+(function(){var b=document.querySelector('.nav-burger'),m=document.getElementById('navMobile');if(!b||!m)return;
+b.setAttribute('aria-controls','navMobile');
+function s(){b.setAttribute('aria-expanded',m.classList.contains('open')?'true':'false');}
+s();new MutationObserver(s).observe(m,{attributes:true,attributeFilter:['class']});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('open')){m.classList.remove('open');b.focus();}});})();
+</script>
+</body>
+</html>
